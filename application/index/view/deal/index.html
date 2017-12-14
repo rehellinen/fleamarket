@@ -1,0 +1,41 @@
+{include file="public/header"}
+<div class="app-container">
+    <div class="row content-container">
+        {include file="public/nav"}
+        <div class="copyrights">rehellinen后台管理</div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <div class="title">订单确定页</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form class="form-horizontal" id="submitForm" method="post" enctype="multipart/form-data">
+                                    <p>图片：{$goods.photo}</p>
+                                    <p>商品名称：{$goods.name}</p>
+                                    <p>价格：{$goods.price}</p>
+                                    <p>数量：{$goods.quantity}</p>
+                                    <p>描述：{$goods.description}</p>
+                                    <button type="button" id="submitButton" class="btn btn-default">下单</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var URL = {
+            'submit_url' : "{:url('index/Goods/edit')}",
+            'success_url' : "{:url('index/Goods/index')}"
+        };
+    </script>
+    {include file="public/footer"}

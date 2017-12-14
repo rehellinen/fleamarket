@@ -1,0 +1,49 @@
+{include file="Public/header"}
+<div class="app-container">
+    <div class="row content-container">
+        {include file="Public/nav"}
+        <div class="copyrights">rehellinen后台管理</div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body">
+                <div class="row">
+                    <div class="">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <div class="title">添加轮播图</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form class="form-horizontal" id="submitForm" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">图片:</label>
+                                        <div class="col-sm-5">
+                                            <div id="upload" style="width: 50%"></div>
+                                            <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
+                                            <input id="file_upload_image" name="photo" type="hidden" multiple="true" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="button" id="submitButton" class="btn btn-default">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var URL = {
+            'submit_url' : "{:url('api/banner/add')}",
+            'success_url' : "{:url('admin/banner/index')}",
+            'image_url' : "{:url('api/image/upload')}"
+        };
+    </script>
+    {include file="Public/footer"}

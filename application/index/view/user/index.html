@@ -1,0 +1,82 @@
+{include file="public/header"}
+<div class="app-container" style="padding: 0">
+    <div class="row content-container">
+        {include file="public/nav"}
+        <div class="copyrights">rehellinen后台管理</div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body">
+                <div class="row">
+                    <div class="">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <div class="title">个人信息</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form class="form-horizontal" id="submitForm" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-2 control-label">名字:</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="请填写名字" value="{$buyer.name}">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="module" value="buyer"/>
+                                    <div class="form-group">
+                                        <label for="tele" class="col-sm-2 control-label">电话:</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" name="tele" id="tele" placeholder="请填写电话" value="{$buyer.tele}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">邮箱:</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" name="email" id="email" placeholder="请填写邮箱" value="{$buyer.email}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="weixin" class="col-sm-2 control-label">微信号:</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" name="weixin" id="weixin" placeholder="请填写微信号" value="{$buyer.weixin}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="zhifubao" class="col-sm-2 control-label">支付宝:</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" name="zhifubao" id="zhifubao" placeholder="请填写支付宝账号" value="{$buyer.zhifubao}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dormitory" class="col-sm-2 control-label">宿舍号:</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" name="dormitory" id="dormitory" placeholder="请填写宿舍号" value="{$buyer.dormitory}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="button" id="submitButton" class="btn btn-default">修改</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var URL = {
+            'submit_url' : "{:url('api/User/updateUser')}",
+            'success_url' : "{:url('index/User/index')}"
+        };
+    </script>
+    {include file="public/footer"}

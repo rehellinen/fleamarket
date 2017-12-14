@@ -1,0 +1,139 @@
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-expand-toggle">
+                <i class="fa fa-bars icon"></i>
+            </button>
+            <a href="{:url('index/index/index')}">
+                <ol class="breadcrumb navbar-breadcrumb">
+                    <li class="active">网联跳蚤市场</li>
+                </ol>
+            </a>
+            <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                <i class="fa fa-th icon"></i>
+            </button>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                <i class="fa fa-times icon" ></i>
+            </button>
+            <!--li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-comments-o"></i></a>
+                <ul class="dropdown-menu animated fadeInDown">
+                    <li class="title">
+                        Notification <span class="badge pull-right">0</span>
+                    </li>
+                    <li class="message">
+                        No new notification
+                    </li>
+                </ul>
+            </li-->
+
+
+            <li class="dropdown profile">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{$buyer.name}<span class="caret" style="margin-left: 5px"></span></a>
+                <ul class="dropdown-menu animated fadeInDown">
+                    <li class="profile-img">
+                        <img src="__STATIC__/btzero_10_flat/img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
+                    </li>
+                    <li>
+                        <div class="profile-info">
+                            <h4 class="username">{$buyer.name}</h4>
+                            <p>{$buyer.email}</p>
+                            <div class="btn-group margin-bottom-2x" role="group">
+                                <a {if condition="$buyer"}href="{:url('index/User/index')}"{/if}>
+                                    <button type="button" class="btn btn-default"><i class="fa fa-user"></i>个人中心</button>
+                                </a>
+                                <a {if condition="$buyer"}href="{:url('index/Login/logOut')}"{/if}>
+                                    <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> 退出登录</button>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="side-menu sidebar-inverse">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="side-menu-container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <div class="icon fa fa-paper-plane"></div>
+                    <div class="title">rehellinen</div>
+                </a>
+                <button type="button" class="navbar-expand-toggle pull-right visible-xs">
+                    <i class="fa fa-times icon"></i>
+                </button>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="{if condition="$controller == 'Index'"}active{/if}">
+                    <a href="{:url('index/index/index')}">
+                        <span class="icon fa fa-tachometer"></span><span class="title">首页</span>
+                    </a>
+                </li>
+                {if condition="!$buyer"}
+                <li >
+                    <a href="{:url('index/login/index')}">
+                        <span class="icon fa fa-user"></span><span class="title">登录</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{:url('index/register/index')}">
+                        <span class="icon glyphicon glyphicon-log-in"></span><span class="title">注册</span>
+                    </a>
+                </li>
+                {/if}
+                {if condition="$buyer"}
+                <!--li class="panel panel-default dropdown ">
+                    <a data-toggle="collapse" href="#dropdown-table">
+                        <span class="icon fa fa-table"></span><span class="title">商品管理</span>
+                    </a>
+                    <!-- Dropdown level 1 -->
+                    <!--div id="dropdown-table" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav navbar-nav">
+                                <li><a href="{:url('index/goods/index')}">我购买的商品</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li-->
+
+
+                <!-- Dropdown-->
+                <li class="panel panel-default dropdown {if condition="$controller == 'User'"}active{/if}">
+                    <a data-toggle="collapse" href="#component-example">
+                        <span class="icon fa fa-user"></span><span class="title">个人中心</span>
+                    </a>
+                    <!-- Dropdown level 1 -->
+                    <div id="component-example" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav navbar-nav">
+                                <li><a href="{:url('index/user/index')}">我的信息</a>
+                                </li>
+                                <li><a href="{:url('index/user/password')}">修改密码</a>
+                                </li>
+                                <li><a href="{:url('index/login/logOut')}">退出登录</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                {/if}
+                <li class="">
+                    <a href="{:url('seller/login/index')}">
+                        <span class="icon glyphicon glyphicon-menu-right"></span><span class="title">商家后台入口</span>
+                    </a>
+                </li>
+
+
+
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</div>

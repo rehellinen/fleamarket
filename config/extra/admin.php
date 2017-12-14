@@ -1,0 +1,11 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: rehellinen
+ * Date: 2017/9/27
+ * Time: 16:14
+ */
+
+return[
+  'md5_prefix' => 'rehellinen_'
+];

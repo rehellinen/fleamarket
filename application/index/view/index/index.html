@@ -1,0 +1,79 @@
+{include file="public/header"}
+<div class="app-container" style="padding: 0">
+    <div class="row content-container">
+        {include file="public/nav"}
+        <div class="copyrights">rehellinen后台管理</div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body" style="margin-left: 0;margin-right: 0">
+                <div class="row" style="padding: 0">
+                    <div id="ad-carousel" class="carousel slide getBannerWidth setBannerImgHeight" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            {volist name="banner" id="vo"}
+                            <li data-target="#ad-carousel" data-slide-to="0" {if condition="$i == 1"}class="active"{/if}></li>
+                            {/volist}
+                        </ol>
+                        <div class="carousel-inner">
+                            {volist name="banner" id="vo"}
+                            <div class="item setBannerImgHeight {if condition="$i == 1"}active{/if}">
+                                <img class="setBannerImgHeight" src="__UPLOAD__{$vo.photo}">
+                            </div>
+                            {/volist}
+
+                        </div>
+                        <a class="left carousel-control" href="#ad-carousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#ad-carousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        {volist name="goods" id="vo" mod="2"}
+                        <div class="col-md-6 col-sm-6 col-xs-6" style="padding: 0 3px;margin-bottom: 10px">
+                            <div class="getDetailWidth thumbnail no-margin-bottom">
+                                <img src="__UPLOAD__{$vo.photo}" class="setDetailImgHeight img-responsive">
+                                <div class="caption" style="padding: 6px 10px">
+                                    <h4>{$vo.name}</h4>
+                                    <p>￥{$vo.price}</p>
+                                    <div>
+                                        <button class="btn btn-primary editButton" attr-id="{$vo.id}">查看详情</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {eq name="mod" value="1"}<div class="row"></div>{/eq}
+                        {/volist}
+                    </div>
+                </div>
+
+                <div class="row">
+                    {$goods->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script>
+    var URL = {
+        'edit_url' : "{:url('index/index/detail')}",
+        'buy_url' : "{:url('index/deal/index')}"
+    };
+</script>
+    <script type="text/javascript" src="__STATIC__/btzero_10_flat/lib/js/jquery.min.js"></script>
+
+    <script>
+        var width = $(".getDetailWidth").width();
+        $(".setDetailImgHeight").height(width * 0.9);
+
+        var width2 = $(".getBannerWidth").width();
+        $(".setBannerImgHeight").height(width2 * 0.6);
+    </script>
+
+{include file="public/footer"}

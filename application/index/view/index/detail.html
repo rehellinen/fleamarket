@@ -1,0 +1,53 @@
+{include file="public/header"}
+<div class="app-container" style="padding-bottom: 0">
+    <div class="row content-container">
+        {include file="public/nav"}
+        <div class="copyrights">rehellinen后台管理</div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">商品详情</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="padding: 0;margin-top: 4px">
+                        <div class="thumbnail no-margin-bottom">
+                            <img src="__UPLOAD__{$goods.photo}" class="img-responsive">
+                            <div class="caption" style="padding: 6px 10px">
+                                <h3>{$goods.name}</h3>
+                                <p>￥{$goods.price}</p>
+                                <p>数量：{$goods.quantity}</p>
+                                <p>数量：{$goods.quantity}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="padding: 0;margin-top: 8px;margin-bottom: 10px">
+                        <div class="thumbnail no-margin-bottom">
+                            <div class="caption" style="padding: 6px 10px">
+                                <h3>卖家信息</h3>
+                                <p>姓名：{$seller.name}</p>
+                                <p>电话：{$seller.tele}</p>
+                                <p>微信：{$seller.weixin}</p>
+                                <p>支付宝：{$seller.zhifubao}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var URL = {
+            'submit_url' : "{:url('seller/Goods/edit')}",
+            'success_url' : "{:url('seller/Goods/index')}"
+        };
+    </script>
+    {include file="public/footer"}

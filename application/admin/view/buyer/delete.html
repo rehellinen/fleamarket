@@ -1,0 +1,42 @@
+{include file="Public/header"}
+<div class="app-container">
+    <div class="row content-container">
+        {include file="Public/nav"}
+        <div class="copyrights">rehellinen后台管理</div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body">
+                <div class="row">
+                    <h4>删除的买家</h4>
+                    {volist name="buyer" id="vo"}
+                    <div class="col-xs-6" style="padding: 3px; margin-bottom: 3px">
+                        <div class="thumbnail no-margin-bottom">
+                            <div class="caption">
+                                <h4>名字：{$vo.name}</h4>
+                                <p>电话：{$vo.tele}</p>
+                                <p>微信：{$vo.weixin}</p>
+                                <p>支付宝：{$vo.zhifubao}</p>
+                                <p>宿舍：{$vo.dormitory}</p>
+                                <button class="btn btn-default statusButton" attr-id="{$vo.id}" attr-status="1">恢复</button>
+                            </div>
+                        </div>
+                    </div>
+                    {/volist}
+                </div>
+                <div class="row">
+                    {$buyer->render()}
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var URL = {
+            'listorder_url' : "{:url('admin/buyer/listorder')}",
+            'success_url' : "{:url('admin/buyer/delete')}",
+            'status_url' : "{:url('admin/buyer/setStatus')}"
+        };
+    </script>
+    {include file="Public/footer"}
