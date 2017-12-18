@@ -9,6 +9,7 @@
 namespace app\common\validate;
 
 
+use app\common\exception\Parameter;
 use think\Request;
 use think\Validate;
 
@@ -24,17 +25,9 @@ class BaseValidate extends Validate
 
         // 抛出异常
         if(!$result) {
-            return show(0, $this->error);
-            json_last_error_msg();
-        }
-
-        return true;
-    }
-
-    protected function isNotEmpty($value)
-    {
-        if(empty($value)) {
-            return false;
+            throw new Parameter([
+                'message' => $this->error
+            ]);
         }
 
         return true;
