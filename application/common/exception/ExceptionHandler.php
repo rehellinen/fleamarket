@@ -17,6 +17,7 @@ class ExceptionHandler extends Handle
     private $httpCode;
     private $message;
     private $status;
+    private $data;
 
     public function render(Exception $e)
     {
@@ -25,6 +26,7 @@ class ExceptionHandler extends Handle
             $this->httpCode = $e->httpCode;
             $this->message = $e->message;
             $this->status = $e->status;
+            $this->data = $e->data;
         }else{
             // 若为调试模式则返回TP5的错误显示页面
             if(config('app_debug')) {
@@ -33,6 +35,7 @@ class ExceptionHandler extends Handle
                 $this->httpCode = 500;
                 $this->message = '服务器内部错误';
                 $this->status = 99999;
+                $this->data = [];
             }
         }
 
@@ -41,9 +44,7 @@ class ExceptionHandler extends Handle
         $result = [
             'status' => $this->status,
             'message' => $this->message,
-            'data' => [
-                'request_url' => $url
-            ]
+            'data' => $this->data
         ];
 
         return json($result, $this->httpCode);

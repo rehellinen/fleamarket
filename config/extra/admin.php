@@ -7,5 +7,6 @@
  */
 
 return[
-  'md5_prefix' => 'rehellinen_'
+    'md5_prefix' => 'rehellinen_',
+    'max_banner_count' => 3
 ];

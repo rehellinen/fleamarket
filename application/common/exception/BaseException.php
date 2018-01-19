@@ -22,6 +22,9 @@ class BaseException extends Exception
     // 返回的错误信息
     public $message = '参数错误';
 
+    // 返回的数据
+    public $data = [];
+
     public function __construct($setting = [])
     {
         if(array_key_exists('httpCode', $setting)) {
@@ -34,6 +37,10 @@ class BaseException extends Exception
 
         if(array_key_exists('message', $setting)) {
             $this->message = $setting['message'];
+        }
+
+        if(array_key_exists('data', $setting)) {
+            $this->data = $setting['data'];
         }
     }
 }

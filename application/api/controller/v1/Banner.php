@@ -6,9 +6,10 @@
  * Time: 0:00
  */
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
 
 
+use app\common\exception\Success;
 use think\Controller;
 use think\Request;
 
@@ -28,6 +29,11 @@ class Banner extends Controller
 
     public function getBanner()
     {
+        $banners = model('Banner')->getBanners();
 
+        throw new Success([
+            'message' => '获取轮播图成功',
+            'data' => $banners
+        ]);
     }
 }

@@ -2,16 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: rehellinen
- * Date: 2017/12/19
- * Time: 0:00
+ * Date: 2018/1/20
+ * Time: 6:23
  */
 
 namespace app\common\exception;
 
 
-class Parameter extends BaseException
+class Success extends BaseException
 {
     public $httpCode = 200;
     public $status = 90000;
-    public $message = '参数错误';
+    public $message = '成功！';
+    public $data = [];
 }
