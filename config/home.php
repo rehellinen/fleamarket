@@ -12,5 +12,6 @@ return [
         '__UPLOAD__' => ''
     ],
 
-    'upload_file' => 'upload/'
+    'upload_file' => 'upload/',
+    'photo_url_prefix' => 'http://fleamarket.cn'
 ];

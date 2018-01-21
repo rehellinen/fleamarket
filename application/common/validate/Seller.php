@@ -20,7 +20,7 @@ class Seller extends BaseValidate
         ['zhifubao', 'require', '支付宝账号不能为空'],
         ['dormitory', 'require|number|max:4', '宿舍号不能为空|宿舍号必须为数字|宿舍号长度不合法'],
         ['oldPassword', 'require|isNotEmpty', '原密码不能为空|原密码不能为空'],
-        ['password', 'require|isNotEmpty', '密码不能为空|密码不能为空'],
+        ['password', 'require', '密码不能为空'],
 
     ];
 
