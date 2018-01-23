@@ -14,3 +14,5 @@ use think\Route;
 
 // 关于Banner
 Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
+
+Route::post('api/:version/token/user', 'api/:version.Token/getToken');
