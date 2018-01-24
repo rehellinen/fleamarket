@@ -10,5 +10,11 @@ namespace app\common\validate;
 
 class Token extends BaseValidate
 {
+    protected $rule = [
+        ['code', 'require', 'code码不能为空']
+    ];
 
+    protected $scene = [
+        'token' => 'code'
+    ];
 }

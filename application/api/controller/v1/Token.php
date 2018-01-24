@@ -9,12 +9,19 @@
 namespace app\api\controller\v1;
 
 
+use app\common\service\UserToken;
 use think\Controller;
+use app\common\validate\Token as tokenValidate;
 
 class Token extends Controller
 {
     public function getToken($code = '')
     {
-        return 1;
+        (new tokenValidate())->goCheck('token');
+
+        $userTokenService = new UserToken();
+        $token = $userTokenService->get($code);
+
+        return $token;
     }
 }
