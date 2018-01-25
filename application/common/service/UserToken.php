@@ -9,6 +9,9 @@
 namespace app\common\service;
 
 
+use app\common\exception\WeChatException;
+use think\Exception;
+
 class UserToken
 {
     protected $code;
@@ -26,7 +29,26 @@ class UserToken
 
     public function get()
     {
+        $result = curl_get($this->loginUrl);
+        $wxResult = json_decode($result, true);
 
-        return $token;
+        if(empty($wxResult)) {
+            throw new Exception('获取open_id失败，微信服务器错误');
+        }else{
+            $loginFail = array_key_exists('errcode', $wxResult);
+            if($loginFail){
+
+            }else{
+
+            }
+        }
+    }
+
+    private function processLoginError($wxResult)
+    {
+        throw new WeChatException([
+            'message' => $wxResult['errmsg'],
+            'status' => $wxResult['errcode']
+        ]);
     }
 }
