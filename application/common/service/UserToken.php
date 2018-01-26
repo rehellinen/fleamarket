@@ -12,7 +12,7 @@ namespace app\common\service;
 use app\common\exception\WeChatException;
 use think\Exception;
 
-class UserToken
+class UserToken extends Token
 {
     protected $code;
     protected $appId;
@@ -37,11 +37,48 @@ class UserToken
         }else{
             $loginFail = array_key_exists('errcode', $wxResult);
             if($loginFail){
-
+                $this->processLoginError($wxResult);
             }else{
-
+                $this->grantToken($wxResult);
             }
         }
+    }
+
+    private function grantToken($wxResult)
+    {
+        $openID = $wxResult['openid'];
+        $buyer = model('user')->getByOpenID($openID);
+
+        if($buyer){
+            $buyerID = $buyer->id;
+        }else{
+            $buyerID = $this->newUser($openID);
+        }
+
+        $cachedValue = $this->prepareCachedValue($wxResult, $buyerID);
+    }
+
+    private function saveToCache($cachedValue)
+    {
+        $key = self::generateToken();
+    }
+
+    private function prepareCachedValue($wxResult, $buyerID)
+    {
+        $cachedValue = $wxResult;
+        $cachedValue['buyerID'] = $buyerID;
+        $cachedValue['scope'] = 16;
+
+        return $cachedValue;
+    }
+
+    private function newUser($openID)
+    {
+        $buyer = model('user')::create([
+            'openid' => $openID
+        ]);
+
+        return $buyer->id;
     }
 
     private function processLoginError($wxResult)

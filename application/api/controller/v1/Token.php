@@ -19,8 +19,8 @@ class Token extends Controller
     {
         (new tokenValidate())->goCheck('token');
 
-        $userTokenService = new UserToken();
-        $token = $userTokenService->get($code);
+        $userTokenService = new UserToken($code);
+        $token = $userTokenService->get();
 
         return $token;
     }
