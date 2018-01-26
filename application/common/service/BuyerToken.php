@@ -9,10 +9,10 @@
 namespace app\common\service;
 
 
+use app\common\exception\TokenException;
 use app\common\exception\WeChatException;
-use think\Exception;
 
-class UserToken extends Token
+class BuyerToken extends Token
 {
     protected $code;
     protected $appId;
@@ -33,34 +33,53 @@ class UserToken extends Token
         $wxResult = json_decode($result, true);
 
         if(empty($wxResult)) {
-            throw new Exception('获取open_id失败，微信服务器错误');
+            throw new WeChatException([
+                'message' => '爬取数据错误或者微信服务器错误',
+                'status' => '10006'
+            ]);
         }else{
             $loginFail = array_key_exists('errcode', $wxResult);
             if($loginFail){
                 $this->processLoginError($wxResult);
             }else{
-                $this->grantToken($wxResult);
+                $token = $this->grantToken($wxResult);
             }
         }
+
+        return $token;
     }
 
     private function grantToken($wxResult)
     {
         $openID = $wxResult['openid'];
-        $buyer = model('user')->getByOpenID($openID);
+        $buyer = model('buyer')->getByOpenID($openID);
 
         if($buyer){
             $buyerID = $buyer->id;
         }else{
-            $buyerID = $this->newUser($openID);
+            $buyerID = $this->newBuyer($openID);
         }
 
         $cachedValue = $this->prepareCachedValue($wxResult, $buyerID);
+        $token = $this->saveToCache($cachedValue);
+        return $token;
     }
 
     private function saveToCache($cachedValue)
     {
         $key = self::generateToken();
+        $value = json_encode($cachedValue);
+        $expireIn = config('admin.token_expire_in');
+
+        $request = cache($key, $value, $expireIn);
+
+        if(!$request){
+            throw new TokenException([
+                'status' => 10005,
+                'message' => '服务器缓存异常'
+            ]);
+        }
+        return $key;
     }
 
     private function prepareCachedValue($wxResult, $buyerID)
@@ -72,9 +91,9 @@ class UserToken extends Token
         return $cachedValue;
     }
 
-    private function newUser($openID)
+    private function newBuyer($openID)
     {
-        $buyer = model('user')::create([
+        $buyer = model('buyer')->create([
             'openid' => $openID
         ]);
 

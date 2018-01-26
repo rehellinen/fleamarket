@@ -15,5 +15,13 @@ class Token
     public static function generateToken()
     {
         // 32位字符串
+        $randChars = getRandChar(32);
+        // 时间戳
+        $timeStamp = $_SERVER['REQUEST_TIME_FLOAT'];
+        // 盐
+        $salt = config('admin.md5_prefix');
+
+        $token = md5($salt.$randChars.$timeStamp);
+        return $token;
     }
 }

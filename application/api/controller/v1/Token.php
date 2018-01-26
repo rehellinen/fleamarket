@@ -9,7 +9,7 @@
 namespace app\api\controller\v1;
 
 
-use app\common\service\UserToken;
+use app\common\service\BuyerToken;
 use think\Controller;
 use app\common\validate\Token as tokenValidate;
 
@@ -19,7 +19,7 @@ class Token extends Controller
     {
         (new tokenValidate())->goCheck('token');
 
-        $userTokenService = new UserToken($code);
+        $userTokenService = new BuyerToken($code);
         $token = $userTokenService->get();
 
         return $token;
