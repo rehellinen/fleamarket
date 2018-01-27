@@ -10,6 +10,11 @@
 namespace app\common\service;
 
 
+use app\common\exception\TokenException;
+use think\Cache;
+use think\Exception;
+use think\Request;
+
 class Token
 {
     public static function generateToken()
@@ -23,5 +28,31 @@ class Token
 
         $token = md5($salt.$randChars.$timeStamp);
         return $token;
+    }
+
+    public static function getCurrentTokenVar($key)
+    {
+        $token = Request::instance()->header('token');
+        $vars = Cache::get($token);
+
+        if(!$vars){
+            throw new TokenException();
+        }else{
+            if(!is_array($vars)){
+                $vars = json_decode($vars, true);
+            }
+            if(array_key_exists($key, $vars)){
+                $var = $vars[$key];
+                return $var;
+            }else{
+                throw new Exception('尝试获取的Token变量不存在');
+            }
+        }
+    }
+
+    public static function getIDByToken()
+    {
+        $buyerID = self::getCurrentTokenVar('buyerID');
+        return $buyerID;
     }
 }
