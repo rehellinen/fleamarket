@@ -11,10 +11,13 @@ namespace app\common\validate;
 class Token extends BaseValidate
 {
     protected $rule = [
-        ['code', 'require', 'code码不能为空']
+        ['code', 'require', 'code码不能为空'],
+        ['tele', 'require', '手机号不能为空'],
+        ['password', 'require', '密码不能为空'],
     ];
 
     protected $scene = [
-        'token' => 'code'
+        'buyerToken' => 'code',
+        'sellerToken' => ['tele', 'password']
     ];
 }

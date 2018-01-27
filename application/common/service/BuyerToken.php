@@ -11,6 +11,7 @@ namespace app\common\service;
 
 use app\common\exception\TokenException;
 use app\common\exception\WeChatException;
+use enum\ScopeEnum;
 
 class BuyerToken extends Token
 {
@@ -86,7 +87,7 @@ class BuyerToken extends Token
     {
         $cachedValue = $wxResult;
         $cachedValue['buyerID'] = $buyerID;
-        $cachedValue['scope'] = 16;
+        $cachedValue['scope'] = ScopeEnum::User;
 
         return $cachedValue;
     }

@@ -9,7 +9,7 @@
 namespace app\common\exception;
 
 
-class Parameter extends BaseException
+class ParameterException extends BaseException
 {
     public $httpCode = 200;
     public $status = 90000;

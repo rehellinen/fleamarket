@@ -52,6 +52,12 @@ function getRandChar($length)
     return $str;
 }
 
+// 用于校对商户输入的密码和数据库中的密码
+function checkPassword($password, $md5Password)
+{
+
+}
+
 
 
 

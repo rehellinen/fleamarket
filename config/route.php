@@ -16,7 +16,8 @@ use think\Route;
 Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 
 // 关于Token的获取
-Route::post('api/:version/token/user', 'api/:version.Token/getToken');
+Route::post('api/:version/token/user', 'api/:version.Token/getBuyerToken');
+Route::post('api/:version/token/seller', 'api/:version.Token/getSellerToken');
 
 // 关于地址
 Route::post('api/:version/address', 'api/:version.Address/createOrUpdateAddress');
