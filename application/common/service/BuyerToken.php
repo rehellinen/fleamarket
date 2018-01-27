@@ -87,7 +87,7 @@ class BuyerToken extends Token
     {
         $cachedValue = $wxResult;
         $cachedValue['buyerID'] = $buyerID;
-        $cachedValue['scope'] = ScopeEnum::User;
+        $cachedValue['scope'] = ScopeEnum::Buyer;
 
         return $cachedValue;
     }

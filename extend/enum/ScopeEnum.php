@@ -11,7 +11,9 @@ namespace enum;
 
 class ScopeEnum
 {
-    const User = 16;
+    const Buyer = 16;
+
+    const Seller = 24;
 
     const Super = 32;
 }

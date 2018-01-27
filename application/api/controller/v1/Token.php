@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\common\exception\Success;
 use app\common\service\BuyerToken;
 use app\common\service\SellerToken;
 use app\common\validate\Token as TokenValidate;
@@ -33,5 +34,10 @@ class Token extends BaseController
 
         $sellerTokenService = new SellerToken($tele, $password);
         $token = $sellerTokenService->get();
+
+        throw new Success([
+            'message' => '获取Token成功',
+            'data' => ['token' => $token]
+        ]);
     }
 }

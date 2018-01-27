@@ -40,6 +40,7 @@ class ExceptionHandler extends Handle
         }
 
         $url = Request::instance()->url();
+        $this->data['request_url'] = $url;
 
         $result = [
             'status' => $this->status,

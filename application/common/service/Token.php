@@ -14,6 +14,7 @@ use app\common\exception\TokenException;
 use think\Cache;
 use think\Exception;
 use think\Request;
+use app\common\exception\SellerException;
 
 class Token
 {
@@ -54,5 +55,25 @@ class Token
     {
         $buyerID = self::getCurrentTokenVar('buyerID');
         return $buyerID;
+    }
+
+    // 用于校对商户输入的密码和数据库中的密码
+    public static function checkPassword($password, $seller)
+    {
+        // md5加密的前缀
+        $prefix = config('admin.md5_prefix');
+        // 盐
+        $salt = $seller->code;
+        // 商户输入的加密后的密码
+        $md5Password = md5($prefix.$password.$salt);
+
+        if($md5Password === $seller->password){
+            return true;
+        }else{
+            throw new SellerException([
+                'message' => '输入的密码不正确',
+                'status'=> '70001'
+            ]);
+        }
     }
 }
