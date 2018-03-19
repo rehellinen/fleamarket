@@ -38,7 +38,7 @@ class Pgsql extends Connection
 
     /**
      * 取得数据表的字段信息
-     * @access public
+     * @access Public
      * @param string $tableName
      * @return array
      */
@@ -69,13 +69,13 @@ class Pgsql extends Connection
 
     /**
      * 取得数据库的表信息
-     * @access public
+     * @access Public
      * @param string $dbName
      * @return array
      */
     public function getTables($dbName = '')
     {
-        $sql    = "select tablename as Tables_in_test from pg_tables where  schemaname ='public'";
+        $sql    = "select tablename as Tables_in_test from pg_tables where  schemaname =PPublic;
         $pdo    = $this->query($sql, [], false, true);
         $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
         $info   = [];

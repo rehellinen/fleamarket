@@ -9,35 +9,18 @@
 namespace app\api\controller\v1;
 
 
-use app\api\controller\BaseController;
-use app\common\exception\Success;
-use app\common\service\BuyerToken;
-use app\common\service\SellerToken;
-use app\common\validate\Token as TokenValidate;
-use think\Request;
+use app\common\service\UserToken;
+use app\common\validate\Token as tokenValidate;
 
 class Token extends BaseController
 {
-    public function getBuyerToken($code = '')
+    public function getToken($code = '')
     {
-        (new TokenValidate())->goCheck('buyerToken');
+        (new tokenValidate())->goCheck('token');
 
-        $userTokenService = new BuyerToken($code);
-        $token = $userTokenService->get();
+        $userTokenService = new UserToken();
+        $token = $userTokenService->get($code);
 
         return $token;
-    }
-
-    public function getSellerToken($tele, $password)
-    {
-        (new TokenValidate())->goCheck('sellerToken');
-
-        $sellerTokenService = new SellerToken($tele, $password);
-        $token = $sellerTokenService->get();
-
-        throw new Success([
-            'message' => '获取Token成功',
-            'data' => ['token' => $token]
-        ]);
     }
 }

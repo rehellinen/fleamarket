@@ -15,9 +15,5 @@ use think\Route;
 // 关于Banner
 Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 
-// 关于Token的获取
-Route::post('api/:version/token/user', 'api/:version.Token/getBuyerToken');
-Route::post('api/:version/token/seller', 'api/:version.Token/getSellerToken');
-
-// 关于地址
-Route::post('api/:version/address', 'api/:version.Address/createOrUpdateAddress');
+// 关于商品
+Route::get('api/:version/goods', 'api/:version.Goods/getGoods');

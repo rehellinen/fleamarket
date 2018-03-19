@@ -28,7 +28,7 @@ class Cache
 
     /**
      * 连接缓存
-     * @access public
+     * @access Public
      * @param array         $options  配置数组
      * @param bool|string   $name 缓存连接标识 true 强制重新连接
      * @return Driver
@@ -56,7 +56,7 @@ class Cache
 
     /**
      * 自动初始化缓存
-     * @access public
+     * @access Public
      * @param array         $options  配置数组
      * @return Driver
      */
@@ -78,7 +78,7 @@ class Cache
 
     /**
      * 切换缓存类型 需要配置 cache.type 为 complex
-     * @access public
+     * @access Public
      * @param string $name 缓存标识
      * @return Driver
      */
@@ -92,7 +92,7 @@ class Cache
 
     /**
      * 判断缓存是否存在
-     * @access public
+     * @access Public
      * @param string $name 缓存变量名
      * @return bool
      */
@@ -104,7 +104,7 @@ class Cache
 
     /**
      * 读取缓存
-     * @access public
+     * @access Public
      * @param string $name 缓存标识
      * @param mixed  $default 默认值
      * @return mixed
@@ -117,7 +117,7 @@ class Cache
 
     /**
      * 写入缓存
-     * @access public
+     * @access Public
      * @param string        $name 缓存标识
      * @param mixed         $value  存储数据
      * @param int|null      $expire  有效时间 0为永久
@@ -131,7 +131,7 @@ class Cache
 
     /**
      * 自增缓存（针对数值缓存）
-     * @access public
+     * @access Public
      * @param string    $name 缓存变量名
      * @param int       $step 步长
      * @return false|int
@@ -144,7 +144,7 @@ class Cache
 
     /**
      * 自减缓存（针对数值缓存）
-     * @access public
+     * @access Public
      * @param string    $name 缓存变量名
      * @param int       $step 步长
      * @return false|int
@@ -157,7 +157,7 @@ class Cache
 
     /**
      * 删除缓存
-     * @access public
+     * @access Public
      * @param string    $name 缓存标识
      * @return boolean
      */
@@ -169,7 +169,7 @@ class Cache
 
     /**
      * 清除缓存
-     * @access public
+     * @access Public
      * @param string $tag 标签名
      * @return boolean
      */
@@ -181,7 +181,7 @@ class Cache
 
     /**
      * 读取缓存并删除
-     * @access public
+     * @access Public
      * @param string $name 缓存变量名
      * @return mixed
      */
@@ -194,7 +194,7 @@ class Cache
 
     /**
      * 如果不存在则写入缓存
-     * @access public
+     * @access Public
      * @param string    $name 缓存变量名
      * @param mixed     $value  存储数据
      * @param int       $expire  有效时间 0为永久
@@ -208,7 +208,7 @@ class Cache
 
     /**
      * 缓存标签
-     * @access public
+     * @access Public
      * @param string        $name 标签名
      * @param string|array  $keys 缓存标识
      * @param bool          $overlay 是否覆盖

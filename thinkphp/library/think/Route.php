@@ -67,7 +67,7 @@ class Route
 
     /**
      * 注册变量规则
-     * @access public
+     * @access Public
      * @param string|array  $name 变量名
      * @param string        $rule 变量规则
      * @return void
@@ -83,7 +83,7 @@ class Route
 
     /**
      * 注册子域名部署规则
-     * @access public
+     * @access Public
      * @param string|array  $domain 子域名
      * @param mixed         $rule 路由规则
      * @param array         $option 路由参数
@@ -120,7 +120,7 @@ class Route
 
     /**
      * 设置路由绑定
-     * @access public
+     * @access Public
      * @param mixed     $bind 绑定信息
      * @param string    $type 绑定类型 默认为module 支持 namespace class controller
      * @return mixed
@@ -132,7 +132,7 @@ class Route
 
     /**
      * 设置或者获取路由标识
-     * @access public
+     * @access Public
      * @param string|array     $name 路由命名标识 数组表示批量设置
      * @param array            $value 路由地址及变量信息
      * @return array
@@ -153,7 +153,7 @@ class Route
 
     /**
      * 读取路由绑定
-     * @access public
+     * @access Public
      * @param string    $type 绑定类型
      * @return mixed
      */
@@ -164,7 +164,7 @@ class Route
 
     /**
      * 导入配置文件的路由规则
-     * @access public
+     * @access Public
      * @param array     $rule 路由规则
      * @param string    $type 请求类型
      * @return void
@@ -221,7 +221,7 @@ class Route
 
     /**
      * 注册路由规则
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param string    $type 请求类型
@@ -269,7 +269,7 @@ class Route
 
     /**
      * 设置路由规则
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param string    $type 请求类型
@@ -347,7 +347,7 @@ class Route
 
     /**
      * 设置当前执行的参数信息
-     * @access public
+     * @access Public
      * @param array    $options 参数信息
      * @return mixed
      */
@@ -358,7 +358,7 @@ class Route
 
     /**
      * 获取当前执行的所有参数信息
-     * @access public
+     * @access Public
      * @return array
      */
     public static function getOption()
@@ -368,7 +368,7 @@ class Route
 
     /**
      * 获取当前的分组信息
-     * @access public
+     * @access Public
      * @param string    $type 分组信息名称 name option pattern
      * @return mixed
      */
@@ -383,7 +383,7 @@ class Route
 
     /**
      * 设置当前的路由分组
-     * @access public
+     * @access Public
      * @param string    $name 分组名称
      * @param array     $option 分组路由参数
      * @param array     $pattern 分组变量规则
@@ -398,7 +398,7 @@ class Route
 
     /**
      * 注册路由分组
-     * @access public
+     * @access Public
      * @param string|array      $name 分组名称或者参数
      * @param array|\Closure    $routes 路由地址
      * @param array             $option 路由参数
@@ -486,7 +486,7 @@ class Route
 
     /**
      * 注册路由
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param array     $option 路由参数
@@ -500,7 +500,7 @@ class Route
 
     /**
      * 注册GET路由
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param array     $option 路由参数
@@ -514,7 +514,7 @@ class Route
 
     /**
      * 注册POST路由
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param array     $option 路由参数
@@ -528,7 +528,7 @@ class Route
 
     /**
      * 注册PUT路由
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param array     $option 路由参数
@@ -542,7 +542,7 @@ class Route
 
     /**
      * 注册DELETE路由
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param array     $option 路由参数
@@ -556,7 +556,7 @@ class Route
 
     /**
      * 注册PATCH路由
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param array     $option 路由参数
@@ -570,7 +570,7 @@ class Route
 
     /**
      * 注册资源路由
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param array     $option 路由参数
@@ -617,7 +617,7 @@ class Route
 
     /**
      * 注册控制器路由 操作方法对应不同的请求后缀
-     * @access public
+     * @access Public
      * @param string    $rule 路由规则
      * @param string    $route 路由地址
      * @param array     $option 路由参数
@@ -633,7 +633,7 @@ class Route
 
     /**
      * 注册别名路由
-     * @access public
+     * @access Public
      * @param string|array  $rule 路由别名
      * @param string        $route 路由地址
      * @param array         $option 路由参数
@@ -650,7 +650,7 @@ class Route
 
     /**
      * 设置不同请求类型下面的方法前缀
-     * @access public
+     * @access Public
      * @param string    $method 请求类型
      * @param string    $prefix 类型前缀
      * @return void
@@ -666,7 +666,7 @@ class Route
 
     /**
      * rest方法定义和修改
-     * @access public
+     * @access Public
      * @param string        $name 方法名称
      * @param array|bool    $resource 资源
      * @return void
@@ -682,7 +682,7 @@ class Route
 
     /**
      * 注册未匹配路由规则后的处理
-     * @access public
+     * @access Public
      * @param string    $route 路由地址
      * @param string    $method 请求类型
      * @param array     $option 路由参数
@@ -695,7 +695,7 @@ class Route
 
     /**
      * 注册一个自动解析的URL路由
-     * @access public
+     * @access Public
      * @param string    $route 路由地址
      * @return void
      */
@@ -706,7 +706,7 @@ class Route
 
     /**
      * 获取或者批量设置路由定义
-     * @access public
+     * @access Public
      * @param mixed $rules 请求类型或者路由定义数组
      * @return array
      */
@@ -725,7 +725,7 @@ class Route
 
     /**
      * 检测子域名部署
-     * @access public
+     * @access Public
      * @param Request   $request Request请求对象
      * @param array     $currentRules 当前路由规则
      * @param string    $method 请求类型
@@ -826,7 +826,7 @@ class Route
 
     /**
      * 检测URL路由
-     * @access public
+     * @access Public
      * @param Request   $request Request请求对象
      * @param string    $url URL地址
      * @param string    $depr URL分隔符
@@ -1048,7 +1048,7 @@ class Route
 
     /**
      * 绑定到类
-     * @access public
+     * @access Public
      * @param string    $url URL地址
      * @param string    $class 类名（带命名空间）
      * @param string    $depr URL分隔符
@@ -1067,7 +1067,7 @@ class Route
 
     /**
      * 绑定到命名空间
-     * @access public
+     * @access Public
      * @param string    $url URL地址
      * @param string    $namespace 命名空间
      * @param string    $depr URL分隔符
@@ -1087,7 +1087,7 @@ class Route
 
     /**
      * 绑定到控制器类
-     * @access public
+     * @access Public
      * @param string    $url URL地址
      * @param string    $controller 控制器名 （支持带模块名 index/user ）
      * @param string    $depr URL分隔符
@@ -1106,7 +1106,7 @@ class Route
 
     /**
      * 绑定到模块/控制器
-     * @access public
+     * @access Public
      * @param string    $url URL地址
      * @param string    $controller 控制器类名（带命名空间）
      * @param string    $depr URL分隔符
@@ -1199,7 +1199,7 @@ class Route
 
     /**
      * 解析模块的URL地址 [模块/控制器/操作?]参数1=值1&参数2=值2...
-     * @access public
+     * @access Public
      * @param string    $url URL地址
      * @param string    $depr URL分隔符
      * @param bool      $autoSearch 是否自动深度搜索控制器

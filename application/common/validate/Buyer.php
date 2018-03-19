@@ -9,7 +9,7 @@ use think\Validate;
  * Date: 2017/9/27
  * Time: 16:47
  */
-class Buyer extends BaseValidate
+class Buyer extends Validate
 {
     protected $rule = [
         ['name', 'require|chsAlpha', '名字不能为空|名字不合法'],
@@ -19,8 +19,8 @@ class Buyer extends BaseValidate
         ['zhifubao', 'require', '支付宝账号不能为空'],
         ['dormitory', 'require|number|max:4', '宿舍号不能为空|宿舍号必须为数字|宿舍号长度不合法'],
         ['oldPassword', 'require', '原密码不能为空'],
-        ['password', 'require', '密码不能为空'],
-        ['address', 'require', '地址不能为空']
+        ['password', 'require', '密码不能为空']
+
     ];
 
     protected $scene = [
@@ -28,7 +28,6 @@ class Buyer extends BaseValidate
                         'zhifubao', 'dormitory', 'password'],
         'login'     =>  ['tele', 'password'],
         'edit'  => ['name', 'tele', 'email', 'weixin', 'zhifubao', 'dormitory'],
-        'password' => ['oldPassword', 'password'],
-        'address' => ['address']
+        'password' => ['oldPassword', 'password']
     ];
 }

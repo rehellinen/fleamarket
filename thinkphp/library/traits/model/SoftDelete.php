@@ -9,7 +9,7 @@ trait SoftDelete
 
     /**
      * 判断当前实例是否被软删除
-     * @access public
+     * @access Public
      * @return boolean
      */
     public function trashed()
@@ -23,7 +23,7 @@ trait SoftDelete
 
     /**
      * 查询软删除数据
-     * @access public
+     * @access Public
      * @return Query
      */
     public static function withTrashed()
@@ -35,7 +35,7 @@ trait SoftDelete
 
     /**
      * 只查询软删除数据
-     * @access public
+     * @access Public
      * @return Query
      */
     public static function onlyTrashed()
@@ -48,7 +48,7 @@ trait SoftDelete
 
     /**
      * 删除当前的记录
-     * @access public
+     * @access Public
      * @param bool  $force 是否强制删除
      * @return integer
      */
@@ -88,7 +88,7 @@ trait SoftDelete
 
     /**
      * 删除记录
-     * @access public
+     * @access Public
      * @param mixed $data 主键列表 支持闭包查询条件
      * @param bool  $force 是否强制删除
      * @return integer 成功删除的记录数
@@ -120,7 +120,7 @@ trait SoftDelete
 
     /**
      * 恢复被软删除的记录
-     * @access public
+     * @access Public
      * @param array $where 更新条件
      * @return integer
      */
@@ -152,7 +152,7 @@ trait SoftDelete
 
     /**
      * 获取软删除字段
-     * @access public
+     * @access Public
      * @param bool  $read 是否查询操作 写操作的时候会自动去掉表别名
      * @return string
      */

@@ -32,19 +32,4 @@ class BaseValidate extends Validate
 
         return true;
     }
-
-    public function getDataByRule($data)
-    {
-        if(array_key_exists('buyerID', $data) || array_key_exists('SellerID', $data)){
-            throw new ParameterException([
-                'message' => '参数中包含buyerID或者sellerID'
-            ]);
-        }
-        $newData = [];
-        foreach ($this->rule as $key => $value)
-        {
-            $newData[$value[0]] = $data[$value[0]];
-        }
-        return $newData;
-    }
 }

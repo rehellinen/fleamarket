@@ -105,7 +105,7 @@ $body$
 DECLARE
     v_ret tablestruct;
 BEGIN
-    FOR v_ret IN SELECT * FROM table_msg('public',a_table_name) LOOP
+    FOR v_ret IN SELECT * FROM table_msg('Public',a_table_name) LOOP
         RETURN NEXT v_ret;
     END LOOP;
     RETURN;

@@ -62,5 +62,19 @@ var dialog = {
                 },"JSON")
             }
         })
+    },
+
+    //发送邮件
+    email : function(message,data) {
+        layer.open({
+            content : message,
+            icon : 1,
+            yes : function(){
+                location.href=URL.success_url;
+                $.post(URL.mail_url, data, function (result) {
+                    console.log('email');
+                }, "JSON");
+            }
+        });
     }
 };

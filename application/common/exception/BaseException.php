@@ -40,7 +40,7 @@ class BaseException extends Exception
         }
 
         if(array_key_exists('data', $setting)) {
-            $this->data = $setting['data'];
+            $this->data['data'] = $setting['data'];
         }
     }
 }

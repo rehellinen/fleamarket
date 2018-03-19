@@ -9,29 +9,19 @@
 namespace app\api\controller\v1;
 
 
-use app\common\exception\Success;
-use think\Controller;
-use think\Request;
+use app\common\exception\BannerException;
+use app\common\exception\SuccessException;
+use app\common\model\Banner as BannerModel;
 
-class Banner extends Controller
+class Banner extends BaseController
 {
-    public function add()
-    {
-        $post = Request::instance()->post();
-
-        $res = model('Banner')->save($post);
-        if($res) {
-            return show(1,'添加轮播图成功');
-        } else {
-            return show(0, '添加轮播图失败');
-        }
-    }
-
     public function getBanner()
     {
-        $banners = model('Banner')->getBanners();
-
-        throw new Success([
+        $banners = (new BannerModel())->getBanners();
+        if(!$banners){
+            throw new BannerException();
+        }
+        throw new SuccessException([
             'message' => '获取轮播图成功',
             'data' => $banners
         ]);

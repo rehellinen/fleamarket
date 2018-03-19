@@ -43,10 +43,4 @@ class Buyer extends Base
         $data['status'] = 1;
         return $this->where($data)->count();
     }
-
-    public function getByOpenID($openID)
-    {
-        $buyer = self::where('openid', '=', $openID)->find();
-        return $buyer;
-    }
 }

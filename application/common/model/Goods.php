@@ -11,6 +11,13 @@ namespace app\common\model;
 
 class Goods extends Base
 {
+    public function getPhotoAttr($value)
+    {
+        $value = config('photo_url_prefix').$value;
+        $value = str_replace('\\', '/', $value);
+        return $value;
+    }
+
     public function getSoldGoods()
     {
         $data['status'] = 2;

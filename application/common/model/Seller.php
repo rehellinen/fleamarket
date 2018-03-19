@@ -34,7 +34,7 @@ class Seller extends Base
             'status' => 1
         );
 
-        return $this->where($data)->find();
+        return $res = $this->where($data)->find();
     }
 
 

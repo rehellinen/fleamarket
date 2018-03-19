@@ -8,8 +8,9 @@
 
 return [
     'view_replace_str'       => [
-        '__UPLOAD__' => '/project/fleamarket/public',
-        '__STATIC__' => '/project/fleamarket/public/static'
+        '__UPLOAD__' => '/fleamarket/public',
+        '__STATIC__' => '/fleamarket/public/static'
     ],
-    'upload_file' => '/project/fleamarket/public/upload/'
+    'upload_file' => '/fleamarket/public/upload/',
+    'photo_url_prefix' => 'https://20298479.rehellinen.cn/fleamarket/public'
 ];

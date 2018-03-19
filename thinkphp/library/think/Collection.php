@@ -346,7 +346,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 
     /**
      * 转换当前数据集为JSON字符串
-     * @access public
+     * @access Public
      * @param integer $options json参数
      * @return string
      */

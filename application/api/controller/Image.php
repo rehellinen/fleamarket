@@ -37,7 +37,8 @@ class Image extends Controller
 
         // 处理
         $ratio = $width / $height;
-        if($width > $setWidth || $height > $setHeight){
+
+        if(1){
             if($width > $height) {
                 // 宽大于高的情况
                 $name = $this->getMD5Name('width');

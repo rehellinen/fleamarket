@@ -23,7 +23,7 @@ class TemplateNotFoundException extends \RuntimeException
 
     /**
      * 获取模板文件
-     * @access public
+     * @access Public
      * @return string
      */
     public function getTemplate()

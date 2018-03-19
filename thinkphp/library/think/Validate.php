@@ -104,7 +104,7 @@ class Validate
 
     /**
      * 构造函数
-     * @access public
+     * @access Public
      * @param array $rules 验证规则
      * @param array $message 验证提示信息
      * @param array $field 验证字段描述信息
@@ -118,7 +118,7 @@ class Validate
 
     /**
      * 实例化验证
-     * @access public
+     * @access Public
      * @param array     $rules 验证规则
      * @param array     $message 验证提示信息
      * @param array     $field 验证字段描述信息
@@ -151,7 +151,7 @@ class Validate
 
     /**
      * 注册验证（类型）规则
-     * @access public
+     * @access Public
      * @param string    $type  验证规则类型
      * @param mixed     $callback callback方法(或闭包)
      * @return void
@@ -183,7 +183,7 @@ class Validate
 
     /**
      * 设置提示信息
-     * @access public
+     * @access Public
      * @param string|array  $name  字段名称
      * @param string        $message 提示信息
      * @return Validate
@@ -200,7 +200,7 @@ class Validate
 
     /**
      * 设置验证场景
-     * @access public
+     * @access Public
      * @param string|array  $name  场景名或者场景设置数组
      * @param mixed         $fields 要验证的字段
      * @return Validate
@@ -221,7 +221,7 @@ class Validate
 
     /**
      * 判断是否存在某个验证场景
-     * @access public
+     * @access Public
      * @param string $name 场景名
      * @return bool
      */
@@ -232,7 +232,7 @@ class Validate
 
     /**
      * 设置批量验证
-     * @access public
+     * @access Public
      * @param bool $batch  是否批量验证
      * @return Validate
      */
@@ -244,7 +244,7 @@ class Validate
 
     /**
      * 数据自动验证
-     * @access public
+     * @access Public
      * @param array     $data  数据
      * @param mixed     $rules  验证规则
      * @param string    $scene 验证场景

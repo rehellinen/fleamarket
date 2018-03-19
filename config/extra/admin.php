@@ -8,6 +8,5 @@
 
 return[
     'md5_prefix' => 'rehellinen_',
-    'max_banner_count' => 3,
-    'token_expire_in' => 7200
+    'max_banner_count' => 3
 ];

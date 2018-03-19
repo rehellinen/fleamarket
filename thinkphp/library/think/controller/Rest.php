@@ -33,7 +33,7 @@ abstract class Rest
 
     /**
      * 构造函数 取得模板对象实例
-     * @access public
+     * @access Public
      */
     public function __construct()
     {
@@ -60,7 +60,7 @@ abstract class Rest
 
     /**
      * REST 调用
-     * @access public
+     * @access Public
      * @param string $method 方法名
      * @return mixed
      * @throws \Exception

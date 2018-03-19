@@ -23,7 +23,7 @@ class Pivot extends Model
 
     /**
      * 架构函数
-     * @access public
+     * @access Public
      * @param Model         $parent 上级模型
      * @param array|object  $data 数据
      * @param string        $table 中间数据表名

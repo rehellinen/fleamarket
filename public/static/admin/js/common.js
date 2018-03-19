@@ -14,6 +14,23 @@ $('#submitButton').click(function () {
    },"JSON");
 });
 
+$('#registerButton').click(function () {
+    var res = $('#submitForm').serializeArray();
+    var postData = {};
+    $(res).each(function (i) {
+        postData[this.name] = this.value;
+    });
+    $.post(URL.submit_url, postData, function (result) {
+        if(result.status===1){
+            console.log(result);
+            dialog.email(result.message, result.data);
+        }
+        if(result.status===0){
+            dialog.error(result.message);
+        }
+    },"JSON");
+});
+
 $('* .listorder').blur(function () {
     var id = $(this).attr('attr-id');
     var listorder = $(this).val();

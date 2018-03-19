@@ -21,7 +21,7 @@ class Sqlite extends Builder
 
     /**
      * limit
-     * @access public
+     * @access Public
      * @param string $limit
      * @return string
      */

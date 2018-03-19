@@ -36,12 +36,12 @@ class ExceptionHandler extends Handle
                 $this->message = '服务器内部错误';
                 $this->status = 99999;
                 $this->data = [];
+                // 记录日志
             }
         }
 
         $url = Request::instance()->url();
         $this->data['request_url'] = $url;
-
         $result = [
             'status' => $this->status,
             'message' => $this->message,

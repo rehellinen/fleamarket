@@ -20,11 +20,9 @@ class Banner extends Base
 
     public function getBanners()
     {
-        $condition = [
-            'status' => 1
-        ];
+        $condition['status'] = 1;
         $maxCount = config('admin.max_banner_count');
         return $this->where($condition)->order('listorder desc, id desc')
-                ->limit($maxCount)->select()->toArray();
+                ->limit($maxCount)->select();
     }
 }

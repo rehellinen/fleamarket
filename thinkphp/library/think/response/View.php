@@ -38,7 +38,7 @@ class View extends Response
 
     /**
      * 获取视图变量
-     * @access public
+     * @access Public
      * @param string $name 模板变量
      * @return mixed
      */
@@ -53,7 +53,7 @@ class View extends Response
 
     /**
      * 模板变量赋值
-     * @access public
+     * @access Public
      * @param mixed $name  变量名
      * @param mixed $value 变量值
      * @return $this
@@ -71,7 +71,7 @@ class View extends Response
 
     /**
      * 视图内容替换
-     * @access public
+     * @access Public
      * @param string|array $content 被替换内容（支持批量替换）
      * @param string  $replace    替换内容
      * @return $this
