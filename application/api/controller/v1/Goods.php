@@ -26,4 +26,17 @@ class Goods extends BaseController
             'message' => '获取所有产品信息成功'
         ]);
     }
+
+    public function getGoodsById($id)
+    {
+        $goods = (new GoodsModel())->getById($id);
+        if(!$goods){
+            throw new GoodsException();
+        }
+
+        throw new SuccessException([
+            'data' => $goods,
+            'message' => '获取产品信息成功'
+        ]);
+    }
 }

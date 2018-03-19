@@ -38,4 +38,10 @@ class Base extends Model
         $condition['id'] = $id;
         return $this->where($condition)->update($data);
     }
+
+    public function getById($id)
+    {
+        $condition['id'] = $id;
+        return $this->where($condition)->find();
+    }
 }
