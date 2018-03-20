@@ -9,6 +9,7 @@
 namespace app\api\controller\v1;
 
 
+use app\common\exception\SuccessException;
 use app\common\service\UserToken;
 use app\common\validate\Token as TokenValidate;
 
@@ -21,6 +22,9 @@ class Token extends BaseController
         $userTokenService = new UserToken($code);
         $token = $userTokenService->get();
 
-        return $token;
+        throw new SuccessException([
+            'message' => '获取令牌成功',
+            'data' => array('token' => $token)
+        ]);
     }
 }

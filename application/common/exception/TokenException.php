@@ -12,7 +12,6 @@ namespace app\common\exception;
 class TokenException extends BaseException
 {
     public $httpCode = 401;
-    public $status = 10001;
+    public $status = 50000;
     public $message = 'Token无效或已过期';
-    public $data = [];
 }
