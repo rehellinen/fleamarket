@@ -10,16 +10,16 @@ namespace app\api\controller\v1;
 
 
 use app\common\service\UserToken;
-use app\common\validate\Token as tokenValidate;
+use app\common\validate\Token as TokenValidate;
 
 class Token extends BaseController
 {
     public function getToken($code = '')
     {
-        (new tokenValidate())->goCheck('token');
+        (new TokenValidate())->goCheck('token');
 
-        $userTokenService = new UserToken();
-        $token = $userTokenService->get($code);
+        $userTokenService = new UserToken($code);
+        $token = $userTokenService->get();
 
         return $token;
     }

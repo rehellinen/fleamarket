@@ -11,6 +11,12 @@ namespace app\common\model;
 
 class Buyer extends Base
 {
+    // 方法1：根据open_id获取用户信息
+    public function getByOpenID($openid)
+    {
+        return $this->where('open_id='.$openid)->find();
+    }
+
     public function insertBuyer($data)
     {
         $data['status'] = 1;
