@@ -11,7 +11,7 @@ namespace app\common\exception;
 
 class GoodsException extends BaseException
 {
-    public $httpCode = 200;
+    public $httpCode = 404;
     public $status = 30000;
     public $message = '产品不存在';
 }

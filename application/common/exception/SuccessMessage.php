@@ -9,7 +9,7 @@
 namespace app\common\exception;
 
 
-class SuccessException extends BaseException
+class SuccessMessage extends BaseException
 {
     public $httpCode = 200;
     public $status = 10000;

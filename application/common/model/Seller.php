@@ -6,7 +6,7 @@ namespace app\common\model;
  * Date: 2017/9/27
  * Time: 15:36
  */
-class Seller extends Base
+class Seller extends BaseModel
 {
     public function getSellerByName($name, $status = 1)
     {

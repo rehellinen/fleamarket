@@ -8,7 +8,7 @@ use think\Model;
  * Date: 2017/9/27
  * Time: 15:37
  */
-class Base extends Model
+class BaseModel extends Model
 {
     public function getAll()
     {

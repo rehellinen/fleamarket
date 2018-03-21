@@ -9,8 +9,13 @@
 namespace app\common\model;
 
 
-class Buyer extends Base
+class Buyer extends BaseModel
 {
+    public function address()
+    {
+        return $this->hasOne('BuyerAddress', 'buyer_id', 'id');
+    }
+
     // 方法1：根据open_id获取用户信息
     public function getByOpenID($openid)
     {

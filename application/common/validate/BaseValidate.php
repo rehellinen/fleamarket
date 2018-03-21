@@ -15,6 +15,7 @@ use think\Validate;
 
 class BaseValidate extends Validate
 {
+    // 对check方法进行封装
     public function goCheck($scene)
     {
         // 获取所有参数
@@ -31,6 +32,21 @@ class BaseValidate extends Validate
         }
 
         return true;
+    }
+
+    // validate 检测什么参数则对什么参数进行操作
+    public function getDataByScene($scene)
+    {
+        $params = Request::instance()->param();
+        $rule = $this->scene[$scene];
+        $newData = array();
+
+        foreach ($rule as $key => $value)
+        {
+            $newData[$value] = $params[$value];
+        }
+
+        return $newData;
     }
 
     public function isNotEmpty($value, $rule = '', $data = '', $field = '')

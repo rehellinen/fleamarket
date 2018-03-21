@@ -10,7 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\common\exception\BannerException;
-use app\common\exception\SuccessException;
+use app\common\exception\SuccessMessage;
 use app\common\model\Banner as BannerModel;
 
 class Banner extends BaseController
@@ -21,7 +21,7 @@ class Banner extends BaseController
         if(!$banners){
             throw new BannerException();
         }
-        throw new SuccessException([
+        throw new SuccessMessage([
             'message' => '获取轮播图成功',
             'data' => $banners
         ]);

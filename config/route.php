@@ -17,7 +17,10 @@ Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 
 // 关于商品
 Route::get('api/:version/goods', 'api/:version.Goods/getGoods');
-Route::get('api/:version/goods/:id', 'api/:version.Goods/getGoodsById');
+Route::get('api/:version/goods/:id', 'api/:version.Goods/getGoodsById', [], ['id'=>'\d+']);
 
 // 关于Token
 Route::post('api/:version/token/user', 'api/:version.Token/getToken');
+
+// 关于地址
+Route::post('api/:version/address', 'api/:version.Address/createOrUpdateAddress');

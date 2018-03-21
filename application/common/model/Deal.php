@@ -9,7 +9,7 @@
 namespace app\common\model;
 
 
-class Deal extends Base
+class Deal extends BaseModel
 {
     public function getDealCount()
     {

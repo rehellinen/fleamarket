@@ -35,7 +35,6 @@ class Token
     {
         $token = Request::instance()->header('token');
         $vars = Cache::get($token);
-
         if(!$vars){
             throw new TokenException();
         }else{
@@ -51,7 +50,7 @@ class Token
         }
     }
 
-    public static function getIDByToken()
+    public static function getBuyerID()
     {
         $buyerID = self::getCurrentTokenVar('buyerID');
         return $buyerID;

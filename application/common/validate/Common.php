@@ -11,10 +11,14 @@ namespace app\common\validate;
 
 use think\Validate;
 
-class Status extends Validate
+class Common extends BaseValidate
 {
     protected $rule = [
-        ['id', 'require|number', 'id不能为空|id不合法'],
-        ['status', 'require|number', '状态不能为空|状态不合法']
+        ['id', 'require|number'],
+        ['status', 'require|number']
+    ];
+
+    protected $scene = [
+        ['id' => 'id']
     ];
 }

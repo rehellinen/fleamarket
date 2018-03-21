@@ -9,7 +9,7 @@
 namespace app\common\model;
 
 
-class Goods extends Base
+class Goods extends BaseModel
 {
     public function getPhotoAttr($value)
     {

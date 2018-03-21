@@ -9,7 +9,7 @@
 namespace app\common\model;
 
 
-class Banner extends Base
+class Banner extends BaseModel
 {
     public function getPhotoAttr($value)
     {
