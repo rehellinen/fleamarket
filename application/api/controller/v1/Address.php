@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\common\exception\BuyerException;
+use app\common\exception\SuccessMessage;
 use app\common\model\BuyerAddress;
 use think\Controller;
 use app\common\validate\Address as AddressValidate;
@@ -22,8 +23,9 @@ class Address extends Controller
     public function createOrUpdateAddress()
     {
         (new AddressValidate)->goCheck('new');
-        $data = (new AddressValidate)->getDataByScene('new');
         $buyerID = TokenService::getBuyerID();
+        $data = (new AddressValidate)->getDataByScene('new');
+        $data['buyer_id'] = $buyerID;
 
         // 判断用户是否存在
         $buyer = BuyerModel::get($buyerID);
@@ -35,16 +37,13 @@ class Address extends Controller
         $address = (new BuyerAddress());
         $buyerAddress = $address->getAddressByBuyerID($buyerID);
         if($buyerAddress){
-            $address->save($data);
+            $address->save($data, ['buyer_id' => $buyerID]);
         }else{
             $address->save($data);
         }
-    }
-
-    public function test()
-    {
-        $buyer = BuyerModel::get(6);
-        $buyerAddress = $buyer->address();
-        print_r($buyerAddress);
+        throw new SuccessMessage([
+            'message' => '更新 / 修改地址成功',
+            'httpCode' => 201
+        ]);
     }
 }

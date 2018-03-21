@@ -20,6 +20,6 @@ class Address extends BaseValidate
     ];
 
     protected $scene = [
-        ['new' => 'name', 'telephone', 'detail', 'number', 'wechat']
+        'new' => ['name', 'telephone', 'detail', 'number', 'wechat']
     ];
 }
