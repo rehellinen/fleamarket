@@ -1,37 +1,46 @@
 {include file="public/header"}
 <link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/common.css">
 
-    <div class="row content-container">
-        {include file="public/nav"}
+<div class="row content-container">
+    {include file="public/nav"}
 
-        <div class="container-fluid">
-            <div class="side-body">
-                <div class="row">
-                    <div class="container">
-                        <h4>轮播图管理</h4>
-                    </div>
-                    {volist name="banner" id="vo"}
-                    <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4">
-                        <div class="thumbnail no-margin-bottom">
-                            <img src="__UPLOAD__{$vo.photo}" class="img-responsive">
-                            <div class="caption">
-                                <p>id：{$vo.id}</p>
-                                <p>排序：<input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}"/></p>
-                                <button class="btn btn-default statusButton" attr-id="{$vo.id}" attr-status="-1">删除</button>
-                            </div>
+    <div class="container-fluid">
+        <div class="side-body">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="title">轮播图管理</div>
                         </div>
                     </div>
-                    {/volist}
+                    <div class="card-body">
+                        <div class="row">
+                            {volist name="banner" id="vo"}
+                            <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4">
+                                <div class="thumbnail no-margin-bottom">
+                                    <img src="__UPLOAD__{$vo.photo}" class="img-responsive">
+                                    <div class="caption">
+                                        <p>id：{$vo.id}</p>
+                                        <p>排序：<input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}"/></p>
+                                        <button class="btn btn-default statusButton" attr-id="{$vo.id}" attr-status="-1">删除
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {/volist}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        var URL = {
-            'listorder_url' : "{:url('admin/Banner/listorder')}",
-            'success_url' : "{:url('admin/Banner/index')}",
-            'status_url' : "{:url('admin/Banner/setStatus')}"
-        };
-    </script>
-    {include file="public/footer"}
+<script>
+    var URL = {
+        'listorder_url': "{:url('admin/Banner/listorder')}",
+        'success_url': "{:url('admin/Banner/index')}",
+        'status_url': "{:url('admin/Banner/setStatus')}"
+    };
+</script>
+{include file="public/footer"}
