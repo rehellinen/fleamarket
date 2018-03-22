@@ -17,9 +17,11 @@ class Base extends Controller
 {
     public function _initialize()
     {
-        //判断是否登录
+
         $module = Request::instance()->module();
         $lowModule = strtolower($module);
+
+        //判断是否登录
         $res = Session::has('loginUser', $lowModule);
         if(!$res){
             $this->redirect($module."/Login/index");
@@ -54,8 +56,8 @@ class Base extends Controller
     public function setStatus()
     {
         $post = Request::instance()->post();
-        $validate = validate('status');
-        if(!$validate->check($post)){
+        $validate = validate('common');
+        if(!$validate->scene('status')->check($post)){
             return show(0, $validate->getError());
         }
 

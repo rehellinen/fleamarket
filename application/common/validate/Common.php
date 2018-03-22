@@ -19,6 +19,7 @@ class Common extends BaseValidate
     ];
 
     protected $scene = [
-        ['id' => 'id']
+        ['id' => 'id'],
+        ['status' => 'status']
     ];
 }

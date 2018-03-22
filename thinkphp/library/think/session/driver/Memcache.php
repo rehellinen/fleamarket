@@ -33,7 +33,7 @@ class Memcache extends SessionHandler
 
     /**
      * 打开Session
-     * @access Public
+     * @access public
      * @param string    $savePath
      * @param mixed     $sessName
      */
@@ -62,7 +62,7 @@ class Memcache extends SessionHandler
 
     /**
      * 关闭Session
-     * @access Public
+     * @access public
      */
     public function close()
     {
@@ -74,7 +74,7 @@ class Memcache extends SessionHandler
 
     /**
      * 读取Session
-     * @access Public
+     * @access public
      * @param string $sessID
      */
     public function read($sessID)
@@ -84,7 +84,7 @@ class Memcache extends SessionHandler
 
     /**
      * 写入Session
-     * @access Public
+     * @access public
      * @param string    $sessID
      * @param String    $sessData
      * @return bool
@@ -96,7 +96,7 @@ class Memcache extends SessionHandler
 
     /**
      * 删除Session
-     * @access Public
+     * @access public
      * @param string $sessID
      * @return bool
      */
@@ -107,7 +107,7 @@ class Memcache extends SessionHandler
 
     /**
      * Session 垃圾回收
-     * @access Public
+     * @access public
      * @param string $sessMaxLifeTime
      * @return true
      */

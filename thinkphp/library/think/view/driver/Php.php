@@ -38,7 +38,7 @@ class Php
 
     /**
      * 检测是否存在模板文件
-     * @access Public
+     * @access public
      * @param string $template 模板文件或者模板规则
      * @return bool
      */
@@ -53,7 +53,7 @@ class Php
 
     /**
      * 渲染模板文件
-     * @access Public
+     * @access public
      * @param string    $template 模板文件
      * @param array     $data 模板变量
      * @return void
@@ -82,7 +82,7 @@ class Php
 
     /**
      * 渲染模板内容
-     * @access Public
+     * @access public
      * @param string    $content 模板内容
      * @param array     $data 模板变量
      * @return void

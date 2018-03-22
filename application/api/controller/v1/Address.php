@@ -15,7 +15,6 @@ use app\common\model\BuyerAddress;
 use think\Controller;
 use app\common\validate\Address as AddressValidate;
 use app\common\service\Token as TokenService;
-use app\common\model\BuyerAddress as BuyerAddressModel;
 use app\common\model\Buyer as BuyerModel;
 
 class Address extends Controller

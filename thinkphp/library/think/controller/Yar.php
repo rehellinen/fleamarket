@@ -19,7 +19,7 @@ abstract class Yar
 
     /**
      * 构造函数
-     * @access Public
+     * @access public
      */
     public function __construct()
     {
@@ -41,7 +41,7 @@ abstract class Yar
 
     /**
      * 魔术方法 有不存在的操作的时候执行
-     * @access Public
+     * @access public
      * @param string $method 方法名
      * @param array $args 参数
      * @return mixed

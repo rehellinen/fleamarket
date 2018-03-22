@@ -48,7 +48,7 @@ class Mysql extends Connection
 
     /**
      * 取得数据表的字段信息
-     * @access Public
+     * @access public
      * @param string $tableName
      * @return array
      */
@@ -83,7 +83,7 @@ class Mysql extends Connection
 
     /**
      * 取得数据库的表信息
-     * @access Public
+     * @access public
      * @param string $dbName
      * @return array
      */

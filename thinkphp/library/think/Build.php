@@ -83,7 +83,7 @@ class Build
 
     /**
      * 创建模块
-     * @access Public
+     * @access public
      * @param  string $module 模块名
      * @param  array  $list build列表
      * @param  string $namespace 应用类库命名空间
@@ -159,7 +159,7 @@ class Build
 
     /**
      * 创建模块的欢迎页面
-     * @access Public
+     * @access public
      * @param  string $module 模块名
      * @param  string $namespace 应用类库命名空间
      * @param  bool   $suffix 类库后缀
@@ -178,7 +178,7 @@ class Build
 
     /**
      * 创建模块的公共文件
-     * @access Public
+     * @access public
      * @param  string $module 模块名
      * @return void
      */

@@ -37,7 +37,7 @@ class File
 
     /**
      * 日志写入接口
-     * @access Public
+     * @access public
      * @param array $log 日志信息
      * @return bool
      */

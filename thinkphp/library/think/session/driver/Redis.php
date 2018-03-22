@@ -36,7 +36,7 @@ class Redis extends SessionHandler
 
     /**
      * 打开Session
-     * @access Public
+     * @access public
      * @param string $savePath
      * @param mixed  $sessName
      * @return bool
@@ -67,7 +67,7 @@ class Redis extends SessionHandler
 
     /**
      * 关闭Session
-     * @access Public
+     * @access public
      */
     public function close()
     {
@@ -79,7 +79,7 @@ class Redis extends SessionHandler
 
     /**
      * 读取Session
-     * @access Public
+     * @access public
      * @param string $sessID
      * @return string
      */
@@ -90,7 +90,7 @@ class Redis extends SessionHandler
 
     /**
      * 写入Session
-     * @access Public
+     * @access public
      * @param string $sessID
      * @param String $sessData
      * @return bool
@@ -106,7 +106,7 @@ class Redis extends SessionHandler
 
     /**
      * 删除Session
-     * @access Public
+     * @access public
      * @param string $sessID
      * @return bool
      */
@@ -117,7 +117,7 @@ class Redis extends SessionHandler
 
     /**
      * Session 垃圾回收
-     * @access Public
+     * @access public
      * @param string $sessMaxLifeTime
      * @return bool
      */

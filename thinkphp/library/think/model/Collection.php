@@ -32,7 +32,7 @@ class Collection extends BaseCollection
 
     /**
      * 延迟预载入关联查询
-     * @access Public
+     * @access public
      * @param mixed $relation 关联
      * @return $this
      */
@@ -45,7 +45,7 @@ class Collection extends BaseCollection
 
     /**
      * 设置需要隐藏的输出属性
-     * @access Public
+     * @access public
      * @param array $hidden   属性列表
      * @param bool  $override 是否覆盖
      * @return $this
@@ -76,7 +76,7 @@ class Collection extends BaseCollection
 
     /**
      * 设置需要追加的输出属性
-     * @access Public
+     * @access public
      * @param array $append   属性列表
      * @param bool  $override 是否覆盖
      * @return $this

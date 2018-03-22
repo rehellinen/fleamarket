@@ -23,7 +23,7 @@ class ValidateException extends \RuntimeException
 
     /**
      * 获取验证错误信息
-     * @access Public
+     * @access public
      * @return array|string
      */
     public function getError()

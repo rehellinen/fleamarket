@@ -26,7 +26,7 @@ class View
 
     /**
      * 构造函数
-     * @access Public
+     * @access public
      * @param array $engine  模板引擎参数
      * @param array $replace  字符串替换参数
      */
@@ -53,7 +53,7 @@ class View
 
     /**
      * 初始化视图
-     * @access Public
+     * @access public
      * @param array $engine  模板引擎参数
      * @param array $replace  字符串替换参数
      * @return object
@@ -68,7 +68,7 @@ class View
 
     /**
      * 模板变量静态赋值
-     * @access Public
+     * @access public
      * @param mixed $name  变量名
      * @param mixed $value 变量值
      * @return void
@@ -84,7 +84,7 @@ class View
 
     /**
      * 模板变量赋值
-     * @access Public
+     * @access public
      * @param mixed $name  变量名
      * @param mixed $value 变量值
      * @return $this
@@ -101,7 +101,7 @@ class View
 
     /**
      * 设置当前模板解析的引擎
-     * @access Public
+     * @access public
      * @param array|string $options 引擎参数
      * @return $this
      */
@@ -172,7 +172,7 @@ class View
 
     /**
      * 视图内容替换
-     * @access Public
+     * @access public
      * @param string|array  $content 被替换内容（支持批量替换）
      * @param string        $replace    替换内容
      * @return $this
@@ -189,7 +189,7 @@ class View
 
     /**
      * 渲染内容输出
-     * @access Public
+     * @access public
      * @param string $content 内容
      * @param array  $vars    模板输出变量
      * @param array  $replace 替换内容
@@ -203,7 +203,7 @@ class View
 
     /**
      * 模板变量赋值
-     * @access Public
+     * @access public
      * @param string    $name  变量名
      * @param mixed     $value 变量值
      */
@@ -225,7 +225,7 @@ class View
 
     /**
      * 检测模板变量是否设置
-     * @access Public
+     * @access public
      * @param string $name 模板变量名
      * @return bool
      */

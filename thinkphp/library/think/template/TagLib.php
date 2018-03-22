@@ -69,7 +69,7 @@ class TagLib
 
     /**
      * 构造函数
-     * @access Public
+     * @access public
      * @param \stdClass $template 模板引擎对象
      */
     public function __construct($template)
@@ -79,7 +79,7 @@ class TagLib
 
     /**
      * 按签标库替换页面中的标签
-     * @access Public
+     * @access public
      * @param  string $content 模板内容
      * @param  string $lib 标签库名
      * @return void
@@ -216,7 +216,7 @@ class TagLib
 
     /**
      * 分析标签属性 正则方式
-     * @access Public
+     * @access public
      * @param string $str 标签属性字符串
      * @param string $name 标签名
      * @param string $alias 别名
@@ -280,7 +280,7 @@ class TagLib
 
     /**
      * 解析条件表达式
-     * @access Public
+     * @access public
      * @param  string $condition 表达式标签内容
      * @return string
      */
@@ -297,7 +297,7 @@ class TagLib
 
     /**
      * 自动识别构建变量
-     * @access Public
+     * @access public
      * @param string $name 变量描述
      * @return string
      */
@@ -323,7 +323,7 @@ class TagLib
 
     /**
      * 获取标签列表
-     * @access Public
+     * @access public
      * @return array
      */
     // 获取标签定义

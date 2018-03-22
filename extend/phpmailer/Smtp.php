@@ -22,7 +22,7 @@ namespace phpmailer;
 | Copyright (c) 2004-2009, Andy Prevost. All Rights Reserved.               |
 | Copyright (c) 2001-2003, Brent R. Matzelle                                |
 | ------------------------------------------------------------------------- |
-|   License: Distributed under the Lesser General Public License (LGPL)     |
+|   License: Distributed under the Lesser General public License (LGPL)     |
 |            http://www.gnu.org/copyleft/lesser.html                        |
 | This program is distributed in the hope that it will be useful - WITHOUT  |
 | ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     |
@@ -42,7 +42,7 @@ namespace phpmailer;
  * @author Andy Prevost
  * @author Marcus Bointon
  * @copyright 2004 - 2008 Andy Prevost
- * @license http://www.gnu.org/copyleft/lesser.html Distributed under the Lesser General Public License (LGPL)
+ * @license http://www.gnu.org/copyleft/lesser.html Distributed under the Lesser General public License (LGPL)
  * @version $Id: class.smtp.php 444 2009-05-05 11:22:26Z coolbru $
  */
 
@@ -89,7 +89,7 @@ class Smtp {
 
     /**
      * Initialize the class so that the data is in a known state.
-     * @access Public
+     * @access public
      * @return void
      */
     public function __construct() {
@@ -114,7 +114,7 @@ class Smtp {
      *
      * SMTP CODE SUCCESS: 220
      * SMTP CODE FAILURE: 421
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Connect($host, $port = 0, $tval = 30) {
@@ -170,7 +170,7 @@ class Smtp {
      * SMTP CODE 220 Ready to start TLS
      * SMTP CODE 501 Syntax error (no parameters allowed)
      * SMTP CODE 454 TLS not available due to temporary reason
-     * @access Public
+     * @access public
      * @return bool success
      */
     public function StartTLS() {
@@ -212,7 +212,7 @@ class Smtp {
     /**
      * Performs SMTP authentication.  Must be run after running the
      * Hello() method.  Returns true if successfully authenticated.
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Authenticate($username, $password) {
@@ -272,7 +272,7 @@ class Smtp {
 
     /**
      * Returns true if connected to a server otherwise false
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Connected() {
@@ -295,7 +295,7 @@ class Smtp {
      * Closes the socket and cleans up the state of the class.
      * It is not considered good to use this function without
      * first trying to use QUIT.
-     * @access Public
+     * @access public
      * @return void
      */
     public function Close() {
@@ -328,7 +328,7 @@ class Smtp {
      *     SMTP CODE FAILURE: 552,554,451,452
      * SMTP CODE FAILURE: 451,554
      * SMTP CODE ERROR  : 500,501,503,421
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Data($msg_data) {
@@ -465,7 +465,7 @@ class Smtp {
      *
      * SMTP CODE SUCCESS: 250
      * SMTP CODE ERROR  : 500, 501, 504, 421
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Hello($host = '') {
@@ -535,7 +535,7 @@ class Smtp {
      * SMTP CODE SUCCESS: 250
      * SMTP CODE SUCCESS: 552,451,452
      * SMTP CODE SUCCESS: 500,501,421
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Mail($from) {
@@ -578,7 +578,7 @@ class Smtp {
      *
      * SMTP CODE SUCCESS: 221
      * SMTP CODE ERROR  : 500
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Quit($close_on_error = true) {
@@ -631,7 +631,7 @@ class Smtp {
      * SMTP CODE SUCCESS: 250,251
      * SMTP CODE FAILURE: 550,551,552,553,450,451,452
      * SMTP CODE ERROR  : 500,501,503,421
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Recipient($to) {
@@ -674,7 +674,7 @@ class Smtp {
      *
      * SMTP CODE SUCCESS: 250
      * SMTP CODE ERROR  : 500,501,504,421
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Reset() {
@@ -722,7 +722,7 @@ class Smtp {
      * SMTP CODE SUCCESS: 250
      * SMTP CODE SUCCESS: 552,451,452
      * SMTP CODE SUCCESS: 500,501,502,421
-     * @access Public
+     * @access public
      * @return bool
      */
     public function SendAndMail($from) {
@@ -766,7 +766,7 @@ class Smtp {
      * SMTP CODE SUCCESS: 250
      * SMTP CODE FAILURE: 502
      * SMTP CODE ERROR  : 500, 503
-     * @access Public
+     * @access public
      * @return bool
      */
     public function Turn() {
@@ -780,7 +780,7 @@ class Smtp {
 
     /**
      * Get the current error
-     * @access Public
+     * @access public
      * @return array
      */
     public function getError() {

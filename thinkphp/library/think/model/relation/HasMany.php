@@ -20,7 +20,7 @@ class HasMany extends Relation
 {
     /**
      * 构造函数
-     * @access Public
+     * @access public
      * @param Model  $parent     上级模型对象
      * @param string $model      模型名
      * @param string $foreignKey 关联外键
@@ -58,7 +58,7 @@ class HasMany extends Relation
 
     /**
      * 预载入关联查询
-     * @access   Public
+     * @access   public
      * @param array    $resultSet   数据集
      * @param string   $relation    当前关联名
      * @param string   $subRelation 子关联名
@@ -102,7 +102,7 @@ class HasMany extends Relation
 
     /**
      * 预载入关联查询
-     * @access   Public
+     * @access   public
      * @param Model    $result      数据对象
      * @param string   $relation    当前关联名
      * @param string   $subRelation 子关联名
@@ -130,7 +130,7 @@ class HasMany extends Relation
 
     /**
      * 关联统计
-     * @access Public
+     * @access public
      * @param Model    $result  数据对象
      * @param \Closure $closure 闭包
      * @return integer
@@ -150,7 +150,7 @@ class HasMany extends Relation
 
     /**
      * 创建关联统计子查询
-     * @access Public
+     * @access public
      * @param \Closure $closure 闭包
      * @return string
      */
@@ -170,7 +170,7 @@ class HasMany extends Relation
 
     /**
      * 一对多 关联模型预查询
-     * @access Public
+     * @access public
      * @param object $model       关联模型对象
      * @param array  $where       关联预查询条件
      * @param string $relation    关联名
@@ -197,7 +197,7 @@ class HasMany extends Relation
 
     /**
      * 保存（新增）当前关联数据对象
-     * @access Public
+     * @access public
      * @param mixed $data 数据 可以使用数组 关联模型对象 和 关联对象的主键
      * @return Model|false
      */
@@ -214,7 +214,7 @@ class HasMany extends Relation
 
     /**
      * 批量保存当前关联数据对象
-     * @access Public
+     * @access public
      * @param array $dataSet 数据集
      * @return integer
      */
@@ -229,7 +229,7 @@ class HasMany extends Relation
 
     /**
      * 根据关联条件查询当前模型
-     * @access Public
+     * @access public
      * @param string  $operator 比较操作符
      * @param integer $count    个数
      * @param string  $id       关联表的统计字段
@@ -252,7 +252,7 @@ class HasMany extends Relation
 
     /**
      * 根据关联条件查询当前模型
-     * @access Public
+     * @access public
      * @param mixed $where 查询条件（数组或者闭包）
      * @return Query
      */

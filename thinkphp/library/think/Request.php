@@ -154,7 +154,7 @@ class Request
 
     /**
      * Hook 方法注入
-     * @access Public
+     * @access public
      * @param string|array  $method 方法名
      * @param mixed         $callback callable
      * @return void
@@ -170,7 +170,7 @@ class Request
 
     /**
      * 初始化
-     * @access Public
+     * @access public
      * @param array $options 参数
      * @return \think\Request
      */
@@ -184,7 +184,7 @@ class Request
 
     /**
      * 创建一个URL请求
-     * @access Public
+     * @access public
      * @param string    $uri URL地址
      * @param string    $method 请求类型
      * @param array     $params 请求参数
@@ -263,7 +263,7 @@ class Request
 
     /**
      * 设置或获取当前包含协议的域名
-     * @access Public
+     * @access public
      * @param string $domain 域名
      * @return string
      */
@@ -280,7 +280,7 @@ class Request
 
     /**
      * 设置或获取当前完整URL 包括QUERY_STRING
-     * @access Public
+     * @access public
      * @param string|true $url URL地址 true 带域名获取
      * @return string
      */
@@ -307,7 +307,7 @@ class Request
 
     /**
      * 设置或获取当前URL 不含QUERY_STRING
-     * @access Public
+     * @access public
      * @param string $url URL地址
      * @return string
      */
@@ -325,7 +325,7 @@ class Request
 
     /**
      * 设置或获取当前执行的文件 SCRIPT_NAME
-     * @access Public
+     * @access public
      * @param string $file 当前执行的文件
      * @return string
      */
@@ -357,7 +357,7 @@ class Request
 
     /**
      * 设置或获取URL访问根地址
-     * @access Public
+     * @access public
      * @param string $url URL地址
      * @return string
      */
@@ -378,7 +378,7 @@ class Request
 
     /**
      * 获取当前请求URL的pathinfo信息（含URL后缀）
-     * @access Public
+     * @access public
      * @return string
      */
     public function pathinfo()
@@ -410,7 +410,7 @@ class Request
 
     /**
      * 获取当前请求URL的pathinfo信息(不含URL后缀)
-     * @access Public
+     * @access public
      * @return string
      */
     public function path()
@@ -434,7 +434,7 @@ class Request
 
     /**
      * 当前URL的访问后缀
-     * @access Public
+     * @access public
      * @return string
      */
     public function ext()
@@ -444,7 +444,7 @@ class Request
 
     /**
      * 获取当前请求的时间
-     * @access Public
+     * @access public
      * @param bool $float 是否使用浮点类型
      * @return integer|float
      */
@@ -455,7 +455,7 @@ class Request
 
     /**
      * 当前请求的资源类型
-     * @access Public
+     * @access public
      * @return false|string
      */
     public function type()
@@ -478,7 +478,7 @@ class Request
 
     /**
      * 设置资源类型
-     * @access Public
+     * @access public
      * @param string|array  $type 资源类型名
      * @param string        $val 资源类型
      * @return void
@@ -494,7 +494,7 @@ class Request
 
     /**
      * 当前的请求类型
-     * @access Public
+     * @access public
      * @param bool $method  true 获取原始请求类型
      * @return string
      */
@@ -518,7 +518,7 @@ class Request
 
     /**
      * 是否为GET请求
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isGet()
@@ -528,7 +528,7 @@ class Request
 
     /**
      * 是否为POST请求
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isPost()
@@ -538,7 +538,7 @@ class Request
 
     /**
      * 是否为PUT请求
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isPut()
@@ -548,7 +548,7 @@ class Request
 
     /**
      * 是否为DELTE请求
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isDelete()
@@ -558,7 +558,7 @@ class Request
 
     /**
      * 是否为HEAD请求
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isHead()
@@ -568,7 +568,7 @@ class Request
 
     /**
      * 是否为PATCH请求
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isPatch()
@@ -578,7 +578,7 @@ class Request
 
     /**
      * 是否为OPTIONS请求
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isOptions()
@@ -588,7 +588,7 @@ class Request
 
     /**
      * 是否为cli
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isCli()
@@ -598,7 +598,7 @@ class Request
 
     /**
      * 是否为cgi
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isCgi()
@@ -608,7 +608,7 @@ class Request
 
     /**
      * 获取当前请求的参数
-     * @access Public
+     * @access public
      * @param string|array  $name 变量名
      * @param mixed         $default 默认值
      * @param string|array  $filter 过滤方法
@@ -645,7 +645,7 @@ class Request
 
     /**
      * 设置获取路由参数
-     * @access Public
+     * @access public
      * @param string|array  $name 变量名
      * @param mixed         $default 默认值
      * @param string|array  $filter 过滤方法
@@ -662,7 +662,7 @@ class Request
 
     /**
      * 设置获取GET参数
-     * @access Public
+     * @access public
      * @param string|array  $name 变量名
      * @param mixed         $default 默认值
      * @param string|array  $filter 过滤方法
@@ -682,7 +682,7 @@ class Request
 
     /**
      * 设置获取POST参数
-     * @access Public
+     * @access public
      * @param string        $name 变量名
      * @param mixed         $default 默认值
      * @param string|array  $filter 过滤方法
@@ -707,7 +707,7 @@ class Request
 
     /**
      * 设置获取PUT参数
-     * @access Public
+     * @access public
      * @param string|array      $name 变量名
      * @param mixed             $default 默认值
      * @param string|array      $filter 过滤方法
@@ -733,7 +733,7 @@ class Request
 
     /**
      * 设置获取DELETE参数
-     * @access Public
+     * @access public
      * @param string|array      $name 变量名
      * @param mixed             $default 默认值
      * @param string|array      $filter 过滤方法
@@ -746,7 +746,7 @@ class Request
 
     /**
      * 设置获取PATCH参数
-     * @access Public
+     * @access public
      * @param string|array      $name 变量名
      * @param mixed             $default 默认值
      * @param string|array      $filter 过滤方法
@@ -778,7 +778,7 @@ class Request
 
     /**
      * 获取session数据
-     * @access Public
+     * @access public
      * @param string|array  $name 数据名称
      * @param string        $default 默认值
      * @param string|array  $filter 过滤方法
@@ -797,7 +797,7 @@ class Request
 
     /**
      * 获取cookie参数
-     * @access Public
+     * @access public
      * @param string|array  $name 数据名称
      * @param string        $default 默认值
      * @param string|array  $filter 过滤方法
@@ -830,7 +830,7 @@ class Request
 
     /**
      * 获取server参数
-     * @access Public
+     * @access public
      * @param string|array  $name 数据名称
      * @param string        $default 默认值
      * @param string|array  $filter 过滤方法
@@ -849,7 +849,7 @@ class Request
 
     /**
      * 获取上传的文件信息
-     * @access Public
+     * @access public
      * @param string|array $name 名称
      * @return null|array|\think\File
      */
@@ -927,7 +927,7 @@ class Request
 
     /**
      * 设置或者获取当前的Header
-     * @access Public
+     * @access public
      * @param string|array  $name header名称
      * @param string        $default 默认值
      * @return string
@@ -1137,7 +1137,7 @@ class Request
 
     /**
      * 是否存在某个请求参数
-     * @access Public
+     * @access public
      * @param string    $name 变量名
      * @param string    $type 变量类型
      * @param bool      $checkEmpty 是否检测空值
@@ -1163,7 +1163,7 @@ class Request
 
     /**
      * 获取指定的参数
-     * @access Public
+     * @access public
      * @param string|array  $name 变量名
      * @param string        $type 变量类型
      * @return mixed
@@ -1185,7 +1185,7 @@ class Request
 
     /**
      * 排除指定参数获取
-     * @access Public
+     * @access public
      * @param string|array  $name 变量名
      * @param string        $type 变量类型
      * @return mixed
@@ -1206,7 +1206,7 @@ class Request
 
     /**
      * 当前是否ssl
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isSsl()
@@ -1228,7 +1228,7 @@ class Request
 
     /**
      * 当前是否Ajax请求
-     * @access Public
+     * @access public
      * @param bool $ajax  true 获取原始ajax请求
      * @return bool
      */
@@ -1245,7 +1245,7 @@ class Request
 
     /**
      * 当前是否Pjax请求
-     * @access Public
+     * @access public
      * @param bool $pjax  true 获取原始pjax请求
      * @return bool
      */
@@ -1297,7 +1297,7 @@ class Request
 
     /**
      * 检测是否使用手机访问
-     * @access Public
+     * @access public
      * @return bool
      */
     public function isMobile()
@@ -1317,7 +1317,7 @@ class Request
 
     /**
      * 当前URL地址中的scheme参数
-     * @access Public
+     * @access public
      * @return string
      */
     public function scheme()
@@ -1327,7 +1327,7 @@ class Request
 
     /**
      * 当前请求URL地址中的query参数
-     * @access Public
+     * @access public
      * @return string
      */
     public function query()
@@ -1337,7 +1337,7 @@ class Request
 
     /**
      * 当前请求的host
-     * @access Public
+     * @access public
      * @return string
      */
     public function host()
@@ -1347,7 +1347,7 @@ class Request
 
     /**
      * 当前请求URL地址中的port参数
-     * @access Public
+     * @access public
      * @return integer
      */
     public function port()
@@ -1357,7 +1357,7 @@ class Request
 
     /**
      * 当前请求 SERVER_PROTOCOL
-     * @access Public
+     * @access public
      * @return integer
      */
     public function protocol()
@@ -1367,7 +1367,7 @@ class Request
 
     /**
      * 当前请求 REMOTE_PORT
-     * @access Public
+     * @access public
      * @return integer
      */
     public function remotePort()
@@ -1377,7 +1377,7 @@ class Request
 
     /**
      * 当前请求 HTTP_CONTENT_TYPE
-     * @access Public
+     * @access public
      * @return string
      */
     public function contentType()
@@ -1396,7 +1396,7 @@ class Request
 
     /**
      * 获取当前请求的路由信息
-     * @access Public
+     * @access public
      * @param array $route 路由名称
      * @return array
      */
@@ -1411,7 +1411,7 @@ class Request
 
     /**
      * 设置或者获取当前请求的调度信息
-     * @access Public
+     * @access public
      * @param array  $dispatch 调度信息
      * @return array
      */
@@ -1425,7 +1425,7 @@ class Request
 
     /**
      * 设置或者获取当前的模块名
-     * @access Public
+     * @access public
      * @param string $module 模块名
      * @return string|Request
      */
@@ -1441,7 +1441,7 @@ class Request
 
     /**
      * 设置或者获取当前的控制器名
-     * @access Public
+     * @access public
      * @param string $controller 控制器名
      * @return string|Request
      */
@@ -1457,7 +1457,7 @@ class Request
 
     /**
      * 设置或者获取当前的操作名
-     * @access Public
+     * @access public
      * @param string $action 操作名
      * @return string|Request
      */
@@ -1473,7 +1473,7 @@ class Request
 
     /**
      * 设置或者获取当前的语言
-     * @access Public
+     * @access public
      * @param string $lang 语言名
      * @return string|Request
      */
@@ -1489,7 +1489,7 @@ class Request
 
     /**
      * 设置或者获取当前请求的content
-     * @access Public
+     * @access public
      * @return string
      */
     public function getContent()
@@ -1502,7 +1502,7 @@ class Request
 
     /**
      * 获取当前请求的php://input
-     * @access Public
+     * @access public
      * @return string
      */
     public function getInput()
@@ -1512,7 +1512,7 @@ class Request
 
     /**
      * 生成请求令牌
-     * @access Public
+     * @access public
      * @param string $name 令牌名称
      * @param mixed  $type 令牌生成方法
      * @return string
@@ -1530,7 +1530,7 @@ class Request
 
     /**
      * 设置当前地址的请求缓存
-     * @access Public
+     * @access public
      * @param string $key 缓存标识，支持变量规则 ，例如 item/:name/:id
      * @param mixed  $expire 缓存有效期
      * @param array  $except 缓存排除
@@ -1604,7 +1604,7 @@ class Request
 
     /**
      * 读取请求缓存设置
-     * @access Public
+     * @access public
      * @return array
      */
     public function getCache()
@@ -1614,7 +1614,7 @@ class Request
 
     /**
      * 设置当前请求绑定的对象实例
-     * @access Public
+     * @access public
      * @param string|array $name 绑定的对象标识
      * @param mixed  $obj 绑定的对象实例
      * @return mixed

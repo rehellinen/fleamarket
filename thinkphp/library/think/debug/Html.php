@@ -37,7 +37,7 @@ class Html
 
     /**
      * 调试输出接口
-     * @access Public
+     * @access public
      * @param Response  $response Response对象
      * @param array     $log 日志信息
      * @return bool

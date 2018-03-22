@@ -22,7 +22,7 @@ abstract class Driver
 
     /**
      * 判断缓存是否存在
-     * @access Public
+     * @access public
      * @param string $name 缓存变量名
      * @return bool
      */
@@ -30,7 +30,7 @@ abstract class Driver
 
     /**
      * 读取缓存
-     * @access Public
+     * @access public
      * @param string $name 缓存变量名
      * @param mixed  $default 默认值
      * @return mixed
@@ -39,7 +39,7 @@ abstract class Driver
 
     /**
      * 写入缓存
-     * @access Public
+     * @access public
      * @param string    $name 缓存变量名
      * @param mixed     $value  存储数据
      * @param int       $expire  有效时间 0为永久
@@ -49,7 +49,7 @@ abstract class Driver
 
     /**
      * 自增缓存（针对数值缓存）
-     * @access Public
+     * @access public
      * @param string    $name 缓存变量名
      * @param int       $step 步长
      * @return false|int
@@ -58,7 +58,7 @@ abstract class Driver
 
     /**
      * 自减缓存（针对数值缓存）
-     * @access Public
+     * @access public
      * @param string    $name 缓存变量名
      * @param int       $step 步长
      * @return false|int
@@ -67,7 +67,7 @@ abstract class Driver
 
     /**
      * 删除缓存
-     * @access Public
+     * @access public
      * @param string $name 缓存变量名
      * @return boolean
      */
@@ -75,7 +75,7 @@ abstract class Driver
 
     /**
      * 清除缓存
-     * @access Public
+     * @access public
      * @param string $tag 标签名
      * @return boolean
      */
@@ -83,7 +83,7 @@ abstract class Driver
 
     /**
      * 获取实际的缓存标识
-     * @access Public
+     * @access public
      * @param string $name 缓存名
      * @return string
      */
@@ -94,7 +94,7 @@ abstract class Driver
 
     /**
      * 读取缓存并删除
-     * @access Public
+     * @access public
      * @param string $name 缓存变量名
      * @return mixed
      */
@@ -111,7 +111,7 @@ abstract class Driver
 
     /**
      * 如果不存在则写入缓存
-     * @access Public
+     * @access public
      * @param string    $name 缓存变量名
      * @param mixed     $value  存储数据
      * @param int       $expire  有效时间 0为永久
@@ -145,7 +145,7 @@ abstract class Driver
 
     /**
      * 缓存标签
-     * @access Public
+     * @access public
      * @param string        $name 标签名
      * @param string|array  $keys 缓存标识
      * @param bool          $overlay 是否覆盖
@@ -175,7 +175,7 @@ abstract class Driver
 
     /**
      * 更新标签
-     * @access Public
+     * @access public
      * @param string $name 缓存标识
      * @return void
      */
@@ -197,7 +197,7 @@ abstract class Driver
 
     /**
      * 获取标签包含的缓存标识
-     * @access Public
+     * @access public
      * @param string $tag 缓存标签
      * @return array
      */
@@ -215,7 +215,7 @@ abstract class Driver
     /**
      * 返回句柄对象，可执行其它高级方法
      *
-     * @access Public
+     * @access public
      * @return object
      */
     public function handler()

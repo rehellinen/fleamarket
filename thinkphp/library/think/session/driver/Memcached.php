@@ -34,7 +34,7 @@ class Memcached extends SessionHandler
 
     /**
      * 打开Session
-     * @access Public
+     * @access public
      * @param string    $savePath
      * @param mixed     $sessName
      */
@@ -70,7 +70,7 @@ class Memcached extends SessionHandler
 
     /**
      * 关闭Session
-     * @access Public
+     * @access public
      */
     public function close()
     {
@@ -82,7 +82,7 @@ class Memcached extends SessionHandler
 
     /**
      * 读取Session
-     * @access Public
+     * @access public
      * @param string $sessID
      */
     public function read($sessID)
@@ -92,7 +92,7 @@ class Memcached extends SessionHandler
 
     /**
      * 写入Session
-     * @access Public
+     * @access public
      * @param string $sessID
      * @param String $sessData
      * @return bool
@@ -104,7 +104,7 @@ class Memcached extends SessionHandler
 
     /**
      * 删除Session
-     * @access Public
+     * @access public
      * @param string $sessID
      * @return bool
      */
@@ -115,7 +115,7 @@ class Memcached extends SessionHandler
 
     /**
      * Session 垃圾回收
-     * @access Public
+     * @access public
      * @param string $sessMaxLifeTime
      * @return true
      */
