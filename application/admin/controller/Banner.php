@@ -9,7 +9,7 @@
 namespace app\admin\controller;
 
 
-class Banner extends Base
+class Banner extends BaseController
 {
     public function index()
     {

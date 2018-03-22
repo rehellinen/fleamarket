@@ -9,7 +9,7 @@
 namespace app\admin\controller;
 
 
-class Seller extends Base
+class Seller extends BaseController
 {
     public function index()
     {

@@ -37,10 +37,10 @@ class Seller extends BaseModel
         return $res = $this->where($data)->find();
     }
 
-    public function getRootByTele($tele)
+    public function getRootByTel($tel)
     {
         $data = array(
-            'tele' => $tele,
+            'telephone' => $tel,
             'status' => 1,
             'is_root' => 1,
         );

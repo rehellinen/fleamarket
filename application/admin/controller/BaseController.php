@@ -12,29 +12,28 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use think\Session;
+use app\common\model\Menu as MenuModel;
 
-class Base extends Controller
+class BaseController extends Controller
 {
     public function _initialize()
     {
-
-        $module = Request::instance()->module();
-        $lowModule = strtolower($module);
-
         //判断是否登录
-        $res = Session::has('loginUser', $lowModule);
+        $res = Session::has('loginUser', 'admin');
         if(!$res){
-            $this->redirect($module."/Login/index");
+            $this->redirect("admin/Login/index");
         }
 
         //导航栏用户信息
-        $seller = Session::get('loginUser', $lowModule);
-        $id = $seller['id'];
-        $user = model('Seller')->get(['id' => $id]);
-        $this->assign('user', $user);
+        $seller = Session::get('loginUser', 'admin');
+        $this->assign('user', $seller);
+
+        // 获取菜单信息
+        $menu = (new MenuModel)->getNormal();
+        $this->assign('menu', $menu);
 
         //导航栏激活状态的完成
-        $controller = Request::instance()->controller();
+        $controller = strtolower(Request::instance()->controller());
         $this->assign('controller', $controller);
     }
 

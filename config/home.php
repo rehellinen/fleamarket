@@ -9,7 +9,8 @@
 return [
     'view_replace_str'       => [
         '__STATIC__' => '/static',
-        '__UPLOAD__' => ''
+        '__UPLOAD__' => '',
+        '__PATH__' => '/index.php'
     ],
 
     'upload_file' => 'upload/',

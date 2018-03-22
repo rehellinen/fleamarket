@@ -9,7 +9,7 @@
 namespace app\admin\controller;
 
 
-class Deal extends Base
+class Deal extends BaseController
 {
     public function index()
     {

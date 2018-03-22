@@ -12,7 +12,7 @@ use think\Request;
 use think\Session;
 
 
-class Goods extends Base
+class Goods extends BaseController
 {
     public function index()
     {

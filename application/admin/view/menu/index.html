@@ -1,0 +1,48 @@
+{include file="public/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/common.css">
+
+    <div class="row content-container">
+        {include file="public/nav"}
+
+        <div class="container-fluid">
+            <div class="side-body">
+                <div class="row">
+                    <div class="container">
+                        <h4>菜单管理</h4>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>排序</th>
+                            <th>菜单名</th>
+                            <th>模块</th>
+                            <th>控制器</th>
+                            <th>方法</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="menu" id="vo"}
+                        <tr>
+                            <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}"/></p></td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var URL = {
+            'listorder_url' : "{:url('admin/Banner/listorder')}",
+            'success_url' : "{:url('admin/Banner/index')}",
+            'status_url' : "{:url('admin/Banner/setStatus')}"
+        };
+    </script>
+    {include file="public/footer"}

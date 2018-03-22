@@ -63,22 +63,24 @@
                         <span class="icon fa fa-tachometer"></span><span class="title">跳蚤市场主页面</span>
                     </a>
                 </li-->
+                {volist name="menu" id="vo"}
                 <li class="panel panel-default dropdown">
                     <a data-toggle="collapse" href="#dropdown-element">
-                        <span class="icon fa fa-desktop"></span><span class="title">轮播图</span>
+                        <span class="icon fa fa-desktop"></span><span class="title">{$vo.name}</span>
                     </a>
                     <!-- Dropdown level 1 -->
                     <div id="dropdown-element" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="{:url('admin/banner/index')}">查看轮播图</a>
+                                <li><a href="__PATH__/{$vo.m}/{$vo.c}/index">查看</a>
                                 </li>
-                                <li><a href="{:url('admin/banner/add')}">添加</a>
+                                <li><a href="__PATH__/{$vo.m}/{$vo.c}/add">添加</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </li>
+                {/volist}
                 <li class="panel panel-default dropdown {if condition="$controller == 'Seller'"}active{/if}">
                     <a data-toggle="collapse" href="#dropdown-table">
                         <span class="icon fa fa-table"></span><span class="title">商家管理</span>

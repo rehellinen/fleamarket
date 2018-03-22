@@ -32,12 +32,12 @@ class Login extends Controller
         }
         $data = $validate->getDataByScene('login');
 
-        $seller = (new SellerModel())->getRootByTele($data['telephone']);
+        $seller = (new SellerModel())->getRootByTel($data['telephone']);
         if(!$seller || $seller['status']!=1 || $seller['is_root']!=1){
             return show(0,'该用户不存在');
         }
-        $password = md5(config('admin.md5_prefix').$password.$seller['code']);
-        if($seller['password']!=$password){
+        $inputPassword = md5(config('admin.md5_prefix').$data['password'].$seller['code']);
+        if($seller['password']!=$inputPassword){
             return show(0,'密码不正确');
         }else{
             Session::set('loginUser', $seller, 'admin');

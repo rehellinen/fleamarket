@@ -10,14 +10,24 @@ use think\Model;
  */
 class BaseModel extends Model
 {
-    public function getAll()
+    public function getNotDelete()
     {
         $data['status'] = array('neq', -1);
         $order = array(
             'listorder' => 'desc',
             'id' => 'desc'
         );
-        return $this->where($data)->order($order)->paginate(13);
+        return $this->where($data)->order($order)->paginate();
+    }
+
+    public function getNormal()
+    {
+        $data['status'] = array('neq', -1);
+        $order = array(
+            'listorder' => 'desc',
+            'id' => 'desc'
+        );
+        return $this->where($data)->order($order)->paginate();
     }
 
     public function updateListorder($id, $listorder)
