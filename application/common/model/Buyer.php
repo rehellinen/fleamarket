@@ -16,7 +16,7 @@ class Buyer extends BaseModel
         return $this->hasOne('BuyerAddress', 'buyer_id', 'id');
     }
 
-    // 方法1：根据open_id获取用户信息
+    // 根据open_id获取用户信息
     public function getByOpenID($openid)
     {
         return $this->where(['open_id' => $openid])->find();

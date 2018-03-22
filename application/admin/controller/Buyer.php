@@ -14,7 +14,7 @@ class Buyer extends BaseController
 {
     public function index()
     {
-        $buyer = (new BuyerModel)->getBuyer(1);
+        $buyer = (new BuyerModel)->getNotDelete();
         return $this->fetch('',[
             'buyer' => $buyer
         ]);
