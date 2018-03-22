@@ -10,6 +10,7 @@ use think\Model;
  */
 class BaseModel extends Model
 {
+    // 获取没有删除的所有数据
     public function getNotDelete()
     {
         $data['status'] = array('neq', -1);
@@ -20,9 +21,10 @@ class BaseModel extends Model
         return $this->where($data)->order($order)->paginate();
     }
 
+    // 获取审核通过的所有数据
     public function getNormal()
     {
-        $data['status'] = array('neq', -1);
+        $data['status'] = 1;
         $order = array(
             'listorder' => 'desc',
             'id' => 'desc'

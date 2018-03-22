@@ -8,12 +8,13 @@
 
 namespace app\admin\controller;
 
+use app\common\model\Buyer as BuyerModel;
 
 class Buyer extends BaseController
 {
     public function index()
     {
-        $buyer = model('Buyer')->getBuyer(1);
+        $buyer = (new BuyerModel)->getBuyer(1);
         return $this->fetch('',[
             'buyer' => $buyer
         ]);

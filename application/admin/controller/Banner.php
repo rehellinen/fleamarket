@@ -8,12 +8,13 @@
 
 namespace app\admin\controller;
 
+use app\common\model\Banner as BannerModel;
 
 class Banner extends BaseController
 {
     public function index()
     {
-        $banner = model('Banner')->getAll();
+        $banner = (new BannerModel())->getNotDelete();
         return $this->fetch('', [
             'banner' => $banner
         ]);

@@ -30,13 +30,14 @@ class BaseController extends Controller
 
         // 获取菜单信息
         $menu = (new MenuModel)->getNormal();
-        $this->assign('menu', $menu);
+        $this->assign('navMenu', $menu);
 
         //导航栏激活状态的完成
         $controller = strtolower(Request::instance()->controller());
         $this->assign('controller', $controller);
     }
 
+    // 排序通用方法
     public function listorder()
     {
         $post = Request::instance()->post();
@@ -52,6 +53,7 @@ class BaseController extends Controller
         }
     }
 
+    // 设置状态通用方法
     public function setStatus()
     {
         $post = Request::instance()->post();
@@ -69,13 +71,41 @@ class BaseController extends Controller
         }
     }
 
-    public function getLoginUser()
+    public function add()
     {
-        $module = Request::instance()->module();
-        $lowerModule = strtolower($module);
+        $post = Request::instance()->post();
+        if($post){
+            $controller = Request::instance()->controller();
+            $res = model($controller)->insert($post);
+            if($res){
+                return show(1,'新增成功');
+            }else{
+                return show(0,'新增失败');
+            }
+        }else{
+            return $this->fetch();
+        }
+    }
 
-        $user = Session::get('loginUser', $lowerModule);
+    public function edit()
+    {
+        $post = Request::instance()->post();
+        if($post){
+            $controller = Request::instance()->controller();
+            $result = model($controller)->where('id='.$post['id'])->update($post);
+            if($result){
+                return show(1,'更新成功');
+            }else{
+                return show(0,'更新失败');
+            }
 
-        return $user;
+        }else{
+            $id = $_GET['id'];
+            $controller = Request::instance()->controller();
+            $result = model($controller)->get($id);
+            return $this->fetch('', [
+                'res' => $result
+            ]);
+        }
     }
 }

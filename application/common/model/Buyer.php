@@ -43,12 +43,6 @@ class Buyer extends BaseModel
         return $res = $this->where($data)->find();
     }
 
-    public function getBuyer($status)
-    {
-        $data['status'] = $status;
-        return $this->where($data)->order('listorder desc, id desc')->paginate(10);
-    }
-
     public function getBuyerCount()
     {
         $data['status'] = 1;

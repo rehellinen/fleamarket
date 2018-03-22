@@ -49,3 +49,16 @@ function getRandChars($length)
 
     return $str;
 }
+
+function getStatus($value)
+{
+    switch ($value)
+    {
+        case -1:
+            return '已删除';
+        case 1:
+            return '审核通过';
+        case 0:
+            return '待审核';
+    }
+}

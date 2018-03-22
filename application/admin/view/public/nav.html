@@ -63,93 +63,21 @@
                         <span class="icon fa fa-tachometer"></span><span class="title">跳蚤市场主页面</span>
                     </a>
                 </li-->
-                {volist name="menu" id="vo"}
+                {volist name="navMenu" id="vo"}
                 <li class="panel panel-default dropdown">
-                    <a data-toggle="collapse" href="#dropdown-element">
-                        <span class="icon fa fa-desktop"></span><span class="title">{$vo.name}</span>
+                    <a data-toggle="collapse" href="#dropdown-{$vo.m}{$vo.c}">
+                        <span class="icon fa fa-cubes"></span><span class="title">{$vo.name}</span>
                     </a>
-                    <!-- Dropdown level 1 -->
-                    <div id="dropdown-element" class="panel-collapse collapse">
+                    <div id="dropdown-{$vo.m}{$vo.c}" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li><a href="__PATH__/{$vo.m}/{$vo.c}/index">查看</a>
-                                </li>
-                                <li><a href="__PATH__/{$vo.m}/{$vo.c}/add">添加</a>
-                                </li>
+                                <li><a href="__PATH__/{$vo.m}/{$vo.c}/index">查看</a></li>
+                                <li><a href="__PATH__/{$vo.m}/{$vo.c}/add">添加</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
                 {/volist}
-                <li class="panel panel-default dropdown {if condition="$controller == 'Seller'"}active{/if}">
-                    <a data-toggle="collapse" href="#dropdown-table">
-                        <span class="icon fa fa-table"></span><span class="title">商家管理</span>
-                    </a>
-                    <!-- Dropdown level 1 -->
-                    <div id="dropdown-table" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav navbar-nav">
-                                <li><a href="{:url('admin/Seller/index')}">已审核商家</a>
-                                </li>
-                                <li><a href="{:url('admin/Seller/wait')}">待审核商家</a>
-                                </li>
-                                <!--li><a href="{:url('admin/Seller/delete')}">删除的商家</a>
-                                </li-->
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="panel panel-default dropdown {if condition="$controller == 'Goods'"}active{/if}">
-                    <a data-toggle="collapse" href="#dropdown-form">
-                        <span class="icon fa fa-file-text-o"></span><span class="title">商品管理</span>
-                    </a>
-                    <!-- Dropdown level 1 -->
-                    <div id="dropdown-form" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav navbar-nav">
-                                <li><a href="{:url('admin/Goods/index')}">在卖商品</a>
-                                </li>
-                                <!--li><a href="{:url('admin/Goods/sold')}">已卖商品</a>
-                                </li-->
-                                <li><a href="{:url('admin/Goods/down')}">下架商品</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Dropdown-->
-                <li class="panel panel-default dropdown {if condition="$controller == 'Buyer'"}active{/if}">
-                    <a data-toggle="collapse" href="#component-example">
-                        <span class="icon fa fa-cubes"></span><span class="title">买家管理</span>
-                    </a>
-                    <!-- Dropdown level 1 -->
-                    <div id="component-example" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav navbar-nav">
-                                <li><a href="{:url('admin/buyer/index')}">买家列表</a>
-                                </li>
-                                <!--li><a href="{:url('admin/buyer/delete')}">删除的买家</a>
-                                </li-->
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <!-- Dropdown-->
-                <!--li class="panel panel-default dropdown">
-                    <a data-toggle="collapse" href="#dropdown-example">
-                        <span class="icon fa fa-slack"></span><span class="title">订单管理</span>
-                    </a>
-                    <!-- Dropdown level 1 -->
-                    <!--div id="dropdown-example" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav navbar-nav">
-                                <li><a href="{:url('admin/deal/index')}">订单列表</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->

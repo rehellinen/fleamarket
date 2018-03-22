@@ -11,6 +11,7 @@ namespace app\common\model;
 
 class Banner extends BaseModel
 {
+    // 读取器设置图片url前缀
     public function getPhotoAttr($value)
     {
         $value = config('photo_url_prefix').$value;
@@ -18,6 +19,7 @@ class Banner extends BaseModel
         return $value;
     }
 
+    // 小程序获取轮播图的方法
     public function getBanners()
     {
         $condition['status'] = 1;
