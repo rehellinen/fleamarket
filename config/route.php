@@ -22,5 +22,5 @@ Route::get('api/:version/goods/:id', 'api/:version.Goods/getGoodsById', [], ['id
 // 关于Token
 Route::post('api/:version/token/user', 'api/:version.Token/getToken');
 
-// 关于地址
-Route::post('api/:version/address', 'api/:version.Address/createOrUpdateAddress');
+// 关于用户
+Route::put('api/:version/buyer', 'api/:version.Buyer/updateBuyerInfo');

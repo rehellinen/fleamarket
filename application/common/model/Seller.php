@@ -48,11 +48,11 @@ class Seller extends BaseModel
         return $this->where($data)->find();
     }
 
-    public function getSeller($status)
+    public function getSeller()
     {
-        $data['status'] = $status;
+        $data['status'] = array('neq', -1);
         $data['is_root'] = 0;
-        return $this->where($data)->order('listorder desc, id desc')->paginate(10);
+        return $this->where($data)->order('listorder desc, id desc')->paginate();
     }
 
     public function getSellerCount()

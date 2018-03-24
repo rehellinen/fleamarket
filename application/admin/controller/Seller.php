@@ -8,28 +8,13 @@
 
 namespace app\admin\controller;
 
+use app\common\model\Seller as SellerModel;
 
 class Seller extends BaseController
 {
     public function index()
     {
-        $seller = model('Seller')->getSeller(1);
-        return $this->fetch('',[
-            'seller' => $seller
-        ]);
-    }
-
-    public function wait()
-    {
-        $seller = model('Seller')->getSeller(0);
-        return $this->fetch('',[
-            'seller' => $seller
-        ]);
-    }
-
-    public function delete()
-    {
-        $seller = model('Seller')->getSeller(-1);
+        $seller = (new SellerModel())->getSeller();
         return $this->fetch('',[
             'seller' => $seller
         ]);

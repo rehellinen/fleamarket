@@ -9,21 +9,38 @@
 namespace app\api\controller\v1;
 
 
-use app\api\controller\BaseController;
 use app\common\exception\BuyerException;
-use app\common\service\Token as TokenService;
+use app\common\exception\SuccessMessage;
+use app\common\model\BuyerAddress;
 use app\common\validate\Buyer as BuyerValidate;
+use app\common\service\Token as TokenService;
+use app\common\model\Buyer as BuyerModel;
+use think\Exception;
+
 
 class Buyer extends BaseController
 {
-    public function createOrUpdateAddress()
+    public function updateBuyerInfo()
     {
-        (new BuyerValidate())->goCheck('address');
-        $buyerID = (new TokenService())->getIDByToken();
+        (new BuyerValidate)->goCheck('update');
+        $buyerID = TokenService::getBuyerID();
+        $data = (new BuyerValidate)->getDataByScene('update');
 
-        $buyer = model('buyer')->get($buyerID);
-        if(!$buyerID){
+        // 判断用户是否存在
+        $buyer = BuyerModel::get($buyerID);
+        if(!$buyer){
             throw new BuyerException();
+        }
+
+        // 进行更新数据操作
+        $res = BuyerModel::update($data, ['id' => $buyerID]);
+        if(!$res){
+            throw new Exception();
+        }else{
+            throw new SuccessMessage([
+                'message' => '更新 / 修改地址成功',
+                'httpCode' => 201
+            ]);
         }
     }
 }

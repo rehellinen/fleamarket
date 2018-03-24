@@ -1,47 +1,64 @@
-{include file="Public/header"}
-<div class="app-container">
-    <div class="row content-container">
-        {include file="Public/nav"}
-        <div class="copyrights">rehellinen后台管理</div>
-        <!-- Main Content -->
-        <div class="container-fluid">
-            <div class="side-body">
-                <div class="row">
-                    <h4>已审核商家</h4>
-                    {volist name="seller" id="vo" mod="2"}
-                    <div class="col-xs-6" style="margin-bottom: 7px;padding: 3px">
-                        <div class="thumbnail no-margin-bottom">
-                            <div class="caption">
-                                <h4>名字：{$vo.name}</h4>
-                                <p>电话：{$vo.tele}</p>
-                                <p>微信：{$vo.weixin}</p>
-                                <p>支付宝：{$vo.zhifubao}</p>
-                                <p>宿舍：{$vo.dormitory}</p>
-                                <button class="btn btn-primary statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 1 ? 0 : 1}">
-                                    {$vo.status == 1 ? '已审核' : '未审核'}
-                                </button>
-                                <button class="btn btn-default statusButton" attr-id="{$vo.id}" attr-status="-1">删除</button>
-                            </div>
+{include file="public/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/common.css">
+
+<div class="row content-container">
+    {include file="public/nav"}
+    <div class="container-fluid">
+        <div class="side-body">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body" style="padding: 20px 10px">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">二手卖家管理</div>
+                            <!-- Table -->
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>排序</th>
+                                    <th>姓名</th>
+                                    <th>电话</th>
+                                    <th>学号</th>
+                                    <th>宿舍号</th>
+                                    <th>邮箱</th>
+                                    <th>微信号</th>
+                                    <th>支付宝</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {volist name="seller" id="vo"}
+                                <tr>
+                                    <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}"/></p>
+                                    </td>
+                                    <td>{$vo.name}</td>
+                                    <td>{$vo.telephone}</td>
+                                    <td>{$vo.number}</td>
+                                    <td>{$vo.dormitory}</td>
+                                    <td>{$vo.email}</td>
+                                    <td>{$vo.weixin}</td>
+                                    <td>{$vo.zhifubao}</td>
+                                    <td>
+                                        <span class="glyphicon glyphicon-remove statusButton" attr-id="{$vo.id}" attr-status="-1"></span>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    {eq name="mod" value="1"}<div class="row"></div>{/eq}
-                    {/volist}
                 </div>
-                <div class="row">
-                    {$seller->render()}
-                </div>
-                <br />
             </div>
         </div>
     </div>
+</div>
 
-
-    <script>
-        var URL = {
-            'listorder_url' : "{:url('admin/Goods/listorder')}",
-            'success_url' : "{:url('admin/Seller/index')}",
-            'edit_url' : "{:url('admin/Goods/edit')}",
-            'status_url' : "{:url('admin/Seller/setStatus')}"
-        };
-    </script>
-    {include file="Public/footer"}
+<script>
+    var URL = {
+        'listorder_url': "{:url('admin/buyer/listorder')}",
+        'success_url': "{:url('admin/buyer/index')}",
+        'status_url': "{:url('admin/buyer/setStatus')}",
+        'edit_url': "{:url('admin/buyer/edit')}"
+    };
+</script>
+{include file="public/footer"}
