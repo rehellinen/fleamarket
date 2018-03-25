@@ -32,6 +32,14 @@ class BaseModel extends Model
         return $this->where($data)->order($order)->paginate();
     }
 
+    // 根据id判断信息是否审核通过 / 未删除
+    public static function isExistedByID($id)
+    {
+        $data['status'] = 1;
+        $data['id'] = $id;
+        return self::where($data)->find();
+    }
+
     public function updateListorder($id, $listorder)
     {
         $where['id'] = $id;

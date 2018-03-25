@@ -20,12 +20,12 @@ class Buyer extends BaseValidate
         ['dormitory', 'require|number|max:4', '宿舍号不能为空|宿舍号必须为数字|宿舍号长度不合法'],
         ['oldPassword', 'require', '原密码不能为空'],
         ['password', 'require', '密码不能为空'],
-        ['number', 'require']
+        ['number', 'require|isNotEmpty', '学号不能为空|学号不能为空']
 
     ];
 
     protected $scene = [
-        'update'  => ['name', 'telephone', 'weixin', 'dormitory'],
+        'update'  => ['name', 'telephone', 'weixin', 'dormitory', 'number'],
         'login'     =>  ['tele', 'password'],
         'edit'  => ['name', 'tele', 'email', 'weixin', 'zhifubao', 'dormitory'],
         'password' => ['oldPassword', 'password']

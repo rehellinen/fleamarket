@@ -22,6 +22,8 @@ class Buyer extends BaseModel
         return $this->where(['open_id' => $openid])->find();
     }
 
+
+
     public function insertBuyer($data)
     {
         $data['status'] = 1;
