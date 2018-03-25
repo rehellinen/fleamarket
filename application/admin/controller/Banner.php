@@ -19,9 +19,4 @@ class Banner extends BaseController
             'banner' => $banner
         ]);
     }
-
-    public function add()
-    {
-        return $this->fetch();
-    }
 }

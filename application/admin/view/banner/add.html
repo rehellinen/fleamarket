@@ -21,7 +21,7 @@
                                         <div class="col-sm-5">
                                             <div id="upload" style="width: 50%"></div>
                                             <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
-                                            <input id="file_upload_image" name="photo" type="hidden" multiple="true" value="">
+                                            <input id="file_upload_image" name="image_id" type="hidden" multiple="true" value="">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -41,9 +41,9 @@
 
     <script>
         var URL = {
-            'submit_url' : "{:url('api/banner/add')}",
+            'submit_url' : "{:url('admin/banner/add')}",
             'success_url' : "{:url('admin/banner/index')}",
-            'image_url' : "{:url('api/image/upload')}"
+            'image_url' : "{:url('api/v1.image/upload')}"
         };
     </script>
     {include file="Public/footer"}

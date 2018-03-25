@@ -11,28 +11,16 @@ namespace app\common\model;
 
 class Goods extends BaseModel
 {
-    public function getPhotoAttr($value)
+    public function getImageIdAttr($value)
     {
-        $value = config('photo_url_prefix').$value;
-        $value = str_replace('\\', '/', $value);
-        return $value;
+        $value = Image::get($value);
+        return $value['image_url'];
     }
 
-    public function getSoldGoods()
+    public function getShopIdAttr($value)
     {
-        $data['status'] = 2;
-        return $this->where($data)->select();
-    }
-
-    public function getNotSold()
-    {
-        $data['status'] = 1;
-        return $this->where($data)->order('listorder desc, id desc')->paginate(12);
-    }
-
-    public function updateById($id, $data)
-    {
-        return $this->where('id='.$id)->update($data);
+        $value = Shop::get($value);
+        return $value['name'];
     }
 
     public function getSellerGoods($sellerId)
@@ -40,17 +28,5 @@ class Goods extends BaseModel
         $condition['status'] = 1;
         $condition['seller_id'] = $sellerId;
         return $this->where($condition)->order('listorder desc, id desc')->paginate(13);
-    }
-
-    public function getGoods($status)
-    {
-        $data['status'] = $status;
-        return $this->where($data)->order('listorder desc, id desc')->paginate(10);
-    }
-
-    public function getGoodsCount()
-    {
-        $data['status'] = 1;
-        return $this->where($data)->count();
     }
 }

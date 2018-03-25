@@ -6,14 +6,13 @@
  * Time: 20:57
  */
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
 
 
 use phpmailer\EmailTo;
-use think\Controller;
 use think\Request;
 
-class Emailer extends Controller
+class Emailer extends BaseController
 {
     public function Send()
     {

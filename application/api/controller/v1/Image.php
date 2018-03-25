@@ -6,13 +6,13 @@
  * Time: 0:34
  */
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
 
 
-use think\Controller;
+use app\api\controller\v1\BaseController;
 use think\Request;
 
-class Image extends Controller
+class Image extends BaseController
 {
     public function upload()
     {
@@ -25,7 +25,7 @@ class Image extends Controller
         }
     }
 
-    private function resizePhoto($setWidth = '480', $setHeight = '270')
+    private function resizePhoto($setWidth = '600', $setHeight = '330')
     {
         // 获取图片相关信息
         $file = Request::instance()->file('file');
@@ -38,19 +38,19 @@ class Image extends Controller
         // 处理
         $ratio = $width / $height;
 
-        if(1){
-            if($width > $height) {
-                // 宽大于高的情况
-                $name = $this->getMD5Name('width');
-                $image->thumb(($setHeight * $ratio), $setHeight)->save(config('upload_file').$name);
-            }else{
-                // 高大于宽的情况
-                $name = $this->getMD5Name('height');
-                $image->thumb($setWidth, ($setWidth / $ratio))->save(config('upload_file').$name);
-            }
+        $basePath = config('upload_file');
+
+        if($width > $height) {
+            // 宽大于高的情况
+            $name = $this->getMD5Name('width');
+            $image->thumb(($setHeight * $ratio), $setHeight)->save($basePath.$name);
+        }else{
+            // 高大于宽的情况
+            $name = $this->getMD5Name('height');
+            $image->thumb($setWidth, ($setWidth / $ratio))->save($basePath.$name);
         }
 
-        return '/'.config('upload_file').$name;
+        return '/'.$basePath.$name;
     }
 
     private function getMD5Name($char)

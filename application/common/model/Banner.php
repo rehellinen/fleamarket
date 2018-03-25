@@ -12,9 +12,10 @@ namespace app\common\model;
 class Banner extends BaseModel
 {
     // 读取器设置图片url前缀
-    public function getPhotoAttr($value)
+    public function getImageIdAttr($value)
     {
-        $value = config('photo_url_prefix').$value;
+        $image = Image::get($value);
+        $value = config('photo_url_prefix').$image['image_url'];
         $value = str_replace('\\', '/', $value);
         return $value;
     }

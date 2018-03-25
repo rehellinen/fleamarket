@@ -8,29 +8,44 @@
         <div class="side-body">
             <div class="row">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <div class="title">自营商品管理</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            {volist name="goods" id="vo"}
-                            <div class="col-xs-12 col-md-4 col-sm-6 col-lg-3">
-                                <div class="thumbnail no-margin-bottom">
-                                    <img src="__UPLOAD__{$vo.photo}" class="img-responsive">
-                                    <div class="caption">
-                                        <p>排序：<input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}"/></p>
-                                        <p>名称：{$vo.name}</p>
-                                        <p>价格：{$vo.price}</p>
-                                        <p>数量：{$vo.quantity}</p>
-                                        <p>卖家：{$vo.seller_id}</p>
-                                        <button class="btn btn-default statusButton" attr-id="{$vo.id}" attr-status="-1">删除
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            {/volist}
+                    <div class="card-body" style="padding: 20px 10px">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">自营商品管理</div>
+                            <!-- Table -->
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>排序</th>
+                                    <th>商品名称</th>
+                                    <th>小标题</th>
+                                    <th>价格</th>
+                                    <th>数量</th>
+                                    <th>商家</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {volist name="goods" id="vo"}
+                                <tr>
+                                    <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}" /></p>
+                                    </td>
+                                    <td>{$vo.name}</td>
+                                    <td>{$vo.subtitle}</td>
+                                    <td>{$vo.price}</td>
+                                    <td>{$vo.quantity}</td>
+                                    <td>{$vo.shop_id}</td>
+                                    <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
+                                    </td>
+                                    <td>
+                                        <span class="fa fa-pencil-square editButton" attr-id="{$vo.id}"></span>
+                                        <span class="glyphicon glyphicon-remove statusButton" attr-id="{$vo.id}" attr-status="-1"></span>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -41,9 +56,10 @@
 
 <script>
     var URL = {
-        'listorder_url': "{:url('admin/Goods/listorder')}",
-        'success_url': "{:url('admin/Goods/index')}",
-        'status_url': "{:url('admin/Goods/setStatus')}"
+        'listorder_url': "{:url('admin/goods/listorder')}",
+        'success_url': "{:url('admin/goods/index')}",
+        'status_url': "{:url('admin/goods/setStatus')}",
+        'edit_url': "{:url('admin/goods/edit')}"
     };
 </script>
 {include file="public/footer"}
