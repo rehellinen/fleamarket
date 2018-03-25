@@ -15,9 +15,9 @@ class OldGoods extends BaseController
 {
     public function index()
     {
-        $goods = (new OldGoodsModel())->getNotDelete();
+        $oldGoods = (new OldGoodsModel())->getNotDelete();
         return $this->fetch('', [
-            'oldGoods' => $goods
+            'oldGoods' => $oldGoods
         ]);
     }
 }

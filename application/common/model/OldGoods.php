@@ -11,5 +11,15 @@ namespace app\common\model;
 
 class OldGoods extends BaseModel
 {
+    public function getImageIdAttr($value)
+    {
+        $value = Image::get($value);
+        return $value['image_url'];
+    }
 
+    public function getSellerIdAttr($value)
+    {
+        $value = Seller::get($value);
+        return $value['name'];
+    }
 }

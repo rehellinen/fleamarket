@@ -23,6 +23,7 @@
                                     <th>邮箱</th>
                                     <th>微信号</th>
                                     <th>支付宝</th>
+                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -38,6 +39,8 @@
                                     <td>{$vo.email}</td>
                                     <td>{$vo.weixin}</td>
                                     <td>{$vo.zhifubao}</td>
+                                    <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
+                                    </td>
                                     <td>
                                         <span class="glyphicon glyphicon-remove statusButton" attr-id="{$vo.id}" attr-status="-1"></span>
                                     </td>
