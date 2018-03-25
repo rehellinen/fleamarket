@@ -15,7 +15,7 @@ class Goods extends BaseController
 {
     public function index()
     {
-        $goods = (new GoodsModel())->getNormal();
+        $goods = (new GoodsModel())->getNotDelete();
         return $this->fetch('', [
             'goods' => $goods
         ]);

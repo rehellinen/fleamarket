@@ -17,7 +17,7 @@ class Goods extends BaseController
 {
     public function getGoods()
     {
-        $goods = (new GoodsModel)->getNotSold();
+        $goods = (new GoodsModel)->getNormal();
         if(!$goods){
             throw new GoodsException();
         }
@@ -31,7 +31,7 @@ class Goods extends BaseController
     public function getGoodsById($id)
     {
         (new Common())->goCheck('id');
-        $goods = (new GoodsModel())->getById($id);
+        $goods = (new GoodsModel())->getNormalById($id);
         if(!$goods){
             throw new GoodsException();
         }

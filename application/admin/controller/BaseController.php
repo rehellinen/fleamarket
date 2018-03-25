@@ -97,6 +97,11 @@ class BaseController extends Controller
     {
         $post = Request::instance()->post();
         if($post){
+            // 判断是否上传了图片
+            if($post['image_id']){
+                $image = Image::create(['image_url' => $post['image_id']]);
+                $post['image_id'] = $image->id;
+            }
             $controller = Request::instance()->controller();
             $result = model($controller)->where('id='.$post['id'])->update($post);
             if($result){

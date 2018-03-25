@@ -1,19 +1,26 @@
 <?php
-namespace app\admin\controller;
 /**
  * Created by PhpStorm.
  * User: rehellinen
  * Date: 2017/9/27
  * Time: 14:13
  */
+
+namespace app\admin\controller;
+
+use app\common\model\Goods;
+use app\common\model\Seller;
+use app\common\model\Buyer;
+use app\common\model\Deal;
+
 class Index extends BaseController
 {
     public function index()
     {
-        $goodsCount = model('Goods')->getGoodsCount();
-        $sellerCount = model('Seller')->getSellerCount();
-        $buyerCount = model('Buyer')->getBuyerCount();
-        $dealCount = model('Deal')->getDealCount();
+        $goodsCount = (new Goods())->getNormal();
+        $sellerCount = (new Seller())->getNormal();
+        $buyerCount = (new Buyer())->getNormal();
+        $dealCount = (new Deal())->getNormal();
         return $this->fetch('', [
             'goodsCount' => $goodsCount,
             'sellerCount' => $sellerCount,

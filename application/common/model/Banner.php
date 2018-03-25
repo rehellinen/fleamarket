@@ -15,9 +15,7 @@ class Banner extends BaseModel
     public function getImageIdAttr($value)
     {
         $image = Image::get($value);
-        $value = config('photo_url_prefix').$image['image_url'];
-        $value = str_replace('\\', '/', $value);
-        return $value;
+        return $image['image_url'];
     }
 
     // 小程序获取轮播图的方法
