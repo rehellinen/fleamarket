@@ -17,11 +17,29 @@
                             <div class="card-body">
                                 <form class="form-horizontal" id="submitForm" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">主图：</label>
+                                        <label class="col-sm-2 control-label">主页图片：</label>
                                         <div class="col-sm-5">
                                             <div id="upload" style="width: 50%"></div>
                                             <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
-                                            <input id="file_upload_image" name="image_id" type="hidden" multiple="true" value="">
+                                            <input id="file_upload_image" name="main_image_id" type="hidden" multiple="true" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">详情头图：</label>
+                                        <div class="col-sm-5">
+                                            <div id="upload2" style="width: 50%"></div>
+                                            <img style="display: none" id="upload_org_code_img2" src="" width="150" height="150">
+                                            <input id="file_upload_image2" name="top_image_id" type="hidden" multiple="true" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">头像图片：</label>
+                                        <div class="col-sm-5">
+                                            <div id="upload3" style="width: 50%"></div>
+                                            <img style="display: none" id="upload_org_code_img3" src="" width="150" height="150">
+                                            <input id="file_upload_image3" name="avatar_image_id" type="hidden" multiple="true" value="">
                                         </div>
                                     </div>
 

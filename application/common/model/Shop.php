@@ -11,7 +11,19 @@ namespace app\common\model;
 
 class Shop extends BaseModel
 {
-    public function getImageIdAttr($value)
+    public function getMainImageIdAttr($value)
+    {
+        $value = Image::get($value);
+        return $value['image_url'];
+    }
+
+    public function getTopImageIdAttr($value)
+    {
+        $value = Image::get($value);
+        return $value['image_url'];
+    }
+
+    public function getAvatarImageIdAttr($value)
     {
         $value = Image::get($value);
         return $value['image_url'];
