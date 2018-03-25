@@ -17,23 +17,19 @@
                                 <thead>
                                 <tr>
                                     <th>排序</th>
-                                    <th>主题名称</th>
-                                    <th>模块</th>
-                                    <th>控制器</th>
-                                    <th>方法</th>
+                                    <th>主题</th>
+                                    <th>图片</th>
                                     <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {volist name="menu" id="vo"}
+                                {volist name="theme" id="vo"}
                                 <tr>
                                     <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}" /></p>
                                     </td>
                                     <td>{$vo.name}</td>
-                                    <td>{$vo.m}</td>
-                                    <td>{$vo.c}</td>
-                                    <td>{$vo.f}</td>
+                                    <td><img src="{$vo.image_id}" class="img-responsive"></td>
                                     <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
                                     </td>
                                     <td>
@@ -54,10 +50,10 @@
 
 <script>
     var URL = {
-        'listorder_url': "{:url('admin/Menu/listorder')}",
-        'success_url': "{:url('admin/Menu/index')}",
-        'status_url': "{:url('admin/Menu/setStatus')}",
-        'edit_url': "{:url('admin/Menu/edit')}"
+        'listorder_url': "{:url('admin/theme/listorder')}",
+        'success_url': "{:url('admin/theme/index')}",
+        'status_url': "{:url('admin/theme/setStatus')}",
+        'edit_url': "{:url('admin/theme/edit')}"
     };
 </script>
 {include file="public/footer"}

@@ -11,7 +11,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <div class="title">修改菜单</div>
+                                    <div class="title">修改自营商家</div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -22,8 +22,8 @@
                                         <label class="col-sm-2 control-label">头图：</label>
                                         <div class="col-sm-5">
                                             <div id="upload" style="width: 50%"></div>
-                                            <img id="upload_org_code_img" src="{$res.top_image}" width="150" height="150">
-                                            <input id="file_upload_image" name="top_image" type="hidden" multiple="true" value="">
+                                            <img id="upload_org_code_img" src="{$res.image_id}" width="150" height="150">
+                                            <input id="file_upload_image" name="image_id" type="hidden" multiple="true" value="{$res.image_id}">
                                         </div>
                                     </div>
 
@@ -74,7 +74,7 @@
         var URL = {
             'submit_url' : "{:url('admin/Shop/edit')}",
             'success_url' : "{:url('admin/Shop/index')}",
-            'image_url' : "{:url('api/image/upload')}"
+            'image_url' : "{:url('api/v1.image/upload')}"
         };
     </script>
     {include file="Public/footer"}

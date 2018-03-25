@@ -34,8 +34,8 @@ $(function(){
         uploader: URL.image_url,
         onUploadComplete:function(file, data, response){
             var obj = JSON.parse(data);
-            $("#upload_org_code_img").attr("src", obj.data);
-            $("#upload_org_code_img").show();
+            $("#upload_org_code_img").attr("src", obj.data).show();
+            // $("#upload_org_code_img").show();
             $("#file_upload_image").attr("value", obj.data);
         }
     });

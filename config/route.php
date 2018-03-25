@@ -28,3 +28,6 @@ Route::put('api/:version/buyer', 'api/:version.Buyer/updateBuyerInfo');
 // 关于自营商家
 Route::get('api/:version/shop', 'api/:version.Shop/getNormalShop');
 Route::get('api/:version/shop/:id', 'api/:version.Shop/getShopByID');
+
+// 关于主题
+Route::get('api/:version/theme', 'api/:version.Theme/getIndexNormalTheme');

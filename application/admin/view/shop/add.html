@@ -11,36 +11,45 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <div class="title">添加菜单</div>
+                                    <div class="title">添加自营商家</div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <form class="form-horizontal" id="submitForm" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="name">菜单名:</label>
+                                        <label class="col-sm-2 control-label">主图：</label>
                                         <div class="col-sm-5">
-                                            <input type="text" id="name" name="name" placeholder="请填写菜单名" class="form-control"/>
+                                            <div id="upload" style="width: 50%"></div>
+                                            <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
+                                            <input id="file_upload_image" name="image_id" type="hidden" multiple="true" value="">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="m">模块:</label>
+                                        <label class="col-sm-2 control-label" for="name">商店名称:</label>
                                         <div class="col-sm-5">
-                                            <input type="text" id="m" name="m" placeholder="请填写模块" class="form-control"/>
+                                            <input type="text" id="name" name="name" placeholder="请填写商店名称" class="form-control"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="c">控制器:</label>
+                                        <label class="col-sm-2 control-label" for="telephone">电话:</label>
                                         <div class="col-sm-5">
-                                            <input type="text" id="c" name="c" placeholder="请填写控制器" class="form-control"/>
+                                            <input type="text" id="telephone" name="telephone" placeholder="请填写电话" class="form-control"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="f">方法:</label>
+                                        <label class="col-sm-2 control-label" for="number">学号:</label>
                                         <div class="col-sm-5">
-                                            <input type="text" id="f" name="f" placeholder="请填写方法" class="form-control"/>
+                                            <input type="text" id="number" name="number" placeholder="请填写学号" class="form-control"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="number">主营范围：</label>
+                                        <div class="col-sm-5">
+                                            <textarea rows="3" id="major" name="major" placeholder="请填写主营范围" class="form-control"></textarea>
                                         </div>
                                     </div>
 
@@ -61,8 +70,9 @@
 
     <script>
         var URL = {
-            'submit_url' : "{:url('admin/menu/add')}",
-            'success_url' : "{:url('admin/menu/index')}"
+            'submit_url' : "{:url('admin/shop/add')}",
+            'success_url' : "{:url('admin/shop/index')}",
+            'image_url' : "{:url('api/v1.image/upload')}"
         };
     </script>
     {include file="Public/footer"}

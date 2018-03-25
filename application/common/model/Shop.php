@@ -11,10 +11,9 @@ namespace app\common\model;
 
 class Shop extends BaseModel
 {
-    public function getTopImageAttr($value)
+    public function getImageIdAttr($value)
     {
-        $value = config('photo_url_prefix').$value;
-        $value = str_replace('\\', '/', $value);
-        return $value;
+        $value = Image::get($value);
+        return $value['image_url'];
     }
 }
