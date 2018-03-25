@@ -40,6 +40,14 @@ class BaseModel extends Model
         return self::where($data)->find();
     }
 
+    // 根据id获取正常的信息
+    public function getNormalById($id)
+    {
+        $condition['id'] = $id;
+        $condition['status'] = 1;
+        return $this->where($condition)->find();
+    }
+
     public function updateListorder($id, $listorder)
     {
         $where['id'] = $id;
@@ -57,11 +65,5 @@ class BaseModel extends Model
     {
         $condition['id'] = $id;
         return $this->where($condition)->update($data);
-    }
-
-    public function getById($id)
-    {
-        $condition['id'] = $id;
-        return $this->where($condition)->find();
     }
 }

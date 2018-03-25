@@ -24,3 +24,7 @@ Route::post('api/:version/token/user', 'api/:version.Token/getToken');
 
 // 关于用户
 Route::put('api/:version/buyer', 'api/:version.Buyer/updateBuyerInfo');
+
+// 关于自营商家
+Route::get('api/:version/shop', 'api/:version.Shop/getNormalShop');
+Route::get('api/:version/shop/:id', 'api/:version.Shop/getShopByID');
