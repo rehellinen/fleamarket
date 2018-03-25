@@ -1,0 +1,58 @@
+{include file="public/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/common.css">
+
+<div class="row content-container">
+    {include file="public/nav"}
+
+    <div class="container-fluid">
+        <div class="side-body">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body" style="padding: 20px 10px">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">自营商家管理</div>
+                            <!-- Table -->
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>排序</th>
+                                    <th>商店名称</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {volist name="shop" id="vo"}
+                                <tr>
+                                    <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}" /></p>
+                                    </td>
+                                    <td>{$vo.name}</td>
+
+                                    <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
+                                    </td>
+                                    <td>
+                                        <span class="fa fa-pencil-square editButton" attr-id="{$vo.id}"></span>
+                                        <span class="glyphicon glyphicon-remove statusButton" attr-id="{$vo.id}" attr-status="-1"></span>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var URL = {
+        'listorder_url': "{:url('admin/Shop/listorder')}",
+        'success_url': "{:url('admin/Shop/index')}",
+        'status_url': "{:url('admin/Shop/setStatus')}",
+        'edit_url': "{:url('admin/Shop/edit')}"
+    };
+</script>
+{include file="public/footer"}
