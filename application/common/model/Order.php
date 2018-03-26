@@ -9,7 +9,7 @@
 namespace app\common\model;
 
 
-class Deal extends BaseModel
+class Order extends BaseModel
 {
     // 获取订单数量
     public function getDealCount()

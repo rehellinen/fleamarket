@@ -39,3 +39,6 @@ Route::get('api/:version/shop/:id', 'api/:version.Shop/getShopByID');
 
 // 关于主题
 Route::get('api/:version/theme', 'api/:version.Theme/getIndexNormalTheme');
+
+// 关于订单
+Route::post('api/:version/order', 'api/:version.Order/placeOrder');
