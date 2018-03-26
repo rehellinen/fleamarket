@@ -48,6 +48,13 @@ class BaseModel extends Model
         return $this->where($condition)->find();
     }
 
+    // 获取正常信息的数量
+    public function getNormalCount()
+    {
+        $condition['status'] = 1;
+        return $this->where($condition)->count();
+    }
+
     public function updateListorder($id, $listorder)
     {
         $where['id'] = $id;

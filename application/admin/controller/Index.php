@@ -17,10 +17,10 @@ class Index extends BaseController
 {
     public function index()
     {
-        $goodsCount = (new Goods())->getNormal();
-        $sellerCount = (new Seller())->getNormal();
-        $buyerCount = (new Buyer())->getNormal();
-        $dealCount = (new Deal())->getNormal();
+        $goodsCount = (new Goods())->getNormalCount();
+        $sellerCount = (new Seller())->getNormalCount();
+        $buyerCount = (new Buyer())->getNormalCount();
+        $dealCount = (new Deal())->getNormalCount();
         return $this->fetch('', [
             'goodsCount' => $goodsCount,
             'sellerCount' => $sellerCount,

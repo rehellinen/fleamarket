@@ -25,10 +25,18 @@ class Goods extends BaseModel
         return $value['name'];
     }
 
-    public function getSellerGoods($sellerId)
+    // 根据商店id获取商品
+    public function getShopGoods($shopId)
     {
         $condition['status'] = 1;
-        $condition['seller_id'] = $sellerId;
+        $condition['shop_id'] = $shopId;
         return $this->where($condition)->order('listorder desc, id desc')->paginate(13);
+    }
+
+    public function getRecentShopGoods($shopId)
+    {
+        $condition['status'] = 1;
+        $condition['shop_id'] = $shopId;
+        return $this->where($condition)->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
     }
 }
