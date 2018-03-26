@@ -32,6 +32,7 @@ class Token
         return $token;
     }
 
+    // 根据Token令牌获取对应的信息
     public static function getCurrentTokenVar($key)
     {
         $token = Request::instance()->header('token');
@@ -51,6 +52,7 @@ class Token
         }
     }
 
+    // 根据买家ID获取相应的信息
     public static function getBuyerID()
     {
         $buyerID = self::getCurrentTokenVar('buyerID');

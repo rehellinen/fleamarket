@@ -14,7 +14,7 @@ class Seller extends BaseController
 {
     public function index()
     {
-        $seller = (new SellerModel())->getSeller();
+        $seller = (new SellerModel())->getNotDelete();
         return $this->fetch('',[
             'seller' => $seller
         ]);

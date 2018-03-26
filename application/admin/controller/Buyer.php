@@ -19,12 +19,4 @@ class Buyer extends BaseController
             'buyer' => $buyer
         ]);
     }
-
-    public function delete()
-    {
-        $buyer = model('Buyer')->getBuyer(-1);
-        return $this->fetch('',[
-            'buyer' => $buyer
-        ]);
-    }
 }

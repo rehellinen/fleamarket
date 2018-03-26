@@ -19,6 +19,11 @@ use think\Exception;
 
 class Buyer extends BaseController
 {
+    protected $beforeActionList = [
+        'checkBuyerScope' => ['only' => 'updateBuyerInfo']
+    ];
+
+    // 更新用户信息
     public function updateBuyerInfo()
     {
         // 根据Token令牌获取用户ID
