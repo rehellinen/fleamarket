@@ -21,6 +21,7 @@ class Buyer extends BaseController
 {
     public function updateBuyerInfo()
     {
+        // 根据Token令牌获取用户ID
         $buyerID = TokenService::getBuyerID();
         (new BuyerValidate)->goCheck('update');
         $data = (new BuyerValidate)->getDataByScene('update');

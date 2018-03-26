@@ -1,0 +1,51 @@
+api文档介绍
+:version表示版本号，:id表示id号
+
+！Banner！
+get     api/:version/banner
+获取banner信息
+！Banner！
+
+！自营商品！
+get     api/:version/goods
+获取所有商品
+get     api/:version/goods/:id
+根据商品id获取商品
+get     api/:version/goods/shop/:id
+根据店铺id获取商品
+get     api/:version/goods/recent/shop/:id
+根据店铺id获取最近新品
+！自营商品！
+
+
+！二手商品！
+get     api/:version/oldGoods
+获取所有商品
+get     api/:version/oldGoods/:id'
+根据商品id获取商品
+get     api/:version/oldGoods/seller/:id
+根据卖家id获取商品
+！二手商品！
+
+
+！Token令牌！
+post    api/:version/token/user
+买家获取Token令牌
+！Token令牌！
+
+
+！买家！
+put     api/:version/buyer
+更新买家信息
+！买家！
+
+
+！商家！
+get     api/:version/shop
+get     api/:version/shop/:id
+！商家！
+
+
+！主题！
+get     api/:version/theme
+！主题！

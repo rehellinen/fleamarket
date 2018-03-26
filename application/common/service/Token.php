@@ -18,6 +18,7 @@ use app\common\exception\SellerException;
 
 class Token
 {
+    // 生成随机字符串作为令牌
     public static function generateToken()
     {
         // 32位字符串
