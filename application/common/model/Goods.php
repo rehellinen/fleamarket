@@ -33,6 +33,7 @@ class Goods extends BaseModel
         return $this->where($condition)->order('listorder desc, id desc')->paginate(13);
     }
 
+    // 获取最近新品
     public function getRecentShopGoods($shopId)
     {
         $condition['status'] = 1;

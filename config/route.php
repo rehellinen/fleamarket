@@ -21,6 +21,11 @@ Route::get('api/:version/goods/:id', 'api/:version.Goods/getGoodsById', [], ['id
 Route::get('api/:version/goods/shop/:id', 'api/:version.Goods/getGoodsByShopId', [], ['id'=>'\d+']);
 Route::get('api/:version/goods/recent/shop/:id', 'api/:version.Goods/getRecentGoodsByShopId', [], ['id'=>'\d+']);
 
+// 关于二手商品
+Route::get('api/:version/oldGoods', 'api/:version.old_goods/getOldGoods');
+Route::get('api/:version/oldGoods/:id', 'api/:version.old_goods/getOldGoodsById', [], ['id'=>'\d+']);
+Route::get('api/:version/oldGoods/seller/:id', 'api/:version.old_goods/getOldGoodsBySellerId', [], ['id'=>'\d+']);
+
 
 // 关于Token
 Route::post('api/:version/token/user', 'api/:version.Token/getToken');

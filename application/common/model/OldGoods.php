@@ -22,4 +22,12 @@ class OldGoods extends BaseModel
         $value = Seller::get($value);
         return $value['name'];
     }
+
+    // 根据卖家id获取所有二手商品
+    public function getSellerGoods($sellerId)
+    {
+        $condition['status'] = 1;
+        $condition['seller_id'] = $sellerId;
+        return $this->where($condition)->order('listorder desc, id desc')->paginate(13);
+    }
 }
