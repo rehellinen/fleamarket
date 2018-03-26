@@ -26,6 +26,17 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label class="col-sm-2 control-label">二手卖家:</label>
+                                        <div class="col-sm-5">
+                                            <select name="seller_id" id="" class="form-control">
+                                                {volist name="seller" id="vo"}
+                                                <option value="{$vo.id}">{$vo.name}</option>
+                                                {/volist}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="col-sm-2 control-label" for="name">商品名称:</label>
                                         <div class="col-sm-5">
                                             <input type="text" id="name" name="name" placeholder="请填写商品名称" class="form-control"/>

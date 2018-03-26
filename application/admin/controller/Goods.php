@@ -9,7 +9,7 @@
 namespace app\admin\controller;
 
 use app\common\model\Goods as GoodsModel;
-
+use app\common\model\Shop;
 
 class Goods extends BaseController
 {
@@ -19,5 +19,19 @@ class Goods extends BaseController
         return $this->fetch('', [
             'goods' => $goods
         ]);
+    }
+
+    public function edit()
+    {
+        $shop = (new Shop())->getNormal();
+        $this->assign('shop', $shop);
+        return parent::edit();
+    }
+
+    public function add()
+    {
+        $shop = (new Shop())->getNormal();
+        $this->assign('shop', $shop);
+        return parent::add();
     }
 }
