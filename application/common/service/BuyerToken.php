@@ -76,6 +76,7 @@ class BuyerToken extends Token
         return $cachedKey;
     }
 
+    // 生成缓存数据
     private function prepareCachedValue($jsonResult, $buyerID)
     {
         $cachedValue = $jsonResult;

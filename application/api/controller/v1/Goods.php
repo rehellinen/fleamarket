@@ -71,4 +71,9 @@ class Goods extends BaseController
             'message' => '获取产品信息成功'
         ]);
     }
+
+    public function deleteOne()
+    {
+
+    }
 }

@@ -17,6 +17,7 @@ class Theme extends BaseModel
         return $value['image_url'];
     }
 
+    // 获取首页主题
     public function getIndexTheme()
     {
         $condition = [

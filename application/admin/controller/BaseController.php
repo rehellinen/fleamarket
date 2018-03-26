@@ -99,12 +99,7 @@ class BaseController extends Controller
         if($post){
             // 判断是否上传了图片
             if($post['image_id']){
-                // 对上传图片的处理
-                $pattern = '{/upload/\w+.png}';
-                preg_match($pattern, $post['image_id'], $match);
-                $post['image_id'] = $match[0];
-                $image = Image::create(['image_url' => $post['image_id']]);
-                $post['image_id'] = $image->id;
+                $post['image_id'] = $this->processImageUrl($post['image_id']);
             }
             $controller = Request::instance()->controller();
             $result = model($controller)->where('id='.$post['id'])->update($post);
@@ -122,5 +117,14 @@ class BaseController extends Controller
                 'res' => $result
             ]);
         }
+    }
+
+    private function processImageUrl($imageUrl){
+        // 对上传图片的处理
+        $pattern = '{/upload/\w+.png}';
+        preg_match($pattern, $imageUrl, $match);
+        $imageUrl = $match[0];
+        $image = Image::create(['image_url' => $imageUrl]);
+        return $image->id;
     }
 }

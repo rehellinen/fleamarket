@@ -15,5 +15,7 @@ class ScopeEnum
 
     const Seller = 24;
 
-    const Super = 32;
+    const Shop = 32;
+
+    const CMS = 40;
 }

@@ -8,35 +8,7 @@ namespace app\common\model;
  */
 class Seller extends BaseModel
 {
-    public function getSellerByName($name, $status = 1)
-    {
-        $data = [
-            'name' => $name,
-            'status' => $status
-        ];
-        return $this->where($data)->find();
-    }
-
-    public function insertSeller($data)
-    {
-        //生成加盐字符串
-        $salt = substr(md5(time()),10,5);
-        $md5Pwd = md5(config('admin.md5_prefix').$data['password'].$salt);
-        $data['code'] = $salt;
-        $data['password'] = $md5Pwd;
-        return $this->save($data);
-    }
-
-    public function getSellerByTele($tele)
-    {
-        $data = array(
-            'tele' => $tele,
-            'status' => 1
-        );
-
-        return $res = $this->where($data)->find();
-    }
-
+    // 根据电话号获取管理员信息
     public function getRootByTel($tel)
     {
         $data = array(
@@ -48,13 +20,7 @@ class Seller extends BaseModel
         return $this->where($data)->find();
     }
 
-    public function getSeller()
-    {
-        $data['status'] = array('neq', -1);
-        $data['is_root'] = 0;
-        return $this->where($data)->order('listorder desc, id desc')->paginate();
-    }
-
+    // 获取卖家的数量
     public function getSellerCount()
     {
         $data['status'] = 0;

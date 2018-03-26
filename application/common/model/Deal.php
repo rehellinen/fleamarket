@@ -11,15 +11,10 @@ namespace app\common\model;
 
 class Deal extends BaseModel
 {
+    // 获取订单数量
     public function getDealCount()
     {
         $data['status'] = 1;
         return $this->where($data)->count();
-    }
-
-    public function getDeal()
-    {
-        $data['status'] = 1;
-        return $this->where($data)->order('listorder desc, id desc')->paginate(10);
     }
 }

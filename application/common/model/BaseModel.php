@@ -55,6 +55,7 @@ class BaseModel extends Model
         return $this->where($condition)->count();
     }
 
+    // 更新排序的方法
     public function updateListorder($id, $listorder)
     {
         $where['id'] = $id;
@@ -62,6 +63,7 @@ class BaseModel extends Model
         return $this->where($where)->update($data);
     }
 
+    // 更新状态的方法
     public function updateStatus($id, $status)
     {
         $data['status'] = $status;

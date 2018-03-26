@@ -22,29 +22,7 @@ class Buyer extends BaseModel
         return $this->where(['open_id' => $openid])->find();
     }
 
-
-
-    public function insertBuyer($data)
-    {
-        $data['status'] = 1;
-        //生成加盐字符串
-        $salt = substr(md5(time()),10,5);
-        $md5Pwd = md5(config('admin.md5_prefix').$data['password'].$salt);
-        $data['code'] = $salt;
-        $data['password'] = $md5Pwd;
-        return $this->save($data);
-    }
-
-    public function getBuyerByTele($tele)
-    {
-        $data = array(
-            'tele' => $tele,
-            'status' => 1
-        );
-
-        return $res = $this->where($data)->find();
-    }
-
+    // 获取买家数量
     public function getBuyerCount()
     {
         $data['status'] = 1;
