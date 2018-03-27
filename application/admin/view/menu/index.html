@@ -18,9 +18,7 @@
                                 <tr>
                                     <th>排序</th>
                                     <th>菜单名</th>
-                                    <th>模块</th>
-                                    <th>控制器</th>
-                                    <th>方法</th>
+                                    <th>二级菜单</th>
                                     <th>状态</th>
                                     <th>操作</th>
                                 </tr>
@@ -31,9 +29,7 @@
                                     <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}" /></p>
                                     </td>
                                     <td>{$vo.name}</td>
-                                    <td>{$vo.m}</td>
-                                    <td>{$vo.c}</td>
-                                    <td>{$vo.f}</td>
+                                    <td><button type="button" class="btn btn-default btn-sm menuButton" attr-id="{$vo.id}">点击查看</button></td>
                                     <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
                                     </td>
                                     <td>

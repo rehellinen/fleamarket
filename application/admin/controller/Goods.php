@@ -21,6 +21,16 @@ class Goods extends BaseController
         ]);
     }
 
+    public function newGoods()
+    {
+
+    }
+
+    public function oldGoods()
+    {
+
+    }
+
     public function edit()
     {
         $shop = (new Shop())->getNormal();

@@ -19,23 +19,43 @@ class BaseController extends Controller
 {
     public function _initialize()
     {
-        //判断是否登录
+        // 判断是否登录
         $res = Session::has('loginUser', 'admin');
         if(!$res){
             $this->redirect("admin/Login/index");
         }
 
-        //导航栏用户信息
+        // 导航栏用户信息
         $seller = Session::get('loginUser', 'admin');
         $this->assign('user', $seller);
 
-        // 获取菜单信息
-        $menu = (new MenuModel)->getNormal();
+        // 导航栏信息获取
+        $menu = $this->addChildMenuToParentMenu();
         $this->assign('navMenu', $menu);
 
-        //导航栏激活状态的完成
+        // 导航栏激活状态的完成
         $controller = strtolower(Request::instance()->controller());
         $this->assign('controller', $controller);
+    }
+
+    private function addChildMenuToParentMenu()
+    {
+        // 获取父菜单
+        $menu = (new MenuModel)->getParentMenu(1)->toArray();
+        $temp = $menu;
+        // 获取子菜单
+        $childMenu = (new MenuModel)->getChildMenu(1)->toArray();
+        // 子菜单附加到父菜单上
+        foreach ($childMenu as $key => $value){
+            $parentID = $value['parent_id'];
+            foreach ($menu as $k => $v){
+                $menu[$k]['child'][0] = $temp[$k];
+                if($v['id'] == $parentID){
+                    array_push($menu[$k]['child'], $childMenu[$key]);
+                }
+            }
+        }
+        return $menu;
     }
 
     // 排序通用方法
@@ -77,7 +97,7 @@ class BaseController extends Controller
         $post = Request::instance()->post();
         if($post){
             // 判断是否上传了图片
-            if($post['image_id']){
+            if(isset($post['image_id'])){
                 $image = Image::create(['image_url' => $post['image_id']]);
                 $post['image_id'] = $image->id;
             }
@@ -98,7 +118,7 @@ class BaseController extends Controller
         $post = Request::instance()->post();
         if($post){
             // 判断是否上传了图片
-            if($post['image_id']){
+            if(isset($post['image_id'])){
                 $post['image_id'] = $this->processImageUrl($post['image_id']);
             }
             $controller = Request::instance()->controller();

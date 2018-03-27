@@ -9,7 +9,11 @@
 namespace enum;
 
 
-class UserEnum
+class TypeEnum
 {
+    // 自营商品
+    const NewGoods = 1;
 
+    // 旧物
+    const OldGoods = 2;
 }

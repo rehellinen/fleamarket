@@ -13,8 +13,6 @@ use enum\StatusEnum;
 
 class Goods extends BaseModel
 {
-    // status值
-    // -1->被删除, 0->审核不通过, 1->正常, 2->卖出
     public function getImageIdAttr($value)
     {
         $value = Image::get($value);

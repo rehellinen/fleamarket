@@ -14,9 +14,29 @@ class Menu extends BaseController
 {
     public function index()
     {
-        $menu = (new MenuModel())->getNotDelete();
+        $get = $this->request->get();
+        if($get){
+            $parentID = $get['id'];
+            $menu = (new MenuModel())->getChildMenuByID($parentID);
+        }else{
+            $menu = (new MenuModel())->getParentMenu();
+        }
         return $this->fetch('', [
             'menu' => $menu
         ]);
+    }
+
+    public function add()
+    {
+        $menu = (new MenuModel())->getParentMenu();
+        $this->assign('menu', $menu);
+        return parent::add();
+    }
+
+    public function edit()
+    {
+        $menu = (new MenuModel())->getParentMenu();
+        $this->assign('menu', $menu);
+        return parent::edit();
     }
 }

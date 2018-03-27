@@ -52,6 +52,11 @@ $('* .editButton').click(function () {
     window.location.href=URL.edit_url+"?id="+id;
 });
 
+$('* .menuButton').click(function () {
+    var id = $(this).attr('attr-id');
+    window.location.href = URL.success_url + '?id=' + id;
+});
+
 $('* .statusButton').click(function () {
    var id = $(this).attr('attr-id');
    var status = $(this).attr('attr-status');
