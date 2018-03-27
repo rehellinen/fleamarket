@@ -11,7 +11,7 @@ namespace app\admin\controller;
 use app\common\model\Goods;
 use app\common\model\Seller;
 use app\common\model\Buyer;
-use app\common\model\Deal;
+use app\common\model\Order;
 
 class Index extends BaseController
 {
@@ -20,7 +20,7 @@ class Index extends BaseController
         $goodsCount = (new Goods())->getNormalCount();
         $sellerCount = (new Seller())->getNormalCount();
         $buyerCount = (new Buyer())->getNormalCount();
-        $dealCount = (new Deal())->getNormalCount();
+        $dealCount = (new Order())->getNormalCount();
         return $this->fetch('', [
             'goodsCount' => $goodsCount,
             'sellerCount' => $sellerCount,

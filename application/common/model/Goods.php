@@ -9,6 +9,8 @@
 namespace app\common\model;
 
 
+use enum\StatusEnum;
+
 class Goods extends BaseModel
 {
     // status值
@@ -28,7 +30,7 @@ class Goods extends BaseModel
     // 根据商店id获取商品
     public function getShopGoods($shopId)
     {
-        $condition['status'] = 1;
+        $condition['status'] = StatusEnum::Normal;
         $condition['shop_id'] = $shopId;
         return $this->where($condition)->order('listorder desc, id desc')->paginate(13);
     }
@@ -36,7 +38,7 @@ class Goods extends BaseModel
     // 获取最近新品
     public function getRecentShopGoods($shopId)
     {
-        $condition['status'] = 1;
+        $condition['status'] = StatusEnum::Normal;
         $condition['shop_id'] = $shopId;
         return $this->where($condition)->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
     }

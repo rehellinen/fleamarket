@@ -9,12 +9,14 @@
 namespace app\common\model;
 
 
+use enum\StatusEnum;
+
 class Order extends BaseModel
 {
     // 获取订单数量
     public function getDealCount()
     {
-        $data['status'] = 1;
+        $data['status'] = StatusEnum::Normal;
         return $this->where($data)->count();
     }
 }

@@ -33,8 +33,6 @@ class Image extends BaseController
         $width = $image->width();
         $height = $image->height();
 
-        //$time = date("Y-m-d", time());
-
         // 处理
         $ratio = $width / $height;
 

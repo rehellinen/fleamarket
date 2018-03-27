@@ -9,6 +9,7 @@
 
 namespace enum;
 
+// 权限值说明
 class ScopeEnum
 {
     const Buyer = 16;

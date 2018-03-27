@@ -9,6 +9,8 @@
 namespace app\common\model;
 
 
+use enum\StatusEnum;
+
 class Buyer extends BaseModel
 {
     public function address()
@@ -25,7 +27,7 @@ class Buyer extends BaseModel
     // 获取买家数量
     public function getBuyerCount()
     {
-        $data['status'] = 1;
+        $data['status'] = StatusEnum::Normal;
         return $this->where($data)->count();
     }
 }

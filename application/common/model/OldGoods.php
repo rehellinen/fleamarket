@@ -9,6 +9,8 @@
 namespace app\common\model;
 
 
+use enum\StatusEnum;
+
 class OldGoods extends BaseModel
 {
     public function getImageIdAttr($value)
@@ -26,7 +28,7 @@ class OldGoods extends BaseModel
     // 根据卖家id获取所有二手商品
     public function getSellerGoods($sellerId)
     {
-        $condition['status'] = 1;
+        $condition['status'] = StatusEnum::Normal;
         $condition['seller_id'] = $sellerId;
         return $this->where($condition)->order('listorder desc, id desc')->paginate(13);
     }

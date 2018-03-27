@@ -1,5 +1,6 @@
 <?php
 namespace app\common\model;
+use enum\StatusEnum;
 use think\Model;
 
 /**
@@ -13,7 +14,7 @@ class BaseModel extends Model
     // 获取没有删除的所有数据
     public function getNotDelete()
     {
-        $data['status'] = array('neq', -1);
+        $data['status'] = array('neq', StatusEnum::Deleted);
         $order = array(
             'listorder' => 'desc',
             'id' => 'desc'
@@ -24,7 +25,7 @@ class BaseModel extends Model
     // 获取审核通过的所有数据
     public function getNormal()
     {
-        $data['status'] = 1;
+        $data['status'] = StatusEnum::Normal;
         $order = array(
             'listorder' => 'desc',
             'id' => 'desc'
@@ -35,7 +36,7 @@ class BaseModel extends Model
     // 根据id判断信息是否审核通过 / 未删除
     public static function isExistedByID($id)
     {
-        $data['status'] = 1;
+        $data['status'] = StatusEnum::Normal;
         $data['id'] = $id;
         return self::where($data)->find();
     }
@@ -44,14 +45,14 @@ class BaseModel extends Model
     public function getNormalById($id)
     {
         $condition['id'] = $id;
-        $condition['status'] = 1;
+        $condition['status'] = StatusEnum::Normal;
         return $this->where($condition)->find();
     }
 
     // 获取正常信息的数量
     public function getNormalCount()
     {
-        $condition['status'] = 1;
+        $condition['status'] = StatusEnum::Normal;
         return $this->where($condition)->count();
     }
 

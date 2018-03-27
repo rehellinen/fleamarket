@@ -9,6 +9,8 @@
 namespace app\common\model;
 
 
+use enum\StatusEnum;
+
 class Theme extends BaseModel
 {
     public function getImageIdAttr($value)
@@ -21,7 +23,7 @@ class Theme extends BaseModel
     public function getIndexTheme()
     {
         $condition = [
-            'status' => 1
+            'status' => StatusEnum::Normal
         ];
         return $this->where($condition)->limit(4)->select();
     }

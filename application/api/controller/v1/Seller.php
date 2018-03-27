@@ -9,8 +9,6 @@
 namespace app\api\controller\v1;
 
 
-use app\api\controller\BaseController;
-
 class Seller extends BaseController
 {
     public function check()

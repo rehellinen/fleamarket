@@ -1,5 +1,7 @@
 <?php
 namespace app\common\model;
+use enum\StatusEnum;
+
 /**
  * Created by PhpStorm.
  * User: rehellinen
@@ -13,7 +15,7 @@ class Seller extends BaseModel
     {
         $data = array(
             'telephone' => $tel,
-            'status' => 1,
+            'status' => StatusEnum::Normal,
             'is_root' => 1,
         );
 
@@ -23,7 +25,7 @@ class Seller extends BaseModel
     // 获取卖家的数量
     public function getSellerCount()
     {
-        $data['status'] = 0;
+        $data['status'] = StatusEnum::Normal;
         return $this->where($data)->count();
     }
 }

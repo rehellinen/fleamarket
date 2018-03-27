@@ -15,6 +15,5 @@ class Image extends BaseModel
         $value = config('photo_url_prefix').$value;
         $value = str_replace('\\', '/', $value);
         return $value;
-
     }
 }
