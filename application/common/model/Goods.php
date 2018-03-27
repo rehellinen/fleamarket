@@ -10,6 +10,7 @@ namespace app\common\model;
 
 
 use enum\StatusEnum;
+use enum\TypeEnum;
 
 class Goods extends BaseModel
 {
@@ -25,19 +26,36 @@ class Goods extends BaseModel
         return $value['name'];
     }
 
+    // 获取商品 / 旧物
+    public function generalGet($type = TypeEnum::NewGoods, $status = [1, 2])
+    {
+        $data = [
+            'type' => $type,
+            'status' => ['in', $status]
+        ];
+        return $this->where($data)->order('listorder desc, id desc')->paginate();
+    }
+
+    // 对自营商品的操作
     // 根据商店id获取商品
     public function getShopGoods($shopId)
     {
-        $condition['status'] = StatusEnum::Normal;
-        $condition['shop_id'] = $shopId;
-        return $this->where($condition)->order('listorder desc, id desc')->paginate(13);
+        $data = [
+            'status' => StatusEnum::Normal,
+            'type' => TypeEnum::NewGoods,
+            'shop_id' => $shopId
+        ];
+        return $this->where($data)->order('listorder desc, id desc')->paginate();
     }
 
     // 获取最近新品
     public function getRecentShopGoods($shopId)
     {
-        $condition['status'] = StatusEnum::Normal;
-        $condition['shop_id'] = $shopId;
-        return $this->where($condition)->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
+        $data = [
+            'status' => StatusEnum::Normal,
+            'type' => TypeEnum::NewGoods,
+            'shop_id' => $shopId
+        ];
+        return $this->where($data)->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
     }
 }

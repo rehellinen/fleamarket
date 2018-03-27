@@ -10,25 +10,24 @@ namespace app\admin\controller;
 
 use app\common\model\Goods as GoodsModel;
 use app\common\model\Shop;
+use enum\TypeEnum;
 
 class Goods extends BaseController
 {
-    public function index()
-    {
-        $goods = (new GoodsModel())->getNotDelete();
-        return $this->fetch('', [
-            'goods' => $goods
-        ]);
-    }
-
     public function newGoods()
     {
-
+        $newGoods = (new GoodsModel())->generalGet(TypeEnum::NewGoods);
+        return $this->fetch('', [
+            'goods' => $newGoods
+        ]);
     }
 
     public function oldGoods()
     {
-
+        $oldGoods = (new GoodsModel())->generalGet(TypeEnum::OldGoods);
+        return $this->fetch('', [
+            'goods' => $oldGoods
+        ]);
     }
 
     public function edit()

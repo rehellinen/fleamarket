@@ -27,7 +27,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {volist name="oldGoods" id="vo"}
+                                {volist name="goods" id="vo"}
                                 <tr>
                                     <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}" /></p>
                                     </td>
@@ -35,7 +35,7 @@
                                     <td>{$vo.subtitle}</td>
                                     <td>{$vo.price}</td>
                                     <td>{$vo.quantity}</td>
-                                    <td>{$vo.seller_id}</td>
+                                    <td>{$vo.shop_id}</td>
                                     <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
                                     </td>
                                     <td>
@@ -56,10 +56,10 @@
 
 <script>
     var URL = {
-        'listorder_url': "{:url('admin/old_goods/listorder')}",
-        'success_url': "{:url('admin/old_goods/index')}",
-        'status_url': "{:url('admin/old_goods/setStatus')}",
-        'edit_url': "{:url('admin/old_goods/edit')}"
+        'listorder_url': "{:url('admin/goods/listorder')}",
+        'success_url': "{:url('admin/goods/index')}",
+        'status_url': "{:url('admin/goods/setStatus')}",
+        'edit_url': "{:url('admin/goods/edit')}"
     };
 </script>
 {include file="public/footer"}
