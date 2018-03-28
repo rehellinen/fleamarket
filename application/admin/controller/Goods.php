@@ -10,13 +10,16 @@ namespace app\admin\controller;
 
 use app\common\model\Goods as GoodsModel;
 use app\common\model\Shop;
+use enum\StatusEnum;
 use enum\TypeEnum;
 
 class Goods extends BaseController
 {
     public function newGoods()
     {
-        $newGoods = (new GoodsModel())->generalGet(TypeEnum::NewGoods);
+        $newGoods = (new GoodsModel())->generalGet(TypeEnum::NewGoods, [
+            StatusEnum::Normal, StatusEnum::NotPass
+        ]);
         return $this->fetch('', [
             'goods' => $newGoods
         ]);
@@ -24,7 +27,9 @@ class Goods extends BaseController
 
     public function oldGoods()
     {
-        $oldGoods = (new GoodsModel())->generalGet(TypeEnum::OldGoods);
+        $oldGoods = (new GoodsModel())->generalGet(TypeEnum::OldGoods, [
+            StatusEnum::Normal, StatusEnum::NotPass
+        ]);
         return $this->fetch('', [
             'goods' => $oldGoods
         ]);

@@ -27,7 +27,7 @@ class Goods extends BaseModel
     }
 
     // 获取商品 / 旧物
-    public function generalGet($type = TypeEnum::NewGoods, $status = [1, 2])
+    public function generalGet($type, $status)
     {
         $data = [
             'type' => $type,
@@ -36,25 +36,35 @@ class Goods extends BaseModel
         return $this->where($data)->order('listorder desc, id desc')->paginate();
     }
 
-    // 对自营商品的操作
-    // 根据商店id获取商品
-    public function getShopGoods($shopId)
+    // 根据id获取商品 / 旧物
+    public function generalGetByID($type, $status, $id)
     {
         $data = [
-            'status' => StatusEnum::Normal,
-            'type' => TypeEnum::NewGoods,
-            'shop_id' => $shopId
+            'status' => ['in', $status],
+            'type' => $type,
+            'id' => $id
         ];
         return $this->where($data)->order('listorder desc, id desc')->paginate();
     }
 
-    // 获取最近新品
-    public function getRecentShopGoods($shopId)
+    // 根据商店id获取商品 / 旧物
+    public function generalGetByForeignID($type, $status, $foreignId)
+    {
+        $data = [
+            'status' => ['in', $status],
+            'type' => $type,
+            'foreign_id' => $foreignId
+        ];
+        return $this->where($data)->order('listorder desc, id desc')->paginate();
+    }
+
+    // 根据商店id获取最近新品
+    public function getRecentShopNewGoods($shopId)
     {
         $data = [
             'status' => StatusEnum::Normal,
             'type' => TypeEnum::NewGoods,
-            'shop_id' => $shopId
+            'foreign_id' => $shopId
         ];
         return $this->where($data)->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
     }

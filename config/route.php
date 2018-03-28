@@ -16,15 +16,15 @@ use think\Route;
 Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 
 // 关于自营商品
-Route::get('api/:version/goods', 'api/:version.Goods/getGoods');
-Route::get('api/:version/goods/:id', 'api/:version.Goods/getGoodsById', [], ['id'=>'\d+']);
-Route::get('api/:version/goods/shop/:id', 'api/:version.Goods/getGoodsByShopId', [], ['id'=>'\d+']);
-Route::get('api/:version/goods/recent/shop/:id', 'api/:version.Goods/getRecentGoodsByShopId', [], ['id'=>'\d+']);
+Route::get('api/:version/newGoods', 'api/:version.Goods/getNewGoods');
+Route::get('api/:version/newGoods/:id', 'api/:version.Goods/getNewGoodsById', [], ['id'=>'\d+']);
+Route::get('api/:version/newGoods/shop/:id', 'api/:version.Goods/getNewGoodsByShopId', [], ['id'=>'\d+']);
+Route::get('api/:version/newGoods/recent/shop/:id', 'api/:version.Goods/getRecentNewGoodsByShopId', [], ['id'=>'\d+']);
 
 // 关于二手商品
-Route::get('api/:version/oldGoods', 'api/:version.old_goods/getOldGoods');
-Route::get('api/:version/oldGoods/:id', 'api/:version.old_goods/getOldGoodsById', [], ['id'=>'\d+']);
-Route::get('api/:version/oldGoods/seller/:id', 'api/:version.old_goods/getOldGoodsBySellerId', [], ['id'=>'\d+']);
+Route::get('api/:version/oldGoods', 'api/:version.Goods/getOldGoods');
+Route::get('api/:version/oldGoods/:id', 'api/:version.Goods/getOldGoodsById', [], ['id'=>'\d+']);
+Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getOldGoodsBySellerId', [], ['id'=>'\d+']);
 
 
 // 关于Token
