@@ -8,24 +8,39 @@
 
 namespace app\common\model;
 
+use enum\StatusEnum;
 
 class Shop extends BaseModel
 {
-    public function getMainImageIdAttr($value)
+    public function mainImageId()
     {
-        $value = Image::get($value);
-        return $value['image_url'];
+        return $this->belongsTo('Image', 'main_image_id', 'id');
     }
 
-    public function getTopImageIdAttr($value)
+    public function topImageId()
     {
-        $value = Image::get($value);
-        return $value['image_url'];
+        return $this->belongsTo('Image', 'top_image_id', 'id');
     }
 
-    public function getAvatarImageIdAttr($value)
+    public function avatarImageId()
     {
-        $value = Image::get($value);
-        return $value['image_url'];
+        return $this->belongsTo('Image', 'avatar_image_id', 'id');
+    }
+
+    public function getNormal()
+    {
+        $data['status'] = StatusEnum::Normal;
+        $order = array(
+            'listorder' => 'desc',
+            'id' => 'desc'
+        );
+        return $this->where($data)->with(['mainImageId'])->order($order)->paginate();
+    }
+
+    public function getNormalById($id)
+    {
+        $condition['id'] = $id;
+        $condition['status'] = StatusEnum::Normal;
+        return $this->with(['topImageId', 'avatarImageId'])->where($condition)->find();
     }
 }

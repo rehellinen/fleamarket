@@ -14,7 +14,7 @@ use enum\TypeEnum;
 
 class Goods extends BaseModel
 {
-    public function ImageID()
+    public function imageId()
     {
         return $this->belongsTo('Image', 'image_id', 'id');
     }
@@ -41,7 +41,7 @@ class Goods extends BaseModel
         }else{
             $related = 'seller';
         }
-        return $this->where($data)->with([$related])->order('listorder desc, id desc')->paginate();
+        return $this->where($data)->with([$related, 'imageId'])->order('listorder desc, id desc')->paginate();
     }
 
     // 根据id获取商品 / 旧物
@@ -52,7 +52,7 @@ class Goods extends BaseModel
             'type' => $type,
             'id' => $id
         ];
-        return $this->where($data)->order('listorder desc, id desc')->paginate();
+        return $this->where($data)->with('imageId')->order('listorder desc, id desc')->find();
     }
 
     // 根据商店id获取商品 / 旧物
@@ -63,7 +63,7 @@ class Goods extends BaseModel
             'type' => $type,
             'foreign_id' => $foreignId
         ];
-        return $this->where($data)->order('listorder desc, id desc')->paginate();
+        return $this->where($data)->with('imageId')->order('listorder desc, id desc')->paginate();
     }
 
     // 根据商店id获取最近新品
@@ -74,6 +74,6 @@ class Goods extends BaseModel
             'type' => TypeEnum::NewGoods,
             'foreign_id' => $shopId
         ];
-        return $this->where($data)->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
+        return $this->where($data)->with('imageId')->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
     }
 }

@@ -13,11 +13,9 @@ use enum\StatusEnum;
 
 class Banner extends BaseModel
 {
-    // 读取器设置图片url前缀
-    public function getImageIdAttr($value)
+    public function imageId()
     {
-        $image = Image::get($value);
-        return $image['image_url'];
+        return $this->belongsTo('Image', 'image_id', 'id');
     }
 
     // 小程序获取轮播图的方法
@@ -26,6 +24,6 @@ class Banner extends BaseModel
         $condition['status'] = StatusEnum::Normal;
         $maxCount = config('admin.max_banner_count');
         return $this->where($condition)->order('listorder desc, id desc')
-                ->limit($maxCount)->select();
+                ->with('imageId')->limit($maxCount)->select();
     }
 }

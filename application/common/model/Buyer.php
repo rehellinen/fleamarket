@@ -13,11 +13,6 @@ use enum\StatusEnum;
 
 class Buyer extends BaseModel
 {
-    public function address()
-    {
-        return $this->hasOne('BuyerAddress', 'buyer_id', 'id');
-    }
-
     // 根据open_id获取用户信息
     public function getByOpenID($openid)
     {
