@@ -25,7 +25,7 @@ class Image extends BaseController
         }
     }
 
-    private function resizePhoto($setWidth = '600', $setHeight = '330')
+    private function resizePhoto($setWidth = '1920', $setHeight = '1080')
     {
         // 获取图片相关信息
         $file = Request::instance()->file('file');
