@@ -35,7 +35,7 @@
                                     <td>{$vo.subtitle}</td>
                                     <td>{$vo.price}</td>
                                     <td>{$vo.quantity}</td>
-                                    <td>{$vo.shop_id}</td>
+                                    <td>{$vo.shop.name}</td>
                                     <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
                                     </td>
                                     <td>

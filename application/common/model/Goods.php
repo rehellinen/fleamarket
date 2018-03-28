@@ -14,16 +14,19 @@ use enum\TypeEnum;
 
 class Goods extends BaseModel
 {
-    public function getImageIdAttr($value)
+    public function ImageID()
     {
-        $value = Image::get($value);
-        return $value['image_url'];
+        return $this->belongsTo('Image', 'image_id', 'id');
     }
 
-    public function getShopIdAttr($value)
+    public function shop()
     {
-        $value = Shop::get($value);
-        return $value['name'];
+       return $this->belongsTo('Shop', 'foreign_id', 'id');
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo('Seller', 'foreign_id', 'id');
     }
 
     // 获取商品 / 旧物
@@ -33,7 +36,12 @@ class Goods extends BaseModel
             'type' => $type,
             'status' => ['in', $status]
         ];
-        return $this->where($data)->order('listorder desc, id desc')->paginate();
+        if($type == TypeEnum::NewGoods){
+            $related = 'shop';
+        }else{
+            $related = 'seller';
+        }
+        return $this->where($data)->with([$related])->order('listorder desc, id desc')->paginate();
     }
 
     // 根据id获取商品 / 旧物
