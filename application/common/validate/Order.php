@@ -15,12 +15,12 @@ class Order extends BaseValidate
 {
     // products 为二维数组
     protected $rule = [
-        ['goods',  'checkGoods']
+        ['goods',  'checkGoods', '订单参数错误']
     ];
 
     protected $singleRule = [
-        ['goods_id',  'require'],
-        ['count',  'require'],
+        ['goods_id',  'require', 'goods_id不能为空'],
+        ['count',  'require', 'count不能为空'],
     ];
 
     protected $scene = [
@@ -42,6 +42,7 @@ class Order extends BaseValidate
         foreach ($value as $v){
             $this->checkGoodsProperties($v);
         }
+        return true;
     }
 
     protected function checkGoodsProperties($value)

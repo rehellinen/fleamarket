@@ -41,11 +41,11 @@ class ExceptionHandler extends Handle
         }
 
         $url = Request::instance()->url();
-        $this->data['request_url'] = $url;
         $result = [
             'status' => $this->status,
             'message' => $this->message,
-            'data' => $this->data
+            'data' => $this->data,
+            'request_url' => $url
         ];
 
         return json($result, $this->httpCode);

@@ -13,6 +13,8 @@ use enum\StatusEnum;
 
 class Order extends BaseModel
 {
+    protected $autoWriteTimestamp = true;
+
     // 获取订单数量
     public function getDealCount()
     {
