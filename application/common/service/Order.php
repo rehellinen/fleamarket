@@ -13,6 +13,8 @@ use app\common\exception\GoodsException;
 use app\common\exception\SuccessMessage;
 use app\common\model\Goods;
 use app\common\model\OrderGoods;
+use think\Db;
+use think\Exception;
 
 class Order
 {
@@ -48,32 +50,38 @@ class Order
     // 生成订单
     private function createOrder($snap)
     {
-        $orderNo = self::makeOrderNo();
-        $order = new \app\common\model\Order();
-        $order->data([
-            'buyer_id' => $this->buyerID,
-            'order_no' => $orderNo,
-            'total_price' => $snap['orderPrice'],
-            'total_count' => $snap['totalCount'],
-            'snap_img' => $snap['snapImg'],
-            'snap_name' => $snap['snapName'],
-            'snap_items' => json_encode($snap['goodsStatus'])
-        ]);
-        $order->save();
-        $orderID = $order->id;
-        $createTime = $order->create_time;
+        Db::startTrans();
+        try{
+            $orderNo = self::makeOrderNo();
+            $order = new \app\common\model\Order();
+            $order->data([
+                'buyer_id' => $this->buyerID,
+                'order_no' => $orderNo,
+                'total_price' => $snap['orderPrice'],
+                'total_count' => $snap['totalCount'],
+                'snap_img' => $snap['snapImg'],
+                'snap_name' => $snap['snapName'],
+                'snap_items' => json_encode($snap['goodsStatus'])
+            ]);
+            $order->save();
+            $orderID = $order->id;
+            $createTime = $order->create_time;
 
-        foreach ($this->orderGoods as &$v){
-            $v['order_id'] = $orderID;
+            foreach ($this->orderGoods as &$v){
+                $v['order_id'] = $orderID;
+            }
+            $orderProduct = new OrderGoods();
+            $orderProduct->saveAll($this->orderGoods);
+            Db::commit();
+            return [
+                'order_no' => $orderNo,
+                'order_id' => $orderID,
+                'create_time' => $createTime
+            ];
+        }catch (Exception $e){
+            Db::rollback();
+            throw $e;
         }
-        $orderProduct = new OrderGoods();
-        $orderProduct->saveAll($this->orderGoods);
-
-        return [
-            'order_no' => $orderNo,
-            'order_id' => $orderID,
-            'create_time' => $createTime
-        ];
     }
     // 生成订单号码
     public static function makeOrderNo()
