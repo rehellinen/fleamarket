@@ -11,7 +11,7 @@ namespace app\common\exception;
 
 class ParameterException extends BaseException
 {
-    public $httpCode = 200;
+    public $httpCode = 400;
     public $status = 90000;
     public $message = '参数错误';
 }

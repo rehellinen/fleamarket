@@ -32,7 +32,7 @@ class Buyer extends BaseController
         $data = (new BuyerValidate)->getDataByScene('update');
 
         // 判断用户是否存在
-        $buyer = BuyerModel::isExistedByID($buyerID);
+        $buyer = (new BuyerModel)->isExistedByID($buyerID);
         if(!$buyer){
             throw new BuyerException();
         }
@@ -47,5 +47,20 @@ class Buyer extends BaseController
                 'httpCode' => 201
             ]);
         }
+    }
+
+    public function getBuyerInfo()
+    {
+        // 根据Token令牌获取用户ID
+        $buyerID = TokenService::getBuyerID();
+        // 判断用户是否存在
+        $buyer = (new BuyerModel)->isExistedByID($buyerID);
+        if(!$buyer){
+            throw new BuyerException();
+        }
+        throw new SuccessMessage([
+            'message' => '获取个人信息成功',
+            'data' => $buyer
+        ]);
     }
 }

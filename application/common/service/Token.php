@@ -59,6 +59,17 @@ class Token
         return $buyerID;
     }
 
+    // 检查令牌是否过期
+    public static function verifyToken($token)
+    {
+        $isExisted = Cache::get($token);
+        if($isExisted){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     // 用于校对商户输入的密码和数据库中的密码
     public static function checkPassword($password, $seller)
     {

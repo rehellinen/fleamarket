@@ -28,10 +28,12 @@ Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getOldGoodsBy
 
 
 // 关于Token
-Route::post('api/:version/token/user', 'api/:version.Token/getToken');
+Route::post('api/:version/token/buyer', 'api/:version.Token/getToken');
+Route::post('api/:version/token/verify', 'api/:version.Token/verifyToken');
 
-// 关于用户
+// 关于买家
 Route::put('api/:version/buyer', 'api/:version.Buyer/updateBuyerInfo');
+Route::get('api/:version/buyer', 'api/:version.Buyer/getBuyerInfo');
 
 // 关于自营商家
 Route::get('api/:version/shop', 'api/:version.Shop/getNormalShop');

@@ -34,11 +34,11 @@ class BaseModel extends Model
     }
 
     // 根据id判断信息是否审核通过 / 未删除
-    public static function isExistedByID($id)
+    public function isExistedByID($id)
     {
         $data['status'] = StatusEnum::Normal;
         $data['id'] = $id;
-        return self::where($data)->find();
+        return $this->where($data)->find()->hidden(['listorder', 'open_id', 'status']);
     }
 
     // 根据id获取正常的信息
