@@ -14,6 +14,7 @@ class EmailTo
     {
         $mail = new Phpmailer(true); //实例化PHPMailer类,true表示出现错误时抛出异常
 
+
         $mail->IsSMTP(); // 使用SMTP
 
         try {

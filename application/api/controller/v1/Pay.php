@@ -20,5 +20,6 @@ class Pay extends BaseController
     public function getPreOrder($orderID = '')
     {
         (new Common())->goCheck('id');
+
     }
 }

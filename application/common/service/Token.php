@@ -89,4 +89,17 @@ class Token
             ]);
         }
     }
+
+    public static function isValidOperate($checkedBuyerID)
+    {
+        $currentBuyerID = self::getBuyerID();
+        if($currentBuyerID == $checkedBuyerID){
+            return true;
+        }else{
+            throw new TokenException([
+                'message' => '订单与用户不匹配',
+                'errorCode' => 80002
+            ]);
+        }
+    }
 }
