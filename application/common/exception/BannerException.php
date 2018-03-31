@@ -11,7 +11,7 @@ namespace app\common\exception;
 
 class BannerException extends BaseException
 {
-    public $httpCode = 200;
+    public $httpCode = 404;
     public $status = 20000;
     public $message = '没有轮播图';
 }

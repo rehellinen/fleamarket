@@ -25,7 +25,7 @@ class Buyer extends BaseValidate
     ];
 
     protected $scene = [
-        'update'  => ['name', 'telephone', 'weixin', 'dormitory', 'number'],
+        'update'  => ['name', 'telephone', 'weixin', 'dormitory', 'number', 'email'],
         'login'     =>  ['tele', 'password'],
         'edit'  => ['name', 'tele', 'email', 'weixin', 'zhifubao', 'dormitory'],
         'password' => ['oldPassword', 'password']

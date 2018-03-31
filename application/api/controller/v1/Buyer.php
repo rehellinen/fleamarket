@@ -20,7 +20,7 @@ use think\Exception;
 class Buyer extends BaseController
 {
     protected $beforeActionList = [
-        'checkBuyerScope' => ['only' => 'updateBuyerInfo']
+        'checkBuyerScope' => ['only' => 'updateBuyerInfo, getBuyerInfo']
     ];
 
     // 更新用户信息

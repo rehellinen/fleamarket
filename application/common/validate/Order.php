@@ -51,7 +51,7 @@ class Order extends BaseValidate
         $res = $validate->check($value);
         if(!$res){
             throw new ParameterException([
-                'message' => '商品参数错误'
+                'message' => $validate->getError()
             ]);
         }
     }
