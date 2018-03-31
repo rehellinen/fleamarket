@@ -8,8 +8,8 @@
 
 namespace app\api\controller\v1;
 
-
 use app\common\validate\Common;
+use app\common\service\Pay as PayService;
 
 class Pay extends BaseController
 {
@@ -20,6 +20,7 @@ class Pay extends BaseController
     public function getPreOrder($orderID = '')
     {
         (new Common())->goCheck('id');
-
+        $pay = new PayService($orderID);
+        $pay->pay();
     }
 }
