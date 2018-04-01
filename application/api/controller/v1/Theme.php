@@ -11,6 +11,8 @@ namespace app\api\controller\v1;
 use app\common\exception\SuccessMessage;
 use app\common\exception\ThemeException;
 use app\common\model\Theme as ThemeModel;
+use app\common\model\ThemeCategory;
+use app\common\validate\Common;
 
 class Theme extends BaseController
 {
@@ -23,6 +25,23 @@ class Theme extends BaseController
         throw new SuccessMessage([
             'message' => '获取主题数据成功',
             'data' => $theme
+        ]);
+    }
+
+    public function getThemeCategory($id)
+    {
+        (new Common())->goCheck('id');
+
+        $category = (new ThemeCategory())->getCategoryByThemeID($id);
+        if(!$category){
+            throw new ThemeException([
+                'message' => '获取该主题分类失败',
+                'status' => 70001
+            ]);
+        }
+        throw new SuccessMessage([
+            'message' => '获取主题分类数据成功',
+            'data' => $category
         ]);
     }
 }
