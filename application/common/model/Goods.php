@@ -29,6 +29,11 @@ class Goods extends BaseModel
         return $this->belongsTo('Seller', 'foreign_id', 'id');
     }
 
+    public function categoryId()
+    {
+        return $this->belongsTo('ThemeCategory', 'category_id', 'id');
+    }
+
     // 获取商品 / 旧物
     public function generalGet($type, $status)
     {
@@ -75,5 +80,16 @@ class Goods extends BaseModel
             'foreign_id' => $shopId
         ];
         return $this->where($data)->with('imageId')->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
+    }
+
+    // 根据分类id获取商品 / 旧物
+    public function generalGetByCategoryID($type, $status, $categoryID)
+    {
+        $data = [
+            'status' => ['in', $status],
+            'type' => $type,
+            'category_id' => $categoryID
+        ];
+        return $this->where($data)->with('imageId')->order('listorder desc, id desc')->paginate();
     }
 }

@@ -116,4 +116,19 @@ class Goods extends BaseController
             'message' => '获取产品信息成功'
         ]);
     }
+
+    public function getOldGoodsByCategoryId($id)
+    {
+        (new Common())->goCheck('id');
+        $goods = (new GoodsModel())->generalGetByCategoryID(TypeEnum::OldGoods, StatusEnum::Normal, $id);
+
+        if(!$goods){
+            throw new GoodsException();
+        }
+
+        throw new SuccessMessage([
+            'data' => $goods,
+            'message' => '获取产品信息成功'
+        ]);
+    }
 }

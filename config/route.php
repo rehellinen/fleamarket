@@ -25,6 +25,7 @@ Route::get('api/:version/newGoods/recent/shop/:id', 'api/:version.Goods/getRecen
 Route::get('api/:version/oldGoods', 'api/:version.Goods/getOldGoods');
 Route::get('api/:version/oldGoods/:id', 'api/:version.Goods/getOldGoodsById', [], ['id'=>'\d+']);
 Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getOldGoodsBySellerId', [], ['id'=>'\d+']);
+Route::get('api/:version/oldGoods/category/:id', 'api/:version.Goods/getOldGoodsByCategoryId', [], ['id'=>'\d+']);
 
 
 // 关于Token
