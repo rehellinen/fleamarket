@@ -17,10 +17,10 @@ class Pay extends BaseController
         'checkBuyerSellerShopScope' => ['only', 'getPreOrder']
     ];
 
-    public function getPreOrder($orderID = '')
+    public function getPreOrder($id = '')
     {
         (new Common())->goCheck('id');
-        $pay = new PayService($orderID);
+        $pay = new PayService($id);
         $pay->pay();
     }
 }

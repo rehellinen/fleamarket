@@ -66,7 +66,7 @@ class Order
         $this->dbGoods = $this->getGoodsByOrder($orderGoods);
 
         $orderStatus = $this->getOrderStatus();
-        return $orderGoods;
+        return $orderStatus;
     }
 
     /**

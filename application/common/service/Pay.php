@@ -59,8 +59,15 @@ class Pay
         $wxOrderData->SetTotal_fee($totalPrice * 100);
         $wxOrderData->SetBody('易乎');
         $wxOrderData->SetOpenid($openID);
-        $wxOrderData->SetNotify_url('');
+        $wxOrderData->SetNotify_url('www.baidu.com');
         return $this->getPaySignature($wxOrderData);
+    }
+
+    private function recordPreOrder($wxOrder)
+    {
+        (new OrderModel())->where('id=' . $this->orderID)->save([
+            'prepay_id' => $wxOrder['prepay_id']
+        ]);
     }
 
     private function getPaySignature($wxOrderData)
@@ -70,6 +77,7 @@ class Pay
             Log::record($wxOrder, 'error');
             Log::record('获取预支付订单失败', 'error');
         }
+        $this->recordPreOrder($wxOrder);
         return null;
     }
 
