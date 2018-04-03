@@ -202,6 +202,8 @@ class Order
      *  count -> 下单的商品数量
      *  name -> 商品的名称
      *  totalPrice -> 该商品的总价格
+     *  price -> 单个商品的价格
+     *  image -> 商品图片
      */
     private function getProductStatus($orderGoodsID, $orderGoodsCount, $dbGoods)
     {
@@ -211,7 +213,9 @@ class Order
             'name' => '',
             'count' => 0,
             'totalPrice' => 0,
-            'haveStock' => false
+            'haveStock' => false,
+            'price' => 0,
+            'image' => ''
         ];
         for($i = 0; $i < count($dbGoods); $i++)
         {
@@ -229,6 +233,8 @@ class Order
             $goodsStatus['id'] = $orderGoodsID;
             $goodsStatus['name'] = $goods['name'];
             $goodsStatus['count'] = $orderGoodsCount;
+            $goodsStatus['price'] = $goods['price'];
+            $goodsStatus['image_id']['image_url'] = $goods['image_id']['image_url'];
             $goodsStatus['totalPrice'] = $goods['price'] * $orderGoodsCount;
             if($goods['quantity'] - $orderGoodsCount >= 0){
                 $goodsStatus['haveStock'] = true;
