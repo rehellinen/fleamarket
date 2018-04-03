@@ -15,6 +15,15 @@ class Order extends BaseModel
 {
     protected $autoWriteTimestamp = true;
 
+    public function getSnapItemsAttr($value)
+    {
+        if(empty($value)){
+            return null;
+        }else{
+            return json_decode($value);
+        }
+    }
+
     // 获取订单数量
     public function getDealCount()
     {

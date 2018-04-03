@@ -59,11 +59,18 @@ class Order extends BaseController
     public function getDetail($id)
     {
         (new Common())->goCheck('id');
-        $order = OrderModel::get($id);
+        $buyerID = TokenService::getBuyerID();
+        $order = (new OrderModel)->where([
+            'buyer_id' => $buyerID,
+            'id' => $id
+        ])->find();
         if(!$order){
             throw new OrderException();
         }
         $order = $order->hidden(['prepay_id']);
-        return $order;
+        throw new SuccessMessage([
+            'message' => '获取订单详情成功',
+            'data' => $order
+        ]);
     }
 }
