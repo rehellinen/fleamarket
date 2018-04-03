@@ -11,6 +11,10 @@ use think\Model;
  */
 class BaseModel extends Model
 {
+    protected $hidden = [
+        'delete_time'
+    ];
+
     // 获取没有删除的所有数据
     public function getNotDelete()
     {

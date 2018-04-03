@@ -21,4 +21,13 @@ class Order extends BaseModel
         $data['status'] = StatusEnum::Normal;
         return $this->where($data)->count();
     }
+
+    public static function getOrderByUser($buyerID, $page, $size)
+    {
+        $res = self::where('buyer_id', '=', $buyerID)->order('create_time desc')
+        ->paginate($size, true, [
+            'page' => $page
+        ]);
+        return $res;
+    }
 }

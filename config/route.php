@@ -45,5 +45,8 @@ Route::get('api/:version/theme', 'api/:version.Theme/getIndexNormalTheme');
 Route::get('api/:version/category/:id', 'api/:version.Theme/getThemeCategory');
 
 // 关于订单
+Route::get('api/:version/order/user', 'api/:version.Order/getBuyerOrder');
+Route::get('api/:version/order/:id', 'api/:version.Order/getDetail', [], ['id'=>'\d+']);
 Route::post('api/:version/order', 'api/:version.Order/placeOrder');
 Route::post('api/:version/preOrder', 'api/:version.Pay/getPreOrder');
+Route::post('api/:version/notify', 'api/:version.Pay/receiveNotify');

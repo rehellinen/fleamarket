@@ -8,14 +8,17 @@
 
 namespace app\api\controller\v1;
 
+use app\common\exception\OrderException;
 use app\common\exception\SuccessMessage;
+use app\common\validate\Common;
 use app\common\validate\Order as OrderValidate;
 use app\common\service\Token as TokenService;
+use app\common\model\Order as OrderModel;
 
 class Order extends BaseController
 {
     protected $beforeActionList = [
-        'checkBuyerScope' => ['only', 'placeOrder']
+        'checkBuyerScope' => ['only' => 'placeOrder, getBuyerOrder, getDetail']
     ];
 
     public function placeOrder()
@@ -31,5 +34,36 @@ class Order extends BaseController
             'message' => '创建订单成功',
             'data' => $status
         ]);
+    }
+
+    public function getBuyerOrder($page = 1, $size = 14)
+    {
+        (new Common())->goCheck('page');
+        $buyerID = TokenService::getBuyerID();
+        $res = (new OrderModel())->getOrderByUser($buyerID, $page, $size);
+        $res = $res->hidden(['snap_items', 'prepay_id']);
+        if($res->isEmpty()){
+            throw new OrderException([
+                'data' => [
+                    'data' => [],
+                    'current_page' => $res->getCurrentPage()
+                ]
+            ]);
+        }
+        throw new SuccessMessage([
+           '获取订单成功',
+            'data' => $res->toArray()
+        ]);
+    }
+
+    public function getDetail($id)
+    {
+        (new Common())->goCheck('id');
+        $order = OrderModel::get($id);
+        if(!$order){
+            throw new OrderException();
+        }
+        $order = $order->hidden(['prepay_id']);
+        return $order;
     }
 }

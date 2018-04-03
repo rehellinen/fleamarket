@@ -59,13 +59,13 @@ class Pay
         $wxOrderData->SetTotal_fee($totalPrice * 100);
         $wxOrderData->SetBody('易乎');
         $wxOrderData->SetOpenid($openID);
-        $wxOrderData->SetNotify_url('www.baidu.com');
+        $wxOrderData->SetNotify_url(config('weixin.pay_back_url'));
         return $this->getPaySignature($wxOrderData);
     }
 
     private function recordPreOrder($wxOrder)
     {
-        (new OrderModel())->where('id=' . $this->orderID)->save([
+        (new OrderModel())->where('id=' . $this->orderID)->update([
             'prepay_id' => $wxOrder['prepay_id']
         ]);
     }
@@ -78,7 +78,25 @@ class Pay
             Log::record('获取预支付订单失败', 'error');
         }
         $this->recordPreOrder($wxOrder);
-        return null;
+        $signature = $this->sign($wxOrder);
+        return $signature;
+    }
+
+    private function sign($wxOrder)
+    {
+        $jsApiPayData = new \WxPayJsApiPay();
+        $jsApiPayData->SetAppid(config('weixin.app_id'));
+        $jsApiPayData->SetTimeStamp((string)time());
+        $rand = md5(time() . mt_rand(0, 1000));
+        $jsApiPayData->SetNonceStr($rand);
+        $jsApiPayData->SetPackage('prepay_id='.$wxOrder['prepay_id']);
+        $jsApiPayData->SetSignType('md5');
+
+        $sign = $jsApiPayData->MakeSign();
+        $rawValues = $jsApiPayData->GetValues();
+        $rawValues['paySign'] = $sign;
+        unset($rawValues['appId']);
+        return $rawValues;
     }
 
     private function checkOrder()
