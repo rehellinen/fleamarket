@@ -45,8 +45,7 @@ class Order extends BaseController
         if($res->isEmpty()){
             throw new OrderException([
                 'data' => [
-                    'data' => [],
-                    'current_page' => $res->getCurrentPage()
+                    'data' => []
                 ]
             ]);
         }
