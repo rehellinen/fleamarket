@@ -9,13 +9,13 @@
 namespace app\admin\controller;
 
 
-class Deal extends BaseController
+class Order extends BaseController
 {
     public function index()
     {
-        $deal = model('Deal')->getDeal();
+        $order = (new \app\common\model\Order())->getNotDelete();
         return $this->fetch('',[
-            'deal' => $deal
+            'order' => $order
         ]);
     }
 }

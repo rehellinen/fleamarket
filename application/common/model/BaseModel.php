@@ -75,12 +75,7 @@ class BaseModel extends Model
         return $this->where('id='.$id)->update($data);
     }
 
-    public function updateById($id, $data)
-    {
-        $condition['id'] = $id;
-        return $this->where($condition)->update($data);
-    }
-
+    // 获取有头图的数据
     public function getHasImage()
     {
         $condition = [

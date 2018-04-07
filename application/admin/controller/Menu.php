@@ -17,12 +17,15 @@ class Menu extends BaseController
         $get = $this->request->get();
         if($get){
             $parentID = $get['id'];
+            $hidden = true;
             $menu = (new MenuModel())->getChildMenuByID($parentID);
         }else{
             $menu = (new MenuModel())->getParentMenu();
+            $hidden = false;
         }
         return $this->fetch('', [
-            'menu' => $menu
+            'menu' => $menu,
+            'hidden' => $hidden
         ]);
     }
 
