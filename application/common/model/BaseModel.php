@@ -80,4 +80,16 @@ class BaseModel extends Model
         $condition['id'] = $id;
         return $this->where($condition)->update($data);
     }
+
+    public function getHasImage()
+    {
+        $condition = [
+            'status' => ['neq', StatusEnum::Deleted]
+        ];
+        $res = $this->where($condition)->order('listorder desc, id desc')->with('imageId')->select()->toArray();
+        foreach ($res as $key => $value) {
+            $res[$key]['image_id'] = $value['image_id']['image_url'];
+        }
+        return $res;
+    }
 }

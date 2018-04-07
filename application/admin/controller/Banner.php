@@ -14,10 +14,7 @@ class Banner extends BaseController
 {
     public function index()
     {
-        $banner = (new BannerModel())->getAdminBanner()->toArray();
-        foreach ($banner as $key => $value) {
-            $banner[$key]['image_id'] = $value['image_id']['image_url'];
-        }
+        $banner = (new BannerModel())->getHasImage();
         return $this->fetch('', [
             'banner' => $banner
         ]);

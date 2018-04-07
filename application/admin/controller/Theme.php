@@ -14,7 +14,7 @@ class Theme extends BaseController
 {
     public function index()
     {
-        $theme = (new ThemeModel())->getNotDelete();
+        $theme = (new ThemeModel())->getHasImage();
         return $this->fetch('', [
             'theme' => $theme
         ]);

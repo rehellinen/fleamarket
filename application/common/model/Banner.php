@@ -26,12 +26,4 @@ class Banner extends BaseModel
         return $this->where($condition)->order('listorder desc, id desc')
                 ->with('imageId')->limit($maxCount)->select();
     }
-
-    public function getAdminBanner()
-    {
-        $condition = [
-            'status' => ['neq', StatusEnum::Deleted]
-        ];
-        return $this->where($condition)->order('listorder desc, id desc')->with('imageId')->select();
-    }
 }
