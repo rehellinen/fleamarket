@@ -49,7 +49,8 @@ $('* .listorder').blur(function () {
 
 $('* .editButton').click(function () {
     var id = $(this).attr('attr-id');
-    window.location.href=URL.edit_url+"?id="+id;
+    var image = $(this).attr('attr-image');
+    window.location.href = URL.edit_url + "?id=" + id + "&image=" + image;
 });
 
 $('* .menuButton').click(function () {

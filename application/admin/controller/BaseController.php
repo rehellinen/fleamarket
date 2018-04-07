@@ -131,8 +131,14 @@ class BaseController extends Controller
 
         }else{
             $id = $_GET['id'];
+            $image = $_GET['image'];
             $controller = Request::instance()->controller();
-            $result = model($controller)->get($id);
+            if($image){
+                $result = model($controller)->with('imageId')->where('id', '=', $id)->find()->toArray();
+                $result['image_id'] = $result['image_id']['image_url'];
+            }else{
+                $result = model($controller)->get($id);
+            }
             return $this->fetch('', [
                 'res' => $result
             ]);
@@ -141,7 +147,7 @@ class BaseController extends Controller
 
     private function processImageUrl($imageUrl){
         // 对上传图片的处理
-        $pattern = '{/upload/\w+.png}';
+        $pattern = '{/upload.+}';
         preg_match($pattern, $imageUrl, $match);
         $imageUrl = $match[0];
         $image = Image::create(['image_url' => $imageUrl]);
