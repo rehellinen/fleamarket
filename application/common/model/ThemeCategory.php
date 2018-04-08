@@ -9,11 +9,18 @@
 namespace app\common\model;
 
 
+use enum\StatusEnum;
+
 class ThemeCategory extends BaseModel
 {
     public function imageId()
     {
         return $this->belongsTo('Image', 'image_id', 'id');
+    }
+
+    public function themeId()
+    {
+        return $this->belongsTo('Theme', 'theme_id', 'id');
     }
 
     public function getCategoryByThemeID($themeID)
@@ -23,5 +30,18 @@ class ThemeCategory extends BaseModel
             'theme_id' => $themeID
         ];
         return $this->where($data)->with('imageId')->order('listorder desc, id desc')->select();
+    }
+
+    public function getCategory()
+    {
+        $data = [
+            'status' => ['neq', StatusEnum::Deleted],
+        ];
+        $category = $this->where($data)->with('themeId')
+            ->order('listorder desc, id desc')->select()->toArray();
+        foreach ($category as $key => $value){
+            $category[$key]['theme_id'] = $value['theme_id']['name'];
+        }
+        return $category;
     }
 }
