@@ -14,7 +14,7 @@ class Shop extends BaseModel
 {
     public function mainImageId()
     {
-        return $this->belongsTo('Image', 'main_image_id', 'id');
+        return $this->hasMany('ShopMainImage', 'shop_id', 'id');
     }
 
     public function topImageId()
@@ -42,5 +42,15 @@ class Shop extends BaseModel
         $condition['id'] = $id;
         $condition['status'] = StatusEnum::Normal;
         return $this->with(['topImageId', 'avatarImageId'])->where($condition)->find();
+    }
+
+    public function getAdminShop($id)
+    {
+        $shop = $this->with(['mainImageId' => function($query){
+            $query->with(['imageId'])->order('listorder desc, id desc');
+        }])->with([
+            'topImageId', 'avatarImageId'
+        ])->where('id', '=', $id)->find()->toArray();
+        return $shop;
     }
 }

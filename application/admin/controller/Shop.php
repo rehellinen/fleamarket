@@ -22,50 +22,10 @@ class Shop extends BaseController
         ]);
     }
 
-    public function add()
-    {
-        $post = Request::instance()->post();
-        if($post){
-            // 对上传图片的处理
-            $image = Image::create(['image_url' => $post['main_image_id']]);
-            $post['main_image_id'] = $image->id;
-            $image = Image::create(['image_url' => $post['top_image_id']]);
-            $post['top_image_id'] = $image->id;
-            $image = Image::create(['image_url' => $post['avatar_image_id']]);
-            $post['avatar_image_id'] = $image->id;
-
-            $res = model('shop')->insert($post);
-            if($res){
-                return show(1,'新增成功');
-            }else{
-                return show(0,'新增失败');
-            }
-        }else{
-            return $this->fetch();
-        }
-    }
-
     public function edit()
     {
         $post = Request::instance()->post();
         if($post){
-            // 对上传图片的处理
-            $pattern = '{/upload/\w+.png}';
-            preg_match($pattern, $post['main_image_id'], $match1);
-            preg_match($pattern, $post['top_image_id'], $match2);
-            preg_match($pattern, $post['avatar_image_id'], $match3);
-
-            $post['main_image_id'] = $match1[0];
-            $post['top_image_id'] = $match2[0];
-            $post['avatar_image_id'] = $match3[0];
-
-            $image = Image::create(['image_url' => $post['main_image_id']]);
-            $post['main_image_id'] = $image->id;
-            $image = Image::create(['image_url' => $post['top_image_id']]);
-            $post['top_image_id'] = $image->id;
-            $image = Image::create(['image_url' => $post['avatar_image_id']]);
-            $post['avatar_image_id'] = $image->id;
-
             $result = model('shop')->where('id='.$post['id'])->update($post);
             if($result){
                 return show(1,'更新成功');
@@ -75,7 +35,7 @@ class Shop extends BaseController
 
         }else{
             $id = $_GET['id'];
-            $result = model('shop')->get($id);
+            $result = (new \app\common\model\Shop())->getAdminShop($id);
             return $this->fetch('', [
                 'res' => $result
             ]);

@@ -17,31 +17,26 @@
                             <div class="card-body">
                                 <form class="form-horizontal" id="submitForm" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="{$res.id}" />
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">主页图片：</label>
-                                        <div class="col-sm-5">
-                                            <div id="upload" style="width: 50%"></div>
-                                            <img id="upload_org_code_img" src="{$res.main_image_id}" width="150" height="150">
-                                            <input id="file_upload_image" name="main_image_id" type="hidden" multiple="true" value="{$res.main_image_id}">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
+                                    <div class="row">
                                         <label class="col-sm-2 control-label">详情头图：</label>
-                                        <div class="col-sm-5">
-                                            <div id="upload2" style="width: 50%"></div>
-                                            <img id="upload_org_code_img2" src="{$res.top_image_id}" width="150" height="150">
-                                            <input id="file_upload_image2" name="top_image_id" type="hidden" multiple="true" value="{$res.top_image_id}">
+                                        <div class="col-sm-10">
+                                            <img src="{$res.top_image_id.image_url}" width="250" height="150">
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="row">
                                         <label class="col-sm-2 control-label">头像图片：</label>
-                                        <div class="col-sm-5">
-                                            <div id="upload3" style="width: 50%"></div>
-                                            <img id="upload_org_code_img3" src="{$res.avatar_image_id}" width="150" height="150">
-                                            <input id="file_upload_image3" name="avatar_image_id" type="hidden" multiple="true" value="{$res.avatar_image_id}">
+                                        <div class="col-sm-10">
+                                            <img src="{$res.avatar_image_id.image_url}" width="150" height="150">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-2 control-label">主页大图：</label>
+                                        <div class="col-sm-10">
+                                            {volist name="res.main_image_id" id="vo"}
+                                                <img src="{$vo.image_id.image_url}" width="200" height="150">
+                                            {/volist}
                                         </div>
                                     </div>
 

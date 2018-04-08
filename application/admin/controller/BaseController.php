@@ -98,8 +98,7 @@ class BaseController extends Controller
         if($post){
             // 判断是否上传了图片
             if(isset($post['image_id'])){
-                $image = Image::create(['image_url' => $post['image_id']]);
-                $post['image_id'] = $image->id;
+                $post['image_id'] = $this->processImageUrl($post['image_id']);
             }
             $controller = Request::instance()->controller();
             $res = model($controller)->insert($post);
