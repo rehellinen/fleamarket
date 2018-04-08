@@ -33,7 +33,7 @@
                                     <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
                                     </td>
                                     <td>
-                                        <span class="fa fa-pencil-square editButton" attr-id="{$vo.id}" attr-image="0"></span>
+                                        <span class="fa fa-pencil-square editButton" attr-id="{$vo.id}" attr-image="1"></span>
                                         <span class="glyphicon glyphicon-remove statusButton" attr-id="{$vo.id}" attr-status="-1"></span>
                                     </td>
                                 </tr>
@@ -50,10 +50,10 @@
 
 <script>
     var URL = {
-        'listorder_url': "{:url('admin/Menu/listorder')}",
-        'success_url': "{:url('admin/Menu/index')}",
-        'status_url': "{:url('admin/Menu/setStatus')}",
-        'edit_url': "{:url('admin/Menu/edit')}"
+        'listorder_url': "{:url('admin/theme_category/listorder')}",
+        'success_url': "{:url('admin/theme_category/index')}",
+        'status_url': "{:url('admin/theme_category/setStatus')}",
+        'edit_url': "{:url('admin/theme_category/edit')}"
     };
 </script>
 {include file="public/footer"}
