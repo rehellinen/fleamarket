@@ -15,62 +15,16 @@ use enum\StatusEnum;
 use think\Cache;
 use think\Exception;
 use think\Request;
-use app\common\exception\SellerException;
+use app\common\exception\WeChatException;
 
 class Token
 {
-    // 生成随机字符串作为令牌
-    public static function generateToken()
-    {
-        // 32位字符串
-        $randChars = getRandChars(32);
-        // 时间戳
-        $timeStamp = $_SERVER['REQUEST_TIME_FLOAT'];
-        // 前缀
-        $prefix = config('admin.md5_prefix');
-
-        $token = md5($prefix.$randChars.$timeStamp);
-        return $token;
-    }
-
-    // 根据Token令牌获取对应的信息
-    public static function getCurrentTokenVar($key)
-    {
-        $token = Request::instance()->header('token');
-        $vars = Cache::get($token);
-        if(!$vars){
-            throw new TokenException();
-        }else{
-            if(!is_array($vars)){
-                $vars = json_decode($vars, true);
-            }
-            if(array_key_exists($key, $vars)){
-                $var = $vars[$key];
-                return $var;
-            }else{
-                throw new Exception('尝试获取的Token变量不存在');
-            }
-        }
-    }
-
-    // 根据买家ID获取相应的信息
-    public static function getBuyerID()
-    {
-        $buyerID = self::getCurrentTokenVar('buyerID');
-        return $buyerID;
-    }
-
-    // 检查令牌是否过期
-    public static function verifyToken($token)
-    {
-        $isExisted = Cache::get($token);
-        if($isExisted){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
+    /**
+     * 爬取微信服务器返回的结果
+     * @return array
+     * @throws Exception
+     * @throws WeChatException
+     */
     protected function getResultFromWx()
     {
         $jsonResult = curl_http($this->loginUrl);
@@ -113,26 +67,101 @@ class Token
         return $buyerID;
     }
 
-    // 用于校对商户输入的密码和数据库中的密码
-    public static function checkPassword($password, $seller)
+    /**
+     * 将Token令牌及其携带的信息存入缓存
+     * @param $cachedValue
+     * @return string
+     * @throws TokenException
+     */
+    protected function saveToCache($cachedKey, $cachedValue)
     {
-        // md5加密的前缀
-        $prefix = config('admin.md5_prefix');
-        // 盐
-        $salt = $seller->code;
-        // 商户输入的加密后的密码
-        $md5Password = md5($prefix.$password.$salt);
+        $cachedValue = json_encode($cachedValue);
+        $expire_in = config('admin.token_expire_in');
 
-        if($md5Password === $seller->password){
+        $cache = cache($cachedKey, $cachedValue, $expire_in);
+        if(!$cache){
+            throw new TokenException([
+                'msg' => '服务器缓存异常',
+                'status' => 10001
+            ]);
+        }
+        return $cachedKey;
+    }
+
+    /**
+     * 生成随机字符串作为令牌
+     * @return string 随机字符串
+     */
+    public static function generateToken()
+    {
+        // 32位字符串
+        $randChars = getRandChars(32);
+        // 时间戳
+        $timeStamp = $_SERVER['REQUEST_TIME_FLOAT'];
+        // 前缀
+        $prefix = config('admin.md5_prefix');
+
+        $token = md5($prefix.$randChars.$timeStamp);
+        return $token;
+    }
+
+    /**
+     * 验证令牌是否过期
+     * @param string $token Token令牌
+     * @return bool
+     */
+    public static function verifyToken($token)
+    {
+        $isExisted = Cache::get($token);
+        if($isExisted){
             return true;
         }else{
-            throw new SellerException([
-                'message' => '输入的密码不正确',
-                'status'=> '70001'
-            ]);
+            return false;
         }
     }
 
+    /**
+     * 根据Token令牌获取对应的信息
+     * @param string $key 存储的信息的键
+     * @return mixed
+     * @throws Exception
+     * @throws TokenException
+     */
+    public static function getCurrentTokenVar($key)
+    {
+        $token = Request::instance()->header('token');
+        $vars = Cache::get($token);
+        if(!$vars){
+            throw new TokenException();
+        }else{
+            if(!is_array($vars)){
+                $vars = json_decode($vars, true);
+            }
+            if(array_key_exists($key, $vars)){
+                $var = $vars[$key];
+                return $var;
+            }else{
+                throw new Exception('尝试获取的Token变量不存在');
+            }
+        }
+    }
+
+    /**
+     * 获取买家ID
+     * @return int 买家ID
+     */
+    public static function getBuyerID()
+    {
+        $buyerID = self::getCurrentTokenVar('buyerID');
+        return $buyerID;
+    }
+
+    /**
+     * 验证用户是否在对自己的订单进行操作
+     * @param int $checkedBuyerID 买家ID
+     * @return bool
+     * @throws TokenException
+     */
     public static function isValidOperate($checkedBuyerID)
     {
         $currentBuyerID = self::getBuyerID();

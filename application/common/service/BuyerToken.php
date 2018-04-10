@@ -8,10 +8,9 @@
 
 namespace app\common\service;
 
-
-use app\common\exception\TokenException;
 use app\common\exception\WeChatException;
 use enum\ScopeEnum;
+use enum\StatusEnum;
 use think\Exception;
 
 class BuyerToken extends Token
@@ -42,35 +41,25 @@ class BuyerToken extends Token
     {
         // 爬取微信服务器返回的结果
         $wxResult = $this->getResultFromWx();
-        //
-        $openID = $wxResult['openid'];
-        $buyerID = $this->getIDByOpenID($openID, 'Buyer');
+        // 根据openID获取用户ID
+        $buyerID = $this->getIDByOpenID($wxResult['openid'], 'Buyer', StatusEnum::Normal);
+        // 生成缓存的键与值
+        $cachedKey = self::generateToken();
         $cachedValue = $this->prepareCachedValue($wxResult, $buyerID);
-        $token = $this->saveToCache($cachedValue);
+        // 进行缓存
+        $token = $this->saveToCache($cachedKey, $cachedValue);
         return $token;
     }
 
-    // 存入缓存并返回Token
-    private function saveToCache($cachedValue)
+    /**
+     * 准备缓存的数据结构
+     * @param array $wxResult 微信返回的结果
+     * @param $buyerID
+     * @return array 要储存的信息
+     */
+    private function prepareCachedValue($wxResult, $buyerID)
     {
-        $cachedKey = self::generateToken();
-        $cachedValue = json_encode($cachedValue);
-        $expire_in = config('admin.token_expire_in');
-
-        $cache = cache($cachedKey, $cachedValue, $expire_in);
-        if(!$cache){
-            throw new TokenException([
-                'msg' => '服务器缓存异常',
-                'status' => 10001
-            ]);
-        }
-        return $cachedKey;
-    }
-
-    // 生成缓存数据
-    private function prepareCachedValue($jsonResult, $buyerID)
-    {
-        $cachedValue = $jsonResult;
+        $cachedValue = $wxResult;
         $cachedValue['buyerID'] = $buyerID;
         $cachedValue['scope'] = ScopeEnum::Buyer;
 
