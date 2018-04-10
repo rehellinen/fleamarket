@@ -1,51 +1,80 @@
 api文档介绍
 :version表示版本号，:id表示id号
 
-！Banner！
+/** Banner **/
 get     api/:version/banner
 获取banner信息
-！Banner！
+/** Banner **/
 
-！自营商品！
-get     api/:version/goods
+
+/** 商品 **/
+get api/:version/goods/check
+携带参数示例：id=1|2|3
+/** 商品 **/
+
+/** 自营商品 **/
+get     api/:version/newGoods
 获取所有商品
-get     api/:version/goods/:id
+get     api/:version/newGoods/:id
 根据商品id获取商品
-get     api/:version/goods/shop/:id
+get     api/:version/newGoods/shop/:id
 根据店铺id获取商品
-get     api/:version/goods/recent/shop/:id
+get     api/:version/newGoods/recent/shop/:id
 根据店铺id获取最近新品
-！自营商品！
+/** 自营商品 **/
 
-
-！二手商品！
+/** 二手商品 **/
 get     api/:version/oldGoods
 获取所有商品
 get     api/:version/oldGoods/:id'
 根据商品id获取商品
 get     api/:version/oldGoods/seller/:id
 根据卖家id获取商品
-！二手商品！
+get     api/:version/oldGoods/category/:id
+根据分类id获取商品
+/** 二手商品 **/
 
 
-！Token令牌！
-post    api/:version/token/user
+/** Token令牌 **/
+post    api/:version/token/buyer
 买家获取Token令牌
-！Token令牌！
+post    api/:version/token/seller
+卖家获取Token令牌
+post    api/:version/token/verify
+验证令牌是否有效
+/** Token令牌 **/
 
 
-！买家！
+/** 买家 **/
 put     api/:version/buyer
 更新买家信息
-！买家！
+get     api/:version/buyer
+获取买家信息
+/** 买家 **/
 
 
-！商家！
+/** 商家 **/
 get     api/:version/shop
 get     api/:version/shop/:id
-！商家！
+/** 商家 **/
 
 
-！主题！
+/** 主题 **/
 get     api/:version/theme
-！主题！
+获取主题
+get     api/:version/category/:id
+根据主题id获取分类
+/** 主题 **/
+
+/** 订单 **/
+get     api/:version/order/user
+用户获取订单
+get     api/:version/order/:id
+根据订单id获取订单
+post    api/:version/order
+下单
+post    api/:version/preOrder
+预订单
+post    api/:version/notify
+接收微信服务器回调的函数
+/** 订单 **/
