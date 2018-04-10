@@ -15,6 +15,7 @@ use think\Route;
 // 关于Banner
 Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 
+Route::get('api/:version/goods/check', 'api/:version.Goods/checkPrice');
 // 关于自营商品
 Route::get('api/:version/newGoods', 'api/:version.Goods/getNewGoods');
 Route::get('api/:version/newGoods/:id', 'api/:version.Goods/getNewGoodsById', [], ['id'=>'\d+']);

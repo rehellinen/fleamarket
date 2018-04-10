@@ -34,7 +34,9 @@ class Shop extends BaseModel
             'listorder' => 'desc',
             'id' => 'desc'
         );
-        return $this->where($data)->with(['mainImageId', 'avatarImageId'])->order($order)->paginate();
+        return $this->where($data)->with(['mainImageId' => function($query){
+            $query->with('imageId')->order('listorder desc, id desc');
+        }])->with('avatarImageId')->order($order)->paginate();
     }
 
     public function getNormalById($id)

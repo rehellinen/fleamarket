@@ -13,6 +13,6 @@ class SellerException extends BaseException
 {
     public $httpCode = 401;
     public $status = 70000;
-    public $message = '商户不存在';
+    public $message = '卖家不存在';
     public $data = [];
 }

@@ -6,7 +6,7 @@ $(function(){
         auto:true,
         fileTypeExts:'*.gif; *.jpg; *.png; *.jpeg',
         multi:false,
-        fileSizeLimit:20000,
+        fileSizeLimit:200000,
         showUploadedPercent:true,
         showUploadedSize:true,
         removeTimeout:1000,

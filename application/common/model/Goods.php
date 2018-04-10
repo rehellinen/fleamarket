@@ -57,7 +57,17 @@ class Goods extends BaseModel
             'type' => $type,
             'id' => $id
         ];
-        return $this->where($data)->with('imageId')->order('listorder desc, id desc')->find();
+
+        if($type == TypeEnum::NewGoods){
+            $related = 'shop';
+        }else{
+            $related = 'seller';
+        }
+
+        return $this->where($data)->with([$related, 'imageId'])->order('listorder desc, id desc')
+            ->find()->hidden([
+                'shop' => ['listorder', 'status', 'number', 'open_id']
+            ]);
     }
 
     // 根据商店id获取商品 / 旧物

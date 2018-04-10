@@ -11,8 +11,5 @@ namespace app\api\controller\v1;
 
 class Seller extends BaseController
 {
-    public function check()
-    {
-        
-    }
+
 }

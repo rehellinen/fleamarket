@@ -131,4 +131,22 @@ class Goods extends BaseController
             'message' => '获取产品信息成功'
         ]);
     }
+
+    public function checkPrice()
+    {
+        $goodsValidate = (new \app\common\validate\Goods());
+        $goodsValidate->goCheck('ids');
+        $ids = $goodsValidate->getDataByScene('ids');
+        $idsArray = explode('|', $ids['ids']);
+        $goods = (new \app\common\model\Goods())->where([
+            'id' => ['in', $idsArray],
+            'status' => StatusEnum::Normal
+        ])->with('imageId')->select()->hidden([
+            'status', 'quantity', 'description', 'foreign_id', 'listorder', 'subtitle', 'category_id'
+        ]);
+        throw new SuccessMessage([
+            'message' => '获取商品信息成功',
+            'data' => $goods
+        ]);
+    }
 }

@@ -27,26 +27,26 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">类型:</label>
-                                        <div class="col-sm-5">
-                                            <select name="type" class="form-control">
-                                                <option value="1" {$res.type == 1 ? 'selected' : ''}>自营</option>
-                                                <option value="2" {$res.type == 2 ? 'selected' : ''}>旧物</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="col-sm-2 control-label">类型:</label>-->
+                                        <!--<div class="col-sm-5">-->
+                                            <!--<select name="type" class="form-control">-->
+                                                <!--<option value="1" {$res.type == 1 ? 'selected' : ''}>自营</option>-->
+                                                <!--<option value="2" {$res.type == 2 ? 'selected' : ''}>旧物</option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">自营商家:</label>
-                                        <div class="col-sm-5">
-                                            <select name="shop_id" class="form-control">
-                                                {volist name="shop" id="vo"}
-                                                <option value="{$vo.id}" {$vo.name == $res.foreign_id ? 'selected' : ''}>{$vo.name}</option>
-                                                {/volist}
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="col-sm-2 control-label">自营商家:</label>-->
+                                        <!--<div class="col-sm-5">-->
+                                            <!--<select name="shop_id" class="form-control">-->
+                                                <!--{volist name="shop" id="vo"}-->
+                                                <!--<option value="{$vo.id}" {$vo.name == $res.foreign_id ? 'selected' : ''}>{$vo.name}</option>-->
+                                                <!--{/volist}-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="name">商品名称:</label>
@@ -101,7 +101,7 @@
     <script>
         var URL = {
             'submit_url' : "{:url('admin/goods/edit')}",
-            'success_url' : "{:url('admin/goods/index')}",
+            'success_url' : "{:url('admin/goods/newGoods')}",
             'image_url' : "{:url('api/v1.image/upload')}"
         };
     </script>
