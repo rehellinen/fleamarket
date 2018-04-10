@@ -11,7 +11,6 @@ namespace app\common\service;
 
 use app\common\exception\TokenException;
 use app\common\exception\WeChatException;
-use app\common\model\Buyer;
 use enum\ScopeEnum;
 use think\Exception;
 
@@ -22,6 +21,9 @@ class BuyerToken extends Token
     protected $appSecret;
     protected $loginUrl;
 
+    /*
+     * 初始化成员变量
+     */
     public function __construct($code)
     {
         $this->code = $code;
@@ -30,31 +32,20 @@ class BuyerToken extends Token
         $this->loginUrl = sprintf(config('weixin.url'), $this->appId, $this->appSecret, $this->code);
     }
 
-    // 主方法
+    /**
+     * 主方法
+     * @return string Token令牌
+     * @throws Exception 微信服务器没有响应
+     * @throws WeChatException
+     */
     public function get()
     {
-        $result = curl_http($this->loginUrl);
-        $jsonResult = json_decode($result, true);
-        if(empty($jsonResult)){
-            throw new Exception('获取open_id / session_key失败');
-        }
-        if(array_key_exists('errcode', $jsonResult)){
-            // 处理错误的结果
-            throw new WeChatException([
-                'message' => $jsonResult['errmsg'],
-                'status' => $jsonResult['errcode']
-            ]);
-        }else{
-            return $token = $this->grantToken($jsonResult);
-        }
-    }
-
-    // 获取令牌的方法
-    private function grantToken($jsonResult)
-    {
-        $openID = $jsonResult['openid'];
-        $buyerID = $this->getIDByOpenID($openID);
-        $cachedValue = $this->prepareCachedValue($jsonResult, $buyerID);
+        // 爬取微信服务器返回的结果
+        $wxResult = $this->getResultFromWx();
+        //
+        $openID = $wxResult['openid'];
+        $buyerID = $this->getIDByOpenID($openID, 'Buyer');
+        $cachedValue = $this->prepareCachedValue($wxResult, $buyerID);
         $token = $this->saveToCache($cachedValue);
         return $token;
     }
@@ -84,20 +75,6 @@ class BuyerToken extends Token
         $cachedValue['scope'] = ScopeEnum::Buyer;
 
         return $cachedValue;
-    }
-
-    // 获取用户ID的方法
-    private function getIDByOpenID($openID)
-    {
-        $buyer = (new Buyer())->getByOpenID($openID);
-        if(!$buyer){
-            $buyerID = (new Buyer())->insertGetId([
-                'open_id' => $openID
-            ]);
-        }else{
-            $buyerID = $buyer->id;
-        }
-        return $buyerID;
     }
 }
 

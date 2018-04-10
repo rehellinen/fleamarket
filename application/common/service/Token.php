@@ -11,6 +11,7 @@ namespace app\common\service;
 
 
 use app\common\exception\TokenException;
+use enum\StatusEnum;
 use think\Cache;
 use think\Exception;
 use think\Request;
@@ -68,6 +69,48 @@ class Token
         }else{
             return false;
         }
+    }
+
+    protected function getResultFromWx()
+    {
+        $jsonResult = curl_http($this->loginUrl);
+        $res = json_decode($jsonResult, true);
+        if(empty($res)){
+            throw new Exception('获取open_id / session_key失败');
+        }
+        if(array_key_exists('errcode', $res)){
+            // 处理错误的结果
+            throw new WeChatException([
+                'message' => $res['errmsg'],
+                'status' => $res['errcode']
+            ]);
+        }else{
+            return $res;
+        }
+    }
+
+    /**
+     * 根据openID获取用户( 买家、商店、卖家 )的ID
+     * @param int $openID 微信服务器返回的openID
+     * @param string $modelName 模型名称
+     * @param int $status 用户状态
+     * @return int 用户的ID
+     */
+    protected function getIDByOpenID($openID, $modelName, $status)
+    {
+        $buyer = model($modelName)->where([
+            'open_id' => $openID,
+            'status' => StatusEnum::Normal
+        ])->find();
+        if(!$buyer){
+            $buyerID = model($modelName)->insertGetId([
+                'open_id' => $openID,
+                'status' => $status
+            ]);
+        }else{
+            $buyerID = $buyer->id;
+        }
+        return $buyerID;
     }
 
     // 用于校对商户输入的密码和数据库中的密码

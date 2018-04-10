@@ -30,7 +30,8 @@ Route::get('api/:version/oldGoods/category/:id', 'api/:version.Goods/getOldGoods
 
 
 // 关于Token
-Route::post('api/:version/token/buyer', 'api/:version.Token/getToken');
+Route::post('api/:version/token/buyer', 'api/:version.Token/getBuyerToken');
+Route::post('api/:version/token/seller', 'api/:version.Token/getSellerToken');
 Route::post('api/:version/token/verify', 'api/:version.Token/verifyToken');
 
 // 关于买家

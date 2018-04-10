@@ -17,7 +17,7 @@ use app\common\service\Token as TokenService;
 
 class Token extends BaseController
 {
-    public function getToken($code = '')
+    public function getBuyerToken($code = '')
     {
         (new TokenValidate())->goCheck('get');
 
@@ -30,14 +30,15 @@ class Token extends BaseController
         ]);
     }
 
+    public function getSellerToken()
+    {
+        (new TokenValidate())->goCheck('get');
+    }
+
     public function verifyToken($token = '')
     {
         (new TokenValidate())->goCheck('verify');
-        if(!$token){
-            throw new ParameterException([
-                'message' => 'token不能为空'
-            ]);
-        }
+
         $valid = TokenService::verifyToken($token);
         throw new SuccessMessage([
             'message' => '获取Token状态成功',
