@@ -25,7 +25,7 @@ class SellerToken extends Token
         $this->code = $code;
         $this->appId = config('weixin.bis_app_id');
         $this->appSecret = config('weixin.bis_app_secret');
-        $this->loginUrl = sprintf(config('weixin.pay_back_url'), $this->appId, $this->appSecret, $this->code);
+        $this->loginUrl = sprintf(config('weixin.url'), $this->appId, $this->appSecret, $this->code);
     }
 
     /**
@@ -51,7 +51,7 @@ class SellerToken extends Token
     /**
      * 准备缓存的数据结构
      * @param array $wxResult 微信返回的结果
-     * @param $buyerID
+     * @param $sellerID
      * @return array 要储存的信息
      */
     private function prepareCachedValue($wxResult, $sellerID)

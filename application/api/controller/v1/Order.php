@@ -28,8 +28,8 @@ class Order extends BaseController
         $goods = $post['goods'];
         $buyerID = TokenService::getBuyerID();
 
-        $order = new \app\common\service\Order();
-        $status = $order->place($buyerID, $goods);
+        $order = new \app\common\service\Order($buyerID, $goods);
+        $status = $order->place();
         throw new SuccessMessage([
             'message' => '创建订单成功',
             'data' => $status
