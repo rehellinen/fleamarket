@@ -15,7 +15,8 @@ class Order extends BaseValidate
 {
     // products 为二维数组
     protected $rule = [
-        ['goods',  'checkGoods', '订单参数错误']
+        ['goods',  'checkGoods', '订单参数错误'],
+        ['order_no', 'require']
     ];
 
     protected $singleRule = [
@@ -24,7 +25,8 @@ class Order extends BaseValidate
     ];
 
     protected $scene = [
-        'order' => ['goods']
+        'order' => ['goods'],
+        'no' => ['order_no']
     ];
 
     protected function checkGoods($value)

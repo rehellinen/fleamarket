@@ -15,13 +15,9 @@ class Order extends BaseModel
 {
     protected $autoWriteTimestamp = true;
 
-    public function getSnapItemsAttr($value)
+    public function snapItems()
     {
-        if(empty($value)){
-            return null;
-        }else{
-            return json_decode($value);
-        }
+        return $this->hasMany('orderGoods', 'order_id', 'id');
     }
 
     // 获取订单数量

@@ -62,7 +62,9 @@ class Order extends BaseController
         $order = (new OrderModel)->where([
             'buyer_id' => $buyerID,
             'id' => $id
-        ])->find();
+        ])->with(['snapItems' => function($query){
+            $query->with('imageId');
+        }])->find();
         if(!$order){
             throw new OrderException();
         }

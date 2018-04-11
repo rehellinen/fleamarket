@@ -14,6 +14,7 @@ use app\common\exception\SuccessMessage;
 use app\common\model\Goods;
 use app\common\model\Image;
 use app\common\model\OrderGoods;
+use enum\StatusEnum;
 use think\Db;
 use think\Exception;
 
@@ -25,6 +26,8 @@ class Order
     protected $dbGoods;
     // 买家ID
     protected $buyerID;
+    // 订单号
+    protected $orderNo;
 
     /**
      * Order constructor.
@@ -36,25 +39,39 @@ class Order
         $this->orderGoods = $orderGoods;
         $this->dbGoods = $this->getGoodsByOrder($orderGoods);
         $this->buyerID = $buyerID;
+        $this->orderNo = self::makeOrderNo();
     }
 
     /**
      * 下单主方法
-     * @throws SuccessMessage
      * @return array
      */
     public function place()
     {
-        // 获取订单状态
-        $orderStatus = $this->getOrderStatus();
+        $order = [
+            'pass' => false,
+            'orderPrice' => 0,
+            'totalCount' => 0,
+            'order_no' => '',
+            'singleOrder' => []
+        ];
+        foreach ($this->dbGoods as $goodsArr){
+            // 获取订单状态
+            $orderStatus = $this->getOrderStatus($goodsArr);
+            // 生成订单快照
+            $snap = $this->snapOrder($orderStatus);
+            // 生成订单
+            $this->createOrder($snap, $orderStatus['goodsStatusArray']);
+            $orderStatus['pass'] = true;
+            $order['pass'] = true;
+            $order['orderPrice'] += $orderStatus['orderPrice'];
+            $order['totalCount'] += $orderStatus['totalCount'];
+            $orderStatus['order_no'] = $this->orderNo;
+            array_push($order['singleOrder'], $orderStatus);
+        }
 
-        // 生成订单快照
-        $snap = $this->snapOrder($orderStatus);
 
-        // 生成订单
-        $order = $this->createOrder($snap, $orderStatus['goodsStatusArray']);
-        $order['pass'] = true;
-        return array_merge($orderStatus, $order);
+        return ($order);
     }
 
     /**
@@ -69,19 +86,34 @@ class Order
             array_push($goodsID, $v['goods_id']);
         }
 
-        $dbGoods = (new Goods())->where('id', 'in', $goodsID)->select()->toArray();
-        return $dbGoods;
+        $dbGoods = (new Goods())->where([
+            'id' => ['in', $goodsID],
+            'status' => StatusEnum::Normal
+        ])->select()->toArray();
+
+        $belongsTo = [];
+
+        foreach ($dbGoods as $value){
+            $key = $value['type'] . '-' . $value['foreign_id'];
+            if(!array_key_exists($key, $belongsTo)){
+                $belongsTo[$key] = [];
+            }
+            array_push($belongsTo[$key], $value);
+        }
+
+        return $belongsTo;
     }
 
     /**
      * 获取订单的状态
      * @return array 订单的状态
+     * @throws SuccessMessage 返回订单的信息
      *  pass -> 订单商品是否所有都通过了库存量检测
      *  orderPrice -> 订单的总价格
      *  totalCount -> 订单中商品的总数量
      *  goodsStatusArray -> 订单中商品的状态
      */
-    private function getOrderStatus()
+    private function getOrderStatus($goodsArr)
     {
         $orderStatus = [
             'pass' => true,
@@ -90,9 +122,9 @@ class Order
             'goodsStatusArray' => []
         ];
 
-        foreach ($this->orderGoods as $orderGoods)
+        foreach ($goodsArr as $goods)
         {
-            $goodsStatus = $this->getProductStatus($orderGoods['goods_id'], $orderGoods['count']);
+            $goodsStatus = $this->getGoodsStatus($goods);
             if(!$goodsStatus['haveStock']){
                 $orderStatus['pass'] = false;
             }
@@ -125,35 +157,36 @@ class Order
      *  price -> 单个商品的价格
      *  image -> 商品图片
      */
-    private function getProductStatus($orderGoodsID, $orderGoodsCount)
+    private function getGoodsStatus($goods)
     {
         $goodsIndex = -1;
-        for($i = 0; $i < count($this->dbGoods); $i++)
-        {
-            if($orderGoodsID == $this->dbGoods[$i]['id']){
+        $count = 0;
+        for($i = 0; $i < count($this->orderGoods); $i++){
+            if($goods['id'] == $this->orderGoods[$i]['goods_id']){
                 $goodsIndex = $i;
+                $count = $this->orderGoods[$i]['count'];
             }
         }
+
         if($goodsIndex == -1){
             throw new GoodsException([
                 'status' => 80001,
-                'msg' => 'id为'.$orderGoodsID.'的商品不存在，订单创建失败'
+                'message' => 'id为'.$goods['id'].'的商品不存在，订单创建失败'
             ]);
         }else{
-            $goods = $this->dbGoods[$goodsIndex];
             $goodsStatus = [
-                'goods_id' => $orderGoodsID,
+                'goods_id' => $goods['id'],
                 'foreign_id' => $goods['foreign_id'],
                 'type' => $goods['type'],
                 'name' => $goods['name'],
                 'price' => $goods['price'],
-                'count' => $orderGoodsCount,
-                'totalPrice' => $goods['price'] * $orderGoodsCount,
+                'count' => $count,
+                'totalPrice' => $goods['price'] * $count,
                 'haveStock' => false,
                 'image_id' => $goods['image_id']
             ];
 
-            if($goods['quantity'] - $orderGoodsCount >= 0){
+            if($goods['quantity'] - $count >= 0){
                 $goodsStatus['haveStock'] = true;
             }
         }
@@ -166,7 +199,6 @@ class Order
      * @return array
      *  orderPrice -> 订单总价格
      *  totalCount -> 订单商品总数量
-     *  goodsStatus -> 订单中商品的详情
      *  snapName -> 订单中第一个商品的名称
      *  snapImg -> 订单中第一个商品的图片
      */
@@ -178,12 +210,12 @@ class Order
             'snapName' => '',
             'snapImg' => ''
         ];
-        $imageUrl = (new Image())->get($this->dbGoods[0]['image_id'])->image_url;
+        $imageUrl = (new Image())->get($orderStatus['goodsStatusArray'][0]['image_id'])->image_url;
         $snap['orderPrice'] = $orderStatus['orderPrice'];
         $snap['totalCount'] = $orderStatus['totalCount'];
-        $snap['snapName'] = $this->dbGoods[0]['name'];
+        $snap['snapName'] = $orderStatus['goodsStatusArray'][0]['name'];
         $snap['snapImg'] = $imageUrl;
-        if(count($this->dbGoods) > 1){
+        if(count($orderStatus['goodsStatusArray']) > 1){
             $snap['snapName'] .= ' 等';
         }
         return $snap;
@@ -193,7 +225,6 @@ class Order
      * 生成订单
      * @param array $snap 订单快照
      * @throws Exception 多表插入若失败则抛出TP5异常
-     * @return array 订单的相关信息
      *  order_no -> 订单号
      *  order_id -> 订单的ID
      *  create_time -> 订单的创建时间
@@ -203,11 +234,10 @@ class Order
         Db::startTrans();
         try{
             // 订单表的插入
-            $orderNo = self::makeOrderNo();
             $order = new \app\common\model\Order();
             $order->data([
                 'buyer_id' => $this->buyerID,
-                'order_no' => $orderNo,
+                'order_no' => $this->orderNo,
                 'total_price' => $snap['orderPrice'],
                 'total_count' => $snap['totalCount'],
                 'snap_img' => $snap['snapImg'],
@@ -215,20 +245,15 @@ class Order
             ]);
             $order->save();
             $orderID = $order->id;
-            $createTime = $order->create_time;
 
             // 订单---商品表的插入
             foreach ($goodsArray as &$v){
                 $v['order_id'] = $orderID;
             }
+
             $orderProduct = new OrderGoods();
-            $orderProduct->saveAll($this->orderGoods);
+            $orderProduct->saveAll($goodsArray);
             Db::commit();
-            return [
-                'order_no' => $orderNo,
-                'order_id' => $orderID,
-                'create_time' => $createTime
-            ];
         }catch (Exception $e){
             Db::rollback();
             throw $e;

@@ -11,5 +11,8 @@ namespace app\common\model;
 
 class OrderGoods extends BaseModel
 {
-
+    public function imageId()
+    {
+        return $this->belongsTo('Image', 'image_id', 'id');
+    }
 }
