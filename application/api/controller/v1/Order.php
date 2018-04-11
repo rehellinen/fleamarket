@@ -26,10 +26,9 @@ class Order extends BaseController
         (new OrderValidate())->goCheck('order');
         $post = $this->request->post();
         $goods = $post['goods'];
-        $buyerID = TokenService::getBuyerID();
 
-        $order = new \app\common\service\Order($buyerID, $goods);
-        $status = $order->place();
+        $order = new \app\common\service\Order();
+        $status = $order->place($goods);
         throw new SuccessMessage([
             'message' => '创建订单成功',
             'data' => $status

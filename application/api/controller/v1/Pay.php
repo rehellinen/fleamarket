@@ -18,10 +18,10 @@ class Pay extends BaseController
         'checkBuyerSellerShopScope' => ['only' => 'getPreOrder']
     ];
 
-    public function getPreOrder($orderNo = '')
+    public function getPreOrder($order_identify = '')
     {
-        (new \app\common\validate\Order())->goCheck('no');
-        $pay = new PayService($orderNo);
+        (new \app\common\validate\Order())->goCheck('pay');
+        $pay = new PayService($order_identify);
         $res = $pay->pay();
         throw new SuccessMessage([
             'message' => '获取微信支付预订单参数成功',

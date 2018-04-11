@@ -34,11 +34,9 @@ class Order
      * @param int $buyerID 买家ID
      * @param array $orderGoods 订单中的商品数组
      */
-    public function __construct($buyerID, $orderGoods)
+    public function __construct()
     {
-        $this->orderGoods = $orderGoods;
-        $this->dbGoods = $this->getGoodsByOrder($orderGoods);
-        $this->buyerID = $buyerID;
+        $this->buyerID = Token::getBuyerID();
         $this->orderNo = self::makeOrderNo();
     }
 
@@ -46,8 +44,10 @@ class Order
      * 下单主方法
      * @return array
      */
-    public function place()
+    public function place($orderGoods)
     {
+        $this->orderGoods = $orderGoods;
+        $this->dbGoods = $this->getGoodsByOrder($orderGoods);
         $order = [
             'pass' => false,
             'orderPrice' => 0,
@@ -66,12 +66,12 @@ class Order
             $order['pass'] = true;
             $order['orderPrice'] += $orderStatus['orderPrice'];
             $order['totalCount'] += $orderStatus['totalCount'];
-            $orderStatus['order_no'] = $this->orderNo;
+            $order['order_no'] = $this->orderNo;
             array_push($order['singleOrder'], $orderStatus);
         }
 
 
-        return ($order);
+        return $order;
     }
 
     /**
@@ -276,16 +276,41 @@ class Order
 
     /**
      * 检查订单中商品库存量
-     * @param int $orderID 订单ID
+     * @param array $orderID 订单ID
      * @return array 订单状态
      */
-    public function checkStock($orderID)
+    public function checkStock($orderIDs)
     {
-        $orderGoods = (new OrderGoods())->where('order_id=' . $orderID)->select()->toArray();
+        $orderGoods = (new OrderGoods())->where([
+            'order_id' => ['in', $orderIDs]
+        ])->select()->toArray();
         $this->orderGoods = $orderGoods;
         $this->dbGoods = $this->getGoodsByOrder($orderGoods);
 
-        $orderStatus = $this->getOrderStatus();
-        return $orderStatus;
+        $order = [
+            'pass' => true,
+            'singleOrder' => [],
+            'orderPrice' => 0
+        ];
+
+        foreach ($this->dbGoods as $goodsArr){
+            // 获取订单状态
+            $orderStatus = $this->getOrderStatus($goodsArr);
+            if(!$orderStatus['pass']){
+                $order['pass'] = false;
+            }
+            $order['orderPrice'] += $orderStatus['orderPrice'];
+            array_push($order['singleOrder'], $orderStatus);
+        }
+
+        // 没有通过库存量检测时的操作
+        if(!$order['pass']){
+            throw new GoodsException([
+                'message' => '库存量不足',
+                'status' => 30001
+            ]);
+        }
+
+        return $order;
     }
 }

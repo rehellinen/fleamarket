@@ -22,13 +22,20 @@ Loader::import('pay.WxPay',EXTEND_PATH , '.Api.php');
 class Pay
 {
     private $orderNO;
+    private $orderID;
+    private $orderIDs = [];
 
-    public function __construct($orderNo)
+    public function __construct($orderIdentify)
     {
-        if(!$orderNo){
+        if(!$orderIdentify){
             throw new Exception('订单号不能为空');
+        }elseif (is_numeric($orderIdentify)){
+            $this->orderID = $orderIdentify;
+            $order = (new OrderModel())->where('id', '=', $orderIdentify)->find();
+            $this->orderNO = $order['order_no'];
+        }else{
+            $this->orderNO = $orderIdentify;
         }
-        $this->orderNo = $orderNo;
     }
 
     public function pay()
@@ -37,32 +44,38 @@ class Pay
         $this->checkOrder();
         // 进行库存量检查
         $orderService = new OrderService();
-        $status = $orderService->checkStock($this->orderID);
-        // 没有通过库存量检测时的操作
-        if(!$status['pass']){
-            return $status;
-        }
-        return $this->makeWxPreOrder($status['orderPrice']);
+        $orderStatus = $orderService->checkStock($this->orderIDs);
+
+        return $this->makeWxPreOrder($orderStatus['orderPrice']);
     }
 
     private function checkOrder()
     {
         // 检查是否有该订单
-        $order = (new OrderModel())->where('id=' . $this->orderID)->find();
-        if(!$order){
-            throw new OrderException();
+        if($this->orderID){
+            $orders = (new OrderModel())->where('id', '=', $this->orderID)->select()->toArray();
+        }else{
+            $orders = (new OrderModel())->where('order_no', '=', $this->orderNO)->select()->toArray();
         }
-        // 检测订单是否属于当前用户
-        Token::isValidOperate($order->buyer_id);
 
-        // 检查订单是否已被支付
-        if($order->status != OrderEnum::UNPAID){
-            throw new OrderException([
-                'message' => '该订单已支付',
-                'status' => 80003
-            ]);
+        foreach ($orders as $order){
+            // 检查订单是否存在
+            if(!$order){
+                throw new OrderException();
+            }
+
+            // 检测订单是否属于当前用户
+            Token::isValidOperate($order['buyer_id']);
+
+            // 检查订单是否已被支付
+            if($order['status'] != OrderEnum::UNPAID){
+                throw new OrderException([
+                    'message' => '该订单已支付',
+                    'status' => 80003
+                ]);
+            }
+            array_push($this->orderIDs, $order['id']);
         }
-        $this->orderNO = $order->order_no;
         return true;
     }
 
@@ -74,20 +87,17 @@ class Pay
         }
 
         $wxOrderData = new \WxPayUnifiedOrder();
-        $wxOrderData->SetOut_trade_no($this->orderNO);
+        if($this->orderID){
+            $wxOrderData->SetOut_trade_no($this->orderID);
+        }else{
+            $wxOrderData->SetOut_trade_no($this->orderNO);
+        }
         $wxOrderData->SetTrade_type('JSAPI');
         $wxOrderData->SetTotal_fee($totalPrice * 100);
         $wxOrderData->SetBody('易乎');
         $wxOrderData->SetOpenid($openID);
         $wxOrderData->SetNotify_url(config('weixin.pay_back_url'));
         return $this->getPaySignature($wxOrderData);
-    }
-
-    private function recordPreOrder($wxOrder)
-    {
-        (new OrderModel())->where('id=' . $this->orderID)->update([
-            'prepay_id' => $wxOrder['prepay_id']
-        ]);
     }
 
     private function getPaySignature($wxOrderData)
@@ -100,6 +110,13 @@ class Pay
         $this->recordPreOrder($wxOrder);
         $signature = $this->sign($wxOrder);
         return $signature;
+    }
+
+    private function recordPreOrder($wxOrder)
+    {
+        (new OrderModel())->where('id' , 'in',  $this->orderIDs)->update([
+            'prepay_id' => $wxOrder['prepay_id']
+        ]);
     }
 
     private function sign($wxOrder)
@@ -118,6 +135,4 @@ class Pay
         unset($rawValues['appId']);
         return $rawValues;
     }
-
-
 }
