@@ -54,16 +54,11 @@ class Order extends BaseController
         ]);
     }
 
-    public function getDetail($id)
+    public function getDetail($id, $type)
     {
         (new Common())->goCheck('id');
         $buyerID = TokenService::getBuyerID();
-        $order = (new OrderModel)->where([
-            'buyer_id' => $buyerID,
-            'id' => $id
-        ])->with(['snapItems' => function($query){
-            $query->with('imageId');
-        }])->find();
+        $order = (new OrderModel)->getOrderByID($id, $buyerID, $type);
         if(!$order){
             throw new OrderException();
         }

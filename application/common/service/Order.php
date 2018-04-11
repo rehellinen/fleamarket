@@ -119,7 +119,9 @@ class Order
             'pass' => true,
             'orderPrice' => 0,
             'totalCount' => 0,
-            'goodsStatusArray' => []
+            'goodsStatusArray' => [],
+            'foreign_id' => null,
+            'type' => null
         ];
 
         foreach ($goodsArr as $goods)
@@ -139,6 +141,8 @@ class Order
                 'data' => $orderStatus
             ]);
         }
+        $orderStatus['foreign_id'] = $goodsArr[0]['foreign_id'];
+        $orderStatus['type'] = $goodsArr[0]['type'];
         return $orderStatus;
     }
 
@@ -176,8 +180,8 @@ class Order
         }else{
             $goodsStatus = [
                 'goods_id' => $goods['id'],
-                'foreign_id' => $goods['foreign_id'],
-                'type' => $goods['type'],
+//                'foreign_id' => $goods['foreign_id'],
+//                'type' => $goods['type'],
                 'name' => $goods['name'],
                 'price' => $goods['price'],
                 'count' => $count,
@@ -211,10 +215,13 @@ class Order
             'snapImg' => ''
         ];
         $imageUrl = (new Image())->get($orderStatus['goodsStatusArray'][0]['image_id'])->image_url;
+        $snap['snapImg'] = $imageUrl;
         $snap['orderPrice'] = $orderStatus['orderPrice'];
         $snap['totalCount'] = $orderStatus['totalCount'];
+        $snap['foreign_id'] = $orderStatus['foreign_id'];
+        $snap['type'] = $orderStatus['type'];
         $snap['snapName'] = $orderStatus['goodsStatusArray'][0]['name'];
-        $snap['snapImg'] = $imageUrl;
+
         if(count($orderStatus['goodsStatusArray']) > 1){
             $snap['snapName'] .= ' 等';
         }
@@ -241,7 +248,9 @@ class Order
                 'total_price' => $snap['orderPrice'],
                 'total_count' => $snap['totalCount'],
                 'snap_img' => $snap['snapImg'],
-                'snap_name' => $snap['snapName']
+                'snap_name' => $snap['snapName'],
+                'foreign_id' => $snap['foreign_id'],
+                'type' => $snap['type']
             ]);
             $order->save();
             $orderID = $order->id;

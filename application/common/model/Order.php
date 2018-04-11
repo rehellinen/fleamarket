@@ -15,6 +15,16 @@ class Order extends BaseModel
 {
     protected $autoWriteTimestamp = true;
 
+    public function shop()
+    {
+        return $this->belongsTo('Shop', 'foreign_id', 'id');
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo('Seller', 'foreign_id', 'id');
+    }
+
     public function snapItems()
     {
         return $this->hasMany('orderGoods', 'order_id', 'id');
@@ -34,5 +44,22 @@ class Order extends BaseModel
             'page' => $page
         ]);
         return $res;
+    }
+
+    public function getOrderByID($id, $buyerID, $type){
+        if($type == 1){
+            $str = 'shop';
+        }else{
+            $str = 'seller';
+        }
+        $order =  $this->where([
+            'buyer_id' => $buyerID,
+            'id' => $id
+        ])->with(['snapItems' => function($query){
+            $query->with('imageId');
+        }])->with($str)->find()->hidden([
+            $str => ['is_root', 'listorder', 'status', 'number', 'open_id']
+        ]);
+        return $order;
     }
 }
