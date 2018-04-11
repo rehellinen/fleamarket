@@ -16,6 +16,7 @@ use app\common\model\Order as OrderModel;
 use app\common\service\Order as OrderService;
 use think\Loader;
 use think\Log;
+use app\common\exception\GoodsException;
 
 Loader::import('pay.WxPay',EXTEND_PATH , '.Api.php');
 
@@ -45,7 +46,13 @@ class Pay
         // 进行库存量检查
         $orderService = new OrderService();
         $orderStatus = $orderService->checkStock($this->orderIDs);
-
+        // 没有通过库存量检测时的操作
+        if(!$orderStatus['pass']){
+            throw new GoodsException([
+                'message' => '库存量不足',
+                'status' => 30001
+            ]);
+        }
         return $this->makeWxPreOrder($orderStatus['orderPrice']);
     }
 

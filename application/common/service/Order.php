@@ -36,7 +36,6 @@ class Order
      */
     public function __construct()
     {
-        $this->buyerID = Token::getBuyerID();
         $this->orderNo = self::makeOrderNo();
     }
 
@@ -44,8 +43,9 @@ class Order
      * 下单主方法
      * @return array
      */
-    public function place($orderGoods)
+    public function place($orderGoods, $buyerID)
     {
+        $this->buyerID = $buyerID;
         $this->orderGoods = $orderGoods;
         $this->dbGoods = $this->getGoodsByOrder($orderGoods);
         $order = [
@@ -302,15 +302,6 @@ class Order
             $order['orderPrice'] += $orderStatus['orderPrice'];
             array_push($order['singleOrder'], $orderStatus);
         }
-
-        // 没有通过库存量检测时的操作
-        if(!$order['pass']){
-            throw new GoodsException([
-                'message' => '库存量不足',
-                'status' => 30001
-            ]);
-        }
-
         return $order;
     }
 }

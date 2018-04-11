@@ -21,25 +21,39 @@ Loader::import('pay.WxPay', EXTEND_PATH, '.Api.php');
 
 class WxNotify extends \WxPayNotify
 {
+    private $orderID;
+    private $orderNO;
+
     public function NotifyProcess($data, &$msg)
     {
         if($data['result_code'] == 'SUCCESS'){
             // 支付成功
-            $orderNo = $data['out_trade_no'];
+            $orderIdentify = $data['out_trade_no'];
+            if(is_numeric($orderIdentify)){
+                $this->orderID = $orderIdentify;
+            }else{
+                $this->orderNO = $orderIdentify;
+            }
+
             Db::startTrans();
             try{
-                Log::info('start Trans');
-                $order = (new OrderModel)->where('order_no', '=', $orderNo)->find();
-                Log::info('pass'.$order->status);
-                if($order->status == 1){
-                    $orderService = new OrderService();
-                    $stockStatus = $orderService->checkStock($order->id);
-                    Log::info('pass'.$stockStatus['pass']);
-                    if($stockStatus['pass']){
-                        $this->updateOrderStatus($order->id, true);
-                        $this->reduceStock($stockStatus);
-                    }else{
-                        $this->updateOrderStatus($order->id, false);
+                if($this->orderID){
+                    $orders = (new OrderModel)->where('id', '=', $this->orderID)->select()->toArray();
+                }else{
+                    $orders = (new OrderModel)->where('order_no', '=', $this->orderNO)->select()->toArray();
+                }
+
+                foreach ($orders as $order){
+                    if($order['status'] == 1){
+                        $orderService = new OrderService();
+                        $stockStatus = $orderService->checkStock([$order['id']]);
+
+                        if($stockStatus['pass']){
+                            $this->updateOrderStatus($order['id'], true);
+                            $this->reduceStock($stockStatus['singleOrder'][0]);
+                        }else{
+                            $this->updateOrderStatus($order['id'], false);
+                        }
                     }
                 }
                 Db::commit();
@@ -67,7 +81,7 @@ class WxNotify extends \WxPayNotify
     {
         foreach ($stockStatus['goodsStatusArray'] as $singleGoods)
         {
-            (new Goods)->where('id='.$singleGoods['id'])->setDec('quantity', $singleGoods['count']);
+            (new Goods)->where('id='.$singleGoods['goods_id'])->setDec('quantity', $singleGoods['count']);
         }
     }
 }
