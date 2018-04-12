@@ -8,15 +8,23 @@
 
 namespace app\api\controller\v1;
 
+use app\common\exception\ShopException;
 use app\common\exception\SuccessMessage;
 use app\common\model\Shop as ShopModel;
 use app\common\validate\Common;
 
 class Shop extends BaseController
 {
-    public function getNormalShop()
+    public function getNormalShop($page = 1, $size = 14)
     {
-        $shop = (new ShopModel())->getNormal();
+        $shop = (new ShopModel())->getNormalShop($page, $size);
+        if($shop->isEmpty()){
+            throw new ShopException([
+                'data' => [
+                    'data' => []
+                ]
+            ]);
+        }
         throw new SuccessMessage([
             'message' => '获取所有自营商家信息成功',
             'data' => $shop

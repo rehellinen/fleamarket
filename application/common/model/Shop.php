@@ -27,7 +27,7 @@ class Shop extends BaseModel
         return $this->belongsTo('Image', 'avatar_image_id', 'id');
     }
 
-    public function getNormal()
+    public function getNormalShop($page, $size)
     {
         $data['status'] = StatusEnum::Normal;
         $order = array(
@@ -36,7 +36,9 @@ class Shop extends BaseModel
         );
         return $this->where($data)->with(['mainImageId' => function($query){
             $query->with('imageId')->order('listorder desc, id desc');
-        }])->with('avatarImageId')->order($order)->paginate();
+        }])->with('avatarImageId')->order($order)->paginate($size, true, [
+            'page' => $page
+        ]);
     }
 
     public function getNormalById($id)

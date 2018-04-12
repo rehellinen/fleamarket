@@ -46,7 +46,7 @@ class Order extends BaseModel
         return $res;
     }
 
-    public function getOrderByID($id, $buyerID, $type){
+    public function getOrderByBuyerID($id, $buyerID, $type){
         if($type == 1){
             $str = 'shop';
         }else{

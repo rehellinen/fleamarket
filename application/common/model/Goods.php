@@ -71,14 +71,17 @@ class Goods extends BaseModel
     }
 
     // 根据商店id获取商品 / 旧物
-    public function generalGetByForeignID($type, $status, $foreignId)
+    public function generalGetByForeignID($type, $status, $foreignId, $page, $size)
     {
         $data = [
             'status' => ['in', $status],
             'type' => $type,
             'foreign_id' => $foreignId
         ];
-        return $this->where($data)->with('imageId')->order('listorder desc, id desc')->paginate();
+        return $this->where($data)->with('imageId')->order('listorder desc, id desc')
+                ->paginate($size, true, [
+                    'page' => $page
+                ]);
     }
 
     // 根据商店id获取最近新品

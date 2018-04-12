@@ -44,13 +44,17 @@ class Goods extends BaseController
         ]);
     }
 
-    public function getNewGoodsByShopId($id)
+    public function getNewGoodsByShopId($id, $page = 1, $size = 14)
     {
         (new Common())->goCheck('id');
-        $goods = (new GoodsModel())->generalGetByForeignID(TypeEnum::NewGoods, StatusEnum::Normal, $id);
+        $goods = (new GoodsModel())->generalGetByForeignID(TypeEnum::NewGoods, StatusEnum::Normal, $id, $page, $size);
 
-        if(!$goods){
-            throw new GoodsException();
+        if($goods->isEmpty()){
+            throw new GoodsException([
+                'data' => [
+                    'data' => []
+                ]
+            ]);
         }
 
         throw new SuccessMessage([
