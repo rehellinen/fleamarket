@@ -52,19 +52,19 @@ class Token
      */
     protected function getIDByOpenID($openID, $modelName, $status)
     {
-        $buyer = model($modelName)->where([
+        $res = model($modelName)->where([
             'open_id' => $openID,
-            'status' => StatusEnum::Normal
+            'status' => ['neq', StatusEnum::Deleted]
         ])->find();
-        if(!$buyer){
-            $buyerID = model($modelName)->insertGetId([
+        if(!$res){
+            $id = model($modelName)->insertGetId([
                 'open_id' => $openID,
                 'status' => $status
             ]);
         }else{
-            $buyerID = $buyer->id;
+            $id = $res->id;
         }
-        return $buyerID;
+        return $id;
     }
 
     /**

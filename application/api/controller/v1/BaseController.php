@@ -44,4 +44,19 @@ class BaseController extends Controller
             throw new ForbiddenException();
         }
     }
+
+    /**
+     * 验证Token令牌是否为二手商家、自营商家的权限
+     * @return bool
+     * @throws ForbiddenException
+     */
+    protected function checkSellerShopScope()
+    {
+        $scope = TokenService::getCurrentTokenVar('scope');
+        if($scope == ScopeEnum::Shop || $scope == ScopeEnum::Seller){
+            return true;
+        }else{
+            throw new ForbiddenException();
+        }
+    }
 }

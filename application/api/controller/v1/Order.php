@@ -19,7 +19,7 @@ class Order extends BaseController
 {
     protected $beforeActionList = [
         'checkBuyerScope' => ['only' => 'placeOrder, getBuyerOrder, getDetail'],
-        'checkSellerShopScope' => ['only' => '']
+        'checkSellerShopScope' => ['only' => 'getSellerOrder']
     ];
 
     /**
@@ -98,8 +98,8 @@ class Order extends BaseController
     public function getSellerOrder($page = 1, $size = 14)
     {
         (new Common())->goCheck('page');
-        $buyerID = TokenService::getBuyerID();
-        $res = (new OrderModel())->getOrderByUser($buyerID, $page, $size);
+        $sellerID = TokenService::getCurrentTokenVar('sellerID');
+        $res = (new OrderModel())->getOrderBySeller($sellerID, $page, $size);
         $res = $res->hidden(['snap_items', 'prepay_id']);
         if($res->isEmpty()){
             throw new OrderException([

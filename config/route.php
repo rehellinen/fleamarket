@@ -33,6 +33,7 @@ Route::get('api/:version/oldGoods/category/:id', 'api/:version.Goods/getOldGoods
 Route::post('api/:version/token/buyer', 'api/:version.Token/getBuyerToken');
 Route::post('api/:version/token/seller', 'api/:version.Token/getSellerToken');
 Route::post('api/:version/token/verify', 'api/:version.Token/verifyToken');
+Route::post('api/:version/token/openID', 'api/:version.Token/verifyOpenID');
 
 // 关于买家
 Route::put('api/:version/buyer', 'api/:version.Buyer/updateBuyerInfo');

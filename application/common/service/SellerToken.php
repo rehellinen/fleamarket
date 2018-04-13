@@ -8,6 +8,7 @@
 
 namespace app\common\service;
 
+use app\common\exception\TokenException;
 use think\Exception;
 use app\common\exception\WeChatException;
 use enum\StatusEnum;
@@ -39,13 +40,47 @@ class SellerToken extends Token
         // 爬取微信服务器返回的结果
         $wxResult = $this->getResultFromWx();
         // 根据openID获取用户ID
-        $sellerID = $this->getIDByOpenID($wxResult['openid'], 'Buyer', StatusEnum::Normal);
+        $sellerID = $this->getIDByOpenID($wxResult['openid'], 'Seller', StatusEnum::Normal);
         // 生成缓存的键与值
         $cachedKey = self::generateToken();
         $cachedValue = $this->prepareCachedValue($wxResult, $sellerID);
         // 进行缓存
         $token = $this->saveToCache($cachedKey, $cachedValue);
         return $token;
+    }
+
+    /**
+     * 根据openID查询是否该用户已经注册为商家 / 二手卖家
+     * @throws TokenException
+     */
+    public function isRegister()
+    {
+        // 爬取微信服务器返回的结果
+        $wxResult = $this->getResultFromWx();
+        $openID = $wxResult['openid'];
+
+        $seller = model('Seller')->where([
+            'open_id' => $openID,
+            'status' => ['neq', StatusEnum::Deleted]
+        ])->find();
+
+        $shop = model('Shop')->where([
+            'open_id' => $openID,
+            'status' => ['neq', StatusEnum::Deleted]
+        ])->find();
+
+        if(!$seller && !$shop){
+            throw new TokenException([
+                'httpCode' => 404,
+                'status' => 50001,
+                'message' => '用户未注册为商家 / 二手卖家'
+            ]);
+        }
+        if($seller){
+            return 'seller';
+        }else{
+            return 'shop';
+        }
     }
 
     /**

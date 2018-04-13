@@ -49,7 +49,23 @@ class Token extends BaseController
 
         throw new SuccessMessage([
             'message' => '获取令牌成功',
-            'data' => array('token' => $token)
+            'data' => [
+                'token' => $token,
+                'type' => 'seller'
+            ]
+        ]);
+    }
+
+    public function verifyOpenID($code = '')
+    {
+        (new TokenValidate())->goCheck('get');
+
+        $sellerTokenService = new SellerToken($code);
+        $res = $sellerTokenService->isRegister();
+
+        throw new SuccessMessage([
+            'message' => '获取OpenID状态成功',
+            'data' => ['type' => $res]
         ]);
     }
 
