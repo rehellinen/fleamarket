@@ -141,7 +141,7 @@ class Token
                 $var = $vars[$key];
                 return $var;
             }else{
-                throw new Exception('尝试获取的Token变量不存在');
+                return false;
             }
         }
     }

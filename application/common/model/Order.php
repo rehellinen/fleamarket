@@ -25,6 +25,11 @@ class Order extends BaseModel
         return $this->belongsTo('Seller', 'foreign_id', 'id');
     }
 
+    public function buyerId()
+    {
+        return $this->belongsTo('Buyer', 'buyer_id', 'id');
+    }
+
     public function snapItems()
     {
         return $this->hasMany('orderGoods', 'order_id', 'id');
@@ -42,11 +47,11 @@ class Order extends BaseModel
         $res = self::where('buyer_id', '=', $buyerID)->order('create_time desc')
         ->paginate($size, true, [
             'page' => $page
-        ]);
+        ])->hidden(['snap_items', 'prepay_id']);
         return $res;
     }
 
-    public function getOrderByBuyerID($id, $buyerID, $type){
+    public function getBuyerOrderByID($id, $buyerID, $type){
         if($type == 1){
             $str = 'shop';
         }else{
@@ -55,11 +60,45 @@ class Order extends BaseModel
         $order =  $this->where([
             'buyer_id' => $buyerID,
             'id' => $id
-        ])->with(['snapItems' => function($query){
+        ])->order('id desc')->with(['snapItems' => function($query){
             $query->with('imageId');
         }])->with($str)->find()->hidden([
             $str => ['is_root', 'listorder', 'status', 'number', 'open_id']
         ]);
         return $order;
+    }
+
+    public function getSellerOrShopDetailByID($id, $uid, $type)
+    {
+        $order =  $this->where([
+            'foreign_id' => $uid,
+            'type' => $type,
+            'id' => $id
+        ])->order('id desc')->with(['snapItems' => function($query){
+            $query->with('imageId');
+        }])->with('buyerId')->find()->hidden([
+            'buyerId' => ['listorder', 'status', 'number', 'open_id']
+        ]);
+
+        return $order;
+    }
+
+    public function getOrderBySellerOrShop($type, $uid, $page, $size)
+    {
+        return $this->order('id desc')->where([
+            'foreign_id' => $uid,
+            'type' => $type
+        ])->paginate($size, true, [
+            'page' => $page
+        ])->hidden(['snap_items', 'prepay_id']);
+    }
+
+    public function updateOrderStatus($id, $uid, $type, $status)
+    {
+        return $this->where([
+            'type' => $type,
+            'id' => $id,
+            'foreign_id' => $uid
+        ])->update(['status' => $status]);
     }
 }

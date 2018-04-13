@@ -14,6 +14,7 @@ use app\common\model\Goods as GoodsModel;
 use app\common\validate\Common;
 use enum\StatusEnum;
 use enum\TypeEnum;
+use think\migration\command\migrate\Status;
 
 class Goods extends BaseController
 {
@@ -151,6 +152,24 @@ class Goods extends BaseController
         throw new SuccessMessage([
             'message' => '获取商品信息成功',
             'data' => $goods
+        ]);
+    }
+
+    public function getIndexGoods($type)
+    {
+        $goods = (new GoodsModel())->where([
+            'status' => StatusEnum::Normal,
+            'type' => $type
+        ])->with('imageId')->select()->toArray();
+        $resGoods = [];
+        $numArr = generateNumber(count($goods), 6);
+
+        foreach ($numArr as $value){
+            array_push($resGoods, $goods[$value]);
+        }
+        throw new SuccessMessage([
+            'message' => '获取首页商品信息成功',
+            'data' => $resGoods
         ]);
     }
 }

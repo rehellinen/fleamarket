@@ -46,7 +46,12 @@ class SellerToken extends Token
         $cachedValue = $this->prepareCachedValue($wxResult, $uidArr);
         // 进行缓存
         $token = $this->saveToCache($cachedKey, $cachedValue);
-        return $token;
+
+        $keyArr = array_keys($uidArr);
+        return [
+            'token' => $token,
+            'type' => $keyArr[0]
+        ];
     }
 
     /**

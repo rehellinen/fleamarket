@@ -18,4 +18,6 @@ class OrderEnum
     const DELIVERED = 3;
 
     const PAID_BUT_NO_GOODS = 4;
+
+    const COMPLETED = 5;
 }

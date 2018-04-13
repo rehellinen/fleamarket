@@ -18,12 +18,14 @@ Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 Route::get('api/:version/goods/check', 'api/:version.Goods/checkPrice');
 // 关于自营商品
 Route::get('api/:version/newGoods', 'api/:version.Goods/getNewGoods');
+Route::get('api/:version/newGoods/index', 'api/:version.Goods/getIndexGoods?type=1');
 Route::get('api/:version/newGoods/:id', 'api/:version.Goods/getNewGoodsById', [], ['id'=>'\d+']);
 Route::get('api/:version/newGoods/shop/:id', 'api/:version.Goods/getNewGoodsByShopId', [], ['id'=>'\d+']);
 Route::get('api/:version/newGoods/recent/shop/:id', 'api/:version.Goods/getRecentNewGoodsByShopId', [], ['id'=>'\d+']);
 
 // 关于二手商品
 Route::get('api/:version/oldGoods', 'api/:version.Goods/getOldGoods');
+Route::get('api/:version/oldGoods/index', 'api/:version.Goods/getIndexGoods?type=2');
 Route::get('api/:version/oldGoods/:id', 'api/:version.Goods/getOldGoodsById', [], ['id'=>'\d+']);
 Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getOldGoodsBySellerId', [], ['id'=>'\d+']);
 Route::get('api/:version/oldGoods/category/:id', 'api/:version.Goods/getOldGoodsByCategoryId', [], ['id'=>'\d+']);
@@ -52,8 +54,10 @@ Route::get('api/:version/category/:id', 'api/:version.Theme/getThemeCategory');
 Route::post('api/:version/seller', 'api/:version.Seller/addSeller');
 
 // 关于订单
-Route::get('api/:version/order/user', 'api/:version.Order/getBuyerOrder');
-Route::get('api/:version/order/:id/:type', 'api/:version.Order/getDetailBuyer', [], ['id'=>'\d+']);
+Route::get('api/:version/order', 'api/:version.Order/getAllOrder');
+Route::get('api/:version/order/:id/:type', 'api/:version.Order/getDetail', [], ['id'=>'\d+']);
 Route::post('api/:version/order', 'api/:version.Order/placeOrder');
+Route::post('api/:version/order/deliver/:id', 'api/:version.Order/deliver', [], ['id'=>'\d+']);
+Route::post('api/:version/order/confirm/:id', 'api/:version.Order/confirm', [], ['id'=>'\d+']);
 Route::post('api/:version/preOrder', 'api/:version.Pay/getPreOrder');
 Route::post('api/:version/notify', 'api/:version.Pay/receiveNotify');

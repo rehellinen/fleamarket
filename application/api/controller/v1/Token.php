@@ -45,14 +45,11 @@ class Token extends BaseController
         (new TokenValidate())->goCheck('get');
 
         $sellerTokenService = new SellerToken($code);
-        $token = $sellerTokenService->get();
+        $tokenInfo = $sellerTokenService->get();
 
         throw new SuccessMessage([
             'message' => '获取令牌成功',
-            'data' => [
-                'token' => $token,
-                'type' => 'seller'
-            ]
+            'data' => $tokenInfo
         ]);
     }
 

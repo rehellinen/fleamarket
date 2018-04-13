@@ -62,3 +62,10 @@ function getStatus($value)
             return '待审核';
     }
 }
+
+function generateNumber($length, $num = 6)
+{
+    $numbers = range (0, $length - 1);
+    shuffle ($numbers);
+    return array_slice($numbers,0,$num);
+}
