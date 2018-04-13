@@ -40,10 +40,10 @@ class SellerToken extends Token
         // 爬取微信服务器返回的结果
         $wxResult = $this->getResultFromWx();
         // 根据openID获取用户ID
-        $sellerID = $this->getIDByOpenID($wxResult['openid'], 'Seller', StatusEnum::Normal);
+        $uidArr = $this->isRegister($wxResult['openid']);
         // 生成缓存的键与值
         $cachedKey = self::generateToken();
-        $cachedValue = $this->prepareCachedValue($wxResult, $sellerID);
+        $cachedValue = $this->prepareCachedValue($wxResult, $uidArr);
         // 进行缓存
         $token = $this->saveToCache($cachedKey, $cachedValue);
         return $token;
@@ -51,14 +51,11 @@ class SellerToken extends Token
 
     /**
      * 根据openID查询是否该用户已经注册为商家 / 二手卖家
+     * @return array
      * @throws TokenException
      */
-    public function isRegister()
+    public function isRegister($openID)
     {
-        // 爬取微信服务器返回的结果
-        $wxResult = $this->getResultFromWx();
-        $openID = $wxResult['openid'];
-
         $seller = model('Seller')->where([
             'open_id' => $openID,
             'status' => ['neq', StatusEnum::Deleted]
@@ -69,31 +66,35 @@ class SellerToken extends Token
             'status' => ['neq', StatusEnum::Deleted]
         ])->find();
 
-        if(!$seller && !$shop){
+        if($seller){
+            return ['seller' => $seller['id']];
+        }elseif($shop){
+            return ['shop' => $shop['id']];
+        }else{
             throw new TokenException([
                 'httpCode' => 404,
                 'status' => 50001,
                 'message' => '用户未注册为商家 / 二手卖家'
             ]);
         }
-        if($seller){
-            return 'seller';
-        }else{
-            return 'shop';
-        }
     }
 
     /**
      * 准备缓存的数据结构
      * @param array $wxResult 微信返回的结果
-     * @param $sellerID
+     * @param array $uidArr
      * @return array 要储存的信息
      */
-    private function prepareCachedValue($wxResult, $sellerID)
+    private function prepareCachedValue($wxResult, $uidArr)
     {
         $cachedValue = $wxResult;
-        $cachedValue['sellerID'] = $sellerID;
-        $cachedValue['scope'] = ScopeEnum::Seller;
+        if(array_key_exists('seller', $uidArr)){
+            $cachedValue['scope'] = ScopeEnum::Seller;
+            $cachedValue['sellerID'] = $uidArr['seller'];
+        }else{
+            $cachedValue['scope'] = ScopeEnum::Shop;
+            $cachedValue['shopID'] = $uidArr['shop'];
+        }
 
         return $cachedValue;
     }

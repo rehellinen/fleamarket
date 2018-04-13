@@ -10,7 +10,7 @@ use think\Validate;
  * Date: 2017/9/27
  * Time: 16:47
  */
-class Seller extends BaseValidate
+class Shop extends BaseValidate
 {
     protected $rule = [
         ['name', 'require|chsAlpha', '名字不能为空|名字不合法'],

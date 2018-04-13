@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 use app\common\exception\ShopException;
 use app\common\exception\SuccessMessage;
 use app\common\model\Shop as ShopModel;
+use app\common\service\SellerToken;
 use app\common\validate\Common;
 
 class Shop extends BaseController
@@ -39,5 +40,15 @@ class Shop extends BaseController
             'message' => '获取自营商家信息成功',
             'data' => $shop
         ]);
+    }
+
+    public function addShop()
+    {
+        // 数据校验
+        $shopValidate = new \app\common\validate\Shop();
+        $shopValidate->goCheck('register');
+        $data = $shopValidate->getDataByScene('register');
+
+        $this->insertOrUpdate('Shop', $data);
     }
 }

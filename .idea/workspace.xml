@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca9e3f9c-9f90-44ef-a5af-9dd41b96e070" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/common/validate/Shop.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/BaseController.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/BaseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Order.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Order.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Seller.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Seller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Shop.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Shop.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Token.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Token.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/common/service/SellerToken.php" afterPath="$PROJECT_DIR$/application/common/service/SellerToken.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/common/service/Token.php" afterPath="$PROJECT_DIR$/application/common/service/Token.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/common/validate/Seller.php" afterPath="$PROJECT_DIR$/application/common/validate/Seller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/route.php" afterPath="$PROJECT_DIR$/config/route.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/error_code.txt" afterPath="$PROJECT_DIR$/error_code.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,53 +26,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Order.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Order.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="101" column="61" lean-forward="false" selection-start-line="101" selection-start-column="52" selection-end-line="101" selection-end-column="61" />
-              <folding>
-                <element signature="e#607#663#0#PHP" expanded="false" />
-                <element signature="e#668#1062#0#PHP" expanded="false" />
-                <element signature="e#1068#1211#0#PHP" expanded="false" />
-                <element signature="e#1216#1780#0#PHP" expanded="false" />
-                <element signature="e#1786#1911#0#PHP" expanded="false" />
-                <element signature="e#1916#2364#0#PHP" expanded="false" />
-                <element signature="e#2370#2518#0#PHP" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="route.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/route.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="37" column="7" lean-forward="true" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SellerToken.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SellerToken.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/common/service/SellerToken.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+            <state relative-caret-position="476">
+              <caret line="95" column="53" lean-forward="true" selection-start-line="95" selection-start-column="53" selection-end-line="95" selection-end-column="53" />
               <folding>
                 <element signature="e#124#164#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Token.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="58" column="32" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="32" />
-              <folding>
-                <element signature="e#128#168#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,8 +70,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/admin/view/goods/oldGoods.html" />
-        <option value="$PROJECT_DIR$/application/common/model/BaseModel.php" />
         <option value="$PROJECT_DIR$/application/admin/controller/Order.php" />
         <option value="$PROJECT_DIR$/application/admin/view/order/index.html" />
         <option value="$PROJECT_DIR$/application/common/model/Menu.php" />
@@ -132,7 +92,6 @@
         <option value="$PROJECT_DIR$/application/api/controller/v1/Image.php" />
         <option value="$PROJECT_DIR$/public/static/admin/js/image.js" />
         <option value="$PROJECT_DIR$/application/common/exception/SellerException.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Seller.php" />
         <option value="$PROJECT_DIR$/application/admin/view/goods/edit.html" />
         <option value="$PROJECT_DIR$/application/common/validate/Goods.php" />
         <option value="$PROJECT_DIR$/config/extra/weixin.php" />
@@ -149,16 +108,19 @@
         <option value="$PROJECT_DIR$/application/common/model/Shop.php" />
         <option value="$PROJECT_DIR$/application/common/model/Goods.php" />
         <option value="$PROJECT_DIR$/application/common/exception/ShopException.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Shop.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Goods.php" />
         <option value="$PROJECT_DIR$/application/common/model/Order.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/BaseController.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Order.php" />
         <option value="$PROJECT_DIR$/error_code.txt" />
+        <option value="$PROJECT_DIR$/application/common/validate/Shop.php" />
         <option value="$PROJECT_DIR$/application/common/service/Token.php" />
-        <option value="$PROJECT_DIR$/application/common/service/SellerToken.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Token.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Shop.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/BaseController.php" />
         <option value="$PROJECT_DIR$/config/route.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Seller.php" />
+        <option value="$PROJECT_DIR$/application/common/validate/Seller.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Token.php" />
+        <option value="$PROJECT_DIR$/application/common/service/SellerToken.php" />
       </list>
     </option>
   </component>
@@ -170,8 +132,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="412" />
-    <option name="width" value="1515" />
+    <option name="x" value="27" />
+    <option name="width" value="1505" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -230,7 +192,91 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="runtime" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="log" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="201804" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fleamarket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fleamarket" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="runtime" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="log" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fleamarket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fleamarket" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fleamarket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fleamarket" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="validate" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fleamarket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fleamarket" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -289,15 +335,15 @@
     <property name="SearchEverywhereHistoryKey" value="getPreOr&#9;null&#9;null&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;term&#9;ACTION&#9;ActivateTerminalToolWindow&#10;sett&#9;ACTION&#9;ShowSettings&#10;seett&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp\www\fleamarket\application\api\controller\v1" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\fleamarket\application\common\validate" />
       <recent name="C:\wamp\www\fleamarket\application\admin\view\category" />
       <recent name="C:\wamp\www\fleamarket\extend\pay" />
       <recent name="C:\wamp\www\fleamarket\application\admin\view\goods" />
       <recent name="C:\wamp\www\fleamarket\application\admin\view\old_goods" />
-      <recent name="C:\wamp\www\fleamarket\application\admin\view\banner" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\fleamarket\application\api\controller\v1" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -429,18 +475,18 @@
       <workItem from="1523409551346" duration="14925000" />
       <workItem from="1523439359338" duration="7447000" />
       <workItem from="1523500462994" duration="8891000" />
-      <workItem from="1523587838533" duration="3895000" />
+      <workItem from="1523587838533" duration="10336000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="316455000" />
+    <option name="totallyTimeSpent" value="322896000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="412" y="0" width="1515" height="1047" extended-state="1" />
+    <frame x="27" y="0" width="1505" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1761174" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17192747" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -491,34 +537,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/common/validate/Common.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/common/validate/Buyer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/common/validate/BaseValidate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/Validate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="589" column="24" lean-forward="false" selection-start-line="589" selection-start-column="18" selection-end-line="589" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/common/validate/Goods.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -537,6 +555,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -718,6 +737,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="39" column="27" lean-forward="true" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -742,16 +762,6 @@
         <state relative-caret-position="150">
           <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="13" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="25" selection-end-column="13" />
-          <folding>
-            <element signature="e#127#166#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -794,22 +804,6 @@
           <folding>
             <marker date="1521682291405" expanded="true" signature="9567:9607" ph="SELECT * FRO... ${$this-&gt;getTable()}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/BaseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="48" column="19" lean-forward="false" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Buyer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="63" column="8" lean-forward="false" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -869,39 +863,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/common/service/Token.php">
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Buyer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3650">
-          <caret line="175" column="5" lean-forward="true" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
+        <state relative-caret-position="310">
+          <caret line="37" column="9" lean-forward="true" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/common/service/SellerToken.php">
+    <entry file="file://$PROJECT_DIR$/application/common/service/Token.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+        <state relative-caret-position="300">
+          <caret line="30" column="44" lean-forward="false" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/common/validate/Shop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/common/validate/Seller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="51" column="45" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="51" selection-end-column="45" />
           <folding>
-            <element signature="e#124#164#0#PHP" expanded="true" />
+            <element signature="e#127#166#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Seller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/route.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="51" column="65" lean-forward="false" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/BaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          <folding>
+            <element signature="e#127#171#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runtime/log/201804/13.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-249429">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="58" column="32" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="32" />
+        <state relative-caret-position="350">
+          <caret line="70" column="5" lean-forward="true" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
           <folding>
             <element signature="e#128#168#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/route.php">
+    <entry file="file://$PROJECT_DIR$/application/common/service/SellerToken.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="37" column="7" lean-forward="true" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
-          <folding />
+        <state relative-caret-position="476">
+          <caret line="95" column="53" lean-forward="true" selection-start-line="95" selection-start-column="53" selection-end-line="95" selection-end-column="53" />
+          <folding>
+            <element signature="e#124#164#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

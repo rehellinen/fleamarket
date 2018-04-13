@@ -42,10 +42,14 @@ Route::get('api/:version/buyer', 'api/:version.Buyer/getBuyerInfo');
 // 关于自营商家
 Route::get('api/:version/shop', 'api/:version.Shop/getNormalShop');
 Route::get('api/:version/shop/:id', 'api/:version.Shop/getShopByID');
+Route::post('api/:version/shop', 'api/:version.Shop/addShop');
 
 // 关于主题
 Route::get('api/:version/theme', 'api/:version.Theme/getIndexNormalTheme');
 Route::get('api/:version/category/:id', 'api/:version.Theme/getThemeCategory');
+
+// 关于二手卖家
+Route::post('api/:version/seller', 'api/:version.Seller/addSeller');
 
 // 关于订单
 Route::get('api/:version/order/user', 'api/:version.Order/getBuyerOrder');

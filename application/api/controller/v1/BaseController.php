@@ -12,9 +12,38 @@ use app\common\exception\ForbiddenException;
 use enum\ScopeEnum;
 use think\Controller;
 use app\common\service\Token as TokenService;
+use app\common\service\SellerToken;
+use app\common\exception\SuccessMessage;
 
 class BaseController extends Controller
 {
+    public function insertOrUpdate($model, $data)
+    {
+        // 获取openID
+        $wxRes = (new SellerToken($data['code']))->getResultFromWx();
+        $data['open_id'] = $wxRes['openid'];
+
+        $shopModel = model($model);
+        $shop = $shopModel->where('open_id', '=', $wxRes['openid'])->find();
+        unset($data['code']);
+        if(!$shop){
+            $res = $shopModel->insert($data);
+            if($res){
+                throw new SuccessMessage([
+                    'message' => '注册成功！'
+                ]);
+            }
+        }else{
+            $res = $shopModel::update($data, ['open_id' => $wxRes['openid']]);
+            if($res){
+                throw new SuccessMessage([
+                    'message' => '修改信息成功'
+                ]);
+            }
+        }
+    }
+
+
     /**
      * 验证Token令牌是否为买家权限
      * @return bool

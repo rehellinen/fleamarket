@@ -25,7 +25,7 @@ class Token
      * @throws Exception
      * @throws WeChatException
      */
-    protected function getResultFromWx()
+    public function getResultFromWx()
     {
         $jsonResult = curl_http($this->loginUrl);
         $res = json_decode($jsonResult, true);

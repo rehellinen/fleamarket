@@ -61,11 +61,12 @@ class Token extends BaseController
         (new TokenValidate())->goCheck('get');
 
         $sellerTokenService = new SellerToken($code);
-        $res = $sellerTokenService->isRegister();
+        $wxResult = $sellerTokenService->getResultFromWx();
+        $openID = $wxResult['openid'];
+        $sellerTokenService->isRegister($openID);
 
         throw new SuccessMessage([
-            'message' => '获取OpenID状态成功',
-            'data' => ['type' => $res]
+            'message' => 'openID已存在'
         ]);
     }
 
