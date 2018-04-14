@@ -15,20 +15,20 @@ use think\Route;
 // 关于Banner
 Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 
-Route::get('api/:version/goods/check', 'api/:version.Goods/checkPrice');
+Route::get('api/:version/goods/check', 'api/:version.Goods/checkInfo');
 // 关于自营商品
-Route::get('api/:version/newGoods', 'api/:version.Goods/getNewGoods');
+Route::get('api/:version/newGoods', 'api/:version.Goods/getGoods?type=1');
 Route::get('api/:version/newGoods/index', 'api/:version.Goods/getIndexGoods?type=1');
-Route::get('api/:version/newGoods/:id', 'api/:version.Goods/getNewGoodsById', [], ['id'=>'\d+']);
-Route::get('api/:version/newGoods/shop/:id', 'api/:version.Goods/getNewGoodsByShopId', [], ['id'=>'\d+']);
+Route::get('api/:version/newGoods/:id', 'api/:version.Goods/getGoodsById?type=1', [], ['id'=>'\d+']);
+Route::get('api/:version/newGoods/shop/:id', 'api/:version.Goods/getGoodsByForeignId?type=1', [], ['id'=>'\d+']);
 Route::get('api/:version/newGoods/recent/shop/:id', 'api/:version.Goods/getRecentNewGoodsByShopId', [], ['id'=>'\d+']);
 
 // 关于二手商品
-Route::get('api/:version/oldGoods', 'api/:version.Goods/getOldGoods');
+Route::get('api/:version/oldGoods', 'api/:version.Goods/getGoods?type=2');
 Route::get('api/:version/oldGoods/index', 'api/:version.Goods/getIndexGoods?type=2');
-Route::get('api/:version/oldGoods/:id', 'api/:version.Goods/getOldGoodsById', [], ['id'=>'\d+']);
-Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getOldGoodsBySellerId', [], ['id'=>'\d+']);
-Route::get('api/:version/oldGoods/category/:id', 'api/:version.Goods/getOldGoodsByCategoryId', [], ['id'=>'\d+']);
+Route::get('api/:version/oldGoods/:id', 'api/:version.Goods/getGoodsById?type=2', [], ['id'=>'\d+']);
+Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getGoodsByForeignId?type=2', [], ['id'=>'\d+']);
+Route::get('api/:version/oldGoods/category/:id', 'api/:version.Goods/getGoodsByCategoryId', [], ['id'=>'\d+']);
 
 
 // 关于Token

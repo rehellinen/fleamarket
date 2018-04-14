@@ -35,7 +35,7 @@ class Goods extends BaseModel
     }
 
     // 获取商品 / 旧物
-    public function generalGet($type, $status)
+    public function generalGet($type, $status, $page = 1, $size = 14)
     {
         $data = [
             'type' => $type,
@@ -46,7 +46,10 @@ class Goods extends BaseModel
         }else{
             $related = 'seller';
         }
-        return $this->where($data)->with([$related, 'imageId'])->order('listorder desc, id desc')->paginate();
+        return $this->where($data)->with([$related, 'imageId'])->order('listorder desc, id desc')
+            ->paginate($size, true, [
+                'page' => $page
+            ]);
     }
 
     // 根据id获取商品 / 旧物
@@ -71,7 +74,7 @@ class Goods extends BaseModel
     }
 
     // 根据商店id获取商品 / 旧物
-    public function generalGetByForeignID($type, $status, $foreignId, $page, $size)
+    public function getByForeignID($type, $status, $foreignId, $page, $size)
     {
         $data = [
             'status' => ['in', $status],
@@ -92,7 +95,8 @@ class Goods extends BaseModel
             'type' => TypeEnum::NewGoods,
             'foreign_id' => $shopId
         ];
-        return $this->where($data)->with('imageId')->order('listorder desc, id desc')->limit(config('admin.max_recent_count'))->select();
+        return $this->where($data)->with('imageId')->order('listorder desc, id desc')
+                ->limit(config('admin.max_recent_count'))->select();
     }
 
     // 根据分类id获取商品 / 旧物
@@ -104,5 +108,18 @@ class Goods extends BaseModel
             'category_id' => $categoryID
         ];
         return $this->where($data)->with('imageId')->order('listorder desc, id desc')->paginate();
+    }
+
+    public function getByCategoryID($categoryID, $page, $size)
+    {
+        $data = [
+            'status' => StatusEnum::Normal,
+            'category_id' => $categoryID
+        ];
+
+        return $this->where($data)->with('imageId')->order('listorder desc, id desc')
+            ->paginate($size, true, [
+                'page' => $page
+            ]);
     }
 }
