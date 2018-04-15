@@ -11,13 +11,15 @@ namespace enum;
 
 class OrderEnum
 {
+    const DELETE = -1;
+
     const UNPAID = 1;
 
     const PAID = 2;
 
     const DELIVERED = 3;
 
-    const PAID_BUT_NO_GOODS = 4;
+    const COMPLETED = 4;
 
-    const COMPLETED = 5;
+    const PAID_BUT_NO_GOODS = 5;
 }

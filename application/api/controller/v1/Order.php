@@ -20,7 +20,7 @@ use enum\TypeEnum;
 class Order extends BaseController
 {
     protected $beforeActionList = [
-        'checkBuyerScope' => ['only' => 'placeOrder, getBuyerOrder, getDetail'],
+        'checkBuyerScope' => ['only' => 'placeOrder, getBuyerOrder, getDetail', 'deleteOrder'],
         'checkSellerShopScope' => ['only' => 'getSellerOrder']
     ];
 
@@ -43,29 +43,33 @@ class Order extends BaseController
     }
 
     /**
-     * 买家 / 二手商家 / 自营商家获取所有订单
+     * 买家 / 二手商家 / 自营商家获取订单
+     * @param int $status 0表示全部订单
      * @param int $page 页码
      * @param int $size 每页数量
      * @throws OrderException
      * @throws SuccessMessage
      */
-    public function getAllOrder($page = 1, $size = 14)
+    public function getOrder($status, $page = 1, $size = 10)
     {
         (new Common())->goCheck('page');
         $buyerID = TokenService::getBuyerID();
         $sellerID = TokenService::getCurrentTokenVar('sellerID');
         $shopID = TokenService::getCurrentTokenVar('shopID');
-
+        // status为0表示获取所有订单
+        if($status == 0){
+            $status = [OrderEnum::UNPAID, OrderEnum::PAID, OrderEnum::COMPLETED, OrderEnum::DELIVERED];
+        }
         if($buyerID){
-            $res = (new OrderModel())->getOrderByUser($buyerID, $page, $size);
+            $res = (new OrderModel())->getOrderByUser($buyerID, $status, $page, $size);
         }elseif($sellerID){
             $type = 2;
             $id = $sellerID;
-            $res = (new OrderModel())->getOrderBySellerOrShop($type, $id, $page, $size);
+            $res = (new OrderModel())->getOrderBySellerOrShop($type, $status, $id, $page, $size);
         }elseif($shopID){
             $type = 1;
             $id = $shopID;
-            $res = (new OrderModel())->getOrderBySellerOrShop($type, $id, $page, $size);
+            $res = (new OrderModel())->getOrderBySellerOrShop($type, $status, $id, $page, $size);
         }
 
         if($res->isEmpty()){
@@ -151,5 +155,35 @@ class Order extends BaseController
                 'message' => '确认收货成功'
             ]);
         }
+    }
+
+    /**
+     * 用户删除订单
+     * @param int $id 订单ID
+     * @throws OrderException 订单不存在
+     */
+    public function deleteOrder($id)
+    {
+        $buyerID = TokenService::getBuyerID();
+        $order = (new OrderModel())->where([
+            'status' => ['=', OrderEnum::UNPAID],
+            'id' => $id
+        ])->find()->toArray();
+
+        if(!$order){
+            throw new OrderException();
+        }
+
+        TokenService::isValidOperate($order['buyer_id']);
+
+        $order['status'] = OrderEnum::DELETE;
+        (new OrderModel())->where([
+            'status' => ['=', OrderEnum::UNPAID],
+            'id' => $id
+        ])->update($order);
+
+        throw new SuccessMessage([
+            'message' => '删除订单成功'
+        ]);
     }
 }

@@ -158,7 +158,7 @@ class Token
 
     /**
      * 验证用户是否在对自己的订单进行操作
-     * @param int $checkedBuyerID 买家ID
+     * @param int $checkedBuyerID 订单查询到的买家ID
      * @return bool
      * @throws TokenException
      */

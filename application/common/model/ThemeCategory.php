@@ -29,7 +29,7 @@ class ThemeCategory extends BaseModel
             'status' => 1,
             'theme_id' => $themeID
         ];
-        return $this->where($data)->with('imageId')->order('listorder desc, id desc')->select();
+        return $this->where($data)->with('imageId')->limit(15)->order('listorder desc, id desc')->select();
     }
 
     public function getCategory()

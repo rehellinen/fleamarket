@@ -13,8 +13,6 @@ use app\common\exception\SuccessMessage;
 use app\common\model\Goods as GoodsModel;
 use app\common\validate\Common;
 use enum\StatusEnum;
-use enum\TypeEnum;
-use think\migration\command\migrate\Status;
 
 class Goods extends BaseController
 {
@@ -144,7 +142,7 @@ class Goods extends BaseController
      * @throws GoodsException
      * @throws SuccessMessage
      */
-    public function getGoodsByCategoryId($id, $page = 1, $size = 15)
+    public function getGoodsByCategoryId($id, $page = 1, $size = 12)
     {
         (new Common())->goCheck('id');
         $goods = (new GoodsModel())->getByCategoryID($id, $page, $size);

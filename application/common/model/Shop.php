@@ -14,7 +14,7 @@ class Shop extends BaseModel
 {
     public function mainImageId()
     {
-        return $this->hasMany('ShopMainImage', 'shop_id', 'id');
+        return $this->hasMany('Goods', 'foreign_id', 'id');
     }
 
     public function topImageId()
@@ -34,11 +34,16 @@ class Shop extends BaseModel
             'listorder' => 'desc',
             'id' => 'desc'
         );
-        return $this->where($data)->with(['mainImageId' => function($query){
-            $query->with('imageId')->order('listorder desc, id desc');
+        return $this->where($data)->with(['mainImageId' => function ($query) {
+            $query->where('type=1')->order('listorder desc, id desc')->limit(3)->with('imageId');
         }])->with('avatarImageId')->order($order)->paginate($size, true, [
             'page' => $page
         ]);
+//        ->hidden([
+//        'status', 'listorder', 'number', 'dormitory', 'open_id',
+//        'avatar_image_id' => ['status'],
+//        'main_image_id' => ['listorder', 'status']
+//    ]);
     }
 
     public function getNormalById($id)
@@ -50,7 +55,7 @@ class Shop extends BaseModel
 
     public function getAdminShop($id)
     {
-        $shop = $this->with(['mainImageId' => function($query){
+        $shop = $this->with(['mainImageId' => function ($query) {
             $query->with(['imageId'])->order('listorder desc, id desc');
         }])->with([
             'topImageId', 'avatarImageId'

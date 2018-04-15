@@ -42,9 +42,13 @@ class Order extends BaseModel
         return $this->where($data)->count();
     }
 
-    public static function getOrderByUser($buyerID, $page, $size)
+    public static function getOrderByUser($buyerID, $status, $page, $size)
     {
-        $res = self::where('buyer_id', '=', $buyerID)->order('create_time desc')
+        $condition = [
+            'buyer_id' => $buyerID,
+            'status' => ['in', $status]
+        ];
+        $res = self::where($condition)->order('create_time desc')
         ->paginate($size, true, [
             'page' => $page
         ])->hidden(['snap_items', 'prepay_id']);
@@ -83,11 +87,12 @@ class Order extends BaseModel
         return $order;
     }
 
-    public function getOrderBySellerOrShop($type, $uid, $page, $size)
+    public function getOrderBySellerOrShop($type, $status, $uid, $page, $size)
     {
         return $this->order('id desc')->where([
             'foreign_id' => $uid,
-            'type' => $type
+            'type' => $type,
+            'status' => $status
         ])->paginate($size, true, [
             'page' => $page
         ])->hidden(['snap_items', 'prepay_id']);

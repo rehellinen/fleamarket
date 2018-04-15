@@ -11,12 +11,11 @@ namespace app\api\controller\v1;
 use app\common\exception\ShopException;
 use app\common\exception\SuccessMessage;
 use app\common\model\Shop as ShopModel;
-use app\common\service\SellerToken;
 use app\common\validate\Common;
 
 class Shop extends BaseController
 {
-    public function getNormalShop($page = 1, $size = 14)
+    public function getNormalShop($page = 1, $size = 7)
     {
         $shop = (new ShopModel())->getNormalShop($page, $size);
         if($shop->isEmpty()){

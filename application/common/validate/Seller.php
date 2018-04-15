@@ -28,6 +28,7 @@ class Seller extends BaseValidate
     protected $scene = [
         'register'  => ['name', 'number', 'telephone', 'weixin', 'dormitory', 'email', 'zhifubao', 'code'],
         'edit'  => ['name', 'telephone', 'email', 'weixin', 'zhifubao', 'dormitory'],
-        'password' => ['oldPassword', 'password']
+        'password' => ['oldPassword', 'password'],
+        'login' => ['telephone', 'password']
     ];
 }

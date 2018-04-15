@@ -36,13 +36,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">自营商家:</label>
+                                        <label class="col-sm-2 control-label" for="foreign_id">商家 / 卖家ID:</label>
                                         <div class="col-sm-5">
-                                            <select name="foreign_id" class="form-control">
-                                                {volist name="shop" id="vo"}
-                                                <option value="{$vo.id}">{$vo.name}</option>
-                                                {/volist}
-                                            </select>
+                                            <input type="text" id="foreign_id" name="foreign_id" placeholder="请填写商家 / 卖家ID" class="form-control"/>
                                         </div>
                                     </div>
 
