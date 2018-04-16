@@ -16,12 +16,15 @@ class Common extends BaseValidate
     protected $rule = [
         ['id', 'require|number'],
         ['status', 'require|number'],
-        ['page', 'require|number']
+        ['page', 'require|number'],
+        ['size', 'require|number'],
+        ['ids', 'require']
     ];
 
     protected $scene = [
         'id' => ['id'],
         'status' => ['status'],
-        'page' => ['page']
+        'page' => ['page', 'size'],
+        'ids' => ['ids']
     ];
 }

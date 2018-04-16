@@ -16,6 +16,7 @@ use think\Route;
 Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 
 Route::get('api/:version/goods/check', 'api/:version.Goods/checkInfo');
+Route::get('api/:version/goods/category/:id', 'api/:version.Goods/getGoodsByCategoryId', [], ['id'=>'\d+']);
 // 关于自营商品
 Route::get('api/:version/newGoods', 'api/:version.Goods/getGoods?type=1');
 Route::get('api/:version/newGoods/index', 'api/:version.Goods/getIndexGoods?type=1');
@@ -28,7 +29,7 @@ Route::get('api/:version/oldGoods', 'api/:version.Goods/getGoods?type=2');
 Route::get('api/:version/oldGoods/index', 'api/:version.Goods/getIndexGoods?type=2');
 Route::get('api/:version/oldGoods/:id', 'api/:version.Goods/getGoodsById?type=2', [], ['id'=>'\d+']);
 Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getGoodsByForeignId?type=2', [], ['id'=>'\d+']);
-Route::get('api/:version/oldGoods/category/:id', 'api/:version.Goods/getGoodsByCategoryId', [], ['id'=>'\d+']);
+
 
 
 // 关于Token
