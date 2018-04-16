@@ -23,9 +23,6 @@ class Banner extends BaseController
     public function getBanner()
     {
         $banners = (new BannerModel())->getBanners();
-        if(!$banners){
-            throw new BannerException();
-        }
         throw new SuccessMessage([
             'message' => '获取轮播图成功',
             'data' => $banners

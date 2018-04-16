@@ -18,13 +18,20 @@ class Banner extends BaseModel
         return $this->belongsTo('Image', 'image_id', 'id');
     }
 
-    // 小程序获取轮播图的方法
+    /**
+     * 小程序获取轮播图的方法
+     * @return mixed
+     */
     public function getBanners()
     {
         $condition['status'] = StatusEnum::Normal;
         $maxCount = config('admin.max_banner_count');
-        return $this->where($condition)->order('listorder desc, id desc')
-                ->with('imageId')->limit($maxCount)->select()
-                ->hidden(['status', 'listorder', 'image_id' => ['status']]);
+        $banners = $this->where($condition)->order('listorder desc, id desc')
+            ->with('imageId')->limit($maxCount)->select();
+
+        if (!$banners) {
+            throw new BannerException();
+        }
+        return $banners->hidden(['status', 'listorder', 'image_id' => ['status']]);
     }
 }

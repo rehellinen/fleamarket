@@ -30,8 +30,6 @@ Route::get('api/:version/oldGoods/index', 'api/:version.Goods/getIndexGoods?type
 Route::get('api/:version/oldGoods/:id', 'api/:version.Goods/getGoodsById?type=2', [], ['id'=>'\d+']);
 Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getGoodsByForeignId?type=2', [], ['id'=>'\d+']);
 
-
-
 // 关于Token
 Route::post('api/:version/token/buyer', 'api/:version.Token/getBuyerToken');
 Route::post('api/:version/token/seller', 'api/:version.Token/getSellerToken');
