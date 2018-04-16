@@ -93,18 +93,13 @@ class Goods extends BaseController
      * 检查商品的信息是否更改
      * @throws SuccessMessage
      */
-    public function checkInfo()
+    public function checkInfo($ids)
     {
         $goodsValidate = (new \app\common\validate\Goods());
         $goodsValidate->goCheck('ids');
-        $ids = $goodsValidate->getDataByScene('ids');
-        $idsArray = explode('|', $ids['ids']);
-        $goods = (new \app\common\model\Goods())->where([
-            'id' => ['in', $idsArray],
-            'status' => StatusEnum::Normal
-        ])->with('imageId')->select()->hidden([
-            'status', 'quantity', 'description', 'foreign_id', 'listorder', 'subtitle', 'category_id'
-        ]);
+
+        $goods = (new GoodsModel())->getByIDs($ids);
+
         throw new SuccessMessage([
             'message' => '获取商品信息成功',
             'data' => $goods

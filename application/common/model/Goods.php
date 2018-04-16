@@ -49,7 +49,8 @@ class Goods extends BaseModel
         return $this->where($data)->with([$related, 'imageId'])->order('listorder desc, id desc')
             ->paginate($size, true, [
                 'page' => $page
-            ]);
+            ])->hidden(['listorder', 'status', 'imageId' => ['status'],
+                        'shop' => ['listorder', 'status', 'number', 'dormitory', 'open_id']]);
     }
 
     // 根据id获取商品 / 旧物
@@ -121,5 +122,17 @@ class Goods extends BaseModel
             ->paginate($size, true, [
                 'page' => $page
             ]);
+    }
+
+    public function getByIDs($ids)
+    {
+        $idsArray = explode('|', $ids);
+        return $goods = $this->where([
+            'id' => ['in', $idsArray],
+            'status' => StatusEnum::Normal
+        ])->with('imageId')->select()->hidden([
+            'status', 'quantity', 'description', 'foreign_id', 'listorder',
+            'subtitle', 'category_id', 'image_id' => ['status']
+        ]);
     }
 }

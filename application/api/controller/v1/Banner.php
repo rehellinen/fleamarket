@@ -15,6 +15,11 @@ use app\common\model\Banner as BannerModel;
 
 class Banner extends BaseController
 {
+    /**
+     * 获取首页轮播图
+     * @throws BannerException 找不到轮播图
+     * @throws SuccessMessage
+     */
     public function getBanner()
     {
         $banners = (new BannerModel())->getBanners();
