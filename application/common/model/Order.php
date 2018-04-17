@@ -55,6 +55,17 @@ class Order extends BaseModel
         return $res;
     }
 
+    public function getOrderBySellerOrShop($type, $status, $uid, $page, $size)
+    {
+        return $this->order('id desc')->where([
+            'foreign_id' => $uid,
+            'type' => $type,
+            'status' => ['in', $status]
+        ])->paginate($size, true, [
+            'page' => $page
+        ])->hidden(['snap_items', 'prepay_id']);
+    }
+
     public function getBuyerOrderByID($id, $buyerID, $type){
         if($type == 1){
             $str = 'shop';
@@ -85,17 +96,6 @@ class Order extends BaseModel
         ]);
 
         return $order;
-    }
-
-    public function getOrderBySellerOrShop($type, $status, $uid, $page, $size)
-    {
-        return $this->order('id desc')->where([
-            'foreign_id' => $uid,
-            'type' => $type,
-            'status' => $status
-        ])->paginate($size, true, [
-            'page' => $page
-        ])->hidden(['snap_items', 'prepay_id']);
     }
 
     public function updateOrderStatus($id, $uid, $type, $status)

@@ -8,6 +8,10 @@
 
 namespace app\api\controller\v1;
 
+use app\common\exception\SellerException;
+use app\common\validate\Common;
+use app\common\model\Seller as SellerModel;
+use app\common\exception\SuccessMessage;
 
 class Seller extends BaseController
 {
@@ -19,5 +23,20 @@ class Seller extends BaseController
         $data = $shopValidate->getDataByScene('register');
 
         $this->insertOrUpdate('Seller', $data);
+    }
+
+    public function getSellerByID($id)
+    {
+        (new Common())->goCheck('id');
+        $seller = (new SellerModel())->getNormalById($id);
+
+        if(!$seller){
+            throw new SellerException();
+        }
+
+        throw new SuccessMessage([
+            'message' => '获取二手卖家信息成功',
+            'data' => $seller
+        ]);
     }
 }

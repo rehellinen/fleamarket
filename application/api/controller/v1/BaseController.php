@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 use app\common\exception\ForbiddenException;
 use enum\ScopeEnum;
+use enum\StatusEnum;
 use think\Controller;
 use app\common\service\Token as TokenService;
 use app\common\service\SellerToken;
@@ -24,7 +25,10 @@ class BaseController extends Controller
         $data['open_id'] = $wxRes['openid'];
 
         $shopModel = model($model);
-        $shop = $shopModel->where('open_id', '=', $wxRes['openid'])->find();
+        $shop = $shopModel->where([
+            'open_id' => ['=', $wxRes['openid']],
+            'status' => ['neq', StatusEnum::Deleted]
+        ])->find();
         unset($data['code']);
         if(!$shop){
             $res = $shopModel->insert($data);
@@ -35,6 +39,7 @@ class BaseController extends Controller
             }
         }else{
             $res = $shopModel::update($data, ['open_id' => $wxRes['openid']]);
+
             if($res){
                 throw new SuccessMessage([
                     'message' => '修改信息成功'

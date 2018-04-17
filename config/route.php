@@ -29,6 +29,11 @@ Route::get('api/:version/oldGoods', 'api/:version.Goods/getGoods?type=2');
 Route::get('api/:version/oldGoods/index', 'api/:version.Goods/getIndexGoods?type=2');
 Route::get('api/:version/oldGoods/:id', 'api/:version.Goods/getGoodsById?type=2', [], ['id'=>'\d+']);
 Route::get('api/:version/oldGoods/seller/:id', 'api/:version.Goods/getGoodsByForeignId?type=2', [], ['id'=>'\d+']);
+// API审查到这里
+
+// 关于主题
+Route::get('api/:version/theme', 'api/:version.Theme/getIndexNormalTheme');
+Route::get('api/:version/category/:id', 'api/:version.Theme/getThemeCategory');
 
 // 关于Token
 Route::post('api/:version/token/buyer', 'api/:version.Token/getBuyerToken');
@@ -44,12 +49,10 @@ Route::get('api/:version/buyer', 'api/:version.Buyer/getBuyerInfo');
 Route::get('api/:version/shop', 'api/:version.Shop/getNormalShop');
 Route::get('api/:version/shop/:id', 'api/:version.Shop/getShopByID');
 Route::post('api/:version/shop', 'api/:version.Shop/addShop');
-
-// 关于主题
-Route::get('api/:version/theme', 'api/:version.Theme/getIndexNormalTheme');
-Route::get('api/:version/category/:id', 'api/:version.Theme/getThemeCategory');
+Route::post('api/:version/image', 'api/:version.Image/appUpload');
 
 // 关于二手卖家
+Route::get('api/:version/seller/:id', 'api/:version.Seller/getSellerByID');
 Route::post('api/:version/seller', 'api/:version.Seller/addSeller');
 
 // 关于订单

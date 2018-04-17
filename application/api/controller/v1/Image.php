@@ -8,12 +8,34 @@
 
 namespace app\api\controller\v1;
 
-
-use app\api\controller\v1\BaseController;
+use app\common\exception\SuccessMessage;
+use app\common\service\Token as TokenService;
+use app\common\model\Image as ImageModel;
+use app\common\model\Shop;
+use app\common\model\Seller;
 use think\Request;
 
 class Image extends BaseController
 {
+    public function appUpload($type)
+    {
+        $image = Request::instance()->file('image');
+        $info = $image->move(ROOT_PATH . 'public' . DS . 'upload');
+        $path = '/upload/' . $info->getSaveName();
+
+        $sellerID = TokenService::getCurrentTokenVar('sellerID');
+        $shopID = TokenService::getCurrentTokenVar('shopID');
+        $imageID = (new ImageModel)->insertGetId(['image_url' => $path]);
+        if ($sellerID){
+            (new Seller())->save([$type => $imageID], ['id' => $sellerID]);
+        }elseif ($shopID){
+            (new Shop())->save([$type => $imageID], ['id' => $shopID]);
+        }
+        throw new SuccessMessage([
+            'message' => '更改图片成功'
+        ]);
+    }
+
     public function upload()
     {
         $path = $this->resizePhoto();

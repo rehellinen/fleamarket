@@ -9,8 +9,6 @@
 namespace app\common\validate;
 
 
-use think\Validate;
-
 class Common extends BaseValidate
 {
     protected $rule = [

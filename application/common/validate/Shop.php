@@ -23,10 +23,11 @@ class Shop extends BaseValidate
         ['password', 'require', '密码不能为空'],
         ['number', 'require', '学号不能为空'],
         ['code', 'require', 'code不能为空'],
+        ['major', 'require', '主营不能为空'],
     ];
 
     protected $scene = [
-        'register'  => ['name', 'number', 'telephone', 'weixin', 'dormitory', 'email', 'zhifubao', 'code'],
+        'register'  => ['name', 'number', 'telephone', 'weixin', 'dormitory', 'email', 'zhifubao', 'code', 'major'],
         'edit'  => ['name', 'telephone', 'email', 'weixin', 'zhifubao', 'dormitory'],
         'password' => ['oldPassword', 'password']
     ];

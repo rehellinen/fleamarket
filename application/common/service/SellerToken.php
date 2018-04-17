@@ -50,7 +50,8 @@ class SellerToken extends Token
         $keyArr = array_keys($uidArr);
         return [
             'token' => $token,
-            'type' => $keyArr[0]
+            'type' => $keyArr[0],
+            'uid' => $uidArr[$keyArr[0]]
         ];
     }
 
