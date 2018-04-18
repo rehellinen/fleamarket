@@ -12,6 +12,7 @@ namespace app\common\model;
 use app\common\exception\GoodsException;
 use enum\StatusEnum;
 use enum\TypeEnum;
+use think\Paginator;
 
 class Goods extends BaseModel
 {
@@ -214,5 +215,23 @@ class Goods extends BaseModel
             ->paginate($size, true, [
                 'page' => $page
             ])->hidden(['status', 'listorder', 'image_id' => ['status']]);
+    }
+
+    /**
+     * 获取下架商品
+     * @param $type
+     * @param $foreignID
+     * @return Paginator
+     */
+    public function getDownedGoods($type, $foreignID, $size, $page)
+    {
+        $condition = [
+            'type' => $type,
+            'foreign_id' => $foreignID,
+            'status' => StatusEnum::NotPass
+        ];
+
+        return $this->where($condition)->order('listorder desc, id desc')->with('imageId')
+                ->paginate($size, true, ['page' => $page])->hidden(['']);
     }
 }

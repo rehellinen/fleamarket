@@ -13,9 +13,22 @@ use app\common\exception\SuccessMessage;
 use app\common\model\Goods as GoodsModel;
 use app\common\validate\Common;
 use enum\StatusEnum;
+use app\common\service\Token;
+use enum\TypeEnum;
+use \app\common\validate\Goods as GoodsValidate;
 
 class Goods extends BaseController
 {
+    /**
+     * @var array 需要权限控制的方法
+     * 1. 获取下架的商品
+     * 2. 添加商品
+     * 3. 上架 / 下架商品
+     */
+    protected $beforeActionList = [
+        'checkSellerShopScope' => ['only' => 'getDownedGoods, addGoods, updateGoodsStatus']
+    ];
+
     /**
      * 获取所有二手 / 自营商品
      * @param int $type 商品类型
@@ -168,5 +181,67 @@ class Goods extends BaseController
             'data' => $goods,
             'message' => '获取产品信息成功'
         ]);
+    }
+
+    /**
+     * 获取下架的商品
+     */
+    public function getDownedGoods($page, $size)
+    {
+        (new Common())->goCheck('page');
+
+        $sellerID = Token::getCurrentTokenVar('sellerID');
+        $shopID = Token::getCurrentTokenVar('shopID');
+        if($sellerID){
+            $goods = (new GoodsModel())->getDownedGoods(TypeEnum::OldGoods, $sellerID, $size, $page);
+        }else{
+            $goods = (new GoodsModel())->getDownedGoods(TypeEnum::NewGoods, $shopID, $size, $page);
+        }
+        if($goods->isEmpty()){
+            throw new GoodsException();
+        }
+        throw new SuccessMessage([
+            'message' => '获取商品信息成功',
+            'data' => $goods
+        ]);
+    }
+
+    /**
+     * 添加商品
+     */
+    public function addGoods()
+    {
+        (new GoodsValidate())->goCheck('add');
+        $data = (new GoodsValidate())->getDataByScene('add');
+
+        $sellerID = Token::getCurrentTokenVar('sellerID');
+        $shopID = Token::getCurrentTokenVar('shopID');
+
+        if($sellerID){
+            $data['type'] = 2;
+            $data['foreign_id'] = $sellerID;
+            (new GoodsModel())->save($data);
+        }else{
+            $data['type'] = 1;
+            $data['foreign_id'] = $shopID;
+            (new GoodsModel())->save($data);
+        }
+
+        throw new SuccessMessage([
+            'message' => '添加商品成功'
+        ]);
+    }
+
+
+    public function updateGoodsStatus($id, $status)
+    {
+        (new Common())->goCheck('id');
+        (new Common())->goCheck('status');
+        $sellerID = Token::getCurrentTokenVar('sellerID');
+        $shopID = Token::getCurrentTokenVar('shopID');
+        if($sellerID){
+            $goods = (new GoodsModel())::get($id);
+            $uid = $goods->
+        }
     }
 }

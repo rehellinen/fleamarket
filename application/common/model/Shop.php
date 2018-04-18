@@ -9,6 +9,7 @@
 namespace app\common\model;
 
 use enum\StatusEnum;
+use enum\TypeEnum;
 
 class Shop extends BaseModel
 {
@@ -35,7 +36,8 @@ class Shop extends BaseModel
             'id' => 'desc'
         );
         return $this->where($data)->with(['mainImageId' => function ($query) {
-            $query->where('type=1')->order('listorder desc, id desc')->limit(3)->with('imageId');
+            $query->where(['type'=>TypeEnum::NewGoods, 'status' => StatusEnum::Normal])
+                ->order('listorder desc, id desc')->with('imageId');
         }])->with('avatarImageId')->order($order)->paginate($size, true, [
             'page' => $page
         ]);

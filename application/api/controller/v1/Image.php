@@ -17,6 +17,22 @@ use think\Request;
 
 class Image extends BaseController
 {
+    /**
+     * 上传图片(不带压缩功能)
+     * @throws SuccessMessage
+     */
+    public function imageUpload()
+    {
+        $image = Request::instance()->file('image');
+        $info = $image->move(ROOT_PATH . 'public' . DS . 'upload');
+        $path = '/upload/' . $info->getSaveName();
+        $imageID = (new ImageModel)->insertGetId(['image_url' => $path]);
+        throw new SuccessMessage([
+            'message' => '上传图片成功',
+            'data' => ['image_id' => $imageID]
+        ]);
+    }
+
     public function appUpload($type)
     {
         $image = Request::instance()->file('image');
@@ -32,7 +48,8 @@ class Image extends BaseController
             (new Shop())->save([$type => $imageID], ['id' => $shopID]);
         }
         throw new SuccessMessage([
-            'message' => '更改图片成功'
+            'message' => '更改图片成功',
+            'data' => ['image_id' => $imageID]
         ]);
     }
 
