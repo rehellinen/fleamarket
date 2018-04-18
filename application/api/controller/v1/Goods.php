@@ -26,7 +26,7 @@ class Goods extends BaseController
      * 3. 上架 / 下架商品
      */
     protected $beforeActionList = [
-        'checkSellerShopScope' => ['only' => 'getDownedGoods, addGoods, updateGoodsStatus']
+        'checkSellerShopScope' => ['only' => 'getDownedGoods,addGoods,updateGoodsStatus']
     ];
 
     /**
@@ -233,15 +233,30 @@ class Goods extends BaseController
     }
 
 
-    public function updateGoodsStatus($id, $status)
+    public function updateGoodsStatus($id = null, $status = null)
     {
         (new Common())->goCheck('id');
         (new Common())->goCheck('status');
         $sellerID = Token::getCurrentTokenVar('sellerID');
         $shopID = Token::getCurrentTokenVar('shopID');
         if($sellerID){
-            $goods = (new GoodsModel())::get($id);
-            $uid = $goods->
+            $goods = (new GoodsModel())->where([
+                'id' => $id,
+                'type' => TypeEnum::OldGoods
+            ])->find($id);
+        }else{
+            $goods = (new GoodsModel())->where([
+                'id' => $id,
+                'type' => TypeEnum::NewGoods
+            ])->find($id);
         }
+
+        $uid = $goods->foreign_id;
+        Token::isValidSellerShop($uid);
+        $goods->status = $status;
+        $goods->save();
+        throw new SuccessMessage([
+            'message' => '更改商品状态成功'
+        ]);
     }
 }

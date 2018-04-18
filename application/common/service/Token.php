@@ -174,4 +174,30 @@ class Token
             ]);
         }
     }
+
+
+    public static function isValidSellerShop($uid)
+    {
+        $sellerID = self::getCurrentTokenVar('sellerID');
+        $shopID = self::getCurrentTokenVar('shopID');
+        if($sellerID){
+            if($uid == $sellerID){
+                return true;
+            }else{
+                throw new TokenException([
+                    'message' => '不能操作不属于你自己的商品',
+                    'errorCode' => 80003
+                ]);
+            }
+        }else{
+            if($uid == $shopID){
+                return true;
+            }else{
+                throw new TokenException([
+                    'message' => '不能操作不属于你自己的商品',
+                    'errorCode' => 80004
+                ]);
+            }
+        }
+    }
 }
