@@ -26,7 +26,7 @@ class Goods extends BaseController
      * 3. 上架 / 下架商品
      */
     protected $beforeActionList = [
-        'checkSellerShopScope' => ['only' => 'getDownedGoods,addGoods,updateGoodsStatus']
+        'checkSellerShopScope' => ['only' => 'getDownedGoods,addGoods,updateGoodsStatus,editGoods']
     ];
 
     /**
@@ -243,12 +243,12 @@ class Goods extends BaseController
             $goods = (new GoodsModel())->where([
                 'id' => $id,
                 'type' => TypeEnum::OldGoods
-            ])->find($id);
+            ])->find();
         }else{
             $goods = (new GoodsModel())->where([
                 'id' => $id,
                 'type' => TypeEnum::NewGoods
-            ])->find($id);
+            ])->find();
         }
 
         $uid = $goods->foreign_id;
@@ -257,6 +257,32 @@ class Goods extends BaseController
         $goods->save();
         throw new SuccessMessage([
             'message' => '更改商品状态成功'
+        ]);
+    }
+
+    public function editGoods()
+    {
+        (new GoodsValidate())->goCheck('edit');
+        $data = (new GoodsValidate())->getDataByScene('edit');
+        $goodsID = $data['id'];
+        $sellerID = Token::getCurrentTokenVar('sellerID');
+        $shopID = Token::getCurrentTokenVar('shopID');
+        if($sellerID){
+            $goods = (new GoodsModel())->where([
+                'id' => $goodsID,
+                'type' => TypeEnum::OldGoods
+            ])->find();
+        }else{
+            $goods = (new GoodsModel())->where([
+                'id' => $goodsID,
+                'type' => TypeEnum::NewGoods
+            ])->find();
+        }
+        $uid = $goods->foreign_id;
+        Token::isValidSellerShop($uid);
+        $goods->save($data);
+        throw new SuccessMessage([
+            'message' => '更改商品信息成功'
         ]);
     }
 }

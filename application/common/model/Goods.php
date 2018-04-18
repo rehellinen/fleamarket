@@ -126,7 +126,7 @@ class Goods extends BaseModel
         return $goods = $goods->hidden([
                 'shop' => ['listorder', 'status', 'number', 'open_id'],
                 'seller' => ['listorder', 'status', 'number', 'open_id'],
-                'image_id' => ['status'], 'status', 'listorder'
+                'image_id' => ['status'], 'status'
             ]);
     }
 

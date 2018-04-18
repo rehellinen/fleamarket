@@ -21,6 +21,7 @@ Route::get('api/:version/goods/category/:id', 'api/:version.Goods/getGoodsByCate
 Route::get('api/:version/goods/downed', 'api/:version.Goods/getDownedGoods', [], ['id'=>'\d+']);
 Route::post('api/:version/goods', 'api/:version.Goods/addGoods');
 Route::post('api/:version/goods/status', 'api/:version.Goods/updateGoodsStatus');
+Route::put('api/:version/goods', 'api/:version.Goods/editGoods');
 // 自营商品中查找
 Route::get('api/:version/newGoods', 'api/:version.Goods/getGoods?type=1');
 Route::get('api/:version/newGoods/index', 'api/:version.Goods/getIndexGoods?type=1');
