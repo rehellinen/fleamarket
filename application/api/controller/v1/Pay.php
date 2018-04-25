@@ -18,6 +18,11 @@ class Pay extends BaseController
         'checkBuyerSellerShopScope' => ['only' => 'getPreOrder']
     ];
 
+    /**
+     * 获取预订单
+     * @param string $order_identify 预订单标识（纯数字代表订单ID，字符串标识订单NO）
+     * @throws SuccessMessage
+     */
     public function getPreOrder($order_identify = '')
     {
         (new \app\common\validate\Order())->goCheck('pay');
@@ -29,6 +34,9 @@ class Pay extends BaseController
         ]);
     }
 
+    /**
+     * 接收微信支付的回调
+     */
     public function receiveNotify()
     {
         $notify = (new WxNotify());

@@ -119,6 +119,11 @@ class Order extends BaseController
         ]);
     }
 
+    /**
+     * 卖家进行订单发货
+     * @param int $id 订单ID
+     * @throws SuccessMessage
+     */
     public function deliver($id)
     {
         (new Common())->goCheck('id');
@@ -140,6 +145,11 @@ class Order extends BaseController
         }
     }
 
+    /**
+     * 卖家确认收货
+     * @param int $id 订单ID
+     * @throws SuccessMessage
+     */
     public function confirm($id)
     {
         (new Common())->goCheck('id');
@@ -161,6 +171,7 @@ class Order extends BaseController
      * 用户删除订单
      * @param int $id 订单ID
      * @throws OrderException 订单不存在
+     * @throws SuccessMessage
      */
     public function deleteOrder($id)
     {
@@ -179,7 +190,8 @@ class Order extends BaseController
         $order['status'] = OrderEnum::DELETE;
         (new OrderModel())->where([
             'status' => ['=', OrderEnum::UNPAID],
-            'id' => $id
+            'id' => $id,
+            'buyer_id' => $buyerID
         ])->update($order);
 
         throw new SuccessMessage([

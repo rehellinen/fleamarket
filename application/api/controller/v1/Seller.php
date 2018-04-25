@@ -15,6 +15,9 @@ use app\common\exception\SuccessMessage;
 
 class Seller extends BaseController
 {
+    /**
+     * 添加二手卖家
+     */
     public function addSeller()
     {
         // 数据校验
@@ -25,6 +28,12 @@ class Seller extends BaseController
         $this->insertOrUpdate('Seller', $data);
     }
 
+    /**
+     * 获取二手卖家
+     * @param int $id 二手卖家ID
+     * @throws SellerException 卖家不存在
+     * @throws SuccessMessage
+     */
     public function getSellerByID($id)
     {
         (new Common())->goCheck('id');
