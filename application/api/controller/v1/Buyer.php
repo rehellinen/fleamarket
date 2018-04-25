@@ -23,7 +23,12 @@ class Buyer extends BaseController
         'checkBuyerScope' => ['only' => 'updateBuyerInfo, getBuyerInfo']
     ];
 
-    // 更新用户信息
+    /**
+     * 更新用户信息
+     * @throws BuyerException 卖家不存在
+     * @throws Exception 数据库操作异常
+     * @throws SuccessMessage
+     */
     public function updateBuyerInfo()
     {
         // 根据Token令牌获取用户ID
@@ -49,6 +54,11 @@ class Buyer extends BaseController
         }
     }
 
+    /**
+     * 获取卖家信息
+     * @throws BuyerException 买家不存在
+     * @throws SuccessMessage
+     */
     public function getBuyerInfo()
     {
         // 根据Token令牌获取用户ID

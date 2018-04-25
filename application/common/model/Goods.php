@@ -169,7 +169,7 @@ class Goods extends BaseModel
             throw new GoodsException();
         }
         return $goods->hidden([
-            'status', 'quantity', 'description', 'foreign_id', 'listorder',
+            'status', 'description', 'foreign_id', 'listorder',
             'subtitle', 'category_id', 'image_id' => ['status']
         ]);
     }

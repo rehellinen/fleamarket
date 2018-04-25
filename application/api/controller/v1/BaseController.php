@@ -18,6 +18,12 @@ use app\common\exception\SuccessMessage;
 
 class BaseController extends Controller
 {
+    /**
+     * 增加卖家 / 更新卖家信息
+     * @param static $model 模型名称 : shop / seller
+     * @param array $data 用户数据
+     * @throws SuccessMessage
+     */
     public function insertOrUpdate($model, $data)
     {
         // 获取openID

@@ -10,6 +10,7 @@ namespace app\common\model;
 
 
 use enum\StatusEnum;
+use app\common\exception\BannerException;
 
 class Banner extends BaseModel
 {
@@ -21,6 +22,7 @@ class Banner extends BaseModel
     /**
      * 小程序获取轮播图的方法
      * @return mixed
+     * @throws BannerException Banner不存在
      */
     public function getBanners()
     {
@@ -32,6 +34,7 @@ class Banner extends BaseModel
         if (!$banners) {
             throw new BannerException();
         }
+
         return $banners->hidden(['status', 'listorder', 'image_id' => ['status']]);
     }
 }
