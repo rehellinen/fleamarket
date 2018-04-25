@@ -6,12 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca9e3f9c-9f90-44ef-a5af-9dd41b96e070" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/BaseController.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/BaseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Order.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Pay.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Pay.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Seller.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Seller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Shop.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Shop.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/api/controller/v1/Theme.php" afterPath="$PROJECT_DIR$/application/api/controller/v1/Theme.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +18,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Shop.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
+      <file leaf-file-name="Theme.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Theme.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="50" column="36" lean-forward="false" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+            <state relative-caret-position="225">
+              <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -66,7 +61,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/admin/view/category/add.html" />
         <option value="$PROJECT_DIR$/application/admin/view/banner/add.html" />
         <option value="$PROJECT_DIR$/application/admin/view/theme_category/add.html" />
         <option value="$PROJECT_DIR$/application/admin/controller/ThemeCategory.php" />
@@ -117,6 +111,7 @@
         <option value="$PROJECT_DIR$/application/api/controller/v1/BaseController.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Seller.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Shop.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Theme.php" />
       </list>
     </option>
   </component>
@@ -382,12 +377,12 @@
       <workItem from="1524497594673" duration="9000" />
       <workItem from="1524547745570" duration="194000" />
       <workItem from="1524621472391" duration="8646000" />
-      <workItem from="1524655746969" duration="504000" />
+      <workItem from="1524655746969" duration="655000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="400918000" />
+    <option name="totallyTimeSpent" value="401069000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="407" y="0" width="1516" height="1047" extended-state="0" />
@@ -444,13 +439,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="29" column="50" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/thinkphp/library/think/Paginator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -469,13 +457,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Theme.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="34" column="57" lean-forward="false" selection-start-line="34" selection-start-column="57" selection-end-line="34" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -830,10 +811,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/common/model/Theme.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="762">
           <caret line="50" column="36" lean-forward="false" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Theme.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
           <folding />
         </state>
       </provider>

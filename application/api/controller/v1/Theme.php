@@ -16,6 +16,11 @@ use app\common\validate\Common;
 
 class Theme extends BaseController
 {
+    /**
+     * 获取首页的四个主题
+     * @throws SuccessMessage
+     * @throws ThemeException 主题不存在
+     */
     public function getIndexNormalTheme()
     {
         $theme = (new ThemeModel())->getIndexTheme();
@@ -28,6 +33,12 @@ class Theme extends BaseController
         ]);
     }
 
+    /**
+     * 获取主题对应的分类
+     * @param $id
+     * @throws SuccessMessage
+     * @throws ThemeException
+     */
     public function getThemeCategory($id)
     {
         (new Common())->goCheck('id');
