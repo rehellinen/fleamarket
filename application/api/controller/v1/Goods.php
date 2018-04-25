@@ -167,7 +167,7 @@ class Goods extends BaseController
     }
 
     /**
-     * 根据商品ID获取最近新品
+     * 根据商店ID获取最近新品
      * @param int $id 分类ID
      * @throws GoodsException
      * @throws SuccessMessage
@@ -232,7 +232,12 @@ class Goods extends BaseController
         ]);
     }
 
-
+    /**
+     * 改变商品的状态
+     * @param int $id 商品ID
+     * @param int $status 商品状态值
+     * @throws SuccessMessage
+     */
     public function updateGoodsStatus($id = null, $status = null)
     {
         (new Common())->goCheck('id');
@@ -260,13 +265,16 @@ class Goods extends BaseController
         ]);
     }
 
+    /**
+     * 编辑商品信息
+     * @throws SuccessMessage
+     */
     public function editGoods()
     {
         (new GoodsValidate())->goCheck('edit');
         $data = (new GoodsValidate())->getDataByScene('edit');
         $goodsID = $data['id'];
         $sellerID = Token::getCurrentTokenVar('sellerID');
-        $shopID = Token::getCurrentTokenVar('shopID');
         if($sellerID){
             $goods = (new GoodsModel())->where([
                 'id' => $goodsID,
@@ -278,6 +286,7 @@ class Goods extends BaseController
                 'type' => TypeEnum::NewGoods
             ])->find();
         }
+
         $uid = $goods->foreign_id;
         Token::isValidSellerShop($uid);
         $goods->save($data);

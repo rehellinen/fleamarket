@@ -45,7 +45,6 @@ class BaseController extends Controller
             }
         }else{
             $res = $shopModel::update($data, ['open_id' => $wxRes['openid']]);
-
             if($res){
                 throw new SuccessMessage([
                     'message' => '修改信息成功'
@@ -94,6 +93,16 @@ class BaseController extends Controller
     {
         $scope = TokenService::getCurrentTokenVar('scope');
         if($scope == ScopeEnum::Shop || $scope == ScopeEnum::Seller){
+            return true;
+        }else{
+            throw new ForbiddenException();
+        }
+    }
+
+    protected function checkShopScope()
+    {
+        $scope = TokenService::getCurrentTokenVar('scope');
+        if($scope == ScopeEnum::Shop){
             return true;
         }else{
             throw new ForbiddenException();

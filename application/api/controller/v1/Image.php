@@ -12,11 +12,15 @@ use app\common\exception\SuccessMessage;
 use app\common\service\Token as TokenService;
 use app\common\model\Image as ImageModel;
 use app\common\model\Shop;
-use app\common\model\Seller;
 use think\Request;
 
 class Image extends BaseController
 {
+    protected $beforeActionList = [
+        'checkSellerShopScope' => ['only' => 'imageUpload'],
+        'checkShopScope' => ['only' => 'appUpload']
+    ];
+
     /**
      * 上传图片(不带压缩功能)
      * @throws SuccessMessage
@@ -33,26 +37,33 @@ class Image extends BaseController
         ]);
     }
 
+    /**
+     * 商店头图以及头像的上传 / 更改
+     * @param string $type 判断是头图还是头像
+     * @throws SuccessMessage
+     */
     public function appUpload($type)
     {
         $image = Request::instance()->file('image');
         $info = $image->move(ROOT_PATH . 'public' . DS . 'upload');
         $path = '/upload/' . $info->getSaveName();
 
-        $sellerID = TokenService::getCurrentTokenVar('sellerID');
         $shopID = TokenService::getCurrentTokenVar('shopID');
         $imageID = (new ImageModel)->insertGetId(['image_url' => $path]);
-        if ($sellerID){
-            (new Seller())->save([$type => $imageID], ['id' => $sellerID]);
-        }elseif ($shopID){
-            (new Shop())->save([$type => $imageID], ['id' => $shopID]);
+        $res = (new Shop())->save([$type => $imageID], ['id' => $shopID]);
+
+        if($res){
+            throw new SuccessMessage([
+                'message' => '更改图片成功',
+                'data' => ['image_id' => $imageID]
+            ]);
         }
-        throw new SuccessMessage([
-            'message' => '更改图片成功',
-            'data' => ['image_id' => $imageID]
-        ]);
     }
 
+    /**
+     * CMS 使用的上传图片方法
+     * @return \think\response\Json
+     */
     public function upload()
     {
         $path = $this->resizePhoto();
@@ -64,6 +75,12 @@ class Image extends BaseController
         }
     }
 
+    /**
+     * 对图片进行压缩
+     * @param string $setWidth 图片最大宽度
+     * @param string $setHeight 图片最大高度
+     * @return string
+     */
     private function resizePhoto($setWidth = '800', $setHeight = '400')
     {
         // 获取图片相关信息
@@ -90,6 +107,11 @@ class Image extends BaseController
         return '/'.$basePath.$name;
     }
 
+    /**
+     * 生成图片文件名
+     * @param $char
+     * @return string
+     */
     private function getMD5Name($char)
     {
         $time = time();

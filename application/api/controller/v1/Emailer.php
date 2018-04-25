@@ -14,13 +14,13 @@ use think\Request;
 
 class Emailer extends BaseController
 {
-    public function Send()
+    /**
+     * 发送邮件
+     * @param string $title 标题
+     * @param string $content 内容
+     */
+    public function Send($title, $content)
     {
-        $post = Request::instance()->post();
-        $title = '跳蚤市场审核提醒';
-        $content = "商家<<".$post['name'].">>提交了跳蚤市场商家申请，请及时审核";
         EmailTo::send(config('mail.mailTo'), $title, $content);
-
-        return show(1, '成功');
     }
 }
