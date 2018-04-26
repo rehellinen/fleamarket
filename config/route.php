@@ -60,14 +60,18 @@ Route::get('api/:version/seller/:id', 'api/:version.Seller/getSellerByID');
 Route::post('api/:version/seller', 'api/:version.Seller/addSeller');
 
 // 关于订单
-Route::get('api/:version/order/:status', 'api/:version.Order/getOrder', [], ['status'=>'\d+']);
+Route::get('api/:version/order/:status', 'api/:version.Order/getOrder', [], ['status'=>'[-]*\d+']);
 Route::get('api/:version/order/:id/:type', 'api/:version.Order/getDetail', [], ['id'=>'\d+']);
+Route::get('api/:version/order/price', 'api/:version.Order/getTotalPrice');
 Route::post('api/:version/order', 'api/:version.Order/placeOrder');
 Route::post('api/:version/order/deliver/:id', 'api/:version.Order/deliver', [], ['id'=>'\d+']);
 Route::post('api/:version/order/confirm/:id', 'api/:version.Order/confirm', [], ['id'=>'\d+']);
+Route::post('api/:version/order/withdraw/:id', 'api/:version.Order/withdraw');
+Route::delete('api/:version/order/:id', 'api/:version.Order/deleteOrder');
+
+// 关于支付
 Route::post('api/:version/preOrder', 'api/:version.Pay/getPreOrder');
 Route::post('api/:version/notify', 'api/:version.Pay/receiveNotify');
-Route::delete('api/:version/order/:id', 'api/:version.Order/deleteOrder');
 
 // 关于图片
 Route::post('api/:version/image', 'api/:version.Image/appUpload');

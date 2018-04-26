@@ -15,13 +15,14 @@ use app\common\validate\Order as OrderValidate;
 use app\common\service\Token as TokenService;
 use app\common\model\Order as OrderModel;
 use enum\OrderEnum;
+use enum\StatusEnum;
 use enum\TypeEnum;
 
 class Order extends BaseController
 {
     protected $beforeActionList = [
-        'checkBuyerScope' => ['only' => 'placeOrder, getBuyerOrder, getDetail', 'deleteOrder'],
-        'checkSellerShopScope' => ['only' => 'getSellerOrder']
+        'checkBuyerScope' => ['only' => 'placeOrder,getBuyerOrder,getDetail,deleteOrder'],
+        'checkSellerShopScope' => ['only' => 'getSellerOrder,withdraw']
     ];
 
     /**
@@ -59,6 +60,10 @@ class Order extends BaseController
         // status为0表示获取所有订单
         if($status == 0){
             $status = [OrderEnum::UNPAID, OrderEnum::PAID, OrderEnum::COMPLETED, OrderEnum::DELIVERED];
+        }
+        // status为-2表示获取收支明细页面的订单
+        if($status == -2){
+            $status = [OrderEnum::COMPLETED, OrderEnum::WITHDRAWING, OrderEnum::WITHDRAWN];
         }
         if($buyerID){
             $res = (new OrderModel())->getOrderByUser($buyerID, $status, $page, $size);
@@ -196,6 +201,90 @@ class Order extends BaseController
 
         throw new SuccessMessage([
             'message' => '删除订单成功'
+        ]);
+    }
+
+    /**
+     * 商家发起提现
+     * @param int $id 订单ID
+     * @throws OrderException 订单不存在
+     * @throws SuccessMessage
+     */
+    public function withdraw($id)
+    {
+        (new Common())->goCheck('id');
+        $sellerID = TokenService::getCurrentTokenVar('sellerID');
+        $shopID = TokenService::getCurrentTokenVar('shopID');
+        if($sellerID){
+            $type = TypeEnum::OldGoods;
+            $foreignID = $sellerID;
+        }else{
+            $type = TypeEnum::NewGoods;
+            $foreignID = $shopID;
+        }
+        $order = (new OrderModel())->where([
+            'status' => OrderEnum::COMPLETED,
+            'id' => $id,
+            'type' => $type,
+            'foreign_id' => $foreignID
+        ])->find();
+        if(!$order){
+            throw new OrderException();
+        }
+        TokenService::isValidSellerShop($order->foreign_id);
+        $order->status = OrderEnum::WITHDRAWING;
+        $res = $order->save();
+        if($res){
+            throw new SuccessMessage([
+               'message' => '发起提现成功'
+            ]);
+        }
+    }
+
+    /**
+     * 获取我的收入页面的价格
+     */
+    public function getTotalPrice()
+    {
+        $sellerID = TokenService::getCurrentTokenVar('sellerID');
+        $shopID = TokenService::getCurrentTokenVar('shopID');
+        if($sellerID){
+            $type = TypeEnum::OldGoods;
+            $foreignID = $sellerID;
+        }else{
+            $type = TypeEnum::NewGoods;
+            $foreignID = $shopID;
+        }
+        $orders = (new OrderModel())->where([
+            'status' => ['in', [OrderEnum::PAID, OrderEnum::DELIVERED, OrderEnum::COMPLETED, OrderEnum::WITHDRAWING, OrderEnum::WITHDRAWN]],
+            'type' => $type,
+            'foreign_id' => $foreignID
+        ])->select()->toArray();
+        $trading = 0;
+        $completed = 0;
+        $withdrawing = 0;
+        $withdrawn = 0;
+        foreach ($orders as $order){
+            if($order['status'] == OrderEnum::PAID || $order['status'] == OrderEnum::DELIVERED){
+                $trading += $order['total_price'];
+            }
+            if($order['status'] == OrderEnum::COMPLETED){
+                $completed += $order['total_price'];
+            }
+            if($order['status'] == OrderEnum::WITHDRAWING){
+                $withdrawing += $order['total_price'];
+            }
+            if($order['status'] == OrderEnum::WITHDRAWN){
+                $withdrawn += $order['total_price'];
+            }
+        }
+        throw new SuccessMessage([
+            'data' => [
+                'trading' => $trading,
+                'completed' => $completed,
+                'withdrawing' => $withdrawing,
+                'withdrawn' => $withdrawn
+            ]
         ]);
     }
 }
