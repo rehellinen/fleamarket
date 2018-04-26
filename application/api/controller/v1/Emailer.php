@@ -19,8 +19,8 @@ class Emailer extends BaseController
      * @param string $title 标题
      * @param string $content 内容
      */
-    public function Send($title, $content)
+    public function send($title = '123', $content = '4576')
     {
-        EmailTo::send(config('mail.mailTo'), $title, $content);
+        EmailTo::send('912377791@qq.com', $title, $content);
     }
 }

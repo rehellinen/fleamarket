@@ -76,3 +76,6 @@ Route::post('api/:version/notify', 'api/:version.Pay/receiveNotify');
 // 关于图片
 Route::post('api/:version/image', 'api/:version.Image/appUpload');
 Route::post('api/:version/image/goods', 'api/:version.Image/imageUpload');
+
+// 邮件
+Route::get('api/:version/email', 'api/:version.Emailer/send');

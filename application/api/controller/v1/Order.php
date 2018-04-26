@@ -21,8 +21,9 @@ use enum\TypeEnum;
 class Order extends BaseController
 {
     protected $beforeActionList = [
-        'checkBuyerScope' => ['only' => 'placeOrder,getBuyerOrder,getDetail,deleteOrder'],
-        'checkSellerShopScope' => ['only' => 'getSellerOrder,withdraw']
+        'checkBuyerScope' => ['only' => 'placeOrder,getBuyerOrder,deleteOrder'],
+        'checkSellerShopScope' => ['only' => 'getSellerOrder,withdraw'],
+        'checkBuyerSellerShopScope' => ['only' => 'getDetail']
     ];
 
     /**

@@ -9,13 +9,18 @@
 namespace app\common\service;
 
 use app\common\model\Goods;
+use app\common\model\Seller;
+use app\common\model\Shop;
 use enum\OrderEnum;
+use enum\StatusEnum;
+use enum\TypeEnum;
 use think\Db;
 use think\Exception;
 use think\Loader;
 use app\common\model\Order as OrderModel;
 use app\common\service\Order as OrderService;
 use think\Log;
+use phpmailer\EmailTo;
 
 Loader::import('pay.WxPay', EXTEND_PATH, '.Api.php');
 
@@ -44,7 +49,14 @@ class WxNotify extends \WxPayNotify
                 }
 
                 foreach ($orders as $order){
-                    if($order['status'] == 1){
+                    // 发送邮件
+//                    if($order['type'] == TypeEnum::NewGoods){
+//                        $user = (new Shop())->where(['id' => $order['foreign_id']])->find();
+//                    }else{
+//                        $user = (new Seller())->where(['id' => $order['foreign_id']])->find();
+//                    }
+//                    EmailTo::send('912377791@qq.com', '有新订单', '请登录小程序查看详情');
+                    if($order['status'] == OrderEnum::UNPAID){
                         $orderService = new OrderService();
                         $stockStatus = $orderService->checkStock([$order['id']]);
 

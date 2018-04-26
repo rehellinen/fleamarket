@@ -23,6 +23,7 @@ class Theme extends BaseModel
         $condition = [
             'status' => StatusEnum::Normal
         ];
-        return $this->where($condition)->with('imageId')->order('listorder desc, id desc')->limit(4)->select();
+        return $this->where($condition)->with('imageId')->order('listorder desc, id desc')
+            ->limit(4)->select()->hidden(['status', 'listorder', 'image_id' => ['status']]);
     }
 }
