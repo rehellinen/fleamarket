@@ -102,6 +102,39 @@ get     api/:version/theme
 get     api/:version/category/:id
 URL params: id为主题ID
 
+19. 买家获取Token
+post    api/:version/token/buyer
+params:
+(1) code   小程序端获取的code码
+
+20. 二手卖家 / 自营商家获取Token
+post    api/:version/token/seller
+params:
+(1) code   小程序端获取的code码
+
+21. 检查Token是否过期
+post    api/:version/token/verify
+params:
+(1) token   Token令牌
+
+22. 检查openID是否存在
+post    api/:version/token/openID
+params:
+(1) code   小程序端获取的code码
+
+23. 买家修改个人信息
+put     api/:version/buyer
+scope   buyer
+params:
+(1) name   姓名
+(2) telephone   电话
+(3) weixin   微信号
+(4) dormitory   宿舍号
+(5) number   学号
+(6) email   邮箱
+
+
+
 
 
 
