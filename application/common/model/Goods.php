@@ -31,7 +31,7 @@ class Goods extends BaseModel
      */
     public function shop()
     {
-       return $this->belongsTo('Shop', 'foreign_id', 'id');
+        return $this->belongsTo('Shop', 'foreign_id', 'id');
     }
 
     /**
@@ -66,7 +66,7 @@ class Goods extends BaseModel
             'type' => $type,
             'status' => ['in', $status]
         ];
-        return $goods =  $this->where($data)->with(['imageId'])->order('listorder desc, id desc')
+        return $goods = $this->where($data)->with(['imageId'])->order('listorder desc, id desc')
             ->paginate($size, true, [
                 'page' => $page
             ])->hidden(['listorder', 'status', 'image_id' => ['status']]);
@@ -84,13 +84,13 @@ class Goods extends BaseModel
             'status' => StatusEnum::Normal,
             'type' => $type
         ])->with('imageId')->select()->toArray();
-        if(!$goods){
+        if (!$goods) {
             throw new GoodsException();
         }
         $resGoods = [];
         $numArr = generateNumber(count($goods), 6);
 
-        foreach ($numArr as $value){
+        foreach ($numArr as $value) {
             array_push($resGoods, $goods[$value]);
         }
 
@@ -113,21 +113,21 @@ class Goods extends BaseModel
             'id' => $id
         ];
 
-        if($type == TypeEnum::NewGoods){
+        if ($type == TypeEnum::NewGoods) {
             $related = 'shop';
-        }else{
+        } else {
             $related = 'seller';
         }
 
-        $goods =  $this->where($data)->with([$related, 'imageId'])->order('listorder desc, id desc')->find();
-        if(!$goods){
+        $goods = $this->where($data)->with([$related, 'imageId'])->order('listorder desc, id desc')->find();
+        if (!$goods) {
             throw new GoodsException();
         }
         return $goods = $goods->hidden([
-                'shop' => ['listorder', 'status', 'number', 'open_id'],
-                'seller' => ['listorder', 'status', 'number', 'open_id'],
-                'image_id' => ['status'], 'status'
-            ]);
+            'shop' => ['listorder', 'status', 'number', 'open_id'],
+            'seller' => ['listorder', 'status', 'number', 'open_id'],
+            'image_id' => ['status'], 'status'
+        ]);
     }
 
     /**
@@ -147,9 +147,9 @@ class Goods extends BaseModel
             'foreign_id' => $foreignId
         ];
         return $this->where($data)->with('imageId')->order('listorder desc, id desc')
-                ->paginate($size, true, [
-                    'page' => $page
-                ])->hidden(['status', 'listorder', 'image_id' => ['status']]);
+            ->paginate($size, true, [
+                'page' => $page
+            ])->hidden(['status', 'listorder', 'image_id' => ['status']]);
     }
 
     /**
@@ -161,13 +161,14 @@ class Goods extends BaseModel
     public function getByIDs($ids)
     {
         $idsArray = explode('|', $ids);
-         $goods = $this->where([
+        $goods = $this->where([
             'id' => ['in', $idsArray],
             'status' => StatusEnum::Normal
         ])->with('imageId')->select();
-        if(!$goods){
+        if ($goods->isEmpty()) {
             throw new GoodsException();
         }
+
         return $goods->hidden([
             'status', 'description', 'foreign_id', 'listorder',
             'subtitle', 'category_id', 'image_id' => ['status']
@@ -188,9 +189,9 @@ class Goods extends BaseModel
             'foreign_id' => $shopId
         ];
         $goods = $this->where($data)->with('imageId')->order('id desc')
-                ->limit(config('admin.max_recent_count'))->select();
+            ->limit(config('admin.max_recent_count'))->select();
 
-        if(!$goods){
+        if (!$goods) {
             throw new GoodsException();
         }
 
@@ -206,15 +207,17 @@ class Goods extends BaseModel
      */
     public function getByCategoryID($categoryID, $page, $size)
     {
+        $queryString = $this->getNormalShopOrSeller();
         $data = [
             'status' => StatusEnum::Normal,
             'category_id' => $categoryID
         ];
 
-        return $this->where($data)->with('imageId')->order('listorder desc, id desc')
-            ->paginate($size, true, [
-                'page' => $page
-            ])->hidden(['status', 'listorder', 'image_id' => ['status']]);
+        return $this->where($data)->where($queryString)
+            ->order('listorder desc, id desc')
+                ->paginate($size, true, [
+                    'page' => $page
+                ])->hidden(['status', 'listorder', 'image_id' => ['status']]);
     }
 
     /**
@@ -232,6 +235,6 @@ class Goods extends BaseModel
         ];
 
         return $this->where($condition)->order('listorder desc, id desc')->with('imageId')
-                ->paginate($size, true, ['page' => $page])->hidden(['']);
+            ->paginate($size, true, ['page' => $page])->hidden(['']);
     }
 }

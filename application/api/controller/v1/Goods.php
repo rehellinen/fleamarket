@@ -21,9 +21,6 @@ class Goods extends BaseController
 {
     /**
      * @var array 需要权限控制的方法
-     * 1. 获取下架的商品
-     * 2. 添加商品
-     * 3. 上架 / 下架商品
      */
     protected $beforeActionList = [
         'checkSellerShopScope' => ['only' => 'getDownedGoods,addGoods,updateGoodsStatus,editGoods']
@@ -125,10 +122,10 @@ class Goods extends BaseController
      * @param string $ids 类似于 12|34|56 的格式
      * @throws SuccessMessage
      */
-    public function checkInfo($ids)
+    public function checkInfo($ids = '')
     {
         (new Common())->goCheck('ids');
-        $goodsValidate = (new \app\common\validate\Goods());
+        $goodsValidate = (new GoodsValidate());
         $goodsValidate->goCheck('ids');
 
         $goods = (new GoodsModel())->getByIDs($ids);
@@ -147,7 +144,7 @@ class Goods extends BaseController
      * @throws GoodsException
      * @throws SuccessMessage
      */
-    public function getGoodsByCategoryId($id, $page = 1, $size = 12)
+    public function getGoodsByCategoryId($id = null, $page = 1, $size = 12)
     {
         (new Common())->goCheck('id');
         (new Common())->goCheck('page');
@@ -185,6 +182,10 @@ class Goods extends BaseController
 
     /**
      * 获取下架的商品
+     * @param int $page 页码
+     * @param int $size 每页数量
+     * @throws  SuccessMessage
+     * @throws  GoodsException 商品不存在
      */
     public function getDownedGoods($page, $size)
     {

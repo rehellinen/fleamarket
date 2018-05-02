@@ -1,6 +1,7 @@
 <?php
 namespace app\common\model;
 use enum\StatusEnum;
+use enum\TypeEnum;
 use think\Model;
 
 /**
@@ -14,6 +15,28 @@ class BaseModel extends Model
     protected $hidden = [
         'delete_time'
     ];
+
+    public function getNormalShopOrSeller()
+    {
+        $cond = [
+            'status' => StatusEnum::Normal
+        ];
+        $all = [
+            TypeEnum::NewGoods => [],
+            TypeEnum::OldGoods => []
+        ];
+        $shop = (new Shop())->where($cond)->select()->toArray();
+        foreach($shop as $k => $value){
+            array_push($all[TypeEnum::NewGoods], $value['id']);
+        }
+
+        $seller = (new Seller())->where($cond)->select()->toArray();
+        foreach($seller as $k => $value){
+            array_push($all[TypeEnum::OldGoods], $value['id']);
+        }
+
+        return '((  `type` = 2  AND `foreign_id` IN (65) ) or (`type` = 1  AND `foreign_id` IN (64)))';
+    }
 
     // 获取没有删除的所有数据
     public function getNotDelete()
