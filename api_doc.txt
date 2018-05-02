@@ -1,16 +1,72 @@
 api文档介绍
-:version表示版本号，:id表示id号
+1. 关于URL参数
+:version表示版本号，目前版本号为v1
+:id表示id号
 
-/** Banner **/
+2. 返回的数据结构
+[
+    'status' => 10000
+    'message' => '成功'
+    'data' => [],
+    'request_url' => ''
+]
+
+3. scope
+scope代表作用域，默认为所有用户都能访问
+
+
+以下为详细的API
+1. 获取banner信息
 get     api/:version/banner
-获取banner信息
-/** Banner **/
+
+2. 检查商品信息是否更改
+get     api/:version/goods/check
+params:
+(1) ids   示例：ids=1|2|3
+
+3. 根据分类获取商品
+get     api/:version/goods/category/:id
+
+4. 获取下架的商品
+get     api/:version/goods/downed
+scope   seller / shop
+
+5. 添加商品
+post    api/:version/goods
+scope   seller / shop
+params:
+(1) name   商品名字
+(2) price   商品价格
+(3) quantity   商品数量
+(4) description   商品描述（目前只支持纯文字）
+(5) image_id   图片的ID
+(6) subtitle   商品副标题
+(7) listorder   商品的排序（商品越大越展示在前面）
+
+6. 上架 / 下架商品
+post    api/:version/goods/status
+scope   seller / shop
+params:
+(1) id   商品ID
+(2) status   商品状态，1为上架，0为下架
+
+7. 修改商品信息
+put     api/:version/goods
+params:
+(1) name   商品名字
+(2) price   商品价格
+(3) quantity   商品数量
+(4) description   商品描述（目前只支持纯文字）
+(5) image_id   图片的ID
+(6) subtitle   商品副标题
+(7) listorder   商品的排序（商品越大越展示在前面）
+(8) id   商品ID
 
 
-/** 商品 **/
-get api/:version/goods/check
-携带参数示例：id=1|2|3
-/** 商品 **/
+
+
+
+
 
 /** 自营商品 **/
 get     api/:version/newGoods

@@ -18,7 +18,7 @@ Route::get('api/:version/banner', 'api/:version.Banner/getBanner');
 // 所有商品中查找
 Route::get('api/:version/goods/check', 'api/:version.Goods/checkInfo');
 Route::get('api/:version/goods/category/:id', 'api/:version.Goods/getGoodsByCategoryId', [], ['id'=>'\d+']);
-Route::get('api/:version/goods/downed', 'api/:version.Goods/getDownedGoods', [], ['id'=>'\d+']);
+Route::get('api/:version/goods/downed', 'api/:version.Goods/getDownedGoods');
 Route::post('api/:version/goods', 'api/:version.Goods/addGoods');
 Route::post('api/:version/goods/status', 'api/:version.Goods/updateGoodsStatus');
 Route::put('api/:version/goods', 'api/:version.Goods/editGoods');
@@ -79,3 +79,6 @@ Route::post('api/:version/image/goods', 'api/:version.Image/imageUpload');
 
 // 邮件
 Route::get('api/:version/email', 'api/:version.Emailer/send');
+
+// 微信相关
+Route::get('api/:version/qr', 'api/:version.Weixin/getQRCode');
