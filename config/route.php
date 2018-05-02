@@ -53,7 +53,7 @@ Route::get('api/:version/buyer', 'api/:version.Buyer/getBuyerInfo');
 // 关于自营商家
 Route::get('api/:version/shop', 'api/:version.Shop/getNormalShop');
 Route::get('api/:version/shop/:id', 'api/:version.Shop/getShopByID');
-Route::post('api/:version/shop', 'api/:version.Shop/addShop');
+Route::post('api/:version/shop', 'api/:version.Shop/addOrEditShop');
 
 // 关于二手卖家
 Route::get('api/:version/seller/:id', 'api/:version.Seller/getSellerByID');

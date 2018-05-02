@@ -63,7 +63,7 @@ class Order extends BaseModel
             'status' => ['in', $status]
         ])->paginate($size, true, [
             'page' => $page
-        ])->hidden(['snap_items', 'prepay_id']);
+        ])->hidden(['snap_items', 'prepay_id', 'listorder']);
     }
 
     public function getBuyerOrderByID($id, $buyerID, $type){

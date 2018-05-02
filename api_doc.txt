@@ -133,6 +133,63 @@ params:
 (5) number   学号
 (6) email   邮箱
 
+24. 买家获取个人信息
+get     api/:version/buyer
+scope   buyer
+
+25. 获取所有自营商店
+get     api/:version/shop
+
+25. 获取自营商店详细信息
+get     api/:version/shop/:id
+URL params: id为商店ID
+
+26. 添加 / 修改自营商店
+post    api/:version/shop
+scope   shop / seller
+params:
+(1) name   名称
+(2) number   学号
+(3) telephone   电话
+(4) weixin   微信
+(5) dormitory   宿舍
+(6) email   邮箱
+(7) zhifubao  支付宝
+(8) code   小程序端获取的code码
+(8) major   主营
+
+27. 获取二手卖家的信息
+get     api/:version/seller/:id
+URL params: id为二手卖家ID
+
+28. 添加 / 修改二手卖家
+post    api/:version/seller
+params:
+(1) name   名称
+(2) number   学号
+(3) telephone   电话
+(4) weixin   微信
+(5) dormitory   宿舍
+(6) email   邮箱
+(7) zhifubao  支付宝
+(8) code   小程序端获取的code码
+(8) major   主营
+
+29. 根据订单状态获取订单
+get     api/:version/order/:status
+URL params: status为订单状态
+-2 => COMPLETED, WITHDRAWING, WITHDRAWN
+0 => UNPAID, PAID, DELIVERED, COMPLETED
+1 => UNPAID
+2 => PAID
+3 => DELIVERED
+4 => COMPLETED
+
+30. 获取订单详情
+get     api/:version/order/:id/:type
+URL params: id为订单ID，type为订单中商品类型（1为新，2为旧）
+
+
 
 
 

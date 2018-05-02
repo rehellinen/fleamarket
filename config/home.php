@@ -14,5 +14,5 @@ return [
     ],
 
     'upload_file' => 'upload/',
-    'photo_url_prefix' => 'http://fleamarket.cn'
+    'photo_url_prefix' => 'https://20298479.rehellinen.cn/fleamarket/public'
 ];

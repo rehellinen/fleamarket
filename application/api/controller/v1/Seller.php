@@ -15,8 +15,12 @@ use app\common\exception\SuccessMessage;
 
 class Seller extends BaseController
 {
+    protected $beforeActionList = [
+
+    ];
+
     /**
-     * 添加二手卖家
+     * 添加 / 修改二手卖家
      */
     public function addSeller()
     {

@@ -10,6 +10,7 @@ namespace app\common\model;
 
 use enum\StatusEnum;
 use enum\TypeEnum;
+use app\common\exception\ShopException;
 
 class Shop extends BaseModel
 {
@@ -40,19 +41,24 @@ class Shop extends BaseModel
                 ->order('listorder desc, id desc')->with('imageId');
         }])->with('avatarImageId')->order($order)->paginate($size, true, [
             'page' => $page
-        ]);
-//        ->hidden([
-//        'status', 'listorder', 'number', 'dormitory', 'open_id',
-//        'avatar_image_id' => ['status'],
-//        'main_image_id' => ['listorder', 'status']
-//    ]);
+        ])
+        ->hidden([
+        'status', 'listorder', 'number', 'dormitory', 'open_id',
+        'avatar_image_id' => ['status'],
+        'main_image_id' => ['listorder', 'status']
+    ]);
     }
 
     public function getNormalById($id)
     {
         $condition['id'] = $id;
         $condition['status'] = StatusEnum::Normal;
-        return $this->with(['topImageId', 'avatarImageId'])->where($condition)->find();
+        $shop = $this->with(['topImageId', 'avatarImageId'])->where($condition)->find();
+        if(!$shop){
+            throw new ShopException();
+        }
+        return $shop->hidden(['listorder', 'status', 'open_id',
+            'top_image_id' => ['status'], 'avatar_image_id' => ['status']]);
     }
 
     public function getAdminShop($id)

@@ -47,9 +47,7 @@ class Shop extends BaseController
     {
         (new Common())->goCheck('id');
         $shop = (new ShopModel())->getNormalById($id);
-        if(!$shop){
-            throw new ShopException();
-        }
+
         throw new SuccessMessage([
             'message' => '获取自营商家信息成功',
             'data' => $shop
@@ -57,9 +55,9 @@ class Shop extends BaseController
     }
 
     /**
-     * 添加自营商家
+     * 添加 / 修改自营商家
      */
-    public function addShop()
+    public function addOrEditShop()
     {
         // 数据校验
         $shopValidate = new \app\common\validate\Shop();
