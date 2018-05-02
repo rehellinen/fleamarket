@@ -189,56 +189,45 @@ URL params: status为订单状态
 get     api/:version/order/:id/:type
 URL params: id为订单ID，type为订单中商品类型（1为新，2为旧）
 
+31. 获取订单总价格（用于商家版小程序）
+get     api/:version/order/price
+scope   shop / seller
 
-
-
-
-
-
-
-
-
-
-/** Token令牌 **/
-post    api/:version/token/buyer
-买家获取Token令牌
-post    api/:version/token/seller
-卖家获取Token令牌
-post    api/:version/token/verify
-验证令牌是否有效
-/** Token令牌 **/
-
-
-/** 买家 **/
-put     api/:version/buyer
-更新买家信息
-get     api/:version/buyer
-获取买家信息
-/** 买家 **/
-
-
-/** 商家 **/
-get     api/:version/shop
-get     api/:version/shop/:id
-/** 商家 **/
-
-
-/** 主题 **/
-get     api/:version/theme
-获取主题
-get     api/:version/category/:id
-根据主题id获取分类
-/** 主题 **/
-
-/** 订单 **/
-get     api/:version/order/user
-用户获取订单
-get     api/:version/order/:id
-根据订单id获取订单
+32. 下单
 post    api/:version/order
-下单
+scope   buyer
+params:
+(1) goods
+类似于
+[
+    ['goods_id' => 13, count => 1],
+    ['goods_id' => 8, count => 5]
+]
+
+33. 商家发货
+post    api/:version/order/deliver/:id
+URL params: id为订单ID
+
+34. 确认收货
+post    api/:version/order/confirm/:id
+URL params: id为订单ID
+
+35. 发起提现
+post    api/:version/order/withdraw/:id
+URL params: id为订单ID
+
+36. 删除订单
+delete  api/:version/order/:id
+URL params: id为订单ID
+
+37. 获取预订单
 post    api/:version/preOrder
-预订单
+params:
+(1) order_identify   订单号或者订单ID
+注：订单号可能对应多个订单，而订单ID唯一
+
+38. 接收微信回调
 post    api/:version/notify
-接收微信服务器回调的函数
-/** 订单 **/
+
+39. 获取小程序码
+get     api/:version/qr
