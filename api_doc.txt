@@ -26,6 +26,7 @@ params:
 
 3. 根据分类获取商品
 get     api/:version/goods/category/:id
+URL params: id为分类ID
 
 4. 获取下架的商品
 get     api/:version/goods/downed
@@ -62,33 +63,50 @@ params:
 (7) listorder   商品的排序（商品越大越展示在前面）
 (8) id   商品ID
 
-
-
-
-
-
-
-/** 自营商品 **/
+8. 获取所有自营商品
 get     api/:version/newGoods
-获取所有商品
-get     api/:version/newGoods/:id
-根据商品id获取商品
-get     api/:version/newGoods/shop/:id
-根据店铺id获取商品
-get     api/:version/newGoods/recent/shop/:id
-根据店铺id获取最近新品
-/** 自营商品 **/
 
-/** 二手商品 **/
+9. 获取首页推荐的自营商品
+get     api/:version/newGoods/index
+
+10. 获取自营商品的详情
+get     api/:version/newGoods/:id
+URL params: id为商品ID
+
+11. 根据商店ID获取所有商品
+get     api/:version/newGoods/shop/:id
+URL params: id为商店ID
+
+12. 根据商店ID获取最近新品
+get     api/:version/newGoods/recent/shop/:id
+URL params: id为商店ID
+
+13. 获取所有二手商品
 get     api/:version/oldGoods
-获取所有商品
-get     api/:version/oldGoods/:id'
-根据商品id获取商品
+
+14. 获取首页推荐的二手商品
+get     api/:version/oldGoods/index
+
+15. 获取二手商品的详情
+get     api/:version/oldGoods/:id
+URL params: id为商品ID
+
+16. 根据二手卖家ID获取最近新品
 get     api/:version/oldGoods/seller/:id
-根据卖家id获取商品
-get     api/:version/oldGoods/category/:id
-根据分类id获取商品
-/** 二手商品 **/
+URL params: id为二手卖家ID
+
+17. 获取所有主题
+get     api/:version/theme
+
+18. 根据主题ID获取分类
+get     api/:version/category/:id
+URL params: id为主题ID
+
+
+
+
+
+
 
 
 /** Token令牌 **/

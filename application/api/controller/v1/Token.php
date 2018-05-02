@@ -36,7 +36,7 @@ class Token extends BaseController
     }
 
     /**
-     * 获取二手卖家的Token
+     * 获取二手卖家 / 自营商家的Token
      * @param string $code 小程序端生成的code码
      * @throws SuccessMessage 返回Token令牌
      */

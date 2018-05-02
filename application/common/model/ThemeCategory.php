@@ -29,7 +29,8 @@ class ThemeCategory extends BaseModel
             'status' => 1,
             'theme_id' => $themeID
         ];
-        return $this->where($data)->with('imageId')->limit(15)->order('listorder desc, id desc')->select();
+        return $this->where($data)->with('imageId')->limit(15)->order('listorder desc, id desc')
+            ->select()->hidden(['status', 'listorder', 'image_id' => ['status']]);
     }
 
     public function getCategory()
