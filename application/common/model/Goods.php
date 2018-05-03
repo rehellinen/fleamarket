@@ -212,12 +212,11 @@ class Goods extends BaseModel
             'status' => StatusEnum::Normal,
             'category_id' => $categoryID
         ];
-
         return $this->where($data)->where($queryString)
             ->order('listorder desc, id desc')
-                ->paginate($size, true, [
-                    'page' => $page
-                ])->hidden(['status', 'listorder', 'image_id' => ['status']]);
+            ->paginate($size, true, [
+                'page' => $page
+            ])->hidden(['status', 'listorder', 'image_id' => ['status']]);
     }
 
     /**

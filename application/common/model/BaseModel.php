@@ -21,21 +21,22 @@ class BaseModel extends Model
         $cond = [
             'status' => StatusEnum::Normal
         ];
-        $all = [
-            TypeEnum::NewGoods => [],
-            TypeEnum::OldGoods => []
-        ];
+        $shopIDs = [];
+        $sellerIDs = [];
         $shop = (new Shop())->where($cond)->select()->toArray();
         foreach($shop as $k => $value){
-            array_push($all[TypeEnum::NewGoods], $value['id']);
+            array_push($shopIDs, $value['id']);
         }
 
         $seller = (new Seller())->where($cond)->select()->toArray();
         foreach($seller as $k => $value){
-            array_push($all[TypeEnum::OldGoods], $value['id']);
+            array_push($sellerIDs, $value['id']);
         }
+        $sellerString = implode(',', $sellerIDs);
+        $shopString = implode(',', $shopIDs);
 
-        return '((  `type` = 2  AND `foreign_id` IN (65) ) or (`type` = 1  AND `foreign_id` IN (64)))';
+        $str = '((  `type` = 1  AND `foreign_id` IN ('.$shopString.') ) or (`type` = 2  AND `foreign_id` IN ('.$sellerString.')))';
+        return $str;
     }
 
     // 获取没有删除的所有数据
