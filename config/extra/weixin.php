@@ -15,4 +15,7 @@ return [
     'bis_app_secret' => '903d07a8dd70185c99448784c2bd83a0',
     'url' => 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code',
     'pay_back_url' => 'https://20298479.rehellinen.cn/fleamarket/public/api/v1/notify',
+    //二维码相关
+    'access_token_url' => 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s',
+    'qrCode_url' => 'https://api.weixin.qq.com/wxa/getwxacode?access_token=%s'
 ];

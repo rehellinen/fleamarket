@@ -21,6 +21,11 @@ class Image extends BaseController
         'checkShopScope' => ['only' => 'appUpload']
     ];
 
+    public function saveQRCode($content)
+    {
+
+    }
+
     /**
      * 上传图片(不带压缩功能)
      * @throws SuccessMessage
