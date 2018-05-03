@@ -12,6 +12,7 @@ namespace app\common\service;
 
 use app\common\exception\TokenException;
 use enum\StatusEnum;
+use enum\TypeEnum;
 use think\Cache;
 use think\Exception;
 use think\Request;
@@ -176,28 +177,21 @@ class Token
     }
 
 
-    public static function isValidSellerShop($uid)
+    public static function isValidSellerShop($uid, $type)
     {
-        $sellerID = self::getCurrentTokenVar('sellerID');
-        $shopID = self::getCurrentTokenVar('shopID');
-        if($sellerID){
-            if($uid == $sellerID){
-                return true;
-            }else{
-                throw new TokenException([
-                    'message' => '不能操作不属于你自己的商品',
-                    'errorCode' => 80003
-                ]);
-            }
+        if($type == TypeEnum::NewGoods){
+            $cachedID = self::getCurrentTokenVar('shopID');
         }else{
-            if($uid == $shopID){
-                return true;
-            }else{
-                throw new TokenException([
-                    'message' => '不能操作不属于你自己的商品',
-                    'errorCode' => 80004
-                ]);
-            }
+            $cachedID = self::getCurrentTokenVar('sellerID');
+        }
+
+        if($uid == $cachedID){
+            return true;
+        }else{
+            throw new TokenException([
+                'message' => '不能操作不属于你自己的商品',
+                'errorCode' => 80003
+            ]);
         }
     }
 }

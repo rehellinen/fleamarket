@@ -24,7 +24,7 @@ class Theme extends BaseController
     public function getIndexNormalTheme()
     {
         $theme = (new ThemeModel())->getIndexTheme();
-        if(!$theme){
+        if($theme->isEmpty()){
             throw new ThemeException();
         }
         throw new SuccessMessage([
@@ -44,7 +44,7 @@ class Theme extends BaseController
         (new Common())->goCheck('id');
 
         $category = (new ThemeCategory())->getCategoryByThemeID($id);
-        if(!$category){
+        if($category->isEmpty()){
             throw new ThemeException([
                 'message' => '获取该主题分类失败',
                 'status' => 70001

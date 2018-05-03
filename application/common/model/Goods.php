@@ -53,6 +53,29 @@ class Goods extends BaseModel
     }
 
     /**
+     * 根据多个id获取多个商品
+     * @param string $ids
+     * @throws GoodsException 找不到商品
+     * @return mixed
+     */
+    public function getByIDs($ids)
+    {
+        $idsArray = explode('|', $ids);
+        $goods = $this->where([
+            'id' => ['in', $idsArray],
+            'status' => StatusEnum::Normal
+        ])->with('imageId')->select();
+        if ($goods->isEmpty()) {
+            throw new GoodsException();
+        }
+
+        return $goods->hidden([
+            'status', 'description', 'foreign_id', 'listorder',
+            'subtitle', 'category_id', 'image_id' => ['status']
+        ]);
+    }
+
+    /**
      * 获所有取商品 / 旧物 （关联图片）
      * @param int $type 商品种类
      * @param int|array $status 商品状态
@@ -153,29 +176,6 @@ class Goods extends BaseModel
     }
 
     /**
-     * 根据多个id获取多个商品
-     * @param string $ids
-     * @throws GoodsException 找不到商品
-     * @return mixed
-     */
-    public function getByIDs($ids)
-    {
-        $idsArray = explode('|', $ids);
-        $goods = $this->where([
-            'id' => ['in', $idsArray],
-            'status' => StatusEnum::Normal
-        ])->with('imageId')->select();
-        if ($goods->isEmpty()) {
-            throw new GoodsException();
-        }
-
-        return $goods->hidden([
-            'status', 'description', 'foreign_id', 'listorder',
-            'subtitle', 'category_id', 'image_id' => ['status']
-        ]);
-    }
-
-    /**
      * 根据商店id获取最近新品
      * @param int $shopId 商店ID
      * @return mixed
@@ -221,9 +221,12 @@ class Goods extends BaseModel
 
     /**
      * 获取下架商品
-     * @param $type
-     * @param $foreignID
+     * @param int $type
+     * @param int $foreignID
+     * @param int $size
+     * @param int $page
      * @return Paginator
+     * @throws GoodsException 商品不存在
      */
     public function getDownedGoods($type, $foreignID, $size, $page)
     {
@@ -233,7 +236,13 @@ class Goods extends BaseModel
             'status' => StatusEnum::NotPass
         ];
 
-        return $this->where($condition)->order('listorder desc, id desc')->with('imageId')
-            ->paginate($size, true, ['page' => $page])->hidden(['']);
+        $goods = $this->where($condition)->order('listorder desc, id desc')->with('imageId')
+            ->paginate($size, true, ['page' => $page]);
+
+        if($goods->isEmpty()){
+            throw new GoodsException();
+        }
+
+        return $goods->hidden(['image_id' => ['status']]);
     }
 }

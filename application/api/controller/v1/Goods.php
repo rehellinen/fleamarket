@@ -187,7 +187,7 @@ class Goods extends BaseController
      * @throws  SuccessMessage
      * @throws  GoodsException 商品不存在
      */
-    public function getDownedGoods($page, $size)
+    public function getDownedGoods($page = 1, $size = 15)
     {
         (new Common())->goCheck('page');
 
@@ -198,9 +198,7 @@ class Goods extends BaseController
         }else{
             $goods = (new GoodsModel())->getDownedGoods(TypeEnum::NewGoods, $shopID, $size, $page);
         }
-        if($goods->isEmpty()){
-            throw new GoodsException();
-        }
+
         throw new SuccessMessage([
             'message' => '获取商品信息成功',
             'data' => $goods
@@ -238,6 +236,7 @@ class Goods extends BaseController
      * @param int $id 商品ID
      * @param int $status 商品状态值
      * @throws SuccessMessage
+     * @throws GoodsException 商品不存在
      */
     public function updateGoodsStatus($id = null, $status = null)
     {
@@ -248,17 +247,26 @@ class Goods extends BaseController
         if($sellerID){
             $goods = (new GoodsModel())->where([
                 'id' => $id,
-                'type' => TypeEnum::OldGoods
+                'type' => TypeEnum::OldGoods,
+                'foreign_id' => $sellerID,
+                'status' => ['in', [StatusEnum::Normal, StatusEnum::NotPass]]
             ])->find();
         }else{
             $goods = (new GoodsModel())->where([
                 'id' => $id,
-                'type' => TypeEnum::NewGoods
+                'type' => TypeEnum::NewGoods,
+                'foreign_id' => $shopID,
+                'status' => ['in', [StatusEnum::Normal, StatusEnum::NotPass]]
             ])->find();
+        }
+        if(!$goods){
+            throw new GoodsException();
         }
 
         $uid = $goods->foreign_id;
-        Token::isValidSellerShop($uid);
+        $goodsArr = $goods->toArray();
+        $type = $goodsArr['type'];
+        Token::isValidSellerShop($uid, $type);
         $goods->status = $status;
         $goods->save();
         throw new SuccessMessage([
@@ -276,20 +284,31 @@ class Goods extends BaseController
         $data = (new GoodsValidate())->getDataByScene('edit');
         $goodsID = $data['id'];
         $sellerID = Token::getCurrentTokenVar('sellerID');
+        $shopID = Token::getCurrentTokenVar('shopID');
+
         if($sellerID){
             $goods = (new GoodsModel())->where([
                 'id' => $goodsID,
-                'type' => TypeEnum::OldGoods
+                'type' => TypeEnum::OldGoods,
+                'foreign_id' => $sellerID,
+                'status' => ['in', [StatusEnum::Normal, StatusEnum::NotPass]]
             ])->find();
         }else{
             $goods = (new GoodsModel())->where([
                 'id' => $goodsID,
-                'type' => TypeEnum::NewGoods
+                'type' => TypeEnum::NewGoods,
+                'foreign_id' => $shopID,
+                'status' => ['in', [StatusEnum::Normal, StatusEnum::NotPass]]
             ])->find();
+        }
+        if(!$goods){
+            throw new GoodsException();
         }
 
         $uid = $goods->foreign_id;
-        Token::isValidSellerShop($uid);
+        $goodsArr = $goods->toArray();
+        $type = $goodsArr['type'];
+        Token::isValidSellerShop($uid, $type);
         $goods->save($data);
         throw new SuccessMessage([
             'message' => '更改商品信息成功'

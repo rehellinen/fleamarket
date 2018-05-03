@@ -12,7 +12,8 @@ api文档介绍
 
 3. scope
 scope代表作用域，默认为所有用户都能访问
-检查API：目前到3
+检查API：目前到6
+TODO: 6 HTTP方式改为PUT
 
 以下为详细的API
 1. 获取banner信息
@@ -90,7 +91,7 @@ get     api/:version/oldGoods/index
 get     api/:version/oldGoods/:id
 URL params: id为商品ID
 
-16. 根据二手卖家ID获取最近新品
+16. 根据二手卖家ID获取所有商品
 get     api/:version/oldGoods/seller/:id
 URL params: id为二手卖家ID
 
