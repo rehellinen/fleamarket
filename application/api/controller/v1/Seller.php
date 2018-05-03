@@ -22,7 +22,7 @@ class Seller extends BaseController
     /**
      * 添加 / 修改二手卖家
      */
-    public function addSeller()
+    public function addOrEditSeller()
     {
         // 数据校验
         $shopValidate = new \app\common\validate\Seller();
@@ -42,10 +42,6 @@ class Seller extends BaseController
     {
         (new Common())->goCheck('id');
         $seller = (new SellerModel())->getNormalById($id);
-
-        if(!$seller){
-            throw new SellerException();
-        }
 
         throw new SuccessMessage([
             'message' => '获取二手卖家信息成功',

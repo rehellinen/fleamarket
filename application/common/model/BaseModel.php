@@ -21,22 +21,19 @@ class BaseModel extends Model
         $cond = [
             'status' => StatusEnum::Normal
         ];
-        $shopIDs = [];
-        $sellerIDs = [];
+        $newGoods = [];
+        $oldGoods = [];
         $shop = (new Shop())->where($cond)->select()->toArray();
         foreach($shop as $k => $value){
-            array_push($shopIDs, $value['id']);
+            array_push($newGoods, $value['id']);
         }
 
         $seller = (new Seller())->where($cond)->select()->toArray();
         foreach($seller as $k => $value){
-            array_push($sellerIDs, $value['id']);
+            array_push($oldGoods, $value['id']);
         }
-        $sellerString = implode(',', $sellerIDs);
-        $shopString = implode(',', $shopIDs);
 
-        $str = '((  `type` = 1  AND `foreign_id` IN ('.$shopString.') ) or (`type` = 2  AND `foreign_id` IN ('.$sellerString.')))';
-        return $str;
+        return '((  `type` = 2  AND `foreign_id` IN (65) ) or (`type` = 1  AND `foreign_id` IN (64)))';
     }
 
     // 获取没有删除的所有数据
@@ -59,14 +56,6 @@ class BaseModel extends Model
             'id' => 'desc'
         );
         return $this->where($data)->order($order)->paginate();
-    }
-
-    // 根据id判断信息是否审核通过 / 未删除
-    public function isExistedByID($id)
-    {
-        $data['status'] = StatusEnum::Normal;
-        $data['id'] = $id;
-        return $this->where($data)->find()->hidden(['listorder', 'open_id', 'status']);
     }
 
     // 根据id获取正常的信息

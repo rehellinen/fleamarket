@@ -9,6 +9,7 @@
 namespace app\common\model;
 
 
+use app\common\exception\BuyerException;
 use enum\StatusEnum;
 
 class Buyer extends BaseModel
@@ -18,5 +19,17 @@ class Buyer extends BaseModel
     {
         $data['status'] = StatusEnum::Normal;
         return $this->where($data)->count();
+    }
+
+    // 根据id判断信息是否审核通过 / 未删除
+    public function isExistedByID($id)
+    {
+        $data['status'] = StatusEnum::Normal;
+        $data['id'] = $id;
+        $buyer = $this->where($data)->find();
+        if(!$buyer){
+            throw new BuyerException();
+        }
+        return $buyer->hidden(['listorder', 'open_id', 'status']);
     }
 }

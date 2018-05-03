@@ -15,6 +15,10 @@ use app\common\validate\Common;
 
 class Shop extends BaseController
 {
+    protected $beforeActionList = [
+        'checkSellerShopScope' => ['only' => 'addOrEditShop']
+    ];
+
     /**
      * 获取商店列表
      * @param int $page 页码

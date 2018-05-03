@@ -1,5 +1,6 @@
 <?php
 namespace app\common\model;
+use app\common\exception\SellerException;
 use enum\StatusEnum;
 
 /**
@@ -27,5 +28,17 @@ class Seller extends BaseModel
     {
         $data['status'] = StatusEnum::Normal;
         return $this->where($data)->count();
+    }
+
+    // 根据id获取正常的信息
+    public function getNormalById($id)
+    {
+        $condition['id'] = $id;
+        $condition['status'] = StatusEnum::Normal;
+        $seller = $this->where($condition)->find();
+        if(!$seller){
+            throw new SellerException();
+        }
+        return $seller->hidden(['listorder', 'status', 'open_id']);
     }
 }

@@ -21,9 +21,9 @@ use enum\TypeEnum;
 class Order extends BaseController
 {
     protected $beforeActionList = [
-        'checkBuyerScope' => ['only' => 'placeOrder,deleteOrder'],
-        'checkSellerShopScope' => ['only' => 'getSellerOrder,withdraw,getTotalPrice'],
-        'checkBuyerSellerShopScope' => ['only' => 'getDetail']
+        'checkBuyerScope' => ['only' => 'placeOrder,deleteOrder,confirm'],
+        'checkSellerShopScope' => ['only' => 'withdraw,getTotalPrice,deliver'],
+        'checkBuyerSellerShopScope' => ['only' => 'getDetail, getOrder']
     ];
 
     /**
@@ -232,7 +232,9 @@ class Order extends BaseController
         if(!$order){
             throw new OrderException();
         }
-        TokenService::isValidSellerShop($order->foreign_id);
+        $orderArr = $order->toArray();
+        $type = $orderArr['type'];
+        TokenService::isValidSellerShop($order->foreign_id, $type);
         $order->status = OrderEnum::WITHDRAWING;
         $res = $order->save();
         if($res){

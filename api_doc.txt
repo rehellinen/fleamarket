@@ -12,7 +12,7 @@ api文档介绍
 
 3. scope
 scope代表作用域，默认为所有用户都能访问
-检查API：目前到6
+检查API：目前到23
 TODO: 6 HTTP方式改为PUT
 
 以下为详细的API
@@ -53,6 +53,7 @@ params:
 
 7. 修改商品信息
 put     api/:version/goods
+scope   seller / shop
 params:
 (1) name   商品名字
 (2) price   商品价格
@@ -177,6 +178,7 @@ params:
 
 29. 根据订单状态获取订单
 get     api/:version/order/:status
+scope   buyer / seller / shop
 URL params: status为订单状态
 -2 => COMPLETED, WITHDRAWING, WITHDRAWN
 0 => UNPAID, PAID, DELIVERED, COMPLETED
@@ -187,6 +189,7 @@ URL params: status为订单状态
 
 30. 获取订单详情
 get     api/:version/order/:id/:type
+scope   buyer / seller / shop
 URL params: id为订单ID，type为订单中商品类型（1为新，2为旧）
 
 31. 获取订单总价格（用于商家版小程序）
@@ -206,18 +209,22 @@ params:
 
 33. 商家发货
 post    api/:version/order/deliver/:id
+scope   seller / shop
 URL params: id为订单ID
 
 34. 确认收货
 post    api/:version/order/confirm/:id
+scope   buyer
 URL params: id为订单ID
 
 35. 发起提现
 post    api/:version/order/withdraw/:id
+scope   seller / shop
 URL params: id为订单ID
 
 36. 删除订单
 delete  api/:version/order/:id
+scope   buyer
 URL params: id为订单ID
 
 37. 获取预订单

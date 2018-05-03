@@ -57,7 +57,7 @@ Route::post('api/:version/shop', 'api/:version.Shop/addOrEditShop');
 
 // 关于二手卖家
 Route::get('api/:version/seller/:id', 'api/:version.Seller/getSellerByID');
-Route::post('api/:version/seller', 'api/:version.Seller/addSeller');
+Route::post('api/:version/seller', 'api/:version.Seller/addOrEditSeller');
 
 // 关于订单
 Route::get('api/:version/order/:status', 'api/:version.Order/getOrder', [], ['status'=>'[-]*\d+']);

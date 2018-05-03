@@ -37,10 +37,7 @@ class Buyer extends BaseController
         $data = (new BuyerValidate)->getDataByScene('update');
 
         // 判断用户是否存在
-        $buyer = (new BuyerModel)->isExistedByID($buyerID);
-        if(!$buyer){
-            throw new BuyerException();
-        }
+        (new BuyerModel)->isExistedByID($buyerID);
 
         // 进行更新数据操作
         $res = BuyerModel::update($data, ['id' => $buyerID]);
