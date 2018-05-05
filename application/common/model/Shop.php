@@ -31,13 +31,13 @@ class Shop extends BaseModel
 
     public function getNormalShop($page, $size)
     {
-        $data['status'] = StatusEnum::Normal;
+        $data['status'] = StatusEnum::NORMAL;
         $order = array(
             'listorder' => 'desc',
             'id' => 'desc'
         );
         return $this->where($data)->with(['mainImageId' => function ($query) {
-            $query->where(['type'=>TypeEnum::NewGoods, 'status' => StatusEnum::Normal])
+            $query->where(['type'=>TypeEnum::NewGoods, 'status' => StatusEnum::NORMAL])
                 ->order('listorder desc, id desc')->with('imageId');
         }])->with('avatarImageId')->order($order)->paginate($size, true, [
             'page' => $page
@@ -52,7 +52,7 @@ class Shop extends BaseModel
     public function getNormalById($id)
     {
         $condition['id'] = $id;
-        $condition['status'] = StatusEnum::Normal;
+        $condition['status'] = StatusEnum::NORMAL;
         $shop = $this->with(['topImageId', 'avatarImageId'])->where($condition)->find();
         if(!$shop){
             throw new ShopException();

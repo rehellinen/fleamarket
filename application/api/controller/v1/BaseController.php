@@ -33,7 +33,7 @@ class BaseController extends Controller
         $shopModel = model($model);
         $shop = $shopModel->where([
             'open_id' => ['=', $wxRes['openid']],
-            'status' => ['neq', StatusEnum::Deleted]
+            'status' => ['neq', StatusEnum::DELETED]
         ])->find();
         unset($data['code']);
         if(!$shop){
@@ -62,7 +62,7 @@ class BaseController extends Controller
     protected function checkBuyerScope()
     {
         $scope = TokenService::getCurrentTokenVar('scope');
-        if($scope == ScopeEnum::Buyer){
+        if($scope == ScopeEnum::BUYER){
             return true;
         }else{
             throw new ForbiddenException();
@@ -77,7 +77,7 @@ class BaseController extends Controller
     protected function checkBuyerSellerShopScope()
     {
         $scope = TokenService::getCurrentTokenVar('scope');
-        if($scope == ScopeEnum::Buyer || $scope == ScopeEnum::Shop || $scope == ScopeEnum::Seller){
+        if($scope == ScopeEnum::BUYER || $scope == ScopeEnum::SHOP || $scope == ScopeEnum::SELLER){
             return true;
         }else{
             throw new ForbiddenException();
@@ -92,7 +92,7 @@ class BaseController extends Controller
     protected function checkSellerShopScope()
     {
         $scope = TokenService::getCurrentTokenVar('scope');
-        if($scope == ScopeEnum::Shop || $scope == ScopeEnum::Seller){
+        if($scope == ScopeEnum::SHOP || $scope == ScopeEnum::SELLER){
             return true;
         }else{
             throw new ForbiddenException();
@@ -102,7 +102,7 @@ class BaseController extends Controller
     protected function checkShopScope()
     {
         $scope = TokenService::getCurrentTokenVar('scope');
-        if($scope == ScopeEnum::Shop){
+        if($scope == ScopeEnum::SHOP){
             return true;
         }else{
             throw new ForbiddenException();

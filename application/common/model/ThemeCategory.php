@@ -36,7 +36,7 @@ class ThemeCategory extends BaseModel
     public function getCategory()
     {
         $data = [
-            'status' => ['neq', StatusEnum::Deleted],
+            'status' => ['neq', StatusEnum::DELETED],
         ];
         $category = $this->where($data)->with(['themeId'])->order('listorder desc, id desc')->select()->toArray();
         foreach ($category as $key => $value){

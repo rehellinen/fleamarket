@@ -38,7 +38,7 @@ class Order extends BaseModel
     // 获取订单数量
     public function getDealCount()
     {
-        $data['status'] = StatusEnum::Normal;
+        $data['status'] = StatusEnum::NORMAL;
         return $this->where($data)->count();
     }
 

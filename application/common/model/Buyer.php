@@ -17,14 +17,14 @@ class Buyer extends BaseModel
     // 获取买家数量
     public function getBuyerCount()
     {
-        $data['status'] = StatusEnum::Normal;
+        $data['status'] = StatusEnum::NORMAL;
         return $this->where($data)->count();
     }
 
     // 根据id判断信息是否审核通过 / 未删除
     public function isExistedByID($id)
     {
-        $data['status'] = StatusEnum::Normal;
+        $data['status'] = StatusEnum::NORMAL;
         $data['id'] = $id;
         $buyer = $this->where($data)->find();
         if(!$buyer){

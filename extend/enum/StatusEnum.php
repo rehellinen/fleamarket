@@ -12,14 +12,14 @@ namespace enum;
 class StatusEnum
 {
     // 正常状态
-    const Normal = 1;
+    const NORMAL = 1;
 
     // 审核不通过
-    const NotPass = 0;
+    const NOTPASS = 0;
 
     // 已删除
-    const Deleted = -1;
+    const DELETED = -1;
 
     // 已卖出（商品独有的状态值）
-    const Sold = 2;
+    const SOLD = 2;
 }

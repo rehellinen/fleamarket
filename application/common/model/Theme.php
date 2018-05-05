@@ -21,7 +21,7 @@ class Theme extends BaseModel
     public function getIndexTheme()
     {
         $condition = [
-            'status' => StatusEnum::Normal
+            'status' => StatusEnum::NORMAL
         ];
         return $this->where($condition)->with('imageId')->order('listorder desc, id desc')
             ->limit(4)->select()->hidden(['status', 'listorder', 'image_id' => ['status']]);

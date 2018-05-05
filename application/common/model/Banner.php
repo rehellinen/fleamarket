@@ -26,7 +26,7 @@ class Banner extends BaseModel
      */
     public function getBanners()
     {
-        $condition['status'] = StatusEnum::Normal;
+        $condition['status'] = StatusEnum::NORMAL;
         $maxCount = config('admin.max_banner_count');
         $banners = $this->where($condition)->order('listorder desc, id desc')
             ->with('imageId')->limit($maxCount)->select();

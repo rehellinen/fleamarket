@@ -18,7 +18,7 @@ class Goods extends BaseController
     public function newGoods()
     {
         $newGoods = (new GoodsModel())->generalGet(TypeEnum::NewGoods, [
-            StatusEnum::Normal, StatusEnum::NotPass
+            StatusEnum::NORMAL, StatusEnum::NOTPASS
         ]);
         return $this->fetch('', [
             'goods' => $newGoods
@@ -28,7 +28,7 @@ class Goods extends BaseController
     public function oldGoods()
     {
         $oldGoods = (new GoodsModel())->generalGet(TypeEnum::OldGoods, [
-            StatusEnum::Normal, StatusEnum::NotPass
+            StatusEnum::NORMAL, StatusEnum::NOTPASS
         ]);
         return $this->fetch('', [
             'goods' => $oldGoods

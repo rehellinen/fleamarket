@@ -38,7 +38,7 @@ class Goods extends BaseController
     {
         (new Common())->goCheck('page');
         (new Common())->goCheck('type');
-        $goods = (new GoodsModel)->getGoods($type, StatusEnum::Normal, $page, $size);
+        $goods = (new GoodsModel)->getGoods($type, StatusEnum::NORMAL, $page, $size);
         if($goods->isEmpty()){
             throw new GoodsException([
                 'data' => ['data' => []]
@@ -78,7 +78,7 @@ class Goods extends BaseController
     {
         (new Common())->goCheck('id');
         (new Common())->goCheck('type');
-        $goods = (new GoodsModel())->GetGoodsByID($type, StatusEnum::Normal, $id);
+        $goods = (new GoodsModel())->GetGoodsByID($type, StatusEnum::NORMAL, $id);
 
         throw new SuccessMessage([
             'data' => $goods,
@@ -101,7 +101,7 @@ class Goods extends BaseController
         (new Common())->goCheck('id');
         (new Common())->goCheck('page');
         (new Common())->goCheck('type');
-        $goods = (new GoodsModel())->getByForeignID($type, StatusEnum::Normal, $id, $page, $size);
+        $goods = (new GoodsModel())->getByForeignID($type, StatusEnum::NORMAL, $id, $page, $size);
 
         if($goods->isEmpty()){
             throw new GoodsException([
@@ -249,14 +249,14 @@ class Goods extends BaseController
                 'id' => $id,
                 'type' => TypeEnum::OldGoods,
                 'foreign_id' => $sellerID,
-                'status' => ['in', [StatusEnum::Normal, StatusEnum::NotPass]]
+                'status' => ['in', [StatusEnum::NORMAL, StatusEnum::NOTPASS]]
             ])->find();
         }else{
             $goods = (new GoodsModel())->where([
                 'id' => $id,
                 'type' => TypeEnum::NewGoods,
                 'foreign_id' => $shopID,
-                'status' => ['in', [StatusEnum::Normal, StatusEnum::NotPass]]
+                'status' => ['in', [StatusEnum::NORMAL, StatusEnum::NOTPASS]]
             ])->find();
         }
         if(!$goods){
@@ -291,14 +291,14 @@ class Goods extends BaseController
                 'id' => $goodsID,
                 'type' => TypeEnum::OldGoods,
                 'foreign_id' => $sellerID,
-                'status' => ['in', [StatusEnum::Normal, StatusEnum::NotPass]]
+                'status' => ['in', [StatusEnum::NORMAL, StatusEnum::NOTPASS]]
             ])->find();
         }else{
             $goods = (new GoodsModel())->where([
                 'id' => $goodsID,
                 'type' => TypeEnum::NewGoods,
                 'foreign_id' => $shopID,
-                'status' => ['in', [StatusEnum::Normal, StatusEnum::NotPass]]
+                'status' => ['in', [StatusEnum::NORMAL, StatusEnum::NOTPASS]]
             ])->find();
         }
         if(!$goods){

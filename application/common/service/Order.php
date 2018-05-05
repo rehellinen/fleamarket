@@ -88,7 +88,7 @@ class Order
 
         $dbGoods = (new Goods())->where([
             'id' => ['in', $goodsID],
-            'status' => StatusEnum::Normal
+            'status' => StatusEnum::NORMAL
         ])->select()->toArray();
 
         $belongsTo = [];

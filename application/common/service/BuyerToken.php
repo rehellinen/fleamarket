@@ -42,7 +42,7 @@ class BuyerToken extends Token
         // 爬取微信服务器返回的结果
         $wxResult = $this->getResultFromWx();
         // 根据openID获取用户ID
-        $buyerID = $this->getIDByOpenID($wxResult['openid'], 'Buyer', StatusEnum::Normal);
+        $buyerID = $this->getIDByOpenID($wxResult['openid'], 'Buyer', StatusEnum::NORMAL);
         // 生成缓存的键与值
         $cachedKey = self::generateToken();
         $cachedValue = $this->prepareCachedValue($wxResult, $buyerID);
@@ -61,7 +61,7 @@ class BuyerToken extends Token
     {
         $cachedValue = $wxResult;
         $cachedValue['buyerID'] = $buyerID;
-        $cachedValue['scope'] = ScopeEnum::Buyer;
+        $cachedValue['scope'] = ScopeEnum::BUYER;
 
         return $cachedValue;
     }

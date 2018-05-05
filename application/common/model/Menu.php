@@ -36,7 +36,7 @@ class Menu extends BaseModel
     public function getChildMenuByID($id)
     {
         $data = [
-            'status' => array('neq', StatusEnum::Deleted),
+            'status' => array('neq', StatusEnum::DELETED),
             'parent_id' => $id
         ];
         return $this->where($data)->order('listorder desc, id desc')->paginate();

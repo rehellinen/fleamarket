@@ -16,7 +16,7 @@ class Seller extends BaseModel
     {
         $data = array(
             'telephone' => $tel,
-            'status' => StatusEnum::Normal,
+            'status' => StatusEnum::NORMAL,
             'is_root' => 1,
         );
 
@@ -26,7 +26,7 @@ class Seller extends BaseModel
     // 获取卖家的数量
     public function getSellerCount()
     {
-        $data['status'] = StatusEnum::Normal;
+        $data['status'] = StatusEnum::NORMAL;
         return $this->where($data)->count();
     }
 
@@ -34,7 +34,7 @@ class Seller extends BaseModel
     public function getNormalById($id)
     {
         $condition['id'] = $id;
-        $condition['status'] = StatusEnum::Normal;
+        $condition['status'] = StatusEnum::NORMAL;
         $seller = $this->where($condition)->find();
         if(!$seller){
             throw new SellerException();

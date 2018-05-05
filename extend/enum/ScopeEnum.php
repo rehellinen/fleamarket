@@ -12,11 +12,11 @@ namespace enum;
 // 权限值说明
 class ScopeEnum
 {
-    const Buyer = 16;
+    const BUYER = 16;
 
-    const Seller = 24;
+    const SELLER = 24;
 
-    const Shop = 32;
+    const SHOP = 32;
 
     const CMS = 40;
 }

@@ -63,7 +63,7 @@ class Goods extends BaseModel
         $idsArray = explode('|', $ids);
         $goods = $this->where([
             'id' => ['in', $idsArray],
-            'status' => StatusEnum::Normal
+            'status' => StatusEnum::NORMAL
         ])->with('imageId')->select();
         if ($goods->isEmpty()) {
             throw new GoodsException();
@@ -104,7 +104,7 @@ class Goods extends BaseModel
     public function getIndexGoods($type)
     {
         $goods = $this->where([
-            'status' => StatusEnum::Normal,
+            'status' => StatusEnum::NORMAL,
             'type' => $type
         ])->with('imageId')->select()->toArray();
         if (!$goods) {
@@ -184,7 +184,7 @@ class Goods extends BaseModel
     public function getRecentShopNewGoods($shopId)
     {
         $data = [
-            'status' => StatusEnum::Normal,
+            'status' => StatusEnum::NORMAL,
             'type' => TypeEnum::NewGoods,
             'foreign_id' => $shopId
         ];
@@ -209,7 +209,7 @@ class Goods extends BaseModel
     {
         $queryString = $this->getNormalShopOrSeller();
         $data = [
-            'status' => StatusEnum::Normal,
+            'status' => StatusEnum::NORMAL,
             'category_id' => $categoryID
         ];
         return $this->where($data)->where($queryString)
@@ -233,7 +233,7 @@ class Goods extends BaseModel
         $condition = [
             'type' => $type,
             'foreign_id' => $foreignID,
-            'status' => StatusEnum::NotPass
+            'status' => StatusEnum::NOTPASS
         ];
 
         $goods = $this->where($condition)->order('listorder desc, id desc')->with('imageId')

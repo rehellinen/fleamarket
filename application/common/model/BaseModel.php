@@ -19,7 +19,7 @@ class BaseModel extends Model
     public function getNormalShopOrSeller()
     {
         $cond = [
-            'status' => StatusEnum::Normal
+            'status' => StatusEnum::NORMAL
         ];
         $newGoods = [];
         $oldGoods = [];
@@ -39,7 +39,7 @@ class BaseModel extends Model
     // 获取没有删除的所有数据
     public function getNotDelete()
     {
-        $data['status'] = array('neq', StatusEnum::Deleted);
+        $data['status'] = array('neq', StatusEnum::DELETED);
         $order = array(
             'listorder' => 'desc',
             'id' => 'desc'
@@ -50,7 +50,7 @@ class BaseModel extends Model
     // 获取审核通过的所有数据
     public function getNormal()
     {
-        $data['status'] = StatusEnum::Normal;
+        $data['status'] = StatusEnum::NORMAL;
         $order = array(
             'listorder' => 'desc',
             'id' => 'desc'
@@ -62,14 +62,14 @@ class BaseModel extends Model
     public function getNormalById($id)
     {
         $condition['id'] = $id;
-        $condition['status'] = StatusEnum::Normal;
+        $condition['status'] = StatusEnum::NORMAL;
         return $this->where($condition)->find();
     }
 
     // 获取正常信息的数量
     public function getNormalCount()
     {
-        $condition['status'] = StatusEnum::Normal;
+        $condition['status'] = StatusEnum::NORMAL;
         return $this->where($condition)->count();
     }
 
@@ -92,7 +92,7 @@ class BaseModel extends Model
     public function getHasImage()
     {
         $condition = [
-            'status' => ['neq', StatusEnum::Deleted]
+            'status' => ['neq', StatusEnum::DELETED]
         ];
         $res = $this->where($condition)->order('listorder desc, id desc')->with('imageId')->select()->toArray();
         foreach ($res as $key => $value) {

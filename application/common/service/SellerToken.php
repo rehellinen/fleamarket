@@ -64,12 +64,12 @@ class SellerToken extends Token
     {
         $seller = model('Seller')->where([
             'open_id' => $openID,
-            'status' => ['neq', StatusEnum::Deleted]
+            'status' => ['neq', StatusEnum::DELETED]
         ])->find();
 
         $shop = model('Shop')->where([
             'open_id' => $openID,
-            'status' => ['neq', StatusEnum::Deleted]
+            'status' => ['neq', StatusEnum::DELETED]
         ])->find();
 
         if($seller){
@@ -95,10 +95,10 @@ class SellerToken extends Token
     {
         $cachedValue = $wxResult;
         if(array_key_exists('seller', $uidArr)){
-            $cachedValue['scope'] = ScopeEnum::Seller;
+            $cachedValue['scope'] = ScopeEnum::SELLER;
             $cachedValue['sellerID'] = $uidArr['seller'];
         }else{
-            $cachedValue['scope'] = ScopeEnum::Shop;
+            $cachedValue['scope'] = ScopeEnum::SHOP;
             $cachedValue['shopID'] = $uidArr['shop'];
         }
 

@@ -34,7 +34,7 @@ class Login extends Controller
         $data = $validate->getDataByScene('login');
 
         $seller = (new SellerModel())->getRootByTel($data['telephone']);
-        if(!$seller || $seller['status'] != StatusEnum::Normal || $seller['is_root'] != 1){
+        if(!$seller || $seller['status'] != StatusEnum::NORMAL || $seller['is_root'] != 1){
             return show(0,'该用户不存在');
         }
         $inputPassword = md5(config('admin.md5_prefix').$data['password'].$seller['code']);

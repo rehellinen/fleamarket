@@ -55,7 +55,7 @@ class Token
     {
         $res = model($modelName)->where([
             'open_id' => $openID,
-            'status' => ['neq', StatusEnum::Deleted]
+            'status' => ['neq', StatusEnum::DELETED]
         ])->find();
         if(!$res){
             $id = model($modelName)->insertGetId([
