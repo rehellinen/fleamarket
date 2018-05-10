@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 
 
+use app\common\model\Admin;
 use enum\StatusEnum;
 use think\Controller;
 use think\Request;
@@ -28,20 +29,21 @@ class Login extends Controller
         // 验证与获取数据
         $post = Request::instance()->post();
         $validate = (new SellerValidate);
-        if(!$validate->scene('login')->check($post)){
+        if(!$validate->scene('loginCMS')->check($post)){
             return show(0,$validate->getError());
         }
-        $data = $validate->getDataByScene('login');
+        $data = $validate->getDataByScene('loginCMS');
 
-        $seller = (new SellerModel())->getRootByTel($data['telephone']);
-        if(!$seller || $seller['status'] != StatusEnum::NORMAL || $seller['is_root'] != 1){
+        $admin = (new Admin())->getByAccount($data['account']);
+        if(!$admin){
             return show(0,'该用户不存在');
         }
-        $inputPassword = md5(config('admin.md5_prefix').$data['password'].$seller['code']);
-        if($seller['password']!=$inputPassword){
+
+        $inputMd5Password = md5(config('admin.md5_prefix').$data['password'].$admin['salt']);
+        if($admin['password']!=$inputMd5Password){
             return show(0,'密码不正确');
         }else{
-            Session::set('loginUser', $seller, 'admin');
+            Session::set('loginUser', $admin, 'admin');
             return show(1,'登录成功');
         }
     }

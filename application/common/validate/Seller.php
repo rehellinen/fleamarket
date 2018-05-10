@@ -20,11 +20,14 @@ class Seller extends BaseValidate
         ['zhifubao', 'require', '支付宝账号不能为空'],
         ['dormitory', 'require|number|max:4', '宿舍号不能为空|宿舍号必须为数字|宿舍号长度不合法'],
         ['number', 'require', '学号不能为空'],
-        ['code', 'require', 'code不能为空'],
+        ['code', 'require', 'code码不能为空'],
+        ['account', 'require', '账号不能为空'],
+        ['password', 'require', '密码不能为空']
     ];
 
     protected $scene = [
         'register'  => ['name', 'number', 'telephone', 'weixin', 'dormitory', 'email', 'zhifubao', 'code'],
         'edit'  => ['name', 'telephone', 'email', 'weixin', 'zhifubao', 'dormitory'],
+        'loginCMS' => ['account', 'password']
     ];
 }

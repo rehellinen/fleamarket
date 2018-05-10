@@ -58,7 +58,11 @@ class BaseModel extends Model
         return $this->where($data)->order($order)->paginate();
     }
 
-    // 根据id获取正常的信息
+    /**
+     * 根据ID获取状态为1的纪录
+     * @param int $id 主键
+     * @return Model
+     */
     public function getNormalById($id)
     {
         $condition['id'] = $id;
