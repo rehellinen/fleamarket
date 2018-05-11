@@ -14,9 +14,13 @@ class Order extends BaseController
 {
     public function index()
     {
-        $order = (new \app\common\model\Order())->getNotDelete();
+        $order = (new OrderModel())->getAllOrder();
+        $page = $order->render();
+        $order = $order->toArray();
+
         return $this->fetch('',[
-            'order' => $order
+            'order' => $order['data'],
+            'page' => $page
         ]);
     }
 

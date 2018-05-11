@@ -21,7 +21,6 @@
                                         <th>总价格</th>
                                         <th>买家</th>
                                         <th>状态</th>
-                                        <th>操作</th>
                                         <th>提现</th>
                                     </tr>
                                     </thead>
@@ -32,11 +31,8 @@
                                         </td>
                                         <td>{$vo.snap_name}</td>
                                         <td>{$vo.total_price}</td>
-                                        <td>{$vo.buyer_id}</td>
+                                        <td>{$vo.buyer_id.name}</td>
                                         <td>{$vo.status|getOrderStatus}</td>
-                                        <td>
-                                            <span class="glyphicon glyphicon-remove statusButton" attr-id="{$vo.id}" attr-status="-1"></span>
-                                        </td>
                                         <td>
                                             {if condition="$vo.status === 6"}
                                                 <button class="btn btn-success btn-sm withdrawButton button-left-margin" attr-id="{$vo.id}">提现完成</button>
@@ -51,7 +47,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    {$order->render()}
+                    {$page}
                 </div>
                 <br />
             </div>

@@ -20,10 +20,10 @@ class BaseController extends Controller
     public function _initialize()
     {
         // 判断是否登录
-        $res = Session::has('loginUser', 'admin');
-        if(!$res){
-            $this->redirect("admin/Login/index");
-        }
+//        $res = Session::has('loginUser', 'admin');
+//        if(!$res){
+//            $this->redirect("admin/Login/index");
+//        }
 
         // 导航栏用户信息
         $seller = Session::get('loginUser', 'admin');

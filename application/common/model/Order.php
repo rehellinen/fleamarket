@@ -9,6 +9,7 @@
 namespace app\common\model;
 
 
+use enum\OrderEnum;
 use enum\StatusEnum;
 
 class Order extends BaseModel
@@ -35,11 +36,17 @@ class Order extends BaseModel
         return $this->hasMany('orderGoods', 'order_id', 'id');
     }
 
-    // 获取订单数量
-    public function getDealCount()
+    /**
+     * 获取未删除的订单
+     */
+    public function getAllOrder()
     {
-        $data['status'] = StatusEnum::NORMAL;
-        return $this->where($data)->count();
+        $order =  $this->where([
+            'status' => ['neq', OrderEnum::DELETE]
+        ])->with('buyerId')->paginate();
+
+        return $order;
+
     }
 
     public static function getOrderByUser($buyerID, $status, $page, $size)
