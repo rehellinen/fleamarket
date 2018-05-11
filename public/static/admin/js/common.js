@@ -21,11 +21,11 @@ $('#registerButton').click(function () {
         postData[this.name] = this.value;
     });
     $.post(URL.submit_url, postData, function (result) {
-        if(result.status===1){
+        if(result.status === 1){
             console.log(result);
             dialog.email(result.message, result.data);
         }
-        if(result.status===0){
+        if(result.status === 0){
             dialog.error(result.message);
         }
     },"JSON");
@@ -33,11 +33,14 @@ $('#registerButton').click(function () {
 
 $('* .withdrawButton').click(function () {
     var id = $(this).attr('attr-id');
-    var postData = {
-        'id': id
-    }
 
-    $.post(URL.)
+    // status 为7表示提现完成
+    var postData = {
+        'id': id,
+        'status': 7
+    };
+
+    dialog.status('是否确定已经提现', URL.status_url, postData);
 });
 
 $('* .listorder').blur(function () {
@@ -49,8 +52,11 @@ $('* .listorder').blur(function () {
     };
 
     $.post(URL.listorder_url, postData, function (result) {
-        if(result.status===1){
+        if(result.status === 1){
             dialog.success(result.message, URL.success_url);
+        }
+        if(result.status === 0){
+            dialog.error(result.message);
         }
 
     }, "JSON");
@@ -70,7 +76,7 @@ $('* .menuButton').click(function () {
 $('* .statusButton').click(function () {
    var id = $(this).attr('attr-id');
    var status = $(this).attr('attr-status');
-   postData = {
+   var postData = {
        'id' : id,
        'status' : status
    };
@@ -83,10 +89,10 @@ $('* .buyButton').click(function () {
      'id' : id
    };
    $.post(URL.buy_url, postData, function (result) {
-       if(result.status===1){
+       if(result.status === 1){
            window.location.href = URL.buy_url+"?id="+id;
        }
-       if(result.status===0){
+       if(result.status === 0){
            dialog.error(result.message);
        }
    },"JSON");
