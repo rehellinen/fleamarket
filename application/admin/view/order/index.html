@@ -11,7 +11,7 @@
                         <div class="card-body" style="padding: 20px 10px">
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
-                                <div class="panel-heading">菜单管理</div>
+                                <div class="panel-heading">订单管理</div>
                                 <!-- Table -->
                                 <table class="table table-bordered">
                                     <thead>
@@ -32,11 +32,13 @@
                                         <td>{$vo.snap_name}</td>
                                         <td>{$vo.total_price}</td>
                                         <td>{$vo.buyer_id}</td>
-                                        <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getOrderStatus}
-                                        </td>
+                                        <td>{$vo.status|getOrderStatus}</td>
                                         <td>
                                             <span class="fa fa-pencil-square editButton" attr-id="{$vo.id}" attr-image="0"></span>
                                             <span class="glyphicon glyphicon-remove statusButton" attr-id="{$vo.id}" attr-status="-1"></span>
+                                            {if condition="$vo.status === 6"}
+                                                <button class="btn btn-success btn-sm withdrawButton button-left-margin" attr-id="{$vo.id}">提现完成</button>
+                                            {/if}
                                         </td>
                                     </tr>
                                     {/volist}
@@ -57,9 +59,10 @@
 
     <script>
         var URL = {
-            'listorder_url' : "{:url('admin/buyer/listorder')}",
-            'success_url' : "{:url('admin/buyer/index')}",
-            'status_url' : "{:url('admin/buyer/setStatus')}"
+            'listorder_url' : "{:url('admin/order/listorder')}",
+            'success_url' : "{:url('admin/order/index')}",
+            'status_url' : "{:url('admin/order/setStatus')}",
+            'withdraw_url' : "{:url('admin/order/withdraw')}"
         };
     </script>
     {include file="Public/footer"}

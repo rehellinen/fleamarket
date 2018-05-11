@@ -31,6 +31,15 @@ $('#registerButton').click(function () {
     },"JSON");
 });
 
+$('* .withdrawButton').click(function () {
+    var id = $(this).attr('attr-id');
+    var postData = {
+        'id': id
+    }
+
+    $.post(URL.)
+});
+
 $('* .listorder').blur(function () {
     var id = $(this).attr('attr-id');
     var listorder = $(this).val();
