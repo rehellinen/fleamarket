@@ -14,11 +14,18 @@ use enum\StatusEnum;
 
 class Buyer extends BaseModel
 {
-    // 获取买家数量
-    public function getBuyerCount()
+    /**
+     * 获取所有已经注册的买家
+     */
+    public function getRegisterBuyer()
     {
-        $data['status'] = StatusEnum::NORMAL;
-        return $this->where($data)->count();
+        $buyers = $this->where([
+            'status' => ['neq', StatusEnum::DELETED],
+            'name' => ['neq', ''],
+            'telephone' => ['neq', '']
+        ])->paginate();
+
+        return $buyers;
     }
 
     // 根据id判断信息是否审核通过 / 未删除
