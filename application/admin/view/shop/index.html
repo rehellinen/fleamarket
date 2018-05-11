@@ -20,6 +20,10 @@
                                     <th>商店名称</th>
                                     <th>电话</th>
                                     <th>学号</th>
+                                    <th>宿舍号</th>
+                                    <th>邮箱</th>
+                                    <th>微信</th>
+                                    <th>支付宝</th>
                                     <th>主营</th>
                                     <th>状态</th>
                                     <th>操作</th>
@@ -33,6 +37,10 @@
                                     <td>{$vo.name}</td>
                                     <td>{$vo.telephone}</td>
                                     <td>{$vo.number}</td>
+                                    <td>{$vo.dormitory}</td>
+                                    <td>{$vo.email}</td>
+                                    <td>{$vo.weixin}</td>
+                                    <td>{$vo.zhifubao}</td>
                                     <td>{$vo.major}</td>
                                     <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getStatus}
                                     </td>
