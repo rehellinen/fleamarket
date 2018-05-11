@@ -53,16 +53,22 @@ function getRandChars($length)
     return $str;
 }
 
+function getOrderStatus()
+{
+
+}
+
 function getStatus($value)
 {
     switch ($value) {
-        case -1:
+        case \enum\StatusEnum::DELETED:
             return '已删除';
-        case 1:
+        case \enum\StatusEnum::NORMAL:
             return '审核通过';
-        case 0:
+        case \enum\StatusEnum::NOTPASS:
             return '待审核';
     }
+    return '未知状态';
 }
 
 function generateNumber($length, $num = 6)

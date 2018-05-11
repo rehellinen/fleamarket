@@ -7,21 +7,47 @@
         <div class="container-fluid">
             <div class="side-body">
                 <div class="row">
-                    <h4>买家列表</h4>
-                    {volist name="order" id="vo"}
-                    <div class="">
-                        <div class="thumbnail no-margin-bottom">
-                            <div class="caption">
-                                <h4>商品名称：{$vo.goods_id}</h4>
-                                <p>买家名称：{$vo.buyer_id}</p>
-                                <p>卖家名称：{$vo.seller_id}</p>
+                    <div class="card">
+                        <div class="card-body" style="padding: 20px 10px">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">菜单管理</div>
+                                <!-- Table -->
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>排序</th>
+                                        <th>订单名</th>
+                                        <th>总价格</th>
+                                        <th>买家</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {volist name="order" id="vo"}
+                                    <tr>
+                                        <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}" /></p>
+                                        </td>
+                                        <td>{$vo.snap_name}</td>
+                                        <td>{$vo.total_price}</td>
+                                        <td>{$vo.buyer_id}</td>
+                                        <td class="statusButton" attr-id="{$vo.id}" attr-status="{$vo.status == 0 ? 1 : 0}">{$vo.status|getOrderStatus}
+                                        </td>
+                                        <td>
+                                            <span class="fa fa-pencil-square editButton" attr-id="{$vo.id}" attr-image="0"></span>
+                                            <span class="glyphicon glyphicon-remove statusButton" attr-id="{$vo.id}" attr-status="-1"></span>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    {/volist}
                 </div>
                 <div class="row">
-                    {$deal->render()}
+                    {$order->render()}
                 </div>
                 <br />
             </div>
