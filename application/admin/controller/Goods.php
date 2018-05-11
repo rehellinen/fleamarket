@@ -17,9 +17,10 @@ class Goods extends BaseController
 {
     public function newGoods()
     {
-        $newGoods = (new GoodsModel())->generalGet(TypeEnum::NewGoods, [
-            StatusEnum::NORMAL, StatusEnum::NOTPASS
-        ]);
+        $newGoods = (new GoodsModel())->where([
+            'type' => TypeEnum::NewGoods,
+            'status' => ['in', [StatusEnum::NOTPASS, StatusEnum::NORMAL]]
+        ])->order('id desc')->paginate();
         return $this->fetch('', [
             'goods' => $newGoods
         ]);
@@ -27,9 +28,10 @@ class Goods extends BaseController
 
     public function oldGoods()
     {
-        $oldGoods = (new GoodsModel())->generalGet(TypeEnum::OldGoods, [
-            StatusEnum::NORMAL, StatusEnum::NOTPASS
-        ]);
+        $oldGoods = (new GoodsModel())->where([
+            'type' => TypeEnum::OldGoods,
+            'status' => ['in', [StatusEnum::NOTPASS, StatusEnum::NORMAL]]
+        ])->order('id desc')->paginate();
         return $this->fetch('', [
             'goods' => $oldGoods
         ]);

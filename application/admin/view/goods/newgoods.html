@@ -16,7 +16,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>排序</th>
+                                    <th>ID</th>
                                     <th>商品名称</th>
                                     <th>小标题</th>
                                     <th>价格</th>
@@ -29,8 +29,7 @@
                                 <tbody>
                                 {volist name="goods" id="vo"}
                                 <tr>
-                                    <td><input attr-id="{$vo.id}" class="listorder" value="{$vo.listorder}" /></p>
-                                    </td>
+                                    <td>{$vo.id}</td>                                    </td>
                                     <td>{$vo.name}</td>
                                     <td>{$vo.subtitle}</td>
                                     <td>{$vo.price}</td>
@@ -49,6 +48,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="row">
+                {$goods->render()}
             </div>
         </div>
     </div>
