@@ -32,8 +32,10 @@ class BaseModel extends Model
         foreach($seller as $k => $value){
             array_push($oldGoods, $value['id']);
         }
+        $newGoodsStr = implode(',', $newGoods);
+        $oldGoodsStr = implode(',', $oldGoods);
 
-        return '((  `type` = 2  AND `foreign_id` IN (65) ) or (`type` = 1  AND `foreign_id` IN (64)))';
+        return '((  `type` = 2  AND `foreign_id` IN ('. $oldGoodsStr .') ) or (`type` = 1  AND `foreign_id` IN ('. $newGoodsStr .')))';
     }
 
     // 获取没有删除的所有数据

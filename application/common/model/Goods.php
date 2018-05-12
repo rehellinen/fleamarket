@@ -10,6 +10,7 @@ namespace app\common\model;
 
 
 use app\common\exception\GoodsException;
+use app\common\exception\ShopException;
 use enum\StatusEnum;
 use enum\TypeEnum;
 use think\Paginator;
@@ -60,8 +61,9 @@ class Goods extends BaseModel
      */
     public function getByIDs($ids)
     {
+        $queryString = $this->getNormalShopOrSeller();
         $idsArray = explode('|', $ids);
-        $goods = $this->where([
+        $goods = $this->where($queryString)->where([
             'id' => ['in', $idsArray],
             'status' => StatusEnum::NORMAL
         ])->with('imageId')->select();
@@ -85,11 +87,12 @@ class Goods extends BaseModel
      */
     public function getGoods($type, $status, $page = 1, $size = 14)
     {
+        $queryString = $this->getNormalShopOrSeller();
         $data = [
             'type' => $type,
             'status' => ['in', $status]
         ];
-        return $goods = $this->where($data)->with(['imageId'])->order('listorder desc, id desc')
+        return $goods = $this->where($data)->with(['imageId'])->order('listorder desc, id desc')->where($queryString)
             ->paginate($size, true, [
                 'page' => $page
             ])->hidden(['listorder', 'status', 'image_id' => ['status']]);
@@ -103,7 +106,8 @@ class Goods extends BaseModel
      */
     public function getIndexGoods($type)
     {
-        $goods = $this->where([
+        $queryString = $this->getNormalShopOrSeller();
+        $goods = $this->where($queryString)->where([
             'status' => StatusEnum::NORMAL,
             'type' => $type
         ])->with('imageId')->select()->toArray();
@@ -164,6 +168,8 @@ class Goods extends BaseModel
      */
     public function getByForeignID($type, $status, $foreignId, $page, $size)
     {
+        // 判断商店 / 卖家是否审核通过
+        $this->isShopSellerNormal($type, $foreignId);
         $data = [
             'status' => ['in', $status],
             'type' => $type,
@@ -183,6 +189,8 @@ class Goods extends BaseModel
      */
     public function getRecentShopNewGoods($shopId)
     {
+        // 判断商店 / 卖家是否审核通过
+        $this->isShopSellerNormal(TypeEnum::NewGoods, $shopId);
         $data = [
             'status' => StatusEnum::NORMAL,
             'type' => TypeEnum::NewGoods,
@@ -244,5 +252,33 @@ class Goods extends BaseModel
         }
 
         return $goods->hidden(['image_id' => ['status']]);
+    }
+
+    /**
+     * 判断二手卖家 / 店家是否通过审核
+     * @param $type
+     * @param $foreignID
+     * @throws ShopException
+     */
+    private function isShopSellerNormal($type, $foreignID)
+    {
+        if($type == TypeEnum::NewGoods){
+            $shop = (new Shop())->where('id', '=', $foreignID)->find();
+            if(!$shop){
+                throw new ShopException();
+            }
+            if($shop->status != 1){
+                throw new ShopException();
+            }
+        }
+        if($type == TypeEnum::OldGoods){
+            $seller = (new Seller())->where('id', '=', $foreignID)->find();
+            if(!$seller){
+                throw new ShopException();
+            }
+            if($seller->status != 1){
+                throw new ShopException();
+            }
+        }
     }
 }
