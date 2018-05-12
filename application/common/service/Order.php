@@ -165,10 +165,12 @@ class Order
     {
         $goodsIndex = -1;
         $count = 0;
+        $remark = '';
         for($i = 0; $i < count($this->orderGoods); $i++){
             if($goods['id'] == $this->orderGoods[$i]['goods_id']){
                 $goodsIndex = $i;
                 $count = $this->orderGoods[$i]['count'];
+                $remark = $this->orderGoods[$i]['remark'];
             }
         }
 
@@ -180,11 +182,10 @@ class Order
         }else{
             $goodsStatus = [
                 'goods_id' => $goods['id'],
-//                'foreign_id' => $goods['foreign_id'],
-//                'type' => $goods['type'],
                 'name' => $goods['name'],
                 'price' => $goods['price'],
                 'count' => $count,
+                'remark' => $remark,
                 'totalPrice' => $goods['price'] * $count,
                 'haveStock' => false,
                 'image_id' => $goods['image_id']
