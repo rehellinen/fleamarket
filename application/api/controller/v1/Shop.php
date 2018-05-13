@@ -16,7 +16,7 @@ use app\common\validate\Common;
 class Shop extends BaseController
 {
     protected $beforeActionList = [
-        'checkSellerShopScope' => ['only' => 'addOrEditShop']
+
     ];
 
     /**
