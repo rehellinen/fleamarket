@@ -170,7 +170,11 @@ class Order
             if($goods['id'] == $this->orderGoods[$i]['goods_id']){
                 $goodsIndex = $i;
                 $count = $this->orderGoods[$i]['count'];
-                $remark = $this->orderGoods[$i]['remark'];
+                if(array_key_exists('remark', $this->orderGoods[$i])){
+                    $remark = $this->orderGoods[$i]['remark'];
+                }else{
+                    $remark = '';
+                }
             }
         }
 
