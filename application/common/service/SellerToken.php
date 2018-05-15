@@ -40,19 +40,15 @@ class SellerToken extends Token
         // 爬取微信服务器返回的结果
         $wxResult = $this->getResultFromWx();
         // 根据openID获取用户ID
-        $uidArr = $this->isRegister($wxResult['openid']);
+        $userArr = $this->isRegister($wxResult['openid']);
         // 生成缓存的键与值
         $cachedKey = self::generateToken();
-        $cachedValue = $this->prepareCachedValue($wxResult, $uidArr);
+        $cachedValue = $this->prepareCachedValue($wxResult, $userArr);
         // 进行缓存
         $token = $this->saveToCache($cachedKey, $cachedValue);
 
-        $keyArr = array_keys($uidArr);
-        return [
-            'token' => $token,
-            'type' => $keyArr[0],
-            'uid' => $uidArr[$keyArr[0]]
-        ];
+        $userArr['token'] = $token;
+        return $userArr;
     }
 
     /**
@@ -73,9 +69,17 @@ class SellerToken extends Token
         ])->find();
 
         if($seller){
-            return ['seller' => $seller['id']];
+            return [
+                'type' => 'seller',
+                'id' => $seller['id'],
+                'status' => $seller['status']
+            ];
         }elseif($shop){
-            return ['shop' => $shop['id']];
+            return [
+                'type' => 'shop',
+                'id' => $shop['id'],
+                'status' => $shop['status']
+            ];
         }else{
             throw new TokenException([
                 'httpCode' => 404,
@@ -88,18 +92,18 @@ class SellerToken extends Token
     /**
      * 准备缓存的数据结构
      * @param array $wxResult 微信返回的结果
-     * @param array $uidArr
+     * @param array $userArr
      * @return array 要储存的信息
      */
-    private function prepareCachedValue($wxResult, $uidArr)
+    private function prepareCachedValue($wxResult, $userArr)
     {
         $cachedValue = $wxResult;
-        if(array_key_exists('seller', $uidArr)){
+        if($userArr['type'] === 'seller'){
             $cachedValue['scope'] = ScopeEnum::SELLER;
-            $cachedValue['sellerID'] = $uidArr['seller'];
+            $cachedValue['sellerID'] = $userArr['id'];
         }else{
             $cachedValue['scope'] = ScopeEnum::SHOP;
-            $cachedValue['shopID'] = $uidArr['shop'];
+            $cachedValue['shopID'] = $userArr['id'];
         }
 
         return $cachedValue;

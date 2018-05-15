@@ -168,8 +168,6 @@ class Goods extends BaseModel
      */
     public function getByForeignID($type, $status, $foreignId, $page, $size)
     {
-        // 判断商店 / 卖家是否审核通过
-        $this->isShopSellerNormal($type, $foreignId);
         $data = [
             'status' => ['in', $status],
             'type' => $type,

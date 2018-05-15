@@ -29,7 +29,7 @@ class BaseController extends Controller
         // 获取openID
         $wxRes = (new SellerToken($data['code']))->getResultFromWx();
         $data['open_id'] = $wxRes['openid'];
-        echo $data['open_id'];exit;
+
         $shopModel = model($model);
         $shop = $shopModel->where([
             'open_id' => ['=', $wxRes['openid']],
