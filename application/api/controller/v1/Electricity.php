@@ -21,7 +21,14 @@ class Electricity extends BaseController
     public function getSurplus()
     {
         $buyerID = TokenService::getBuyerID();
+        $elec = (new ElectricityModel())->getSurplus($buyerID);
 
+        throw new SuccessMessage([
+            'message' => '获取剩余电费成功',
+            'data' => [
+                'elec' => $elec
+            ]
+        ]);
     }
 
     public function getThreeDays()

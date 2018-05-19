@@ -30,4 +30,16 @@ class Electricity extends BaseModel
 
         return $sum;
     }
+
+    public function getSurplus($buyerID)
+    {
+        $condition = [
+            'buyer_id' =>$buyerID,
+            'status' => StatusEnum::NORMAL
+        ];
+
+        $elec = $this->where($condition)->order('check_date desc')->find();
+        $surplus = $elec->remain;
+        return $surplus;
+    }
 }
