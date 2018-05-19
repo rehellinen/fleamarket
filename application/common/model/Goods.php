@@ -218,7 +218,7 @@ class Goods extends BaseModel
             'status' => StatusEnum::NORMAL,
             'category_id' => $categoryID
         ];
-        return $this->where($data)->where($queryString)
+        return $this->where($data)->where($queryString)->with('imageId')
             ->order('listorder desc, id desc')
             ->paginate($size, true, [
                 'page' => $page
