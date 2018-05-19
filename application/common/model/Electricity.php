@@ -15,19 +15,34 @@ class Electricity extends BaseModel
 {
     public function getRecentThreeDays($buyerID)
     {
+        $seconds = 86400;
+        $today = ((round(time() / $seconds, 0) - 1) * $seconds) + $seconds / 6;
+        $dateArr = [
+            $today,
+            $today - $seconds,
+            $today - $seconds * 2
+        ];
+
         $sum = 0;
         $condition = [
             'buyer_id' =>$buyerID,
-            'status' => StatusEnum::NORMAL
+            'status' => StatusEnum::NORMAL,
+            'check_date' => ['in', $dateArr]
         ];
-        $elecArr = $this->where($condition)->limit(3)->order('check_date desc')
+        $elecArr = $this->where($condition)->order('check_date desc, id asc')
                         ->select()->toArray();
 
-
+        $threeDaysElecArr = [];
         foreach ($elecArr as $key => $value){
-            $sum += $value['cost_elec'];
+            if($value['check_date'] == $today){
+                $threeDaysElecArr[0] = $value['cost_elec'];
+            }elseif($value['check_date'] == ($today - $seconds)){
+                $threeDaysElecArr[1] = $value['cost_elec'];
+            }else{
+                $threeDaysElecArr[2] = $value['cost_elec'];
+            }
         }
-
+        $sum = array_sum($threeDaysElecArr);
         return $sum;
     }
 
