@@ -44,6 +44,12 @@ class Goods extends BaseModel
         return $this->belongsTo('Seller', 'foreign_id', 'id');
     }
 
+    public function themeId()
+    {
+        return $this->belongsTo('Theme', 'theme_id', 'id');
+
+    }
+
     /**
      * 分类关联模型
      * @return \think\model\relation\BelongsTo
@@ -146,14 +152,18 @@ class Goods extends BaseModel
             $related = 'seller';
         }
 
-        $goods = $this->where($data)->with([$related, 'imageId'])->order('listorder desc, id desc')->find();
+        $goods = $this->where($data)->with([$related, 'imageId'])->with(['categoryId' => function($query){
+            $query->with('themeId');
+        }])
+            ->order('listorder desc, id desc')->find();
         if (!$goods) {
             throw new GoodsException();
         }
         return $goods = $goods->hidden([
             'shop' => ['listorder', 'status', 'number', 'open_id'],
             'seller' => ['listorder', 'status', 'number', 'open_id'],
-            'image_id' => ['status'], 'status'
+            'image_id' => ['status'], 'status',
+            'category_id' => ['status', 'listorder', 'image_id']
         ]);
     }
 

@@ -21,12 +21,13 @@ class Goods extends BaseValidate
         ['price', 'require'],
         ['ids', 'require|checkIDs'],
         ['listorder', 'require', '排序不能为空'],
-        ['id', 'require', '商品ID不能为空']
+        ['id', 'require', '商品ID不能为空'],
+        ['category_id', 'require', '分类不能为空']
     ];
 
     protected $scene = [
-        'add' => ['name', 'price', 'quantity', 'description', 'image_id', 'subtitle', 'listorder'],
-        'edit' => ['name', 'price', 'quantity', 'description', 'image_id', 'subtitle', 'listorder', 'id'],
+        'add' => ['name', 'price', 'quantity', 'description', 'image_id', 'subtitle', 'listorder', 'category_id'],
+        'edit' => ['name', 'price', 'quantity', 'description', 'image_id', 'subtitle', 'listorder', 'id', 'category_id'],
         'ids' => ['ids']
     ];
 

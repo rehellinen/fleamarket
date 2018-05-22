@@ -22,8 +22,7 @@ class Electricity extends BaseModel
             $today - $seconds,
             $today - $seconds * 2
         ];
-
-        $sum = 0;
+        
         $condition = [
             'buyer_id' =>$buyerID,
             'status' => StatusEnum::NORMAL,
