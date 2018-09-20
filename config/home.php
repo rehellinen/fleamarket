@@ -8,9 +8,9 @@
 
 return [
     'view_replace_str'       => [
-        '__STATIC__' => '/static',
-        '__UPLOAD__' => '',
-        '__INDEX__' => '/index.php'
+        '__STATIC__' => '/git/yihu_background/public/static',
+        '__UPLOAD__' => '/git/yihu_background/public',
+        '__INDEX__' => '/git/yihu_background/public/index.php'
     ],
 
     'upload_file' => 'upload/',
