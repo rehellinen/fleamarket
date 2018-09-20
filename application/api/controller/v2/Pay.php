@@ -11,6 +11,7 @@ namespace app\api\controller\v2;
 use app\common\exception\SuccessMessage;
 use app\common\service\WxNotify;
 use app\common\service\Pay as PayService;
+use app\common\validate\Order;
 
 class Pay extends BaseController
 {
@@ -25,7 +26,7 @@ class Pay extends BaseController
      */
     public function getPreOrder($order_identify = '')
     {
-        (new \app\common\validate\Order())->goCheck('pay');
+        (new Order())->goCheck('pay');
         $pay = new PayService($order_identify);
         $res = $pay->pay();
         throw new SuccessMessage([

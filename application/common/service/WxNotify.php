@@ -20,7 +20,6 @@ use think\Loader;
 use app\common\model\Order as OrderModel;
 use app\common\service\Order as OrderService;
 use think\Log;
-use phpmailer\EmailTo;
 
 Loader::import('pay.WxPay', EXTEND_PATH, '.Api.php');
 
@@ -32,7 +31,6 @@ class WxNotify extends \WxPayNotify
     public function NotifyProcess($data, &$msg)
     {
         if($data['result_code'] == 'SUCCESS'){
-            // 支付成功
             $orderIdentify = $data['out_trade_no'];
             if(is_numeric($orderIdentify)){
                 $this->orderID = $orderIdentify;
@@ -48,14 +46,10 @@ class WxNotify extends \WxPayNotify
                     $orders = (new OrderModel)->where('order_no', '=', $this->orderNO)->select()->toArray();
                 }
 
+                // 发送模板消息
+                (new Template($orders[0]))->send();
+
                 foreach ($orders as $order){
-                    // 发送邮件
-//                    if($order['type'] == TypeEnum::NewGoods){
-//                        $user = (new Shop())->where(['id' => $order['foreign_id']])->find();
-//                    }else{
-//                        $user = (new Seller())->where(['id' => $order['foreign_id']])->find();
-//                    }
-//                    EmailTo::send('912377791@qq.com', '有新订单', '请登录小程序查看详情');
                     if($order['status'] == OrderEnum::UNPAID){
                         $orderService = new OrderService();
                         $stockStatus = $orderService->checkStock([$order['id']]);

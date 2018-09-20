@@ -8,6 +8,7 @@
 
 namespace app\api\controller\v2;
 
+use app\common\service\Template;
 
 class Weixin extends BaseController
 {
@@ -25,5 +26,11 @@ class Weixin extends BaseController
         ]);
         $qr = curl_http($qr_url, 1, $jsonData);
         (new Image())->saveQRCode($qr);
+    }
+
+    public function testTemplate()
+    {
+        $res = (new Template())->getAccessToken();
+        echo $res;
     }
 }
