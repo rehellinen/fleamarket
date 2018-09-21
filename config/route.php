@@ -83,6 +83,7 @@ Route::get('api/:version/email', 'api/:version.Emailer/send');
 // 微信相关
 Route::get('api/:version/qr', 'api/:version.Weixin/getQRCode');
 Route::get('api/:version/template', 'api/:version.Weixin/testTemplate');
+Route::get('api/:version/mail', 'api/:version.Weixin/mail');
 
 // 关于电费
 Route::get('api/:version/electricity/three', 'api/:version.Electricity/getThreeDays');

@@ -8,8 +8,6 @@
 
 namespace app\api\controller\v2;
 
-use app\common\service\Template;
-
 class Weixin extends BaseController
 {
     public function getQRCode()
@@ -30,7 +28,6 @@ class Weixin extends BaseController
 
     public function testTemplate()
     {
-        $res = (new Template())->getAccessToken();
-        echo $res;
+
     }
 }

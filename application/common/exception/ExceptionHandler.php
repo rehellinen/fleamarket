@@ -10,6 +10,7 @@ namespace app\common\exception;
 
 use Exception;
 use think\exception\Handle;
+use think\Log;
 use think\Request;
 
 class ExceptionHandler extends Handle
@@ -30,6 +31,8 @@ class ExceptionHandler extends Handle
         }else{
             // 若为调试模式则返回TP5的错误显示页面
             if(config('app_debug')) {
+                // 记录日志
+                $this->log($e);
                 return parent::render($e);
             }else{
                 $this->httpCode = 500;
@@ -37,6 +40,7 @@ class ExceptionHandler extends Handle
                 $this->status = 99999;
                 $this->data = [];
                 // 记录日志
+                $this->log($e);
             }
         }
 
@@ -49,5 +53,15 @@ class ExceptionHandler extends Handle
         ];
 
         return json($result, $this->httpCode);
+    }
+
+    private function log(Exception $e)
+    {
+        Log::init([
+            'type'  =>  'File',
+            'path'  =>  LOG_PATH,
+            'level' => ['error']
+        ]);
+        Log::record($e->getMessage(), 'error');
     }
 }
