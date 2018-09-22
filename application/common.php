@@ -32,7 +32,7 @@ function curl_http($url, $type = 0, $data = "", &$httpCode = 0)
     // 处理POST的情况
     if ($type == 1) {
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
     }
     $content = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

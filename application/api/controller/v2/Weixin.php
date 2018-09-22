@@ -8,6 +8,8 @@
 
 namespace app\api\controller\v2;
 
+use app\common\service\WxNotify;
+
 class Weixin extends BaseController
 {
     public function getQRCode()
@@ -28,6 +30,11 @@ class Weixin extends BaseController
 
     public function testTemplate()
     {
-
+        $data = [
+            'result_code' => 'SUCCESS',
+            'out_trade_no' => 'A921056378737014'
+        ];
+        $msg = 'test';
+        (new WxNotify())->NotifyProcess($data, $msg);
     }
 }

@@ -13,6 +13,10 @@ use enum\StatusEnum;
 
 class Electricity extends BaseModel
 {
+    protected $connection = [
+      'database' => 'query'
+    ];
+
     public function getRecentThreeDays($buyerID)
     {
         $seconds = 86400;
@@ -22,9 +26,11 @@ class Electricity extends BaseModel
             $today - $seconds,
             $today - $seconds * 2
         ];
-        
+        $buyer = (new Buyer())->getNormalById($buyerID);
+        $dormitory = $buyer['dormitory'];
+
         $condition = [
-            'buyer_id' =>$buyerID,
+            'dormitory' =>$dormitory,
             'status' => StatusEnum::NORMAL,
             'check_date' => ['in', $dateArr]
         ];
@@ -47,8 +53,11 @@ class Electricity extends BaseModel
 
     public function getSurplus($buyerID)
     {
+        $buyer = (new Buyer())->getNormalById($buyerID);
+        $dormitory = $buyer['dormitory'];
+
         $condition = [
-            'buyer_id' =>$buyerID,
+            'dormitory' =>$dormitory,
             'status' => StatusEnum::NORMAL
         ];
 

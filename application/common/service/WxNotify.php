@@ -9,12 +9,7 @@
 namespace app\common\service;
 
 use app\common\model\Goods;
-use app\common\model\Seller;
-use app\common\model\Shop;
 use enum\OrderEnum;
-use enum\StatusEnum;
-use enum\TypeEnum;
-use think\Db;
 use think\Exception;
 use think\Loader;
 use app\common\model\Order as OrderModel;
@@ -37,8 +32,6 @@ class WxNotify extends \WxPayNotify
             }else{
                 $this->orderNO = $orderIdentify;
             }
-
-            Db::startTrans();
             try{
                 if($this->orderID){
                     $orders = (new OrderModel)->where('id', '=', $this->orderID)->select()->toArray();
@@ -62,10 +55,8 @@ class WxNotify extends \WxPayNotify
                         }
                     }
                 }
-                Db::commit();
                 return true;
             }catch (Exception $e){
-                Db::rollback();
                 Log::error($e);
                 return false;
             }
